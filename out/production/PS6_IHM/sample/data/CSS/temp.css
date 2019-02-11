@@ -1,0 +1,11 @@
+#default-profile {
+    -fx-background-image: url("../Images/clock.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 0, 15;
+}
+
+#gear {
+    -fx-background-image: url("../Images/back-arrow.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 0, 15;
+}

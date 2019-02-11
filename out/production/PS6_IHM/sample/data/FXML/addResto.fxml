@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label layoutX="50.0" layoutY="33.0" text="Ajouter vos photos" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="90.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Images/plus_button.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ScrollPane prefHeight="275.0" prefWidth="200.0">
+         <content>
+            <Pane prefHeight="400.0" prefWidth="184.0">
+               <children>
+                  <Label layoutX="18.0" layoutY="32.0" text="3,5" />
+                  <TextField layoutX="26.0" promptText="Nom du restaurant" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/starFull.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/starFull.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="90.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/starFull.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="110.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/starHalf.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="130.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/starEmpty.png" />
+                     </image>
+                  </ImageView>
+                  <TextField layoutX="26.0" layoutY="70.0" promptText="Adresse" />
+                  <TextField layoutX="26.0" layoutY="95.0" promptText="Site" />
+                  <TextField layoutX="26.0" layoutY="120.0" promptText="Téléphone" />
+                  <TextField layoutX="70.0" layoutY="182.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField layoutX="70.0" layoutY="207.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField layoutX="70.0" layoutY="232.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField layoutX="70.0" layoutY="257.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField layoutX="70.0" layoutY="282.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField layoutX="70.0" layoutY="307.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField layoutX="70.0" layoutY="332.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <Text layoutX="8.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horaires :" />
+                  <Text layoutX="21.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lundi :" />
+                  <Text layoutX="20.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mardi :" />
+                  <Text layoutX="16.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mercredi :" />
+                  <Text layoutX="22.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jeudi :" />
+                  <Text layoutX="12.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendredi :" />
+                  <Text layoutX="17.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Samedi :" />
+                  <Text layoutX="9.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dimanche :" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="2.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="2.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="2.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+         </content>
+      </ScrollPane>
+      <Pane prefHeight="25.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" text="Annuler" />
+            <Button layoutX="117.0" mnemonicParsing="false" text="Sauvegarder" />
+         </children>
+      </Pane>
+   </children>
+</VBox>
