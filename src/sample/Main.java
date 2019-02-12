@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.controllers.Controller;
 
 public class Main extends Application {
 
@@ -29,11 +30,11 @@ public class Main extends Application {
         controller.init();
 
         //create the view
-        primaryStage.setScene(new Scene(root, View.WIDTH, View.HEIGHT));
-        primaryStage.setTitle(View.LABEL);
+        View.stage.setScene(new Scene(root, View.WIDTH, View.HEIGHT));
+        View.stage.setTitle(View.LABEL);
 
         //show the view
-        primaryStage.show();
+        View.stage.show();
     }
 
 
