@@ -10,7 +10,7 @@ import sample.models.AddLocationModel;
 
 
 public class AddLocationController {
-    /*@FXML
+    @FXML
     private TextField restaurant;
     @FXML
     private TextField adress;
@@ -34,27 +34,25 @@ public class AddLocationController {
     private TextField sunday;
     @FXML
     private Label grade;
-    @FXML*/
+    @FXML
     private Button cancel;
     @FXML
     private Button save;
 
-   /* public void addLocation(){
+    public void addLocation(){
         AddLocationModel model = new AddLocationModel();
         String[] schedule = {monday.getText(),thuesday.getText(),wednesday.getText(),thursday.getText(),friday.getText(),saturday.getText(),sunday.getText()};
         model.addLocation(restaurant.getText(),adress.getText(),website.getText(),phoneNumber.getText(),schedule,Integer.parseInt(grade.getText()));
         RestaurantList.printRestaurants();
-    }*/
+    }
 
-   public void addLocation(){}
     public void changePage(String instruction){
         AddLocationModel model = new AddLocationModel();
         model.compute(instruction);
     }
 
     public void init() {
-        //grade.setText("4");
         save.setOnAction( event -> addLocation());
-        //cancel.setOnAction( event -> changePage("cancel"));
+        cancel.setOnAction( event -> changePage("cancel"));
     }
 }

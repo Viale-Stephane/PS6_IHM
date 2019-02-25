@@ -17,8 +17,9 @@ public class Controller {
     @FXML
     private Button logOut;
 
+
     public void results(String instruction){
-        Model model = new Model();
+        Model model=new Model();
         System.out.println(model.compute(instruction));
     }
 

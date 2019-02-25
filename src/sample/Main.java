@@ -1,44 +1,46 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.controllers.AddLocationController;
 import sample.controllers.Controller;
 
 public class Main extends Application {
-    public static AddLocationController addLocationController;
-    private Parent root;
+    public static View view;
+    public static Stage stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         //create a loader
         FXMLLoader loader = new FXMLLoader();
 
+        View view = new View();
         //create a controller
-        Controller controller = new Controller();
-        addLocationController = new AddLocationController();
 
         //attach controller
-        loader.setController(controller);
-
         //attach XML file
-        root = loader.load(getClass().getResourceAsStream(View.XML_FILE));
+        Parent root = loader.load(getClass().getResourceAsStream(View.HOME));
 
         //attach css file
-        root.getStylesheets().add(View.CSS_FILE);
+        root.getStylesheets().add(view.getCSS_FILE());
 
         //initialize the controller
-        controller.init();
+        ((Controller) loader.getController()).init();
+
+        stage = new Stage();
 
         //create the view
-        View.stage.setScene(new Scene(root, View.WIDTH, View.HEIGHT));
-        View.stage.setTitle(View.LABEL);
+        stage.setScene(new Scene(root, view.getWIDTH(), view.getHEIGHT()));
+        stage.setTitle(view.getLABEL());
 
         //show the view
-        View.stage.show();
+        stage.show();
+
+
+
     }
 
 

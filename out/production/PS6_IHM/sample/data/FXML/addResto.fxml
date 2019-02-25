@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="sample.controllers.AddLocationController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -79,10 +79,8 @@
          </content>
       </ScrollPane>
       <Pane prefHeight="25.0" prefWidth="200.0">
-         <children>
             <Button fx:id="cancel" mnemonicParsing="false" text="Annuler" />
             <Button fx:id="save" layoutX="117.0" mnemonicParsing="false" text="Sauvegarder" />
-         </children>
       </Pane>
    </children>
 </VBox>

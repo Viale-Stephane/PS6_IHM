@@ -7,11 +7,11 @@ import javafx.stage.Stage;
 import sample.Main;
 import sample.View;
 import sample.controllers.AddLocationController;
-import sample.controllers.Controller;
 
 import java.io.IOException;
 
 public class Model {
+
 
     public Model(){
     }
@@ -34,25 +34,26 @@ public class Model {
                 break;
             case "addLocation":
                 answer ="You will be redirected to the new location system..";
-                fxmlFile = "../data/FXML/addResto.fxml";
+                fxmlFile = View.NEW_LOCATION;
                 break;
             case "logOut":
                 answer = "You are getting disconnected..";
                 fxmlFile = "../data/FXML/";
-            break;
+                break;
         }
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent rootNode = loader.load(getClass().getResourceAsStream(fxmlFile));
-            loader.setController(Main.addLocationController);
-            //Main.addLocationController.init();
-            Scene scene = new Scene(rootNode);
-            View.changeStage(scene, View.LABEL,fxmlFile,View.CSS_FILE);
+            FXMLLoader loader = new FXMLLoader();
+            loader.getClass().getResource(fxmlFile);
+            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
+            Scene scene = new Scene(root);
+            Main.stage.setScene(scene);
+            ((AddLocationController) loader.getController()).init();
+            Main.stage.show();
 
-
-        } catch (IOException e) {
+        }catch (IOException e){
             e.printStackTrace();
         }
+
         return answer;
     }
 }

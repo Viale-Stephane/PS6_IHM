@@ -27,23 +27,25 @@ public class AddLocationModel {
         switch(button) {
             case "cancel":
                 answer = "Cancelling...";
-                fxmlFile = "../data/FXML/userProfile.fxml";
+                fxmlFile = "../"+View.HOME;
                 break;
             case "save":
                 answer = "Adding the restaurant to our database..";
                 fxmlFile = "../data/FXML/";//MODIFY
                 break;
         }
-        /*try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent rootNode = loader.load(getClass().getResourceAsStream(fxmlFile));
-            Scene scene = new Scene(rootNode);
-            View.stage.setScene(scene);
-            View.stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.getClass().getResource(fxmlFile);
+            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
+            Scene scene = new Scene(root);
+            Main.stage.setScene(scene);
+            ((Controller) loader.getController()).init();
+            Main.stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
         return answer;
     }
 }
