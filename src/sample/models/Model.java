@@ -45,7 +45,7 @@ public class Model {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent rootNode = loader.load(getClass().getResourceAsStream(fxmlFile));
             loader.setController(Main.addLocationController);
-            Main.addLocationController.init();
+            //Main.addLocationController.init();
             Scene scene = new Scene(rootNode);
             View.changeStage(scene, View.LABEL,fxmlFile,View.CSS_FILE);
 
