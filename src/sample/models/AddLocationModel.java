@@ -7,7 +7,7 @@ import sample.Main;
 import sample.Restaurant;
 import sample.RestaurantList;
 import sample.View;
-import sample.controllers.Controller;
+import sample.controllers.ProfileController;
 
 import java.io.IOException;
 
@@ -27,7 +27,7 @@ public class AddLocationModel {
         switch(button) {
             case "cancel":
                 answer = "Cancelling...";
-                fxmlFile = "../"+View.HOME;
+                fxmlFile = View.PROFILE;
                 break;
             case "save":
                 answer = "Adding the restaurant to our database..";
@@ -40,7 +40,7 @@ public class AddLocationModel {
             Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
-            ((Controller) loader.getController()).init();
+            ((ProfileController) loader.getController()).init();
             Main.stage.show();
 
         } catch (IOException e) {

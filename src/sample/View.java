@@ -4,10 +4,21 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class View {
-    public final static String HOME = "data/FXML/userProfile.fxml" ;
+    public final static String HOME_OFFLINE = "data/FXML/mainPageOffline.fxml";
+    public final static String HOME_ONLINE = "../data/FXML/mainPageOnline.fxml";
+    public final static String SIGN_IN = "../data/FXML/SignIn.fxml";
+    public final static String LOG_IN = "../data/FXML/logIn.fxml";
+    public final static String INFORMATIONS = "../data/FXML/";
+    public final static String MENU_FILTER = "../data/FXML/MenuFIlter.fxml";
+    public final static String PROFILE = "../data/FXML/userProfile.fxml" ;
     public final static String NEW_LOCATION = "../data/FXML/addResto.fxml";
+    public final static String FAVORITES = "../data/FXML/";
+    public final static String HISTORY = "../data/FXML/";
+    public final static String MY_RATINGS = "../data/FXML/";
+    public final static String LOG_OUT = "../data/FXML/";
+
     public String CSS_FILE = "sample/data/CSS/temp.css";
-    public String LABEL ="User Profile";
+    public String LABEL ="BROUPE G";
     public final int WIDTH = 200;
     public final int HEIGHT = 400;
 

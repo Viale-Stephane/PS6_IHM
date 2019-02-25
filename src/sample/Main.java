@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,7 +21,7 @@ public class Main extends Application {
 
         //attach controller
         //attach XML file
-        Parent root = loader.load(getClass().getResourceAsStream(View.HOME));
+        Parent root = loader.load(getClass().getResourceAsStream(View.HOME_OFFLINE));
 
         //attach css file
         root.getStylesheets().add(view.getCSS_FILE());
@@ -33,7 +32,7 @@ public class Main extends Application {
         stage = new Stage();
 
         //create the view
-        stage.setScene(new Scene(root, view.getWIDTH(), view.getHEIGHT()));
+        stage.setScene(new Scene(root));
         stage.setTitle(view.getLABEL());
 
         //show the view

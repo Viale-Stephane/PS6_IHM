@@ -3,36 +3,42 @@ package sample.models;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 import sample.Main;
 import sample.View;
 import sample.controllers.AddLocationController;
 
 import java.io.IOException;
 
-public class Model {
+public class ProfileModel {
 
-    public Model(){
+
+    public ProfileModel(){
     }
 
     public String compute(String button){
         String answer="";
         String fxmlFile="";
         switch(button) {
-            case "logIn":
+            case "history":
                 answer = "Accessing to your history..";
-                fxmlFile = View.LOG_IN;
+                fxmlFile = View.HISTORY;
                 break;
-            case "signIn":
+            case "favorites":
                 answer = "Accessing to your favorites..";
-                fxmlFile = View.SIGN_IN;
+                fxmlFile = View.FAVORITES;
                 break;
-            case "informations":
+            case "myRatings":
                 answer = "Accessing to your ratings..";
-                fxmlFile = View.INFORMATIONS;
+                fxmlFile = View.MY_RATINGS;
                 break;
-            case "filter":
+            case "addLocation":
                 answer ="You will be redirected to the new location system..";
-                fxmlFile = View.MENU_FILTER;
+                fxmlFile = View.NEW_LOCATION;
+                break;
+            case "logOut":
+                answer = "You are getting disconnected..";
+                fxmlFile = View.LOG_OUT;
                 break;
         }
         try {

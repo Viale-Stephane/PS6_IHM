@@ -2,33 +2,32 @@ package sample.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import sample.models.Model;
 
 public class Controller {
     @FXML
-    private Button history;
+    private Button filterButton;
     @FXML
-    private Button favorites;
+    private TextField researchBar;
     @FXML
-    private Button myRatings;
+    private Button connexion;
     @FXML
-    private Button addLocation;
+    private Button register;
+    @FXML
+    private Button info;
 
-    @FXML
-    private Button logOut;
-
-
-    public void results(String instruction){
-        Model model=new Model();
+    public void computeModel(String instruction){
+        Model model = new Model();
         System.out.println(model.compute(instruction));
     }
 
-    public void init() {
-        history.setOnAction( event -> results("history"));
-        favorites.setOnAction( event -> results("favorites"));
-        myRatings.setOnAction( event -> results("myRatings"));
-        addLocation.setOnAction( event -> results("addLocation"));
-        logOut.setOnAction( event -> results("logOut"));
-    }
 
+
+    public void init() {
+        filterButton.setOnAction( event -> computeModel("filter"));
+        connexion.setOnAction( event -> computeModel("logIn"));
+        register.setOnAction( event -> computeModel("signIn"));
+        info.setOnAction( event -> computeModel("informations"));
+    }
 }
