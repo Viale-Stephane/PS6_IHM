@@ -4,7 +4,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.Main;
 import sample.View;
+import sample.controllers.AddLocationController;
+import sample.controllers.Controller;
 
 import java.io.IOException;
 
@@ -41,10 +44,11 @@ public class Model {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent rootNode = loader.load(getClass().getResourceAsStream(fxmlFile));
-            //Stage stage = new Stage();
+            loader.setController(Main.addLocationController);
+            Main.addLocationController.init();
             Scene scene = new Scene(rootNode);
-            View.stage.setScene(scene);
-            View.stage.show();
+            View.changeStage(scene, View.LABEL,fxmlFile,View.CSS_FILE);
+
 
         } catch (IOException e) {
             e.printStackTrace();

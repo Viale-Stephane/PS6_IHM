@@ -5,9 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.controllers.AddLocationController;
 import sample.controllers.Controller;
 
 public class Main extends Application {
+    public static AddLocationController addLocationController;
+    private Parent root;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -16,12 +19,13 @@ public class Main extends Application {
 
         //create a controller
         Controller controller = new Controller();
+        addLocationController = new AddLocationController();
 
         //attach controller
         loader.setController(controller);
 
         //attach XML file
-        Parent root = loader.load(getClass().getResourceAsStream(View.XML_FILE));
+        root = loader.load(getClass().getResourceAsStream(View.XML_FILE));
 
         //attach css file
         root.getStylesheets().add(View.CSS_FILE);
