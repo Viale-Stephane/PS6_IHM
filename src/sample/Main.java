@@ -24,7 +24,7 @@ public class Main extends Application {
         Parent root = loader.load(getClass().getResourceAsStream(View.HOME_OFFLINE));
 
         //attach css file
-        root.getStylesheets().add(view.getCSS_FILE());
+        root.getStylesheets().add(View.CSS_FILE);
 
         //initialize the controller
         ((Controller) loader.getController()).init();

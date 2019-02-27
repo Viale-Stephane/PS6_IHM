@@ -29,5 +29,6 @@ public class Controller {
         connexion.setOnAction( event -> computeModel("logIn"));
         register.setOnAction( event -> computeModel("signIn"));
         info.setOnAction( event -> computeModel("informations"));
+        researchBar.setOnAction( event -> computeModel("researchBar"));
     }
 }

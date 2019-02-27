@@ -15,9 +15,15 @@ public class View {
     public final static String FAVORITES = "../data/FXML/";
     public final static String HISTORY = "../data/FXML/";
     public final static String MY_RATINGS = "../data/FXML/";
+    public final static String RESTORANT_PAGE = "../data/FXML/restopage.fxml";
     public final static String LOG_OUT = "../data/FXML/";
 
-    public String CSS_FILE = "sample/data/CSS/temp.css";
+    //IMAGES//
+
+    public final static String FULL_STAR = "sample/data/Images/starFull.png";
+    public final static String EMPTY_STAR = "sample/data/Images/starEmpty.png";
+
+    public static String CSS_FILE = "sample/data/CSS/temp.css";
     public String LABEL ="BROUPE G";
     public final int WIDTH = 200;
     public final int HEIGHT = 400;

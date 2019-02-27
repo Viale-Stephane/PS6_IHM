@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import sample.Main;
 import sample.View;
 import sample.controllers.AddLocationController;
+import sample.controllers.ResearchRestaurantController;
 
 import java.io.IOException;
 
@@ -19,19 +20,19 @@ public class Model {
         String fxmlFile="";
         switch(button) {
             case "logIn":
-                answer = "Accessing to your history..";
+                answer = "Accessing to the log-in page..";
                 fxmlFile = View.LOG_IN;
                 break;
             case "signIn":
-                answer = "Accessing to your favorites..";
+                answer = "Accessing to the sign-in page..";
                 fxmlFile = View.SIGN_IN;
                 break;
             case "informations":
-                answer = "Accessing to your ratings..";
+                answer = "Accessing to the website informations..";
                 fxmlFile = View.INFORMATIONS;
                 break;
             case "filter":
-                answer ="You will be redirected to the new location system..";
+                answer ="Accessing to the research filters..";
                 fxmlFile = View.MENU_FILTER;
                 break;
         }
@@ -41,7 +42,18 @@ public class Model {
             Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
-            ((AddLocationController) loader.getController()).init();
+            switch(button) {
+                case "logIn":
+                    ((AddLocationController) loader.getController()).init();
+                    break;
+                case "signIn":
+                    break;
+                case "informations":
+                    break;
+                case "filter":
+                    ((ResearchRestaurantController) loader.getController()).init();
+                    break;
+            }
             Main.stage.show();
 
         }catch (IOException e){

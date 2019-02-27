@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox fx:id="research" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.HBox?>
+<VBox fx:controller="sample.controllers.ResearchRestaurantController" fx:id="research" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="59.0" prefWidth="250.0">
          <children>
@@ -50,36 +51,31 @@
             <Label fx:id="distanceMin" layoutX="29.0" layoutY="44.0" text="0km" />
          </children>
       </Pane>
-      <Pane prefHeight="61.0" prefWidth="250.0">
+      <HBox prefHeight="61.0" prefWidth="250.0">
          <children>
             <Label layoutX="14.0" layoutY="6.0" text="Note minimale :" />
             <ImageView fx:id="filterStar1" fitHeight="25.0" fitWidth="23.0" layoutX="45.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@starEmpty.png" />
                </image>
             </ImageView>
             <ImageView fx:id="filterStar2" fitHeight="25.0" fitWidth="23.0" layoutX="68.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@starEmpty.png" />
                </image>
             </ImageView>
             <ImageView fx:id="filterStar3" fitHeight="25.0" fitWidth="23.0" layoutX="91.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@starEmpty.png" />
                </image>
             </ImageView>
             <ImageView fx:id="filterStar4" fitHeight="25.0" fitWidth="23.0" layoutX="114.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@starEmpty.png" />
                </image>
             </ImageView>
             <ImageView fx:id="filterStar5" fitHeight="25.0" fitWidth="23.0" layoutX="137.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@starEmpty.png" />
                </image>
             </ImageView>
          </children>
-      </Pane>
+      </HBox>
       <Pane prefHeight="61.0" prefWidth="250.0">
          <children>
             <Button fx:id="buttonFiltre" layoutX="99.0" layoutY="17.0" mnemonicParsing="false" text="Filtrer" />
