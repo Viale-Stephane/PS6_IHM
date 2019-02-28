@@ -16,9 +16,9 @@ public class AddLocationModel {
     public AddLocationModel(){
     }
 
-    public void addLocation(String restaurant, String adress, String website, String phoneNumber, String[] schedule, int grade){
-        Restaurant newRestaurant = new Restaurant(restaurant, adress, website, phoneNumber, schedule, grade);
-        RestaurantList.addRestaurant(newRestaurant);
+    public void addLocation(String restaurant, String adress, String website, String phoneNumber, String[] schedule, int grade, int averagePrice, int averageDistance){
+        Restaurant newRestaurant = new Restaurant(restaurant, adress, website, phoneNumber, schedule, grade, averagePrice, averageDistance);
+        Main.restaurantList.addRestaurant(newRestaurant);
     }
 
     public String compute(String button){

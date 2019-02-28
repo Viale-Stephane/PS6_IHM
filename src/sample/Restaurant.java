@@ -1,19 +1,35 @@
 package sample;
 
-import java.sql.SQLOutput;
-
 public class Restaurant {
     private String restaurant, adress, website, phoneNumber;
     private String[] schedule;
-    private int grade;
+    private double grade, price, distance;
 
-    public Restaurant(String restaurant, String adress, String website, String phoneNumber, String[] schedule, int grade){
+    public Restaurant(String restaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance){
         this.restaurant=restaurant;
         this.adress=adress;
         this.website=website;
         this.phoneNumber=phoneNumber;
         this.schedule=schedule;
         this.grade=grade;
+        this.price=price;
+        this.distance=distance;
+    }
+
+    public double getGrade(){
+        return this.grade;
+    }
+
+    public double getPrice(){
+        return this.price;
+    }
+
+    public double getDistance(){
+        return this.price;
+    }
+
+    public String getName(){
+        return this.restaurant;
     }
 
     public void printRestaurant(){

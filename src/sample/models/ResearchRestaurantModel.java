@@ -4,22 +4,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import sample.Main;
+import sample.Restaurant;
+import sample.RestaurantList;
 import sample.View;
 import sample.controllers.AddLocationController;
 import sample.controllers.ResearchRestaurantController;
 import sample.controllers.RestaurantPageController;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 public class ResearchRestaurantModel {
 
     public ResearchRestaurantModel(){}
 
-    public void slideBarPrice(){
-
-    }
-
-    public void filter(){
+    public void filter(int minStar, boolean isItARestaurant, double maxPrice, double maxDistance){
+        RestaurantList whiteListedRestaurant = new RestaurantList();
+        ArrayList<Restaurant> restaurants = Main.restaurantList.getRestaurants();
+        for (Restaurant restaurant : restaurants) {
+            if (restaurant.getPrice() <= maxPrice && restaurant.getDistance() <= maxDistance && restaurant.getGrade() >= minStar) {
+                whiteListedRestaurant.addRestaurant(restaurant);
+            }
+        }
         String fxmlFile= View.RESTORANT_PAGE;
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -33,5 +40,6 @@ public class ResearchRestaurantModel {
         }catch (IOException e){
             e.printStackTrace();
         }
+        whiteListedRestaurant.printRestaurants();
     }
 }

@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import sample.Main;
 import sample.RestaurantList;
 import sample.models.AddLocationModel;
 
@@ -41,9 +42,10 @@ public class AddLocationController {
 
     public void addLocation(){
         AddLocationModel model = new AddLocationModel();
+        int averagePrice = 20, averageDistance = 20;
         String[] schedule = {monday.getText(),thuesday.getText(),wednesday.getText(),thursday.getText(),friday.getText(),saturday.getText(),sunday.getText()};
-        model.addLocation(restaurant.getText(),adress.getText(),website.getText(),phoneNumber.getText(),schedule,Integer.parseInt(grade.getText()));
-        RestaurantList.printRestaurants();
+        model.addLocation(restaurant.getText(),adress.getText(),website.getText(),phoneNumber.getText(),schedule,Integer.parseInt(grade.getText()), averagePrice, averageDistance);
+        Main.restaurantList.printRestaurants();
     }
 
     public void changePage(String instruction){

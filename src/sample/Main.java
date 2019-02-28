@@ -10,9 +10,12 @@ import sample.controllers.Controller;
 public class Main extends Application {
     public static View view;
     public static Stage stage;
+    public static RestaurantList restaurantList = new RestaurantList();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        restaurantList.sampleRestaurant();
+        restaurantList.printRestaurants();
         //create a loader
         FXMLLoader loader = new FXMLLoader();
 
@@ -37,7 +40,6 @@ public class Main extends Application {
 
         //show the view
         stage.show();
-
 
 
     }

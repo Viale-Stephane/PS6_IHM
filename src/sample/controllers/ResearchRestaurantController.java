@@ -7,8 +7,6 @@ import javafx.scene.image.ImageView;
 import sample.View;
 import sample.models.ResearchRestaurantModel;
 
-import java.io.InputStream;
-
 
 public class ResearchRestaurantController {
     @FXML
@@ -49,20 +47,20 @@ public class ResearchRestaurantController {
     @FXML
     private Button buttonFiltre;
 
+    //-------------------------------------------------------------------
+
+    private int minStar;
     Image FULL_STAR = new Image(View.FULL_STAR);
     Image EMPTY_STAR = new Image(View.EMPTY_STAR);
 
 
     ResearchRestaurantModel model = new ResearchRestaurantModel();
 
-    public void filter(){
-        model.filter();
+    public void filter(int minStar, boolean restaurant, double maxPrice, double maxDistance){
+        model.filter(minStar, restaurant, maxPrice, maxDistance);
     }
 
-    public void click(int number){
-        Image FULL_STAR = new Image("sample/data/Images/starFull.png");
-        Image EMPTY_STAR = new Image(View.EMPTY_STAR);
-
+    public void clickStar(int number){
         filterStar5.setImage(EMPTY_STAR);
         filterStar4.setImage(EMPTY_STAR);
         filterStar3.setImage(EMPTY_STAR);
@@ -80,6 +78,14 @@ public class ResearchRestaurantController {
             case 1:
                 filterStar1.setImage(FULL_STAR);
         }
+        this.minStar = number;
+    }
+
+    public void initSlider(Slider slider, int tickUnit, int blockIncrement){
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setMajorTickUnit(tickUnit);
+        slider.setBlockIncrement(blockIncrement);
     }
 
     public void init(){
@@ -88,15 +94,17 @@ public class ResearchRestaurantController {
         filterStar3.setImage(EMPTY_STAR);
         filterStar2.setImage(EMPTY_STAR);
         filterStar1.setImage(EMPTY_STAR);
-        System.out.println(slideBarPrice.getValue());
-        slideBarPrice.adjustValue(slideBarPrice.getValue());
         toggleButtonRestaurant.fire();
-        buttonFiltre.setOnAction(event -> filter());
-        filterStar1.setOnMouseClicked(event -> click(1));
-        filterStar2.setOnMouseClicked(event -> click(2));
-        filterStar3.setOnMouseClicked(event -> click(3));
-        filterStar4.setOnMouseClicked(event -> click(4));
-        filterStar5.setOnMouseClicked(event -> click(5));
+        buttonFiltre.setOnAction(event -> filter(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue()));
+        filterStar1.setOnMouseClicked(event -> clickStar(1));
+        filterStar2.setOnMouseClicked(event -> clickStar(2));
+        filterStar3.setOnMouseClicked(event -> clickStar(3));
+        filterStar4.setOnMouseClicked(event -> clickStar(4));
+        filterStar5.setOnMouseClicked(event -> clickStar(5));
 
+        initSlider(slideBarDistance, 20,10);
+        initSlider(slideBarPrice,100,50);
+
+        slideBarDistance.setOnMouseClicked(event -> System.out.println(slideBarDistance.getValue()));
     }
 }
