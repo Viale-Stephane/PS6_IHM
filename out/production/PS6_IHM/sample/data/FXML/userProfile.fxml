@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="sample.controllers.ProfileController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="sample.controllers.ProfileController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="70.0" prefWidth="200.0">
          <children>
@@ -18,7 +18,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="135.0">
                <children>
-                  <Label fx:id="name" layoutX="5.0" layoutY="14.0" prefHeight="17.0" prefWidth="60.0" text="Nom" />
+                  <Label fx:id="lastName" layoutX="5.0" layoutY="14.0" prefHeight="17.0" prefWidth="60.0" text="Nom" />
                   <Label fx:id="firstName" layoutX="70.0" layoutY="14.0" prefHeight="17.0" prefWidth="60.0" text="Prénom" />
                   <Label fx:id="email" layoutX="5.0" layoutY="35.0" prefHeight="17.0" prefWidth="120.0" text="Email" />
                </children>

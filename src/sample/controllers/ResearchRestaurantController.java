@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import sample.Profile;
 import sample.Tag;
 import sample.View;
 import sample.models.ResearchRestaurantModel;
@@ -65,10 +66,6 @@ public class ResearchRestaurantController {
 
     ResearchRestaurantModel model = new ResearchRestaurantModel();
     ArrayList<String> researchedTags = new ArrayList<>();
-
-    public void filter(int minStar, boolean restaurant, double maxPrice, double maxDistance, ArrayList<String> researchedTags){
-        model.filter(minStar, restaurant, maxPrice, maxDistance, researchedTags);
-    }
 
     public void clickStar(int number){
         filterStar5.setImage(EMPTY_STAR);
@@ -132,7 +129,7 @@ public class ResearchRestaurantController {
         }
     }
 
-    public void init(){
+    public void init(Profile profile){
         filterStar5.setImage(EMPTY_STAR);
         filterStar4.setImage(EMPTY_STAR);
         filterStar3.setImage(EMPTY_STAR);
@@ -156,11 +153,8 @@ public class ResearchRestaurantController {
         for(MenuItem menuItem : splitMenuFiltre.getItems()){
             menuItem.setOnAction(event -> addFiltre(menuItem.getText()));
         }
-        //filtre1.setText(Tag.Burger.toString());
-        //filtre1.setOnAction(event -> addFiltre((filtre1.getText())));
-        //filtre2.setOnAction(event -> addFiltre(filtre2.getText()));
 
-        buttonFiltre.setOnAction(event -> filter(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags));
+        buttonFiltre.setOnAction(event -> model.filter(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags,profile));
 
     }
 }

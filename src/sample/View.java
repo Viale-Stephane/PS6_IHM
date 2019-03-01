@@ -16,7 +16,6 @@ public class View {
     public final static String HISTORY = "../data/FXML/";
     public final static String MY_RATINGS = "../data/FXML/";
     public final static String RESTORANT_PAGE = "../data/FXML/restopage.fxml";
-    public final static String LOG_OUT = "../data/FXML/";
 
     //IMAGES//
 

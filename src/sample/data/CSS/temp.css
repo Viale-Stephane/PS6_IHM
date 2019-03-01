@@ -22,3 +22,7 @@
     -fx-background-position: 0, 15;
 
 }
+
+#plus {
+    -fx-background-image: url("../Images/plus_button.png");
+}

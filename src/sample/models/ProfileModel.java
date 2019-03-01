@@ -5,8 +5,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.Main;
+import sample.Profile;
 import sample.View;
 import sample.controllers.AddLocationController;
+import sample.controllers.Controller;
 
 import java.io.IOException;
 
@@ -16,7 +18,7 @@ public class ProfileModel {
     public ProfileModel(){
     }
 
-    public String compute(String button){
+    public String accessingTo(String button, Profile profile){
         String answer="";
         String fxmlFile="";
         switch(button) {
@@ -38,16 +40,30 @@ public class ProfileModel {
                 break;
             case "logOut":
                 answer = "You are getting disconnected..";
-                fxmlFile = View.LOG_OUT;
+                fxmlFile = "../"+View.HOME_OFFLINE;
                 break;
         }
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.getClass().getResource(fxmlFile);
             Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
+            root.getStylesheets().add(View.CSS_FILE);
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
-            ((AddLocationController) loader.getController()).init();
+            switch(button){
+                case "history":
+                    break;
+                case "favorites":
+                    break;
+                case "myRatings":
+                    break;
+                case "addLocation":
+                    ((AddLocationController) loader.getController()).init(profile);
+                    break;
+                case "logOut":
+                    ((Controller) loader.getController()).init();
+                    break;
+            }
             Main.stage.show();
 
         }catch (IOException e){

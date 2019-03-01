@@ -11,10 +11,12 @@ public class Main extends Application {
     public static View view;
     public static Stage stage;
     public static RestaurantList restaurantList = new RestaurantList();
+    public static ProfileList profileList = new ProfileList();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         restaurantList.sampleRestaurant();
+        profileList.profileSample();
         //create a loader
         FXMLLoader loader = new FXMLLoader();
 

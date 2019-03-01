@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import sample.Main;
+import sample.Profile;
 import sample.RestaurantList;
 import sample.Tag;
 import sample.models.AddLocationModel;
@@ -52,13 +53,13 @@ public class AddLocationController {
         Main.restaurantList.printRestaurants();
     }
 
-    public void changePage(String instruction){
+    public void changePage(String instruction, Profile profile){
         AddLocationModel model = new AddLocationModel();
-        model.compute(instruction);
+        model.compute(instruction, profile);
     }
 
-    public void init() {
+    public void init(Profile profile) {
         save.setOnAction( event -> addLocation());
-        cancel.setOnAction( event -> changePage("cancel"));
+        cancel.setOnAction( event -> changePage("cancel", profile));
     }
 }

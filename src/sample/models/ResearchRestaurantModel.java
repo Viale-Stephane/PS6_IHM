@@ -33,7 +33,10 @@ public class ResearchRestaurantModel {
         return null;
     }
 
-    public void filter(int minStar, boolean isItARestaurant, double maxPrice, double maxDistance, ArrayList<String> tags){
+    public void filter(int minStar, boolean isItARestaurant, double maxPrice, double maxDistance, ArrayList<String> tags,Profile profile){
+        if(profile.isNull()){
+            profile = new Profile(null,null,null,null,null);
+        }
         RestaurantList whiteListedRestaurant = new RestaurantList();
         ArrayList<Restaurant> restaurants = Main.restaurantList.getRestaurants();
         for (Restaurant restaurant : restaurants) {
@@ -46,9 +49,10 @@ public class ResearchRestaurantModel {
             FXMLLoader loader = new FXMLLoader();
             loader.getClass().getResource(fxmlFile);
             Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
+            root.getStylesheets().add(View.CSS_FILE);
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
-            ((RestaurantPageController) loader.getController()).init();
+            ((RestaurantPageController) loader.getController()).init(profile);
             Main.stage.show();
 
         }catch (IOException e){

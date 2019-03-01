@@ -19,7 +19,7 @@ public class AddLocationModel {
         Main.restaurantList.addRestaurant(newRestaurant);
     }
 
-    public String compute(String button){
+    public String compute(String button, Profile profile){
         String answer="";
         String fxmlFile="";
         switch(button) {
@@ -36,9 +36,10 @@ public class AddLocationModel {
             FXMLLoader loader = new FXMLLoader();
             loader.getClass().getResource(fxmlFile);
             Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
+            root.getStylesheets().add(View.CSS_FILE);
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
-            ((ProfileController) loader.getController()).init();
+            ((ProfileController) loader.getController()).init(profile);
             Main.stage.show();
 
         } catch (IOException e) {

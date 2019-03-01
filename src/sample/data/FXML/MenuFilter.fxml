@@ -14,7 +14,7 @@
 
 
 <?import javafx.scene.layout.HBox?>
-<VBox fx:controller="sample.controllers.ResearchRestaurantController" fx:id="research" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="sample.controllers.ResearchRestaurantController" fx:id="research" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="59.0" prefWidth="250.0">
          <children>
