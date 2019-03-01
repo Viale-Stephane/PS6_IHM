@@ -149,9 +149,10 @@ public class ResearchRestaurantController {
         filterStar3.setOnMouseClicked(event -> clickStar(3));
         filterStar4.setOnMouseClicked(event -> clickStar(4));
         filterStar5.setOnMouseClicked(event -> clickStar(5));
-
         initSlider(slideBarDistance, 20,10);
         initSlider(slideBarPrice,100,50);
+        slideBarPrice.setOnMouseClicked(event -> labelPrice.setText("Prix : "+((int)slideBarPrice.getValue())+"€"));
+        slideBarDistance.setOnMouseClicked(event -> labelDistance.setText("Distance : "+((int)slideBarDistance.getValue())+"km"));
         for(MenuItem menuItem : splitMenuFiltre.getItems()){
             menuItem.setOnAction(event -> addFiltre(menuItem.getText()));
         }

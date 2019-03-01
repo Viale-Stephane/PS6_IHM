@@ -48,7 +48,7 @@ public class AddLocationController {
         AddLocationModel model = new AddLocationModel();
         int averagePrice = 20, averageDistance = 20;
         String[] schedule = {monday.getText(),thuesday.getText(),wednesday.getText(),thursday.getText(),friday.getText(),saturday.getText(),sunday.getText()};
-        model.addLocation(restaurant.getText(),adress.getText(),website.getText(),phoneNumber.getText(),schedule,Integer.parseInt(grade.getText()), averagePrice, averageDistance,new ArrayList<Tag>(Arrays.asList(Tag.Francais, Tag.Fromage, Tag.Healthy)));
+        model.addLocation(restaurant.getText(), true, adress.getText(),website.getText(),phoneNumber.getText(),schedule,Integer.parseInt(grade.getText()), averagePrice, averageDistance,new ArrayList<Tag>(Arrays.asList(Tag.Francais, Tag.Fromage, Tag.Healthy)));
         Main.restaurantList.printRestaurants();
     }
 

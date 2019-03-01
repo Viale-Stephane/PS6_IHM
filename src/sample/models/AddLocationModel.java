@@ -14,8 +14,8 @@ public class AddLocationModel {
     public AddLocationModel(){
     }
 
-    public void addLocation(String restaurant, String adress, String website, String phoneNumber, String[] schedule, int grade, int averagePrice, int averageDistance, ArrayList<Tag> tags){
-        Restaurant newRestaurant = new Restaurant(restaurant, adress, website, phoneNumber, schedule, grade, averagePrice, averageDistance,tags);
+    public void addLocation(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, int grade, int averagePrice, int averageDistance, ArrayList<Tag> tags){
+        Restaurant newRestaurant = new Restaurant(restaurant, kindRestaurant, adress, website, phoneNumber, schedule, grade, averagePrice, averageDistance,tags);
         Main.restaurantList.addRestaurant(newRestaurant);
     }
 

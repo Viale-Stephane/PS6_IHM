@@ -7,9 +7,11 @@ public class Restaurant {
     private String[] schedule;
     private ArrayList<Tag> tags;
     private double grade, price, distance;
+    private boolean kindRestaurant;
 
-    public Restaurant(String restaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, ArrayList<Tag> tags){
+    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, ArrayList<Tag> tags){
         this.restaurant=restaurant;
+        this.kindRestaurant = kindRestaurant;
         this.adress=adress;
         this.website=website;
         this.phoneNumber=phoneNumber;

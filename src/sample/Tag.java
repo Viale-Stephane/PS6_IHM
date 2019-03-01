@@ -15,7 +15,10 @@ public enum Tag {
     Glace,
     Burger,
     Healthy,
-    Kebab;
+    Kebab,
+    Sandwich,
+    Salade,
+    Commerce;
 
     public static EnumSet<Tag> getFullList(){
         return EnumSet.allOf(Tag.class);
