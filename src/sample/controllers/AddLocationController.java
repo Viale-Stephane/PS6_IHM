@@ -7,7 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import sample.Main;
 import sample.RestaurantList;
+import sample.Tag;
 import sample.models.AddLocationModel;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class AddLocationController {
@@ -44,7 +48,7 @@ public class AddLocationController {
         AddLocationModel model = new AddLocationModel();
         int averagePrice = 20, averageDistance = 20;
         String[] schedule = {monday.getText(),thuesday.getText(),wednesday.getText(),thursday.getText(),friday.getText(),saturday.getText(),sunday.getText()};
-        model.addLocation(restaurant.getText(),adress.getText(),website.getText(),phoneNumber.getText(),schedule,Integer.parseInt(grade.getText()), averagePrice, averageDistance);
+        model.addLocation(restaurant.getText(),adress.getText(),website.getText(),phoneNumber.getText(),schedule,Integer.parseInt(grade.getText()), averagePrice, averageDistance,new ArrayList<Tag>(Arrays.asList(Tag.Francais, Tag.Fromage, Tag.Healthy)));
         Main.restaurantList.printRestaurants();
     }
 

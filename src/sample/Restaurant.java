@@ -1,11 +1,14 @@
 package sample;
 
+import java.util.ArrayList;
+
 public class Restaurant {
     private String restaurant, adress, website, phoneNumber;
     private String[] schedule;
+    private ArrayList<Tag> tags;
     private double grade, price, distance;
 
-    public Restaurant(String restaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance){
+    public Restaurant(String restaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, ArrayList<Tag> tags){
         this.restaurant=restaurant;
         this.adress=adress;
         this.website=website;
@@ -14,6 +17,7 @@ public class Restaurant {
         this.grade=grade;
         this.price=price;
         this.distance=distance;
+        this.tags = tags;
     }
 
     public double getGrade(){
@@ -31,6 +35,8 @@ public class Restaurant {
     public String getName(){
         return this.restaurant;
     }
+
+    public ArrayList<Tag> getTags(){ return this.tags;}
 
     public void printRestaurant(){
         System.out.println("Le nom du restaurant est : "+this.restaurant);

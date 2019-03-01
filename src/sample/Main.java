@@ -15,7 +15,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         restaurantList.sampleRestaurant();
-        restaurantList.printRestaurants();
         //create a loader
         FXMLLoader loader = new FXMLLoader();
 

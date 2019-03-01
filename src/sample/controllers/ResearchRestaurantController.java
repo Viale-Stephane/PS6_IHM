@@ -4,8 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import sample.Tag;
 import sample.View;
 import sample.models.ResearchRestaurantModel;
+
+import java.util.ArrayList;
 
 
 public class ResearchRestaurantController {
@@ -47,6 +50,12 @@ public class ResearchRestaurantController {
     @FXML
     private Button buttonFiltre;
 
+    @FXML
+    private MenuItem filtre1;
+
+    @FXML
+    private MenuItem filtre2;
+
     //-------------------------------------------------------------------
 
     private int minStar;
@@ -55,9 +64,10 @@ public class ResearchRestaurantController {
 
 
     ResearchRestaurantModel model = new ResearchRestaurantModel();
+    ArrayList<String> researchedTags = new ArrayList<>();
 
-    public void filter(int minStar, boolean restaurant, double maxPrice, double maxDistance){
-        model.filter(minStar, restaurant, maxPrice, maxDistance);
+    public void filter(int minStar, boolean restaurant, double maxPrice, double maxDistance, ArrayList<String> researchedTags){
+        model.filter(minStar, restaurant, maxPrice, maxDistance, researchedTags);
     }
 
     public void clickStar(int number){
@@ -88,14 +98,40 @@ public class ResearchRestaurantController {
         slider.setBlockIncrement(blockIncrement);
     }
 
+    public void swapKindOfLocation(String location){
+        switch(location){
+            case "restaurant":
+                toggleButtonCommerce.setSelected(false);
+                toggleButtonRestaurant.setSelected(true);
+                break;
+            case "commerce":
+                toggleButtonRestaurant.setSelected(false);
+                toggleButtonCommerce.setSelected(true);
+                break;
+        }
+    }
+
+    public boolean addFiltre(String newFiltre){
+            if(researchedTags.contains("#"+newFiltre+" ")){
+                researchedTags.remove("#"+newFiltre+" ");
+                textFieldFiltres.setText(researchedTags.toString());
+                return false;
+            }
+        researchedTags.add("#"+newFiltre+" ");
+        textFieldFiltres.setText(researchedTags.toString());
+        return true;
+    }
+
     public void init(){
         filterStar5.setImage(EMPTY_STAR);
         filterStar4.setImage(EMPTY_STAR);
         filterStar3.setImage(EMPTY_STAR);
         filterStar2.setImage(EMPTY_STAR);
         filterStar1.setImage(EMPTY_STAR);
-        toggleButtonRestaurant.fire();
-        buttonFiltre.setOnAction(event -> filter(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue()));
+        toggleButtonRestaurant.setSelected(true);
+        textFieldFiltres.setEditable(false);
+        toggleButtonRestaurant.setOnMouseClicked(event -> swapKindOfLocation("restaurant"));
+        toggleButtonCommerce.setOnMouseClicked(event -> swapKindOfLocation("commerce"));
         filterStar1.setOnMouseClicked(event -> clickStar(1));
         filterStar2.setOnMouseClicked(event -> clickStar(2));
         filterStar3.setOnMouseClicked(event -> clickStar(3));
@@ -105,6 +141,11 @@ public class ResearchRestaurantController {
         initSlider(slideBarDistance, 20,10);
         initSlider(slideBarPrice,100,50);
 
-        slideBarDistance.setOnMouseClicked(event -> System.out.println(slideBarDistance.getValue()));
+        filtre1.setText(Tag.Burger.toString());
+        filtre1.setOnAction(event -> addFiltre((filtre1.getText())));
+        filtre2.setOnAction(event -> addFiltre(filtre2.getText()));
+
+        buttonFiltre.setOnAction(event -> filter(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags));
+
     }
 }

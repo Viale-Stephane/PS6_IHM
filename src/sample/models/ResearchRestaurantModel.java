@@ -3,10 +3,7 @@ package sample.models;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import sample.Main;
-import sample.Restaurant;
-import sample.RestaurantList;
-import sample.View;
+import sample.*;
 import sample.controllers.AddLocationController;
 import sample.controllers.ResearchRestaurantController;
 import sample.controllers.RestaurantPageController;
@@ -19,13 +16,30 @@ public class ResearchRestaurantModel {
 
     public ResearchRestaurantModel(){}
 
-    public void filter(int minStar, boolean isItARestaurant, double maxPrice, double maxDistance){
+    public Restaurant lookingForARestaurant(int minStar, Restaurant restaurant, double maxPrice, double maxDistance, ArrayList<String> tags){
+        if(!tags.isEmpty()) {
+            for (Tag restaurantTag : restaurant.getTags()) {
+                for (String tag : tags) {
+                    if (("#"+restaurantTag.toString()+" ").equals(tag) && restaurant.getPrice() <= maxPrice && restaurant.getDistance() <= maxDistance && restaurant.getGrade() >= minStar) {
+                        return restaurant;
+                    }
+                }
+            }
+        }else {
+            if (restaurant.getPrice() <= maxPrice && restaurant.getDistance() <= maxDistance && restaurant.getGrade() >= minStar) {
+                return restaurant;
+            }
+        }
+        return null;
+    }
+
+    public void filter(int minStar, boolean isItARestaurant, double maxPrice, double maxDistance, ArrayList<String> tags){
         RestaurantList whiteListedRestaurant = new RestaurantList();
         ArrayList<Restaurant> restaurants = Main.restaurantList.getRestaurants();
         for (Restaurant restaurant : restaurants) {
-            if (restaurant.getPrice() <= maxPrice && restaurant.getDistance() <= maxDistance && restaurant.getGrade() >= minStar) {
-                whiteListedRestaurant.addRestaurant(restaurant);
-            }
+            Restaurant choosenOne = this.lookingForARestaurant(minStar, restaurant, maxPrice, maxDistance, tags);
+            if(choosenOne!= null)
+                whiteListedRestaurant.addRestaurant(choosenOne);
         }
         String fxmlFile= View.RESTORANT_PAGE;
         try {

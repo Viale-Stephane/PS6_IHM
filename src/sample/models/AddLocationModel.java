@@ -3,21 +3,19 @@ package sample.models;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import sample.Main;
-import sample.Restaurant;
-import sample.RestaurantList;
-import sample.View;
+import sample.*;
 import sample.controllers.ProfileController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AddLocationModel {
 
     public AddLocationModel(){
     }
 
-    public void addLocation(String restaurant, String adress, String website, String phoneNumber, String[] schedule, int grade, int averagePrice, int averageDistance){
-        Restaurant newRestaurant = new Restaurant(restaurant, adress, website, phoneNumber, schedule, grade, averagePrice, averageDistance);
+    public void addLocation(String restaurant, String adress, String website, String phoneNumber, String[] schedule, int grade, int averagePrice, int averageDistance, ArrayList<Tag> tags){
+        Restaurant newRestaurant = new Restaurant(restaurant, adress, website, phoneNumber, schedule, grade, averagePrice, averageDistance,tags);
         Main.restaurantList.addRestaurant(newRestaurant);
     }
 
