@@ -122,6 +122,16 @@ public class ResearchRestaurantController {
         return true;
     }
 
+    public void initFilters(){
+        int i = 0;
+        for(Tag tag : Tag.getFullList())
+        splitMenuFiltre.getItems().add(new MenuItem(tag.toString()));
+        for(MenuItem menuItem : splitMenuFiltre.getItems()){
+            menuItem.setId("filtre"+i);
+            i++;
+        }
+    }
+
     public void init(){
         filterStar5.setImage(EMPTY_STAR);
         filterStar4.setImage(EMPTY_STAR);
@@ -130,6 +140,8 @@ public class ResearchRestaurantController {
         filterStar1.setImage(EMPTY_STAR);
         toggleButtonRestaurant.setSelected(true);
         textFieldFiltres.setEditable(false);
+        initFilters();
+
         toggleButtonRestaurant.setOnMouseClicked(event -> swapKindOfLocation("restaurant"));
         toggleButtonCommerce.setOnMouseClicked(event -> swapKindOfLocation("commerce"));
         filterStar1.setOnMouseClicked(event -> clickStar(1));
@@ -140,10 +152,12 @@ public class ResearchRestaurantController {
 
         initSlider(slideBarDistance, 20,10);
         initSlider(slideBarPrice,100,50);
-
-        filtre1.setText(Tag.Burger.toString());
-        filtre1.setOnAction(event -> addFiltre((filtre1.getText())));
-        filtre2.setOnAction(event -> addFiltre(filtre2.getText()));
+        for(MenuItem menuItem : splitMenuFiltre.getItems()){
+            menuItem.setOnAction(event -> addFiltre(menuItem.getText()));
+        }
+        //filtre1.setText(Tag.Burger.toString());
+        //filtre1.setOnAction(event -> addFiltre((filtre1.getText())));
+        //filtre2.setOnAction(event -> addFiltre(filtre2.getText()));
 
         buttonFiltre.setOnAction(event -> filter(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags));
 

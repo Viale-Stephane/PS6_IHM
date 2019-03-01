@@ -26,8 +26,6 @@
          <children>
             <SplitMenuButton fx:id="splitMenuFiltre" layoutX="89.0" layoutY="1.0" mnemonicParsing="false" text="Filtres">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </SplitMenuButton>
             <TextField fx:id="textFieldFiltres" alignment="CENTER" layoutX="19.0" layoutY="36.0" opacity="0.7" prefHeight="25.0" prefWidth="212.0" promptText="Populaires : #FastFood" />

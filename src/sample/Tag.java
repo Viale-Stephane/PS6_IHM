@@ -1,5 +1,7 @@
 package sample;
 
+import java.util.EnumSet;
+
 public enum Tag {
     FastFood,
     Pizza,
@@ -13,5 +15,9 @@ public enum Tag {
     Glace,
     Burger,
     Healthy,
-    Kebab
+    Kebab;
+
+    public static EnumSet<Tag> getFullList(){
+        return EnumSet.allOf(Tag.class);
+    }
 }
