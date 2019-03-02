@@ -75,7 +75,7 @@ public class Model {
         ArrayList<Restaurant> restaurants = Main.restaurantList.getRestaurants();
         for(Restaurant restaurant: restaurants){
             if(restaurant.getName().equals(researchBarText)){
-                String fxmlFile = View.RESTORANT_PAGE;
+                String fxmlFile = View.RESTAURANT_PAGE;
                 try {
                     FXMLLoader loader = new FXMLLoader();
                     loader.getClass().getResource(fxmlFile);

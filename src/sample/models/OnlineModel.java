@@ -52,7 +52,7 @@ public class OnlineModel {
     }
 
     public void accessInformations(Profile profile) {
-        String fxmlFile = View.MENU_INFORMATIONS;
+        String fxmlFile = View.INFORMATIONS;
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.getClass().getResource(fxmlFile);
@@ -72,7 +72,7 @@ public class OnlineModel {
         ArrayList<Restaurant> restaurants = Main.restaurantList.getRestaurants();
         for(Restaurant restaurant: restaurants){
             if(restaurant.getName().equals(researchBarText)){
-                String fxmlFile = View.RESTORANT_PAGE;
+                String fxmlFile = View.RESTAURANT_PAGE;
                 try {
                     FXMLLoader loader = new FXMLLoader();
                     loader.getClass().getResource(fxmlFile);

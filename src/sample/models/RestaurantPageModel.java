@@ -50,7 +50,6 @@ public class RestaurantPageModel {
 
     public void returnToHome(Profile profile) {
         String fxmlFile;
-        System.out.println(profile.getUsername());
         if (profile.isNull())
             fxmlFile = "../"+View.HOME_OFFLINE;
         else

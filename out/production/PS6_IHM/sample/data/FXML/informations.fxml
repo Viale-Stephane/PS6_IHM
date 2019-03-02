@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="sample.controllers.ApplicationInformationsController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="74.0" prefWidth="250.0">
          <children>
@@ -22,10 +22,8 @@
       </Pane>
       <Pane prefHeight="109.0" prefWidth="250.0">
          <children>
-            <ImageView fitHeight="75.0" fitWidth="99.0" layoutX="88.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/logo.png" />
-               </image>
+            <ImageView fx:id="logo" fitHeight="75.0" fitWidth="99.0" layoutX="88.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image></image>
             </ImageView>
             <Label layoutX="100.0" layoutY="6.0" style="-fx-font-weight: bold;" text="Georesto" textAlignment="CENTER" />
          </children>
@@ -42,7 +40,7 @@
       </Pane>
       <Pane prefHeight="70.0" prefWidth="250.0">
          <children>
-            <Button fx:id="informationsReturn" layoutX="99.0" layoutY="23.0" mnemonicParsing="false" text="Retour" />
+            <Button fx:id="goBack" layoutX="99.0" layoutY="23.0" mnemonicParsing="false" text="Retour" />
          </children>
       </Pane>
    </children>

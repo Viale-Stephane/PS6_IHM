@@ -11,7 +11,6 @@ import sample.Main;
 import sample.Profile;
 import sample.Restaurant;
 import sample.View;
-import sample.controllers.OnlineController;
 import sample.controllers.RestaurantPageController;
 
 import java.io.IOException;
@@ -48,7 +47,7 @@ public class RestaurantListModel {
     }
 
     public void accessRestaurantPage(Restaurant restaurant, Profile profile){
-        String fxmlFile = View.RESTORANT_PAGE;
+        String fxmlFile = View.RESTAURANT_PAGE;
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.getClass().getResource(fxmlFile);
