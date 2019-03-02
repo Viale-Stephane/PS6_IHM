@@ -7,10 +7,7 @@ import sample.Main;
 import sample.Profile;
 import sample.Restaurant;
 import sample.View;
-import sample.controllers.ApplicationInformationsController;
-import sample.controllers.LoginController;
-import sample.controllers.ProfileController;
-import sample.controllers.ResearchRestaurantController;
+import sample.controllers.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -71,10 +68,24 @@ public class OnlineModel {
         }
     }
 
-    public String search(String researchBarText) {
+    public String search(String researchBarText,Profile profile) {
         ArrayList<Restaurant> restaurants = Main.restaurantList.getRestaurants();
         for(Restaurant restaurant: restaurants){
             if(restaurant.getName().equals(researchBarText)){
+                String fxmlFile = View.RESTORANT_PAGE;
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.getClass().getResource(fxmlFile);
+                    Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
+                    root.getStylesheets().add(View.CSS_FILE);
+                    Scene scene = new Scene(root);
+                    Main.stage.setScene(scene);
+                    ((RestaurantPageController) loader.getController()).init(restaurant,profile);
+                    Main.stage.show();
+
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
                 return "Accessing to the page of "+researchBarText+"..";
             }
         }

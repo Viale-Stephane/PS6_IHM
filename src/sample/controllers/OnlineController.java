@@ -59,9 +59,9 @@ public class OnlineController {
 
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))
-                System.out.println(model.search(researchBar.getText()));
+                System.out.println(model.search(researchBar.getText(),profile));
         });
-        search.setOnMouseClicked(event -> System.out.println(model.search(researchBar.getText())));
+        search.setOnMouseClicked(event -> System.out.println(model.search(researchBar.getText(),profile)));
 
     }
 }

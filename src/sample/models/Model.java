@@ -71,9 +71,24 @@ public class Model {
     }
 
     public String search(String researchBarText) {
+        Profile profile = new Profile(null,null,null,null,null);
         ArrayList<Restaurant> restaurants = Main.restaurantList.getRestaurants();
         for(Restaurant restaurant: restaurants){
             if(restaurant.getName().equals(researchBarText)){
+                String fxmlFile = View.RESTORANT_PAGE;
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.getClass().getResource(fxmlFile);
+                    Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
+                    root.getStylesheets().add(View.CSS_FILE);
+                    Scene scene = new Scene(root);
+                    Main.stage.setScene(scene);
+                    ((RestaurantPageController) loader.getController()).init(restaurant,profile);
+                    Main.stage.show();
+
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
                 return "Accessing to the page of "+researchBarText+"..";
             }
         }
