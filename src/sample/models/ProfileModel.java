@@ -9,6 +9,7 @@ import sample.Profile;
 import sample.View;
 import sample.controllers.AddLocationController;
 import sample.controllers.Controller;
+import sample.controllers.FavorisController;
 
 import java.io.IOException;
 
@@ -54,6 +55,7 @@ public class ProfileModel {
                 case "history":
                     break;
                 case "favorites":
+                    ((FavorisController) loader.getController()).init(profile);
                     break;
                 case "myRatings":
                     break;

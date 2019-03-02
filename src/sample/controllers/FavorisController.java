@@ -1,0 +1,55 @@
+package sample.controllers;
+
+import javafx.fxml.FXML;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import sample.*;
+import sample.models.RestaurantListModel;
+
+
+public class FavorisController {
+
+    @FXML
+    private ListView<Pane> paneListView;
+
+    private ObservableList<Pane> panes = FXCollections.observableArrayList();
+    private ObservableList<Restaurant> items = FXCollections.observableArrayList();
+
+    RestaurantListModel model = new RestaurantListModel();
+
+    public void init(Profile profile) {
+        items.addAll(profile.getFavoris());
+        for(int i=0 ;i<profile.getFavoris().size();i++){
+            Pane pane = new Pane();
+            Label restaurantName = new Label();
+            Label monday = new Label(), thuesday = new Label(), wednesday = new Label(), thursday = new Label(), friday = new Label(), saturday = new Label(), sunday = new Label();
+            Label[] schedule = {monday,thuesday,wednesday,thursday,friday,saturday,sunday};
+            model.setSchedule(schedule,profile.getFavori(i));
+            ImageView star1 = new ImageView(), star2 = new ImageView(), star3 = new ImageView(), star4 = new ImageView(), star5 = new ImageView();
+            model.setSizeAndPosition(new ImageView[]{star1, star2, star3, star4, star5}, profile.getFavori(i).getGrade());
+            pane.setId("pane"+i);
+            pane.setPrefHeight(100);
+            pane.setPrefWidth(200);
+            restaurantName.setText(profile.getFavori(i).getName());
+            pane.getChildren().add(restaurantName);
+            pane.getChildren().addAll(new ImageView[]{star1,star2,star3,star4,star5});
+            pane.getChildren().addAll(schedule);
+            panes.add(pane);
+
+        }
+
+        try {
+            paneListView.setItems(panes);
+            for(int i=0; i<paneListView.getItems().size();i++) {
+                int finalI = i;
+                paneListView.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(profile.getFavori(finalI),profile));
+            }
+        } catch (NullPointerException error){
+            System.out.println("vous n'avez pas de favoris");
+        }
+    }
+}

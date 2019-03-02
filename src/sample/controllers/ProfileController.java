@@ -17,7 +17,6 @@ public class ProfileController {
     private Button addLocation;
     @FXML
     private Button logOut;
-
     @FXML
     private Label lastName;
     @FXML

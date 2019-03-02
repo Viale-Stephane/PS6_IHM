@@ -12,7 +12,7 @@ public class View {
     public final static String MENU_FILTER = "../data/FXML/MenuFilter.fxml";
     public final static String PROFILE = "../data/FXML/userProfile.fxml" ;
     public final static String NEW_LOCATION = "../data/FXML/addResto.fxml";
-    public final static String FAVORITES = "../data/FXML/";
+    public final static String FAVORITES = "../data/FXML/Favoris.fxml";
     public final static String HISTORY = "../data/FXML/";
     public final static String MY_RATINGS = "../data/FXML/";
     public final static String RESTORANT_PAGE = "../data/FXML/restopage.fxml";
