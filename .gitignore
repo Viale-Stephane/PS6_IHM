@@ -1,3 +1,9 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
 
 .DS_Store
 *.iml
@@ -6,3 +12,4 @@
 *.properties
 *.lst
 *.xml
+out/*
