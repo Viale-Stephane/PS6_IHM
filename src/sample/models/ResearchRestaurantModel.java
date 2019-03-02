@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import sample.*;
 import sample.controllers.AddLocationController;
 import sample.controllers.ResearchRestaurantController;
+import sample.controllers.RestaurantListController;
 import sample.controllers.RestaurantPageController;
 
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class ResearchRestaurantModel {
             if(choosenOne!= null)
                 whiteListedRestaurant.addRestaurant(choosenOne);
         }
-        String fxmlFile= View.RESTORANT_PAGE;
+        String fxmlFile= View.RESTAURANT_LIST;
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.getClass().getResource(fxmlFile);
@@ -52,7 +53,7 @@ public class ResearchRestaurantModel {
             root.getStylesheets().add(View.CSS_FILE);
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
-            ((RestaurantPageController) loader.getController()).init(profile);
+            ((RestaurantListController) loader.getController()).init(profile,whiteListedRestaurant);
             Main.stage.show();
 
         }catch (IOException e){

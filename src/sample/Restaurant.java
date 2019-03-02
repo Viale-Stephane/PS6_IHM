@@ -51,4 +51,24 @@ public class Restaurant {
         }
         System.out.println("Le restaurant a pour note : "+grade);
     }
+
+    public String getSchedule(int dayNumber) {
+        switch(dayNumber){
+            case 0:
+                return "Lundi : "+this.schedule[0];
+            case 1:
+                return "Mardi : "+this.schedule[1];
+            case 2:
+                return "Mercredi : "+this.schedule[2];
+            case 3:
+                return "Jeudi : "+this.schedule[3];
+            case 4:
+                return "Vendredi : "+this.schedule[4];
+            case 5:
+                return "Samedi : "+this.schedule[5];
+            case 6:
+                return "Dimanche : "+this.schedule[6];
+        }
+        return null;
+    }
 }

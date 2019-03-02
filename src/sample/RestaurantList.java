@@ -42,4 +42,12 @@ public class RestaurantList {
         this.restaurants.addAll(Arrays.asList(listOfRestaurants));
 
     }
+
+    public int size() {
+        return this.restaurants.size();
+    }
+
+    public Restaurant getRestaurants(int i) {
+        return this.restaurants.get(i);
+    }
 }
