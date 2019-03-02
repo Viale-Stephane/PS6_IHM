@@ -3,25 +3,59 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import sample.Profile;
+import sample.View;
 import sample.models.OnlineModel;
+
 
 public class OnlineController {
     OnlineModel model = new OnlineModel();
 
     @FXML
-    private Button filterButton;
-    @FXML
-    private Button profile;
-    @FXML
-    private Button info;
-
-    @FXML
     private TextField researchBar;
 
+    @FXML
+    private ImageView search;
+    @FXML
+    private ImageView profile;
+    @FXML
+    private ImageView filterButton;
+    @FXML
+    private ImageView info;
+
+    //-------------------------------
+    Image SEARCH_ICON = new Image(View.SEARCH_ICON);
+    Image DEFAULT_PROFILE = new Image(View.DEFAULT_PROFILE);
+    Image DROP_DOWN_MENU = new Image(View.DROP_DOWN_MENU);
+    Image ORGANISATION_LOGO = new Image(View.ORGANISATION_LOGO);
+
+
     public void init(Profile profile){
-        this.profile.setOnAction(event -> this.model.moveToProfile(profile));
-        filterButton.setOnAction(event -> this.model.filter(profile));
+        search.setX(researchBar.getPrefWidth());
+        search.setY(-search.getFitHeight()/2);
+        search.setImage(SEARCH_ICON);
+
+        filterButton.setFitWidth(40);
+        filterButton.setFitHeight(40);
+        filterButton.setImage(DROP_DOWN_MENU);
+
+        info.setFitHeight(40);
+        info.setFitWidth(40);
+        info.setX(550);
+        info.setY(-info.getFitHeight()/2);
+        info.setImage(ORGANISATION_LOGO);
+
+
+        this.profile.setFitWidth(40);
+        this.profile.setFitHeight(40);
+        this.profile.setX(550);
+        this.profile.setY(-this.profile.getFitHeight()/2);
+        this.profile.setImage(DEFAULT_PROFILE);
+        this.profile.setOnMouseClicked(event -> this.model.moveToProfile(profile));
+        filterButton.setOnMouseClicked(event -> this.model.filter(profile));
+        info.setOnMouseClicked(event -> this.model.accessInformations(profile));
 
     }
 }

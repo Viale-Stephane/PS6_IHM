@@ -26,3 +26,8 @@
 #plus {
     -fx-background-image: url("../Images/plus_button.png");
 }
+
+#search {
+    -fx-background-image: url("../Images/Search-icon.png");
+    -fx-background-repeat: no-repeat;
+}

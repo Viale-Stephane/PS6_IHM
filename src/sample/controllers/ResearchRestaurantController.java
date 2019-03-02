@@ -51,12 +51,6 @@ public class ResearchRestaurantController {
     @FXML
     private Button buttonFiltre;
 
-    @FXML
-    private MenuItem filtre1;
-
-    @FXML
-    private MenuItem filtre2;
-
     //-------------------------------------------------------------------
 
     private int minStar;
