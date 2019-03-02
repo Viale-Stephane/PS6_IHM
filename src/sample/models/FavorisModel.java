@@ -11,14 +11,13 @@ import sample.Main;
 import sample.Profile;
 import sample.Restaurant;
 import sample.View;
+import sample.controllers.OnlineController;
 import sample.controllers.ProfileController;
-import sample.controllers.ResearchRestaurantController;
 import sample.controllers.RestaurantPageController;
 
 import java.io.IOException;
 
-public class RestaurantListModel {
-
+public class FavorisModel {
     Image FULL_STAR = new Image(View.FULL_STAR);
     Image EMPTY_STAR = new Image(View.EMPTY_STAR);
 
@@ -66,7 +65,7 @@ public class RestaurantListModel {
     }
 
     public void goBack(Profile profile) {
-        String fxmlFile = View.MENU_FILTER;
+        String fxmlFile = View.PROFILE;
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.getClass().getResource(fxmlFile);
@@ -74,12 +73,11 @@ public class RestaurantListModel {
             root.getStylesheets().add(View.CSS_FILE);
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
-            ((ResearchRestaurantController) loader.getController()).init(profile);
+            ((ProfileController) loader.getController()).init(profile);
             Main.stage.show();
 
         }catch (IOException e){
             e.printStackTrace();
         }
     }
-
 }

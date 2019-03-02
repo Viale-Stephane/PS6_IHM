@@ -3,11 +3,13 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import sample.*;
+import sample.models.FavorisModel;
 import sample.models.RestaurantListModel;
 
 
@@ -15,11 +17,13 @@ public class FavorisController {
 
     @FXML
     private ListView<Pane> paneListView;
+    @FXML
+    private Button goBack;
 
     private ObservableList<Pane> panes = FXCollections.observableArrayList();
     private ObservableList<Restaurant> items = FXCollections.observableArrayList();
 
-    RestaurantListModel model = new RestaurantListModel();
+    FavorisModel model = new FavorisModel();
 
     public void init(Profile profile) {
         items.addAll(profile.getFavoris());
@@ -41,15 +45,17 @@ public class FavorisController {
             panes.add(pane);
 
         }
+        paneListView.setItems(panes);
+        for(int i=0; i<paneListView.getItems().size();i++) {
+            int finalI = i;
+            paneListView.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(profile.getFavori(finalI),profile));
+            System.out.println(paneListView.getHeight());
+            if((i+1) == paneListView.getItems().size()){
+                goBack.setLayoutX(paneListView.getWidth()-goBack.getWidth());
+                goBack.setLayoutY(paneListView.getHeight()-goBack.getHeight());
 
-        try {
-            paneListView.setItems(panes);
-            for(int i=0; i<paneListView.getItems().size();i++) {
-                int finalI = i;
-                paneListView.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(profile.getFavori(finalI),profile));
             }
-        } catch (NullPointerException error){
-            System.out.println("vous n'avez pas de favoris");
         }
+        goBack.setOnMouseClicked(event -> model.goBack(profile));
     }
 }

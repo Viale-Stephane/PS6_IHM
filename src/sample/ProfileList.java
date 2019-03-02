@@ -23,9 +23,8 @@ public class ProfileList {
         restolist.sampleRestaurant();
         Profile Paul = new Profile("Paul","azerty", "Paul", "Aimé", "paulaime@gmail.com");
         Profile administrator = new Profile("", "", "administrator", "administrator", "administrator@gmail.com");
-        Paul.addFavori(restolist.getRestaurants(0));
-        Paul.addFavori(restolist.getRestaurants(1));
-        System.out.println(Paul.getFavori(1).getName());
+        administrator.addFavori(restolist.getRestaurants(0));
+        administrator.addFavori(restolist.getRestaurants(1));
         Profile[] samples = {Paul, administrator};
         this.profiles.addAll(Arrays.asList(samples));
     }

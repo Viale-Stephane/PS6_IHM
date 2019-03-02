@@ -3,6 +3,7 @@ package sample.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -17,6 +18,9 @@ import java.lang.reflect.Array;
 public class RestaurantListController {
     @FXML
     private ListView<Pane> paneList;
+
+    @FXML
+    private Button goBack;
 
     //-----------------------------------------------------------
 
@@ -52,6 +56,12 @@ public class RestaurantListController {
         for(int i=0; i<paneList.getItems().size();i++) {
             int finalI = i;
             paneList.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(whiteListedRestaurant.getRestaurants(finalI),profile));
+            if((i+1) == paneList.getItems().size()){
+                goBack.setLayoutX(paneList.getWidth()-goBack.getWidth());
+                goBack.setLayoutY(paneList.getHeight()-goBack.getHeight());
+
+            }
         }
+        goBack.setOnMouseClicked(event -> model.goBack(profile));
     }
 }
