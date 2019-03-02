@@ -55,4 +55,14 @@ public class LoginModel {
         }
     }
 
+    public String getPassword(String username) {
+        ArrayList<Profile> profiles = Main.profileList.getProfiles();
+
+        for(Profile profile : profiles){
+            if(profile.getUsername().equals(username)){
+                return "Votre mot de passe est : \""+profile.getPassword()+"\"";
+            }
+        }
+        return "Votre identifiant n'est pas correct";
+    }
 }
