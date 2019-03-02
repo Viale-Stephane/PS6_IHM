@@ -57,5 +57,11 @@ public class OnlineController {
         filterButton.setOnMouseClicked(event -> this.model.filter(profile));
         info.setOnMouseClicked(event -> this.model.accessInformations(profile));
 
+        researchBar.setOnKeyPressed(event ->{
+            if(event.getCode().toString().equals("ENTER"))
+                System.out.println(model.search(researchBar.getText()));
+        });
+        search.setOnMouseClicked(event -> System.out.println(model.search(researchBar.getText())));
+
     }
 }

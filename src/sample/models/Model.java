@@ -5,10 +5,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import sample.Main;
 import sample.Profile;
+import sample.Restaurant;
 import sample.View;
 import sample.controllers.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Model {
 
@@ -66,5 +68,15 @@ public class Model {
         }
 
         return answer;
+    }
+
+    public String search(String researchBarText) {
+        ArrayList<Restaurant> restaurants = Main.restaurantList.getRestaurants();
+        for(Restaurant restaurant: restaurants){
+            if(restaurant.getName().equals(researchBarText)){
+                return "Accessing to the page of "+researchBarText+"..";
+            }
+        }
+        return  "This location doesn't exist..";
     }
 }
