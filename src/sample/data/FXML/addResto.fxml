@@ -28,30 +28,20 @@
                <children>
                   <Label fx:id="grade" layoutX="18.0" layoutY="32.0" text="3" />
                   <TextField fx:id="restaurant" layoutX="26.0" promptText="Nom du restaurant" />
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <!--<Image url="@../../../../Images/starFull.png" />-->
-                     </image>
+                  <ImageView fx:id="star1" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image></image>
                   </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <!--<Image url="@../../../../Images/starFull.png" />-->
-                     </image>
+                  <ImageView fx:id="star2" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image></image>
                   </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="90.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <!--<Image url="@../../../../Images/starFull.png" />-->
-                     </image>
+                  <ImageView fx:id="star3" fitHeight="20.0" fitWidth="20.0" layoutX="90.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image></image>
                   </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="110.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <!--<Image url="@../../../../Images/starHalf.png" />-->
-                     </image>
+                  <ImageView fx:id="star4" fitHeight="20.0" fitWidth="20.0" layoutX="110.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image></image>
                   </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="130.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <!--<Image url="@../../../../Images/starEmpty.png" />-->
-                     </image>
+                  <ImageView fx:id="star5" fitHeight="20.0" fitWidth="20.0" layoutX="130.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image></image>
                   </ImageView>
                   <TextField fx:id="adress" layoutX="26.0" layoutY="70.0" promptText="Adresse" />
                   <TextField fx:id="website" layoutX="26.0" layoutY="95.0" promptText="Site" />

@@ -3,4 +3,4 @@
 <?import javafx.scene.control.ListView?>
 
 
-<ListView fx:id="restList" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<ListView fx:controller="sample.controllers.RestaurantListController" fx:id="restList" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" />

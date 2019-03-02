@@ -4,11 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import sample.Main;
-import sample.Profile;
-import sample.RestaurantList;
-import sample.Tag;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import sample.*;
 import sample.models.AddLocationModel;
 
 import java.util.ArrayList;
@@ -45,6 +43,21 @@ public class AddLocationController {
     @FXML
     private Button save;
 
+    @FXML
+    private ImageView star1;
+    @FXML
+    private ImageView star2;
+    @FXML
+    private ImageView star3;
+    @FXML
+    private ImageView star4;
+    @FXML
+    private ImageView star5;
+    //--------------------------------------
+
+    Image FULL_STAR = new Image(View.FULL_STAR);
+    Image EMPTY_STAR = new Image(View.EMPTY_STAR);
+
     public void addLocation(){
         AddLocationModel model = new AddLocationModel();
         int averagePrice = 20, averageDistance = 20;
@@ -58,7 +71,40 @@ public class AddLocationController {
         model.compute(instruction, profile);
     }
 
+    public void clickStar(int number){
+        star5.setImage(EMPTY_STAR);
+        star4.setImage(EMPTY_STAR);
+        star3.setImage(EMPTY_STAR);
+        star2.setImage(EMPTY_STAR);
+        star1.setImage(EMPTY_STAR);
+        switch(number){
+            case 5:
+                star5.setImage(FULL_STAR);
+            case 4:
+                star4.setImage(FULL_STAR);
+            case 3:
+                star3.setImage(FULL_STAR);
+            case 2:
+                star2.setImage(FULL_STAR);
+            case 1:
+                star1.setImage(FULL_STAR);
+        }
+        grade.setText(Integer.toString(number));
+    }
+
     public void init(Profile profile) {
+        star5.setImage(EMPTY_STAR);
+        star4.setImage(EMPTY_STAR);
+        star3.setImage(FULL_STAR);
+        star2.setImage(FULL_STAR);
+        star1.setImage(FULL_STAR);
+        star1.setOnMouseClicked(event -> clickStar(1));
+        star2.setOnMouseClicked(event -> clickStar(2));
+        star3.setOnMouseClicked(event -> clickStar(3));
+        star4.setOnMouseClicked(event -> clickStar(4));
+        star5.setOnMouseClicked(event -> clickStar(5));
+
+
         save.setOnAction( event -> addLocation());
         cancel.setOnAction( event -> changePage("cancel", profile));
     }
