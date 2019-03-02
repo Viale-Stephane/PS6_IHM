@@ -33,7 +33,7 @@ public class Profile {
     }
 
     public boolean isNull(){
-        if(this.username == null || this.password == null || this.firstName == null || this.lastName == null || this.email == null) return false;
-        return true;
+        if(this.username == null || this.password == null || this.firstName == null || this.lastName == null || this.email == null) return true;
+        return false;
     }
 }

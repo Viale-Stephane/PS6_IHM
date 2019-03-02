@@ -28,6 +28,10 @@ public class View {
     public final static String DEFAULT_PROFILE = "sample/data/Images/default-profile.png";
     public final static String DROP_DOWN_MENU = "sample/data/Images/menu_deroulant.PNG";
     public final static String ORGANISATION_LOGO = "sample/data/Images/logo.png";
+    public final static String PHONE_IMAGE = "sample/data/Images/phone-receiver.png";
+    public final static String WEBSITE_IMAGE = "sample/data/Images/internet.png";
+    public final static String BACK_ARROW = "sample/data/Images/back-arrow.png";
+
 
     public static String CSS_FILE = "sample/data/CSS/temp.css";
     public String LABEL ="BROUPE G";

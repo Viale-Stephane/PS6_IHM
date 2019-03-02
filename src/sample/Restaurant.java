@@ -71,4 +71,16 @@ public class Restaurant {
         }
         return null;
     }
+
+    public String getWebsite() {
+        return this.website;
+    }
+
+    public String getAdress() {
+        return this.adress;
+    }
+
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
 }

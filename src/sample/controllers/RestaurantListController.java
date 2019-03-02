@@ -49,6 +49,9 @@ public class RestaurantListController {
 
         }
         paneList.setItems(panes);
-        System.out.println(paneList.getId());
+        for(int i=0; i<paneList.getItems().size();i++) {
+            int finalI = i;
+            paneList.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(whiteListedRestaurant.getRestaurants(finalI),profile));
+        }
     }
 }

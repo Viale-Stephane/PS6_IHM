@@ -11,12 +11,13 @@ import sample.Main;
 import sample.Profile;
 import sample.Restaurant;
 import sample.View;
+import sample.controllers.Controller;
 import sample.controllers.OnlineController;
 import sample.controllers.RestaurantPageController;
 
 import java.io.IOException;
 
-public class RestaurantListModel {
+public class RestaurantPageModel {
 
     Image FULL_STAR = new Image(View.FULL_STAR);
     Image EMPTY_STAR = new Image(View.EMPTY_STAR);
@@ -24,10 +25,10 @@ public class RestaurantListModel {
     public void setSizeAndPosition(ImageView[] stars, double grade){
         int i=0;
         for(ImageView star: stars){
-            star.setFitHeight(15);
-            star.setFitWidth(15);
-            star.setX(15*i);
-            star.setY(15);
+            star.setFitHeight(20);
+            star.setFitWidth(20);
+            star.setX(20*i);
+            star.setY(0);
             i++;
             if(i<grade){
                 star.setImage(FULL_STAR);
@@ -42,13 +43,18 @@ public class RestaurantListModel {
         for(Label day: schedule){
             day.setText(restaurant.getSchedule(i));
             day.setFont(Font.font(10));
-            day.setLayoutY(10*(i+3));
+            day.setLayoutY(-30+10*i);
             i++;
         }
     }
 
-    public void accessRestaurantPage(Restaurant restaurant, Profile profile){
-        String fxmlFile = View.RESTORANT_PAGE;
+    public void returnToHome(Profile profile) {
+        String fxmlFile;
+        System.out.println(profile.getUsername());
+        if (profile.isNull())
+            fxmlFile = "../"+View.HOME_OFFLINE;
+        else
+            fxmlFile = View.HOME_ONLINE;
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.getClass().getResource(fxmlFile);
@@ -56,12 +62,15 @@ public class RestaurantListModel {
             root.getStylesheets().add(View.CSS_FILE);
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
-            ((RestaurantPageController) loader.getController()).init(restaurant,profile);
+            if(profile.isNull())
+                ((Controller) loader.getController()).init();
+            else
+                ((OnlineController) loader.getController()).init(profile);
+
             Main.stage.show();
 
         }catch (IOException e){
             e.printStackTrace();
         }
     }
-
 }
