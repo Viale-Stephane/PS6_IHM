@@ -37,7 +37,7 @@ public class Main extends Application {
 
         //create the view
         stage.setScene(new Scene(root));
-        stage.setTitle(view.getLABEL());
+        stage.setTitle(View.LABEL);
 
         //show the view
         stage.show();

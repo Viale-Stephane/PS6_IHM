@@ -31,7 +31,7 @@ public class Restaurant {
     }
 
     public double getDistance(){
-        return this.price;
+        return this.distance;
     }
 
     public String getName(){
@@ -82,5 +82,9 @@ public class Restaurant {
 
     public String getPhoneNumber() {
         return this.phoneNumber;
+    }
+
+    public boolean isKindRestaurant() {
+        return kindRestaurant;
     }
 }

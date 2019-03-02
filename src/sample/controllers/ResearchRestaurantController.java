@@ -53,7 +53,7 @@ public class ResearchRestaurantController {
 
     //-------------------------------------------------------------------
 
-    private int minStar;
+    private int minStar = 0;
     Image FULL_STAR = new Image(View.FULL_STAR);
     Image EMPTY_STAR = new Image(View.EMPTY_STAR);
 
@@ -147,7 +147,6 @@ public class ResearchRestaurantController {
         for(MenuItem menuItem : splitMenuFiltre.getItems()){
             menuItem.setOnAction(event -> addFiltre(menuItem.getText()));
         }
-
         buttonFiltre.setOnAction(event -> model.filter(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags,profile));
 
     }
