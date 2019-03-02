@@ -43,6 +43,7 @@
       </Pane>
       <Pane prefHeight="30.0" prefWidth="200.0">
          <children>
+            <Button fx:id="goBack" layoutY="4.0" mnemonicParsing="false" text="Retour" />
             <Button fx:id="logOut" layoutX="100.0" layoutY="4.0" mnemonicParsing="false" text="Se Déconnecter" />
          </children>
       </Pane>

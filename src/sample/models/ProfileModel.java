@@ -10,6 +10,7 @@ import sample.View;
 import sample.controllers.AddLocationController;
 import sample.controllers.Controller;
 import sample.controllers.FavorisController;
+import sample.controllers.OnlineController;
 
 import java.io.IOException;
 
@@ -73,5 +74,22 @@ public class ProfileModel {
         }
 
         return answer;
+    }
+
+    public void goBack(Profile profile) {
+        String fxmlFile = View.HOME_ONLINE;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.getClass().getResource(fxmlFile);
+            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
+            root.getStylesheets().add(View.CSS_FILE);
+            Scene scene = new Scene(root);
+            Main.stage.setScene(scene);
+            ((OnlineController) loader.getController()).init(profile);
+            Main.stage.show();
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }
