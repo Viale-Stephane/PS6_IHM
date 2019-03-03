@@ -4,13 +4,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:controller="sample.controllers.AddLocationController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Slider?>
+<VBox fx:controller="sample.controllers.AddLocationController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="210.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -24,53 +26,77 @@
       </Pane>
       <ScrollPane prefHeight="275.0" prefWidth="200.0">
          <content>
-            <Pane prefHeight="400.0" prefWidth="184.0">
+            <Pane prefHeight="518.0" prefWidth="184.0">
                <children>
-                  <Label fx:id="grade" layoutX="18.0" layoutY="32.0" text="3" />
-                  <TextField fx:id="restaurant" layoutX="26.0" promptText="Nom du restaurant" />
-                  <ImageView fx:id="star1" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                  <Pane prefHeight="59.0" prefWidth="250.0">
+                     <children>
+                        <ToggleButton fx:id="toggleButtonRestaurant" layoutX="24.0" mnemonicParsing="false" text="Restaurant" />
+                        <ToggleButton fx:id="toggleButtonCommerce" layoutX="97.0" mnemonicParsing="false" text="Commerce" />
+                     </children>
+                  </Pane>
+                  <TextField fx:id="restaurant" layoutX="26.0" layoutY="29.0" promptText="Nom du restaurant" />
+                  <Label fx:id="grade" layoutX="18.0" layoutY="57.0" text="3" />
+                  <ImageView fx:id="star1" fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                      <image></image>
                   </ImageView>
-                  <ImageView fx:id="star2" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="star2" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                      <image></image>
                   </ImageView>
-                  <ImageView fx:id="star3" fitHeight="20.0" fitWidth="20.0" layoutX="90.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="star3" fitHeight="20.0" fitWidth="20.0" layoutX="90.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                      <image></image>
                   </ImageView>
-                  <ImageView fx:id="star4" fitHeight="20.0" fitWidth="20.0" layoutX="110.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="star4" fitHeight="20.0" fitWidth="20.0" layoutX="110.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                      <image></image>
                   </ImageView>
-                  <ImageView fx:id="star5" fitHeight="20.0" fitWidth="20.0" layoutX="130.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="star5" fitHeight="20.0" fitWidth="20.0" layoutX="130.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                      <image></image>
                   </ImageView>
-                  <TextField fx:id="adress" layoutX="26.0" layoutY="70.0" promptText="Adresse" />
-                  <TextField fx:id="website" layoutX="26.0" layoutY="95.0" promptText="Site" />
-                  <TextField fx:id="phoneNumber" layoutX="26.0" layoutY="120.0" promptText="Téléphone" />
-                  <TextField fx:id="monday" layoutX="70.0" layoutY="182.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
-                  <TextField fx:id="thuesday" layoutX="70.0" layoutY="207.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
-                  <TextField fx:id="wednesday" layoutX="70.0" layoutY="232.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
-                  <TextField fx:id="thursday" layoutX="70.0" layoutY="257.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
-                  <TextField fx:id="friday" layoutX="70.0" layoutY="282.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
-                  <TextField fx:id="saturday" layoutX="70.0" layoutY="307.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
-                  <TextField fx:id="sunday" layoutX="70.0" layoutY="332.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
-                  <Text layoutX="8.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horaires :" />
-                  <Text layoutX="21.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lundi :" />
-                  <Text layoutX="20.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mardi :" />
-                  <Text layoutX="16.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mercredi :" />
-                  <Text layoutX="22.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jeudi :" />
-                  <Text layoutX="12.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendredi :" />
-                  <Text layoutX="17.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Samedi :" />
-                  <Text layoutX="9.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dimanche :" />
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="2.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="2.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="2.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
+                  <TextField fx:id="adress" layoutX="26.0" layoutY="80.0" promptText="Adresse" />
+                  <TextField fx:id="website" layoutX="26.0" layoutY="105.0" promptText="Site" />
+                  <TextField fx:id="phoneNumber" layoutX="26.0" layoutY="130.0" promptText="Téléphone" />
+
+                  <SplitMenuButton fx:id="splitMenuFiltre" layoutX="60.0" layoutY="158.0" mnemonicParsing="false" text="Filtres">
+                     <items>
+                     </items>
+                  </SplitMenuButton>
+                  <TextField fx:id="textFieldFiltres" alignment="CENTER" layoutX="9.0" layoutY="185.0" opacity="0.7" prefHeight="25.0" prefWidth="177.0" promptText="Tags ajoutés.." />
+
+                        <Slider fx:id="slideBarPrice" layoutX="23.0" layoutY="231.0" max="500.0" value="100.0" />
+                        <Label fx:id="labelPrice" layoutX="14.0" layoutY="211.0" text="Prix : 100€" />
+                        <Label fx:id="priceMax" layoutX="161.0" layoutY="230.0" text="500€" />
+                        <Label fx:id="priceMin" layoutX="9.0" layoutY="229.0" text="0€" />
+
+                        <Slider fx:id="slideBarDistance" layoutX="23.0" layoutY="284.0" value="20.0" />
+                        <Label fx:id="labelDistance" layoutX="14.0" layoutY="264.0" text="Distance :20km" />
+                        <Label fx:id="distanceMax" layoutX="157.0" layoutY="282.0" text="100km" />
+                        <Label fx:id="distanceMin" layoutX="1.0" layoutY="282.0" text="0km" />
+
+
+                  <TextField fx:id="monday" layoutX="70.0" layoutY="332.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField fx:id="thuesday" layoutX="70.0" layoutY="357.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField fx:id="wednesday" layoutX="70.0" layoutY="382.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField fx:id="thursday" layoutX="70.0" layoutY="407.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField fx:id="friday" layoutX="70.0" layoutY="432.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField fx:id="saturday" layoutX="70.0" layoutY="457.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <TextField fx:id="sunday" layoutX="70.0" layoutY="482.0" prefHeight="25.0" prefWidth="100.0" promptText="Horaires" />
+                  <Text layoutX="8.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horaires :" />
+                  <Text layoutX="21.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lundi :" />
+                  <Text layoutX="20.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mardi :" />
+                  <Text layoutX="16.0" layoutY="399.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mercredi :" />
+                  <Text layoutX="22.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jeudi :" />
+                  <Text layoutX="12.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendredi :" />
+                  <Text layoutX="17.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Samedi :" />
+                  <Text layoutX="9.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dimanche :" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="2.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="2.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="2.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
          </content>
       </ScrollPane>
       <Pane prefHeight="25.0" prefWidth="200.0">
             <Button fx:id="cancel" mnemonicParsing="false" text="Annuler" />
-            <Button fx:id="save" layoutX="117.0" mnemonicParsing="false" text="Sauvegarder" />
+            <Button fx:id="save" layoutX="127.0" mnemonicParsing="false" text="Sauvegarder" />
       </Pane>
    </children>
 </VBox>

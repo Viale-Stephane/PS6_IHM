@@ -3,17 +3,19 @@ package sample.models;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import sample.*;
-import sample.controllers.AddLocationController;
-import sample.controllers.ResearchRestaurantController;
 import sample.controllers.RestaurantListController;
-import sample.controllers.RestaurantPageController;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
+import java.util.EnumSet;
 
 public class ResearchRestaurantModel {
+    Image FULL_STAR = new Image(View.FULL_STAR);
+    Image EMPTY_STAR = new Image(View.EMPTY_STAR);
 
     public ResearchRestaurantModel(){}
 
@@ -22,7 +24,7 @@ public class ResearchRestaurantModel {
             if (!tags.isEmpty()) {
                 for (Tag restaurantTag : restaurant.getTags()) {
                     for (String tag : tags) {
-                        if (("#" + restaurantTag.toString() + " ").equals(tag) && restaurant.getPrice() <= maxPrice && restaurant.getDistance() <= maxDistance && restaurant.getGrade() >= minStar) {
+                        if ((restaurantTag.getName()).equals(tag) && restaurant.getPrice() <= maxPrice && restaurant.getDistance() <= maxDistance && restaurant.getGrade() >= minStar) {
                             return restaurant;
                         }
                     }
@@ -61,6 +63,67 @@ public class ResearchRestaurantModel {
         }catch (IOException e){
             e.printStackTrace();
         }
-        //whiteListedRestaurant.printRestaurants();
+    }
+
+    public void initFilters(EnumSet<Tag> fullList, SplitMenuButton splitMenuFiltre){
+        int i = 0;
+        for(Tag tag : fullList)
+            splitMenuFiltre.getItems().add(new MenuItem(tag.toString()));
+        for(MenuItem menuItem : splitMenuFiltre.getItems()){
+            menuItem.setId("filtre"+i);
+            i++;
+        }
+    }
+
+    public boolean addFiltre(String newFiltre, ArrayList<String> researchedTags, TextField textFieldFiltres){
+        if(researchedTags.contains("#"+newFiltre+" ")){
+            researchedTags.remove("#"+newFiltre+" ");
+            textFieldFiltres.setText(researchedTags.toString());
+            return false;
+        }
+        researchedTags.add("#"+newFiltre+" ");
+        textFieldFiltres.setText(researchedTags.toString());
+        return true;
+    }
+
+    public void initSlider(Slider slider, int tickUnit, int blockIncrement){
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setMajorTickUnit(tickUnit);
+        slider.setBlockIncrement(blockIncrement);
+    }
+
+    public void swapKindOfLocation(String location, ToggleButton toggleButtonCommerce, ToggleButton toggleButtonRestaurant){
+        switch(location){
+            case "restaurant":
+                toggleButtonCommerce.setSelected(false);
+                toggleButtonRestaurant.setSelected(true);
+                break;
+            case "commerce":
+                toggleButtonRestaurant.setSelected(false);
+                toggleButtonCommerce.setSelected(true);
+                break;
+        }
+    }
+
+    public int clickStar(int number, ImageView filterStar1, ImageView filterStar2, ImageView filterStar3, ImageView filterStar4, ImageView filterStar5){
+        filterStar5.setImage(EMPTY_STAR);
+        filterStar4.setImage(EMPTY_STAR);
+        filterStar3.setImage(EMPTY_STAR);
+        filterStar2.setImage(EMPTY_STAR);
+        filterStar1.setImage(EMPTY_STAR);
+        switch(number){
+            case 5:
+                filterStar5.setImage(FULL_STAR);
+            case 4:
+                filterStar4.setImage(FULL_STAR);
+            case 3:
+                filterStar3.setImage(FULL_STAR);
+            case 2:
+                filterStar2.setImage(FULL_STAR);
+            case 1:
+                filterStar1.setImage(FULL_STAR);
+        }
+        return number;
     }
 }

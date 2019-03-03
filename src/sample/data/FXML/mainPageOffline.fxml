@@ -15,8 +15,8 @@
          <image></image>
       </ImageView>
       <TextField fx:id="researchBar" layoutX="40.0" prefHeight="40.0" prefWidth="170.0" promptText="Recherche" />
-      <Button fx:id="connexion" layoutX="540.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Connexion" />
       <Button fx:id="register" layoutX="440.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Enregistrement" />
+      <Button fx:id="connexion" layoutX="540.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Connexion" />
 
       </Pane>
       <Pane fx:id="map" prefHeight="400.0" prefWidth="640.0" />

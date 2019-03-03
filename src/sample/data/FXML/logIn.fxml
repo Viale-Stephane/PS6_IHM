@@ -36,8 +36,8 @@
          </children>
       </Pane>
 
-      <Button fx:id="buttonConnexion" layoutX="31.0" layoutY="286.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="128.0" text="Connexion" />
       <Hyperlink fx:id="passwordForget" layoutX="49.0" layoutY="229.0" text="Mot de passe oublié ?" underline="true" />
+      <Button fx:id="buttonConnexion" layoutX="31.0" layoutY="286.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="128.0" text="Connexion" />
       <Hyperlink fx:id="signInLink" layoutX="95.0" layoutY="363.0" text="Enregistrement" underline="true" />
       <Label fx:id="passwordIs" layoutX="5.0" layoutY="256.0" />
    </children>

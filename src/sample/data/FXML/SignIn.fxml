@@ -7,23 +7,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.SignInController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.SignInController">
    <children>
       <Text layoutX="36.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enregistrement" wrappingWidth="128.0000001192093">
          <font>
             <Font name="Calibri" size="20.0" />
          </font>
       </Text>
-      <Pane layoutX="13.0" layoutY="124.0" prefHeight="60.0" prefWidth="164.0">
-         <children>
-            <Text layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe" wrappingWidth="138.916015625">
-               <font>
-                  <Font name="Calibri" size="15.0" />
-               </font>
-            </Text>
-            <TextField fx:id="inputPassword" cache="true" layoutY="42.0" prefHeight="25.0" prefWidth="157.0" promptText="********" />
-         </children>
-      </Pane>
       <Pane layoutX="13.0" layoutY="24.0" prefHeight="50.0" prefWidth="164.0">
          <children>
             <Text layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="138.916015625">
@@ -34,18 +24,6 @@
             <TextField fx:id="inputEmail" cache="true" layoutY="38.0" prefHeight="25.0" prefWidth="157.0" promptText="john.doe@mail.com" />
          </children>
       </Pane>
-      <Button fx:id="buttonCreate" layoutX="6.0" layoutY="355.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="128.0" text="Créer" />
-      <Hyperlink fx:id="logInLink" layoutX="135.0" layoutY="365.0" text="Connexion" underline="true" />
-      <Pane layoutX="13.0" layoutY="184.0" prefHeight="60.0" prefWidth="164.0">
-         <children>
-            <Text layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Répetez le mot de passe" wrappingWidth="150.916015625">
-               <font>
-                  <Font name="Calibri" size="15.0" />
-               </font>
-            </Text>
-            <TextField fx:id="inputPasswordVerification" cache="true" layoutY="35.0" prefHeight="25.0" prefWidth="157.0" promptText="********" />
-         </children>
-      </Pane>
       <Pane layoutX="13.0" layoutY="74.0" prefHeight="50.0" prefWidth="164.0">
          <children>
             <Text layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom d'utilisateur" wrappingWidth="138.916015625">
@@ -54,6 +32,26 @@
                </font>
             </Text>
             <TextField fx:id="inputUsername" cache="true" layoutY="38.0" prefHeight="25.0" prefWidth="157.0" promptText="Nom d'utilisateur" />
+         </children>
+      </Pane>
+      <Pane layoutX="13.0" layoutY="124.0" prefHeight="60.0" prefWidth="164.0">
+         <children>
+            <Text layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe" wrappingWidth="138.916015625">
+               <font>
+                  <Font name="Calibri" size="15.0" />
+               </font>
+            </Text>
+            <TextField fx:id="inputPassword" cache="true" layoutY="42.0" prefHeight="25.0" prefWidth="157.0" promptText="********" />
+         </children>
+      </Pane>
+      <Pane layoutX="13.0" layoutY="184.0" prefHeight="60.0" prefWidth="164.0">
+         <children>
+            <Text layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Répetez le mot de passe" wrappingWidth="150.916015625">
+               <font>
+                  <Font name="Calibri" size="15.0" />
+               </font>
+            </Text>
+            <TextField fx:id="inputPasswordVerification" cache="true" layoutY="35.0" prefHeight="25.0" prefWidth="157.0" promptText="********" />
          </children>
       </Pane>
       <Pane layoutX="13.0" layoutY="244.0" prefHeight="50.0" prefWidth="164.0">
@@ -76,5 +74,7 @@
             <TextField fx:id="lastName" cache="true" layoutY="25.0" prefHeight="25.0" prefWidth="157.0" promptText="Nom de famille" />
          </children>
       </Pane>
+      <Button fx:id="buttonCreate" layoutX="6.0" layoutY="355.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="128.0" text="Créer" />
+      <Hyperlink fx:id="logInLink" layoutX="135.0" layoutY="365.0" text="Connexion" underline="true" />
    </children>
 </Pane>
