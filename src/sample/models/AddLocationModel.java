@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
-public class AddLocationModel {
+public class AddLocationModel extends Model {
     Image FULL_STAR = new Image(View.FULL_STAR);
     Image EMPTY_STAR = new Image(View.EMPTY_STAR);
 

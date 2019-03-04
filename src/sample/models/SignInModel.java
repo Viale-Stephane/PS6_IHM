@@ -8,18 +8,18 @@ import sample.Profile;
 import sample.View;
 import sample.controllers.LoginController;
 import sample.controllers.OnlineController;
-import sample.controllers.SignInController;
-import sample.controllers.Controller;
+import sample.controllers.OfflineController;
 
 import java.io.IOException;
 
-public class SignInModel{
+public class SignInModel extends Model {
 
     public SignInModel(){
 
     }
 
     public void login(){
+
         String fxmlFile = View.LOG_IN;
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -36,21 +36,6 @@ public class SignInModel{
         }
     }
 
-    public void offline() {
-        String fxmlFile = "../"+View.HOME_OFFLINE;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
-            ((Controller) loader.getController()).init();
-            Main.stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void creatingProfile(String username, String email, String password, String firstName, String lastName) {
         Profile profile = new Profile(username,password,firstName,lastName,email);

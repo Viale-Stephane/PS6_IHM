@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
-public class ResearchRestaurantModel {
+public class ResearchRestaurantModel extends Model {
     Image FULL_STAR = new Image(View.FULL_STAR);
     Image EMPTY_STAR = new Image(View.EMPTY_STAR);
 
@@ -128,20 +128,5 @@ public class ResearchRestaurantModel {
         return number;
     }
 
-    public void goBack(Profile profile) {
-        String fxmlFile= View.HOME_ONLINE;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
-            ((OnlineController) loader.getController()).init(profile);
-            Main.stage.show();
 
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 }

@@ -17,7 +17,7 @@ import sample.controllers.RestaurantPageController;
 
 import java.io.IOException;
 
-public class FavorisModel {
+public class FavorisModel extends Model {
     Image FULL_STAR = new Image(View.FULL_STAR);
     Image EMPTY_STAR = new Image(View.EMPTY_STAR);
 
@@ -64,20 +64,5 @@ public class FavorisModel {
         }
     }
 
-    public void goBack(Profile profile) {
-        String fxmlFile = View.PROFILE;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
-            ((ProfileController) loader.getController()).init(profile);
-            Main.stage.show();
 
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 }

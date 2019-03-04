@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.controllers.Controller;
+import sample.controllers.OfflineController;
 
 public class Main extends Application {
     public static View view;
@@ -31,7 +31,7 @@ public class Main extends Application {
         root.getStylesheets().add(View.CSS_FILE);
 
         //initialize the controller
-        ((Controller) loader.getController()).init();
+        ((OfflineController) loader.getController()).init();
 
         stage = new Stage();
 

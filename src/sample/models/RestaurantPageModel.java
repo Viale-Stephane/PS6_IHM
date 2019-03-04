@@ -11,13 +11,12 @@ import sample.Main;
 import sample.Profile;
 import sample.Restaurant;
 import sample.View;
-import sample.controllers.Controller;
+import sample.controllers.OfflineController;
 import sample.controllers.OnlineController;
-import sample.controllers.RestaurantPageController;
 
 import java.io.IOException;
 
-public class RestaurantPageModel {
+public class RestaurantPageModel extends Model {
 
     Image FULL_STAR = new Image(View.FULL_STAR);
     Image EMPTY_STAR = new Image(View.EMPTY_STAR);
@@ -62,7 +61,7 @@ public class RestaurantPageModel {
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
             if(profile.isNull())
-                ((Controller) loader.getController()).init();
+                ((OfflineController) loader.getController()).init();
             else
                 ((OnlineController) loader.getController()).init(profile);
 

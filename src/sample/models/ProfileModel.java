@@ -3,18 +3,17 @@ package sample.models;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import sample.Main;
 import sample.Profile;
 import sample.View;
 import sample.controllers.AddLocationController;
-import sample.controllers.Controller;
+import sample.controllers.OfflineController;
 import sample.controllers.FavorisController;
 import sample.controllers.OnlineController;
 
 import java.io.IOException;
 
-public class ProfileModel {
+public class ProfileModel extends Model {
 
 
     public ProfileModel(){
@@ -64,7 +63,7 @@ public class ProfileModel {
                     ((AddLocationController) loader.getController()).init(profile);
                     break;
                 case "logOut":
-                    ((Controller) loader.getController()).init();
+                    ((OfflineController) loader.getController()).init();
                     break;
             }
             Main.stage.show();
@@ -76,20 +75,4 @@ public class ProfileModel {
         return answer;
     }
 
-    public void goBack(Profile profile) {
-        String fxmlFile = View.HOME_ONLINE;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
-            ((OnlineController) loader.getController()).init(profile);
-            Main.stage.show();
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 }

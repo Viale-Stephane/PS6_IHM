@@ -5,13 +5,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import sample.Profile;
 import sample.View;
-import sample.models.Model;
+import sample.models.OfflineModel;
 
 
-public class Controller {
+public class OfflineController {
     @FXML
     private TextField researchBar;
 
@@ -20,7 +18,6 @@ public class Controller {
     private Button connexion;
     @FXML
     private Button register;
-
 
     @FXML
     private ImageView search;
@@ -34,7 +31,7 @@ public class Controller {
     Image DROP_DOWN_MENU = new Image(View.DROP_DOWN_MENU);
     Image ORGANISATION_LOGO = new Image(View.ORGANISATION_LOGO);
 
-    Model model = new Model();
+    OfflineModel offlineModel = new OfflineModel();
 
 
 
@@ -57,12 +54,12 @@ public class Controller {
         info.setImage(ORGANISATION_LOGO);
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))
-                System.out.println(model.search(researchBar.getText()));
+                System.out.println(offlineModel.search(researchBar.getText()));
         });
-        search.setOnMouseClicked(event -> System.out.println(model.search(researchBar.getText())));
-        filterButton.setOnMouseClicked( event -> System.out.println(model.compute("filter")));
-        connexion.setOnMouseClicked( event -> System.out.println(model.compute("logIn")));
-        register.setOnMouseClicked( event -> System.out.println(model.compute("signIn")));
-        info.setOnMouseClicked( event -> System.out.println(model.compute("informations")));
+        search.setOnMouseClicked(event -> System.out.println(offlineModel.search(researchBar.getText())));
+        filterButton.setOnMouseClicked( event -> System.out.println(offlineModel.compute("filter")));
+        connexion.setOnMouseClicked( event -> System.out.println(offlineModel.compute("logIn")));
+        register.setOnMouseClicked( event -> System.out.println(offlineModel.compute("signIn")));
+        info.setOnMouseClicked( event -> System.out.println(offlineModel.compute("informations")));
     }
 }

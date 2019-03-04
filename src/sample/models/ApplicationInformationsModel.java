@@ -6,14 +6,14 @@ import javafx.scene.Scene;
 import sample.Main;
 import sample.Profile;
 import sample.View;
-import sample.controllers.Controller;
+import sample.controllers.OfflineController;
 import sample.controllers.OnlineController;
-import sample.controllers.RestaurantPageController;
 
 import java.io.IOException;
 
-public class ApplicationInformationsModel {
+public class ApplicationInformationsModel extends Model {
 
+    @Override
     public void goBack(Profile profile) {
         String fxmlFile;
         if(profile.isNull()){
@@ -29,7 +29,7 @@ public class ApplicationInformationsModel {
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
             if(profile.isNull())
-                ((Controller) loader.getController()).init();
+                ((OfflineController) loader.getController()).init();
             else
                 ((OnlineController) loader.getController()).init(profile);
             Main.stage.show();
