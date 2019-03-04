@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Coolvetica;
+    src: url("Makinas-Scrap-5.otf");
+}
+
 #default-profile {
     -fx-background-image: url("../Images/clock.png");
     -fx-background-repeat: no-repeat;
@@ -22,9 +27,30 @@
     -fx-background-position: 0, 15;
 
 }
+#button,#button2 {
+      -fx-background-color: #000000; /* Green */
+      -fx-border-color: white;
+      -fx-font: 12px "Arial Black", Gadget, sans-serif;
+      -fx-background-radius:0px;
+      -fx-text-align: center;
+      -fx-text-fill: white;
+      -fx-text-decoration: none;
+     
+
+    }
+
+#button:hover,#button2:hover {
+          -fx-background-color: #3e8e41; /* Green */
+}
 
 #plus {
     -fx-background-image: url("../Images/plus_button.png");
+}
+
+
+#mainPage{
+    -fx-background-color: #FFFFFF;
+    -fx-font: 12px "Arial Black", Gadget, sans-serif;
 }
 
 #search {

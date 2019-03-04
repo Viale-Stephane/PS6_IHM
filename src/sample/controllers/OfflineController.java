@@ -16,9 +16,9 @@ public class OfflineController {
 
 
     @FXML
-    private Button connexion;
+    private Button button;
     @FXML
-    private Button register;
+    private Button button2;
 
     @FXML
     private ImageView search;
@@ -64,8 +64,8 @@ public class OfflineController {
         });
         search.setOnMouseClicked(event -> System.out.println(offlineModel.search(researchBar.getText())));
         filterButton.setOnMouseClicked( event -> System.out.println(offlineModel.compute("filter")));
-        connexion.setOnMouseClicked( event -> System.out.println(offlineModel.compute("logIn")));
-        register.setOnMouseClicked( event -> System.out.println(offlineModel.compute("signIn")));
+        button2.setOnMouseClicked( event -> System.out.println(offlineModel.compute("logIn")));
+        button.setOnMouseClicked( event -> System.out.println(offlineModel.compute("signIn")));
         info.setOnMouseClicked( event -> System.out.println(offlineModel.compute("informations")));
     }
 }

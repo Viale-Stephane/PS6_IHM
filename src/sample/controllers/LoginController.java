@@ -15,13 +15,13 @@ public class LoginController {
 
 
     @FXML
-    private Button buttonConnexion;
+    private Button button;
+
+
+
+
     @FXML
-    private Button buttonRetour;
-
-
-
-
+    private Hyperlink buttonRetour;
     @FXML
     private Hyperlink signInLink;
     @FXML
@@ -31,7 +31,7 @@ public class LoginController {
     private Label passwordIs;
 
     public void init() {
-        buttonConnexion.setOnAction(event -> model.connecting(inputUsername.getText(), inputPassword.getText()));
+        button.setOnAction(event -> model.connecting(inputUsername.getText(), inputPassword.getText()));
         signInLink.setOnAction(event -> model.signIn());
         buttonRetour.setOnAction(event -> model.offline());
         passwordForget.setOnAction(event -> passwordIs.setText(model.getPassword(inputUsername.getText())));

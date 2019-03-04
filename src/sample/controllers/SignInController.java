@@ -24,7 +24,7 @@ public class SignInController {
     private TextField lastName;
 
     @FXML
-    private Button buttonCreate;
+    private Button button;
 
 
 
@@ -38,6 +38,6 @@ public class SignInController {
     public void init(){
         logInLink.setOnAction(event -> model.login());
         buttonRetour.setOnAction(event -> model.offline());
-        buttonCreate.setOnAction(event -> model.creatingProfile(inputUsername.getText(),inputEmail.getText(),inputPassword.getText(),firstName.getText(),lastName.getText()));
+        button.setOnAction(event -> model.creatingProfile(inputUsername.getText(),inputEmail.getText(),inputPassword.getText(),firstName.getText(),lastName.getText()));
     }
 }
