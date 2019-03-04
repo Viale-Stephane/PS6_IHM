@@ -14,7 +14,11 @@ import java.io.IOException;
 public class Model {
 
     public void goBack(Profile profile) {
-        String fxmlFile = View.HOME_ONLINE;
+        String fxmlFile;
+        if(profile.isNull())
+            fxmlFile = "../"+View.HOME_OFFLINE;
+        else
+            fxmlFile = View.HOME_ONLINE;
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.getClass().getResource(fxmlFile);
@@ -22,7 +26,10 @@ public class Model {
             root.getStylesheets().add(View.CSS_FILE);
             Scene scene = new Scene(root);
             Main.stage.setScene(scene);
-            ((OnlineController) loader.getController()).init(profile);
+            if(!profile.isNull())
+                ((OnlineController) loader.getController()).init(profile);
+            else
+                ((OfflineController) loader.getController()).init();
             Main.stage.show();
 
         }catch (IOException e){

@@ -1,11 +1,14 @@
 package sample;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 public class Profile {
     String username, password;
     String firstName, lastName, email;
     ArrayList<Restaurant> favoris= new ArrayList<>();
+    ArrayList<History> history = new ArrayList<>();
     public Profile(String username, String password, String firstName, String lastName, String email){
         this.username = username;
         this.password = password;
@@ -27,6 +30,9 @@ public class Profile {
     public ArrayList<Restaurant> getFavoris() {
         return this.favoris;
     }
+
+    public boolean isFavori(Restaurant restaurant) {return favoris.contains(restaurant);}
+
 
     public String getUsername(){
         return this.username;
@@ -54,5 +60,15 @@ public class Profile {
         return false;
     }
 
-    public boolean isFavori(Restaurant restaurant) {return favoris.contains(restaurant);}
+    public ArrayList<History> getHistory(){
+        return history;
+    }
+
+    public void addHistory(Restaurant restaurant, Date date){
+        this.history.add(new History(restaurant,date));
+    }
+
+    public History getRestaurant(int number){
+        return this.history.get(number);
+    }
 }

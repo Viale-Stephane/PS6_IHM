@@ -3,4 +3,4 @@
 <?import javafx.scene.control.ListView?>
 
 
-<ListView fx:controller="sample.controllers.FavorisListController" fx:id="FavList" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" />
+<ListView fx:controller="sample.controllers.HistoryController" fx:id="historyList" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" />

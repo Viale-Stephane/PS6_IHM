@@ -6,10 +6,7 @@ import javafx.scene.Scene;
 import sample.Main;
 import sample.Profile;
 import sample.View;
-import sample.controllers.AddLocationController;
-import sample.controllers.OfflineController;
-import sample.controllers.FavorisController;
-import sample.controllers.OnlineController;
+import sample.controllers.*;
 
 import java.io.IOException;
 
@@ -53,6 +50,7 @@ public class ProfileModel extends Model {
             Main.stage.setScene(scene);
             switch(button){
                 case "history":
+                    ((HistoryController) loader.getController()).init(profile);
                     break;
                 case "favorites":
                     ((FavorisController) loader.getController()).init(profile);

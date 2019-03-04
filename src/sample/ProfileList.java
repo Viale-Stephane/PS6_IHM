@@ -2,6 +2,7 @@ package sample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class ProfileList {
     private ArrayList<Profile> profiles;
@@ -25,6 +26,9 @@ public class ProfileList {
         Profile administrator = new Profile("", "", "administrator", "administrator", "administrator@gmail.com");
         administrator.addFavori(restolist.getRestaurants(0));
         administrator.addFavori(restolist.getRestaurants(1));
+        administrator.addHistory(restolist.getRestaurants(0),new Date(112,0,14));
+        administrator.addHistory(restolist.getRestaurants(1),new Date(119,11,12));
+
         Profile[] samples = {Paul, administrator};
         this.profiles.addAll(Arrays.asList(samples));
     }
