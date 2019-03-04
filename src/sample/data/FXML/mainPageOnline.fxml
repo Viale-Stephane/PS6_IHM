@@ -22,7 +22,10 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane id="map" fx:id="map" prefHeight="400.0" prefWidth="640.0" />
+      <Pane id="map" fx:id="map" prefHeight="400.0" prefWidth="640.0">
+         <Pane fx:id="rightPane" prefHeight="400.0" prefWidth="200.0"/>
+         <Pane fx:id="leftPane" prefHeight="400.0" prefWidth="200.0" layoutX="440.0"/>
+      </Pane>
       <Pane prefHeight="40.0" prefWidth="640.0">
          <children>
             <ImageView fx:id="info" fitHeight="25.0" fitWidth="23.0" layoutX="45.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">

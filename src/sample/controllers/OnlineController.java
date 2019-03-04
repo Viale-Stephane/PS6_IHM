@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import sample.Profile;
 import sample.View;
 import sample.models.OnlineModel;
@@ -24,6 +25,11 @@ public class OnlineController {
     private ImageView filterButton;
     @FXML
     private ImageView info;
+
+    @FXML
+    private Pane rightPane;
+    @FXML
+    private Pane leftPane;
 
     //-------------------------------
     Image SEARCH_ICON = new Image(View.SEARCH_ICON);
