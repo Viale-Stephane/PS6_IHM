@@ -48,6 +48,8 @@ public class ResearchRestaurantController {
 
     @FXML
     private Button buttonFiltre;
+    @FXML
+    private Button buttonReturn;
 
     //-------------------------------------------------------------------
 
@@ -82,6 +84,8 @@ public class ResearchRestaurantController {
             menuItem.setOnAction(event -> model.addFiltre(menuItem.getText(),researchedTags,textFieldFiltres));
         }
         buttonFiltre.setOnAction(event -> model.filter(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags,profile));
+
+        buttonReturn.setOnAction(event -> model.goBack(profile));
 
     }
 }

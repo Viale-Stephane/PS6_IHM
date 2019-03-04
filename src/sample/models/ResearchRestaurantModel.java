@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.*;
+import sample.controllers.OnlineController;
 import sample.controllers.RestaurantListController;
 
 import java.io.IOException;
@@ -125,5 +126,22 @@ public class ResearchRestaurantModel {
                 filterStar1.setImage(FULL_STAR);
         }
         return number;
+    }
+
+    public void goBack(Profile profile) {
+        String fxmlFile= View.HOME_ONLINE;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.getClass().getResource(fxmlFile);
+            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
+            root.getStylesheets().add(View.CSS_FILE);
+            Scene scene = new Scene(root);
+            Main.stage.setScene(scene);
+            ((OnlineController) loader.getController()).init(profile);
+            Main.stage.show();
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

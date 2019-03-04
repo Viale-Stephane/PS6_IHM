@@ -74,7 +74,8 @@
       </HBox>
       <Pane prefHeight="61.0" prefWidth="250.0">
          <children>
-            <Button fx:id="buttonFiltre" layoutX="99.0" layoutY="17.0" mnemonicParsing="false" text="Filtrer" />
+            <Button fx:id="buttonReturn" layoutX="55.0" layoutY="17.0" mnemonicParsing="false" text="Retour"/>
+            <Button fx:id="buttonFiltre" layoutX="134.0" layoutY="17.0" mnemonicParsing="false" text="Filtrer" />
          </children>
       </Pane>
    </children>
