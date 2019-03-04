@@ -8,6 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.RestaurantPageController">
    <children>
       <ImageView fx:id="image" fitHeight="175.0" fitWidth="270.0" layoutX="-12.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
@@ -122,4 +123,5 @@
          </ImageView>
       </Pane>
    </children>
+   <RadioButton fx:id="fav" alignment="BOTTOM_LEFT">favoris</RadioButton>
 </Pane>

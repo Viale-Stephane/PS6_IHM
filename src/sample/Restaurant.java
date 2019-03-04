@@ -87,4 +87,6 @@ public class Restaurant {
     public boolean isKindRestaurant() {
         return kindRestaurant;
     }
+
+    public boolean equals(Restaurant r){ return this.restaurant.equals(r.getName()) && this.adress.equals(r.getAdress()) ;}
 }

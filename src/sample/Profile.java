@@ -18,6 +18,8 @@ public class Profile {
         this.favoris.add(restaurant);
     }
 
+    public void removeFavori(Restaurant restaurant) { this.favoris.remove(restaurant); }
+
     public Restaurant getFavori(int i){
         return this.favoris.get(i);
     }
@@ -51,4 +53,6 @@ public class Profile {
             return true;
         return false;
     }
+
+    public boolean isFavori(Restaurant restaurant) {return favoris.contains(restaurant);}
 }

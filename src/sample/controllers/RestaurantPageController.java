@@ -3,6 +3,7 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.Profile;
@@ -56,6 +57,9 @@ public class RestaurantPageController {
     @FXML
     private Hyperlink phoneNumber;
 
+    @FXML
+    private RadioButton fav;
+
     RestaurantPageModel model = new RestaurantPageModel();
 
     Image phoneImage = new Image(View.PHONE_IMAGE);
@@ -63,6 +67,11 @@ public class RestaurantPageController {
     Image backArrow = new Image(View.BACK_ARROW);
 
     public void init(Restaurant restaurant, Profile profile){
+        if (profile.isNull()) fav.visibleProperty().setValue(false);
+        else fav.visibleProperty().setValue(true);
+
+        if (profile.isFavori(restaurant)) fav.setSelected(true);
+
         phone.setY(phone.getY()-25);
         phone.setImage(phoneImage);
         websiteImage.setY(websiteImage.getY()-25);
@@ -83,5 +92,7 @@ public class RestaurantPageController {
         model.setSizeAndPosition(new ImageView[]{star1,star2,star3,star4,star5},restaurant.getGrade());
 
         returnToHome.setOnMouseClicked(event -> model.returnToHome(profile));
+
+        fav.setOnMouseClicked(event -> {if (fav.isSelected()) profile.addFavori(restaurant); else profile.removeFavori(restaurant);});
     }
 }
