@@ -38,8 +38,8 @@ public class SignInController {
     SignInModel model = new SignInModel();
 
     public void init(){
-        logInLink.setOnAction(event -> model.accessingTo(new Profile(null,null,null,null,null), View.LOG_IN,View.CSS_FILE,"LoginController"));
-        buttonRetour.setOnAction(event -> model.accessingTo(new Profile(null,null,null,null,null), "../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
+        logInLink.setOnAction(event -> model.accessingTo(new Profile(), View.LOG_IN,View.CSS_FILE,"LoginController"));
+        buttonRetour.setOnAction(event -> model.accessingTo(new Profile(), "../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
         button.setOnAction(event -> model.creatingProfile(inputUsername.getText(),inputEmail.getText(),inputPassword.getText(),firstName.getText(),lastName.getText()));
     }
 }

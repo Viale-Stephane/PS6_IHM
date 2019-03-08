@@ -41,7 +41,7 @@ public class ResearchRestaurantModel extends Model {
 
     public void accessingTo(int minStar, boolean isItARestaurant, double maxPrice, double maxDistance, ArrayList<String> tags, Profile profile){
         if(profile.isNull()){
-            profile = new Profile(null,null,null,null,null);
+            profile = new Profile();
         }
         RestaurantList whiteListedRestaurant = new RestaurantList();
         ArrayList<Restaurant> restaurants = Main.restaurantList.getRestaurants();

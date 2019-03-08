@@ -61,12 +61,12 @@ public class OfflineController {
         info.setImage(ORGANISATION_LOGO);
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))
-                System.out.println(offlineModel.search(researchBar.getText(),new Profile(null,null,null,null,null)));
+                System.out.println(offlineModel.search(researchBar.getText(),new Profile()));
         });
-        search.setOnMouseClicked(event -> System.out.println(offlineModel.search(researchBar.getText(),new Profile(null,null,null,null,null))));
-        filterButton.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(null,null,null,null,null),View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
-        button2.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(null,null,null,null,null),View.LOG_IN,View.CSS_FILE,"LoginController"));
-        button.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(null,null,null,null,null),View.SIGN_IN,View.CSS_FILE,"SignInController"));
-        info.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(null,null,null,null,null),View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
+        search.setOnMouseClicked(event -> System.out.println(offlineModel.search(researchBar.getText(),new Profile())));
+        filterButton.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(),View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
+        button2.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(),View.LOG_IN,View.CSS_FILE,"LoginController"));
+        button.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(),View.SIGN_IN,View.CSS_FILE,"SignInController"));
+        info.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(),View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
     }
 }

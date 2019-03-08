@@ -3,9 +3,12 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import sample.Profile;
 import sample.View;
 import sample.models.ProfileModel;
+
 
 public class ProfileController {
     @FXML
@@ -28,12 +31,19 @@ public class ProfileController {
     @FXML
     private Label email;
 
+    @FXML
+    private ImageView idPicture;
+    @FXML
+    private ImageView gearButton;
+
     //----------------------------------
     ProfileModel model =new ProfileModel();
 
-
+    Image gearButtonPicture = new Image("sample/data/Images/gear_button.png");
 
     public void init(Profile profile) {
+        idPicture.setImage(profile.getProfileImage());
+        gearButton.setImage(this.gearButtonPicture);
         lastName.setText(profile.getFirstName());
         firstName.setText(profile.getLastName());
         email.setText(profile.getEmail());

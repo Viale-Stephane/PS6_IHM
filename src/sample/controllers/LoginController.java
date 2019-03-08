@@ -34,8 +34,8 @@ public class LoginController {
 
     public void init() {
         button.setOnAction(event -> model.connecting(inputUsername.getText(), inputPassword.getText()));
-        signInLink.setOnAction(event -> model.accessingTo(new Profile(null,null,null,null,null), View.SIGN_IN,View.CSS_FILE,"SignInController"));
-        buttonRetour.setOnAction(event -> model.accessingTo(new Profile(null,null,null,null,null),"../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
+        signInLink.setOnAction(event -> model.accessingTo(new Profile(), View.SIGN_IN,View.CSS_FILE,"SignInController"));
+        buttonRetour.setOnAction(event -> model.accessingTo(new Profile(),"../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
         passwordForget.setOnAction(event -> passwordIs.setText(model.getPassword(inputUsername.getText())));
     }
 }

@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -9,12 +11,23 @@ public class Profile {
     String firstName, lastName, email;
     ArrayList<Restaurant> favoris= new ArrayList<>();
     ArrayList<History> history = new ArrayList<>();
-    public Profile(String username, String password, String firstName, String lastName, String email){
+    Image profileImage;
+    public Profile(String username, String password, String firstName, String lastName, String email, Image profileImage){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.profileImage = profileImage;
+    }
+
+    public Profile(){
+        this.username = null;
+        this.password = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.email = null;
+        this.profileImage = null;
     }
 
     public void addFavori(Restaurant restaurant) {
@@ -51,8 +64,10 @@ public class Profile {
     }
 
     public String getEmail(){
-        return  this.email;
+        return this.email;
     }
+
+    public Image getProfileImage() { return this.profileImage; }
 
     public boolean isNull(){
         if(this.username == null || this.password == null || this.firstName == null || this.lastName == null || this.email == null)
