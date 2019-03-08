@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import sample.Profile;
 import sample.Tag;
+import sample.View;
 import sample.models.ResearchRestaurantModel;
 
 import java.util.ArrayList;
@@ -83,9 +84,12 @@ public class ResearchRestaurantController {
         for(MenuItem menuItem : splitMenuFiltre.getItems()){
             menuItem.setOnAction(event -> model.addFiltre(menuItem.getText(),researchedTags,textFieldFiltres));
         }
-        buttonFiltre.setOnAction(event -> model.filter(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags,profile));
+        buttonFiltre.setOnAction(event -> model.accessingTo(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags,profile));
 
-        buttonReturn.setOnAction(event -> model.goBack(profile));
+        if(profile.isNull())
+        buttonReturn.setOnAction(event -> model.accessingTo(profile, "../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
+        else
+        buttonReturn.setOnAction(event -> model.accessingTo(profile, View.HOME_ONLINE,View.CSS_FILE,"OnlineController"));
 
     }
 }

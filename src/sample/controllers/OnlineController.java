@@ -59,9 +59,9 @@ public class OnlineController {
         this.profile.setX(550);
         this.profile.setY(-this.profile.getFitHeight()/2);
         this.profile.setImage(DEFAULT_PROFILE);
-        this.profile.setOnMouseClicked(event -> this.model.moveToProfile(profile));
-        filterButton.setOnMouseClicked(event -> this.model.filter(profile));
-        info.setOnMouseClicked(event -> this.model.accessInformations(profile));
+        this.profile.setOnMouseClicked(event -> this.model.accessingTo(profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
+        filterButton.setOnMouseClicked(event -> this.model.accessingTo(profile,View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
+        info.setOnMouseClicked(event -> this.model.accessingTo(profile,View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
 
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))

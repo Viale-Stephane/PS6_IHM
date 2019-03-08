@@ -3,24 +3,26 @@ package sample.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import sample.History;
 import sample.Profile;
-import sample.Restaurant;
+import sample.View;
 import sample.models.HistoryModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class HistoryController {
     @FXML
     private ListView<Pane> historyList;
+    @FXML
+    private Button goBack;
 
     //--------------------------------------------------------
 
@@ -57,6 +59,13 @@ public class HistoryController {
         for(int i=0; i<historyList.getItems().size();i++) {
             int finalI = i;
             historyList.getItems().get(i).setOnMouseClicked((event -> model.accessRestaurantPage(history.get(finalI).getHistory(),profile)));
+            if((i+1) == historyList.getItems().size()){
+                goBack.setLayoutX(historyList.getWidth()-goBack.getWidth());
+                goBack.setLayoutY(historyList.getHeight()-goBack.getHeight());
+
+            }
         }
+        goBack.setOnMouseClicked(event -> model.accessingTo(profile, View.PROFILE,View.CSS_FILE,"ProfileController"));
+
     }
 }

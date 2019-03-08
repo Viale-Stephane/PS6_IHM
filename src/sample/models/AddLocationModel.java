@@ -24,40 +24,8 @@ public class AddLocationModel extends Model {
     public String addLocation(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, int grade, double price, double distance, ArrayList<Tag> tags, Profile profile){
         Restaurant newRestaurant = new Restaurant(restaurant, kindRestaurant, adress, website, phoneNumber, schedule, grade, price, distance,tags);
         Main.restaurantList.addRestaurant(newRestaurant);
-
         String answer = "Adding the restaurant to our database..";
-        String fxmlFile = View.HOME_ONLINE;//MODIFY
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
-            ((OnlineController) loader.getController()).init(profile);
-            Main.stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return answer;
-    }
-
-    public String cancel(Profile profile){
-        String answer = "Cancelling...";
-        String fxmlFile = View.PROFILE;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
-            ((ProfileController) loader.getController()).init(profile);
-            Main.stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE, "OnlineController");
         return answer;
     }
 

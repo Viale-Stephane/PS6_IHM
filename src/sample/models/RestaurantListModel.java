@@ -1,21 +1,11 @@
 package sample.models;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
-import sample.Main;
-import sample.Profile;
 import sample.Restaurant;
 import sample.View;
-import sample.controllers.ProfileController;
-import sample.controllers.ResearchRestaurantController;
-import sample.controllers.RestaurantPageController;
-
-import java.io.IOException;
 
 public class RestaurantListModel extends Model {
 
@@ -47,22 +37,4 @@ public class RestaurantListModel extends Model {
             i++;
         }
     }
-
-    public void accessRestaurantPage(Restaurant restaurant, Profile profile){
-        String fxmlFile = View.RESTAURANT_PAGE;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
-            ((RestaurantPageController) loader.getController()).init(restaurant,profile);
-            Main.stage.show();
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
 }

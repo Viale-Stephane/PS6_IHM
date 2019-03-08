@@ -21,7 +21,7 @@ public class ApplicationInformationsController {
 
     public void init(Profile profile){
         logo.setImage(logoImage);
-        goBack.setOnMouseClicked(event -> model.goBack(profile));
+        goBack.setOnMouseClicked(event -> model.accessingTo(profile));
 
     }
 }

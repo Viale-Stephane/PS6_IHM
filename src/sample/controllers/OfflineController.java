@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import sample.Profile;
 import sample.View;
 import sample.models.OfflineModel;
 
@@ -60,12 +61,12 @@ public class OfflineController {
         info.setImage(ORGANISATION_LOGO);
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))
-                System.out.println(offlineModel.search(researchBar.getText()));
+                System.out.println(offlineModel.search(researchBar.getText(),new Profile(null,null,null,null,null)));
         });
-        search.setOnMouseClicked(event -> System.out.println(offlineModel.search(researchBar.getText())));
-        filterButton.setOnMouseClicked( event -> System.out.println(offlineModel.compute("filter")));
-        button2.setOnMouseClicked( event -> System.out.println(offlineModel.compute("logIn")));
-        button.setOnMouseClicked( event -> System.out.println(offlineModel.compute("signIn")));
-        info.setOnMouseClicked( event -> System.out.println(offlineModel.compute("informations")));
+        search.setOnMouseClicked(event -> System.out.println(offlineModel.search(researchBar.getText(),new Profile(null,null,null,null,null))));
+        filterButton.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(null,null,null,null,null),View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
+        button2.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(null,null,null,null,null),View.LOG_IN,View.CSS_FILE,"LoginController"));
+        button.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(null,null,null,null,null),View.SIGN_IN,View.CSS_FILE,"SignInController"));
+        info.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(null,null,null,null,null),View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
     }
 }

@@ -60,6 +60,6 @@ public class RestaurantListController {
 
             }
         }
-        goBack.setOnMouseClicked(event -> model.goBack(profile));
+        goBack.setOnMouseClicked(event -> model.accessingTo(profile,View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
     }
 }

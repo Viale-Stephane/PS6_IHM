@@ -13,29 +13,12 @@ import java.io.IOException;
 
 public class ApplicationInformationsModel extends Model {
 
-    @Override
-    public void goBack(Profile profile) {
-        String fxmlFile;
-        if(profile.isNull()){
-            profile = new Profile(null,null,null,null,null);
-            fxmlFile = "../"+View.HOME_OFFLINE;
-        }else
-            fxmlFile = View.HOME_ONLINE;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
-            if(profile.isNull())
-                ((OfflineController) loader.getController()).init();
-            else
-                ((OnlineController) loader.getController()).init(profile);
-            Main.stage.show();
+    public void accessingTo(Profile profile) {
+        if (profile.isNull()) {
+            profile = new Profile(null, null, null, null, null);
+            super.accessingTo(profile,"../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController");
+        } else
+            super.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE,"OnlineController");
 
-        }catch (IOException e){
-            e.printStackTrace();
-        }
     }
 }

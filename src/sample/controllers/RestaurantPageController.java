@@ -67,8 +67,14 @@ public class RestaurantPageController {
     Image backArrow = new Image(View.BACK_ARROW);
 
     public void init(Restaurant restaurant, Profile profile){
-        if (profile.isNull()) fav.visibleProperty().setValue(false);
-        else fav.visibleProperty().setValue(true);
+        if (profile.isNull()){
+            fav.visibleProperty().setValue(false);
+            returnToHome.setOnMouseClicked(event -> model.accessingTo(profile,"../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
+        }
+        else{
+            fav.visibleProperty().setValue(true);
+            returnToHome.setOnMouseClicked(event -> model.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE,"OnlineController"));
+        }
 
         if (profile.isFavori(restaurant)) fav.setSelected(true);
 
@@ -91,7 +97,7 @@ public class RestaurantPageController {
         model.setSchedule(new Label[]{monday,tuesday,wednesday,thursday,friday,saturday,sunday},restaurant);
         model.setSizeAndPosition(new ImageView[]{star1,star2,star3,star4,star5},restaurant.getGrade());
 
-        returnToHome.setOnMouseClicked(event -> model.returnToHome(profile));
+
 
         fav.setOnMouseClicked(event -> {if (fav.isSelected()) profile.addFavori(restaurant); else profile.removeFavori(restaurant);});
     }

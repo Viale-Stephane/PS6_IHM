@@ -39,7 +39,7 @@ public class ResearchRestaurantModel extends Model {
         return null;
     }
 
-    public void filter(int minStar, boolean isItARestaurant, double maxPrice, double maxDistance, ArrayList<String> tags,Profile profile){
+    public void accessingTo(int minStar, boolean isItARestaurant, double maxPrice, double maxDistance, ArrayList<String> tags, Profile profile){
         if(profile.isNull()){
             profile = new Profile(null,null,null,null,null);
         }

@@ -46,23 +46,4 @@ public class FavorisModel extends Model {
             i++;
         }
     }
-
-    public void accessRestaurantPage(Restaurant restaurant, Profile profile){
-        String fxmlFile = View.RESTAURANT_PAGE;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
-            ((RestaurantPageController) loader.getController()).init(restaurant,profile);
-            Main.stage.show();
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-
 }
