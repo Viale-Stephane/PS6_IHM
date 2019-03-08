@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import sample.Profile;
 import sample.View;
 import sample.models.OnlineModel;
@@ -33,7 +34,6 @@ public class OnlineController {
 
     //-------------------------------
     Image SEARCH_ICON = new Image(View.SEARCH_ICON);
-    Image DEFAULT_PROFILE = new Image(View.DEFAULT_PROFILE);
     Image DROP_DOWN_MENU = new Image(View.DROP_DOWN_MENU);
     Image ORGANISATION_LOGO = new Image(View.ORGANISATION_LOGO);
 
@@ -58,6 +58,11 @@ public class OnlineController {
         this.profile.setFitHeight(40);
         this.profile.setX(550);
         this.profile.setY(-this.profile.getFitHeight()/2);
+        Circle circle = new Circle();
+        circle.setCenterX(this.profile.getX()+this.profile.getFitWidth()/2);
+        circle.setRadius(17);
+        this.profile.setClip(circle);
+
         this.profile.setOnMouseClicked(event -> this.model.accessingTo(profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
         filterButton.setOnMouseClicked(event -> this.model.accessingTo(profile,View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
         info.setOnMouseClicked(event -> this.model.accessingTo(profile,View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));

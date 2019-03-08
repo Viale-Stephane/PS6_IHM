@@ -24,7 +24,6 @@ public class View {
     public final static String FULL_STAR = "sample/data/Images/starFull.png";
     public final static String EMPTY_STAR = "sample/data/Images/starEmpty.png";
     public final static String SEARCH_ICON = "sample/data/Images/Search-icon.png";
-    public final static String DEFAULT_PROFILE = "sample/data/Images/default-profile.png";
     public final static String DROP_DOWN_MENU = "sample/data/Images/menu_deroulant.PNG";
     public final static String ORGANISATION_LOGO = "sample/data/Images/logo.png";
     public final static String PHONE_IMAGE = "sample/data/Images/phone-receiver.png";

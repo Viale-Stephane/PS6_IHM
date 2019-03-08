@@ -11,7 +11,7 @@
    <children>
       <HBox prefHeight="70.0" prefWidth="200.0">
          <children>
-            <Pane id="default-profile" prefHeight="70.0" prefWidth="35.0">
+            <Pane prefHeight="70.0" prefWidth="35.0">
                <children>
                   <ImageView fx:id="idPicture" fitHeight="70.0" fitWidth="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                </children>
@@ -21,14 +21,6 @@
                   <Label fx:id="lastName" layoutX="5.0" layoutY="14.0" prefHeight="17.0" prefWidth="60.0" text="Nom" />
                   <Label fx:id="firstName" layoutX="70.0" layoutY="14.0" prefHeight="17.0" prefWidth="60.0" text="Prénom" />
                   <Label fx:id="email" layoutX="5.0" layoutY="35.0" prefHeight="17.0" prefWidth="120.0" text="Email" />
-               </children>
-            </Pane>
-            <Pane id="gear" prefHeight="70.0" prefWidth="30.0">
-               <children>
-                  <ImageView fx:id="gearButton" fitHeight="70.0" fitWidth="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                     </image>
-                  </ImageView>
                </children>
             </Pane>
          </children>

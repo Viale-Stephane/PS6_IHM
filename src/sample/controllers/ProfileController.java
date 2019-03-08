@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import sample.Profile;
 import sample.View;
 import sample.models.ProfileModel;
@@ -33,17 +35,17 @@ public class ProfileController {
 
     @FXML
     private ImageView idPicture;
-    @FXML
-    private ImageView gearButton;
 
     //----------------------------------
     ProfileModel model =new ProfileModel();
 
-    Image gearButtonPicture = new Image("sample/data/Images/gear_button.png");
-
     public void init(Profile profile) {
+        Circle circle = new Circle();
+        circle.setCenterX(idPicture.getX()+idPicture.getFitWidth()/2);
+        circle.setCenterY(idPicture.getFitHeight()/4);
+        circle.setRadius(17);
+        idPicture.setClip(circle);
         idPicture.setImage(profile.getProfileImage());
-        gearButton.setImage(this.gearButtonPicture);
         lastName.setText(profile.getFirstName());
         firstName.setText(profile.getLastName());
         email.setText(profile.getEmail());
