@@ -78,6 +78,7 @@ public class RestaurantPageController {
 
         if (profile.isFavori(restaurant)) fav.setSelected(true);
 
+        image.setImage(restaurant.getRestaurantPicture());
         phone.setY(phone.getY()-25);
         phone.setImage(phoneImage);
         websiteImage.setY(websiteImage.getY()-25);

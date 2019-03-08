@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 
 public class Restaurant {
@@ -8,8 +10,9 @@ public class Restaurant {
     private ArrayList<Tag> tags;
     private double grade, price, distance;
     private boolean kindRestaurant;
+    private Image restaurantPicture;
 
-    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, ArrayList<Tag> tags){
+    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, ArrayList<Tag> tags,String restaurantPicture){
         this.restaurant=restaurant;
         this.kindRestaurant = kindRestaurant;
         this.adress=adress;
@@ -20,6 +23,11 @@ public class Restaurant {
         this.price=price;
         this.distance=distance;
         this.tags = tags;
+        this.restaurantPicture = new Image(restaurantPicture);
+    }
+
+    public Image getRestaurantPicture() {
+        return restaurantPicture;
     }
 
     public double getGrade(){
