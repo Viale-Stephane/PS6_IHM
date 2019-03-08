@@ -1,17 +1,16 @@
 package sample;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
-import static sample.Tag.FastFood;
 
 public class RestaurantList {
     private ArrayList<Restaurant> restaurants;
 
-    private String imageBK="sample/data/Images/Restaurants_Picture/burger-king.jpg";
-    private String imageLidL="sample/data/images/Commerce_Picture/lidl.jpg";
+    private Image imageBK=new Image("sample/data/Images/Restaurants_Picture/burger-king.jpg");
+    private Image imageLidL=new Image("sample/data/images/Commerce_Picture/lidl.jpg");
 
     public RestaurantList(){
         this.restaurants = new ArrayList<>();
@@ -47,7 +46,7 @@ public class RestaurantList {
         return this.restaurants.size();
     }
 
-    public Restaurant getRestaurants(int i) {
+    public Restaurant getRestaurant(int i) {
         return this.restaurants.get(i);
     }
 }

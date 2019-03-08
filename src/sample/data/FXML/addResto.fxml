@@ -14,12 +14,11 @@
 <?import javafx.scene.control.Slider?>
 <VBox fx:controller="sample.controllers.AddLocationController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="210.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="100.0" prefWidth="200.0">
+      <Pane fx:id="testDrop" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label layoutX="50.0" layoutY="33.0" text="Ajouter vos photos" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="90.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="image" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <!--<Image url="@../../../../Images/plus_button.png" />-->
                </image>
             </ImageView>
          </children>

@@ -2,7 +2,11 @@ package sample.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import sample.*;
 import sample.models.AddLocationModel;
 
@@ -70,11 +74,37 @@ public class AddLocationController {
     private ImageView star4;
     @FXML
     private ImageView star5;
+    @FXML
+    private ImageView image;
+
+    @FXML
+    private Pane testDrop;
+
     //--------------------------------------
     AddLocationModel model = new AddLocationModel();
     ArrayList<Tag> researchedTags = new ArrayList<>();
+    private Image picture;
 
     public void init(Profile profile) {
+
+        image.setPreserveRatio(false);
+        image.setX(0);
+        image.setY(0);
+
+        testDrop.setOnDragExited(event -> {
+            Dragboard db = event.getDragboard();
+            if (db.hasFiles()) {
+                db.getFiles().forEach(file -> {
+                    try {
+                        picture = new Image(file.toURI().toURL().toExternalForm(), 100, 100, false, true);
+                        image.setImage(picture);
+                    } catch (Exception exc) {
+                        System.out.println("Could not load image "+file);
+                    }
+                });
+        }});
+
+
         toggleButtonRestaurant.setSelected(true);
 
         toggleButtonRestaurant.setOnMouseClicked(event -> model.swapKindOfLocation("restaurant",toggleButtonCommerce,toggleButtonRestaurant));
@@ -100,7 +130,7 @@ public class AddLocationController {
         star5.setOnMouseClicked(event -> model.clickStar(5, star1, star2, star3, star4, star5, grade));
 
 
-        save.setOnAction( event -> model.addLocation(restaurant.getText(),toggleButtonRestaurant.isSelected(),adress.getText(),website.getText(),phoneNumber.getText(), new String[]{monday.getText(),thuesday.getText(),wednesday.getText(),thursday.getText(),friday.getText(),saturday.getText(),sunday.getText()},Integer.parseInt(grade.getText()),slideBarPrice.getValue(), slideBarDistance.getValue(),researchedTags, profile,"../data/Images/Restaurants_Picture/burger-king.jpg"));
+        save.setOnAction( event -> model.addLocation(restaurant.getText(),toggleButtonRestaurant.isSelected(),adress.getText(),website.getText(),phoneNumber.getText(), new String[]{monday.getText(),thuesday.getText(),wednesday.getText(),thursday.getText(),friday.getText(),saturday.getText(),sunday.getText()},Integer.parseInt(grade.getText()),slideBarPrice.getValue(), slideBarDistance.getValue(),researchedTags, profile,picture));
         cancel.setOnAction( event -> model.accessingTo(profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
     }
 }

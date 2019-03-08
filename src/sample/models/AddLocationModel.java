@@ -21,8 +21,8 @@ public class AddLocationModel extends Model {
     public AddLocationModel(){
     }
 
-    public String addLocation(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, int grade, double price, double distance, ArrayList<Tag> tags, Profile profile, String imageURL){
-        Restaurant newRestaurant = new Restaurant(restaurant, kindRestaurant, adress, website, phoneNumber, schedule, grade, price, distance,tags,imageURL);
+    public String addLocation(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, int grade, double price, double distance, ArrayList<Tag> tags, Profile profile, Image image){
+        Restaurant newRestaurant = new Restaurant(restaurant, kindRestaurant, adress, website, phoneNumber, schedule, grade, price, distance,tags,image);
         Main.restaurantList.addRestaurant(newRestaurant);
         String answer = "Adding the restaurant to our database..";
         this.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE, "OnlineController");

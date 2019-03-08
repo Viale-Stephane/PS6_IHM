@@ -12,7 +12,7 @@ public class Restaurant {
     private boolean kindRestaurant;
     private Image restaurantPicture;
 
-    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, ArrayList<Tag> tags,String restaurantPicture){
+    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, ArrayList<Tag> tags,Image restaurantPicture){
         this.restaurant=restaurant;
         this.kindRestaurant = kindRestaurant;
         this.adress=adress;
@@ -23,7 +23,7 @@ public class Restaurant {
         this.price=price;
         this.distance=distance;
         this.tags = tags;
-        this.restaurantPicture = new Image(restaurantPicture);
+        this.restaurantPicture = restaurantPicture;
     }
 
     public Image getRestaurantPicture() {
