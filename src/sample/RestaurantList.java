@@ -38,6 +38,13 @@ public class RestaurantList {
         Restaurant degueulasse = new Restaurant("C'est dégueulasse", true,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes","www.bkvousecoute.fr","0422000150",schedule,1.2,109,50, new ArrayList<Tag>(Arrays.asList(Tag.Burger, Tag.Pizza, Tag.Kebab, Tag.FastFood)),imageLidL);
         Restaurant lidl = new Restaurant("LidL", false, "38 avenue de lidL, 06600 Antibes", "www.lidL.com", "0682392412", schedule, 4.2,3,5, new ArrayList<Tag>(Arrays.asList(Tag.Commerce, Tag.Sandwich, Tag.Salade, Tag.Healthy)),imageLidL);
         Restaurant[] listOfRestaurants = {burgerKing,chezBernard,kebab,degueulasse,lidl};
+        for(Restaurant restaurant:listOfRestaurants){
+            restaurant.getCommentList().addComment(new Comment("lolilolfezf lofzal fzealfzao lfzafza",restaurant));
+            restaurant.getCommentList().addComment(new Comment("lolilolfezf lofzal fzealfzao lfzafza",restaurant));
+            restaurant.getCommentList().addComment(new Comment("lolilolfezf lofzal fzealfzao lfzafza",restaurant));
+            restaurant.getCommentList().addComment(new Comment("lolilolfezf lofzal fzealfzao lfzafza",restaurant));
+
+        }
         this.restaurants.addAll(Arrays.asList(listOfRestaurants));
 
     }

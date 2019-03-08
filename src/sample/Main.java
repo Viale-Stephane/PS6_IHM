@@ -20,7 +20,7 @@ public class Main extends Application {
         //create a loader
         FXMLLoader loader = new FXMLLoader();
 
-        View view = new View();
+        view = new View();
         //create a controller
 
         //attach controller
@@ -34,7 +34,7 @@ public class Main extends Application {
         ((OfflineController) loader.getController()).init();
 
         stage = new Stage();
-
+        stage.setResizable(false);
         //create the view
         stage.setScene(new Scene(root));
         stage.setTitle(View.LABEL);

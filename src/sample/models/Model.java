@@ -50,8 +50,12 @@ public class Model {
                 case "ResearchRestaurantController":
                     ((ResearchRestaurantController) loader.getController()).init(profile);
                     break;
+                case "MyRatingsController":
+                    ((MyRatingsController) loader.getController()).init(profile);
+                    break;
                 case "SignInController":
                     ((SignInController) loader.getController()).init();
+                    break;
             }
         } catch (IOException e) {
             e.printStackTrace();

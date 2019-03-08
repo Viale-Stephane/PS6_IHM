@@ -11,6 +11,7 @@ public class Restaurant {
     private double grade, price, distance;
     private boolean kindRestaurant;
     private Image restaurantPicture;
+    private CommentList commentList;
 
     public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, ArrayList<Tag> tags,Image restaurantPicture){
         this.restaurant=restaurant;
@@ -24,6 +25,7 @@ public class Restaurant {
         this.distance=distance;
         this.tags = tags;
         this.restaurantPicture = restaurantPicture;
+        this.commentList = new CommentList();
     }
 
     public Image getRestaurantPicture() {
@@ -94,6 +96,10 @@ public class Restaurant {
 
     public boolean isKindRestaurant() {
         return kindRestaurant;
+    }
+
+    public CommentList getCommentList(){
+        return this.commentList;
     }
 
     public boolean equals(Restaurant r){ return this.restaurant.equals(r.getName()) && this.adress.equals(r.getAdress()) ;}

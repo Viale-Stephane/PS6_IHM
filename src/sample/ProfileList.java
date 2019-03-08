@@ -27,13 +27,18 @@ public class ProfileList {
 
         restolist.sampleRestaurant();
         Profile Paul = new Profile("Paul","azerty", "Paul", "Aimé", "paulaime@gmail.com",administratorImage);
-        Profile administrator = new Profile("", "", "administrator", "administrator", "administrator@gmail.com",administratorImage);
+        Profile administrator = new Profile("administrator", "", "admin", "admin", "admin@gmail.com",administratorImage);
         administrator.addFavori(restolist.getRestaurant(0));
         administrator.addFavori(restolist.getRestaurant(1));
         administrator.addHistory(restolist.getRestaurant(0),new Date(112,0,14));
         administrator.addHistory(restolist.getRestaurant(1),new Date(119,11,12));
 
         Profile[] samples = {Paul, administrator};
+        int i=0;
+        for(Profile profile: samples){
+            profile.getUserComments().addComment(new Comment("lolilolfezf lofzal fzealfzao lfzafza",profile,restolist.getRestaurant(i)));
+            i++;
+        }
         this.profiles.addAll(Arrays.asList(samples));
     }
 

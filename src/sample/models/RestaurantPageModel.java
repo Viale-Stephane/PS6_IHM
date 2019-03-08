@@ -7,8 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
-import sample.Restaurant;
-import sample.View;
+import sample.*;
 
 public class RestaurantPageModel extends Model {
 
@@ -38,6 +37,16 @@ public class RestaurantPageModel extends Model {
             day.setFont(Font.font(10));
             day.setLayoutY(-30+10*i);
             i++;
+        }
+    }
+
+    public void attributeProfileToComments(Comment comment){
+        for(Profile profile : Main.profileList.getProfiles()){
+            for(Comment commentUser : profile.getUserComments().getCommentList()){
+                if(commentUser.getComment().equals(comment.getComment())){
+                    comment.setProfile(profile);
+                }
+            }
         }
     }
 }

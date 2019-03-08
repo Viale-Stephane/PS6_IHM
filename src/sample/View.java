@@ -14,7 +14,7 @@ public class View {
     public final static String NEW_LOCATION = "../data/FXML/addResto.fxml";
     public final static String FAVORITES = "../data/FXML/Favoris.fxml";
     public final static String HISTORY = "../data/FXML/Historique.fxml";
-    public final static String MY_RATINGS = "../data/FXML/";
+    public final static String MY_RATINGS = "../data/FXML/Ratings.fxml";
     public final static String RESTAURANT_PAGE = "../data/FXML/restopage.fxml";
     public final static String RESTAURANT_LIST = "../data/FXML/RestoList.fxml";
 

@@ -12,6 +12,8 @@ public class Profile {
     ArrayList<Restaurant> favoris= new ArrayList<>();
     ArrayList<History> history = new ArrayList<>();
     Image profileImage;
+    CommentList userComments;
+
     public Profile(String username, String password, String firstName, String lastName, String email, Image profileImage){
         this.username = username;
         this.password = password;
@@ -19,6 +21,7 @@ public class Profile {
         this.lastName = lastName;
         this.email = email;
         this.profileImage = profileImage;
+        this.userComments = new CommentList();
     }
 
     public Profile(){
@@ -28,6 +31,7 @@ public class Profile {
         this.lastName = null;
         this.email = null;
         this.profileImage = null;
+        this.userComments = null;
     }
 
     public void addFavori(Restaurant restaurant) {
@@ -68,6 +72,10 @@ public class Profile {
     }
 
     public Image getProfileImage() { return this.profileImage; }
+
+    public CommentList getUserComments() {
+        return userComments;
+    }
 
     public boolean isNull(){
         if(this.username == null || this.password == null || this.firstName == null || this.lastName == null || this.email == null)
