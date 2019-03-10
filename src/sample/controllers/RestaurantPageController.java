@@ -132,8 +132,8 @@ public class RestaurantPageController {
         if (profile.isNull()){
             newComment.visibleProperty().setValue(false);
             fav.visibleProperty().setValue(false);
+            //addComment.visibleProperty().setValue(false);
             //returnToHome.setOnMouseClicked(event -> model.accessingTo(profile,"../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
-
         }
         else{
             fav.visibleProperty().setValue(true);
