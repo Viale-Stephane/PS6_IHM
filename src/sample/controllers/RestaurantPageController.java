@@ -82,11 +82,11 @@ public class RestaurantPageController {
     private int prefHeight = 100;
     private int prefWidth = 250;
 
-    Image phoneImage = new Image(View.PHONE_IMAGE);
-    Image websitePicture = new Image(View.WEBSITE_IMAGE);
-    Image backArrow = new Image(View.BACK_ARROW);
+    private Image phoneImage = new Image(View.PHONE_IMAGE);
+    private Image websitePicture = new Image(View.WEBSITE_IMAGE);
+    private Image backArrow = new Image(View.BACK_ARROW);
 
-    public void initCommentList(Restaurant restaurant) {
+    private void initCommentList(Restaurant restaurant) {
         items.addAll( restaurant.getCommentList().getCommentList());
         for(Comment comment : restaurant.getCommentList().getCommentList()){
             model.attributeProfileToComments(comment);
@@ -133,12 +133,11 @@ public class RestaurantPageController {
             newComment.visibleProperty().setValue(false);
             fav.visibleProperty().setValue(false);
             //addComment.visibleProperty().setValue(false);
-            //returnToHome.setOnMouseClicked(event -> model.accessingTo(profile,"../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
         }
         else{
             fav.visibleProperty().setValue(true);
-            //returnToHome.setOnMouseClicked(event -> model.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE,"OnlineController"));
         }
+        returnToHome.setOnMouseClicked(event -> model.comeBackToHome(profile));
 
         if (profile.isFavori(restaurant)) fav.setSelected(true);
 
