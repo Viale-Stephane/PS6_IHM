@@ -131,7 +131,6 @@ public class RestaurantPageController {
     public void init(Restaurant restaurant, Profile profile){
         this.initCommentList(restaurant);
         scrollBar.setOnMouseClicked(event -> System.out.println());
-        System.out.println(scrollBar.computeAreaInScreen());
         if (profile.isNull()){
             fav.visibleProperty().setValue(false);
             returnToHome.setOnMouseClicked(event -> model.accessingTo(profile,"../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));

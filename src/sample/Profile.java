@@ -7,13 +7,14 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Profile {
-    String username, password;
-    String firstName, lastName, email;
-    ArrayList<Restaurant> favoris= new ArrayList<>();
-    ArrayList<History> history = new ArrayList<>();
-    Image profileImage;
-    CommentList userComments;
+    private String username, password;
+    private String firstName, lastName, email;
+    private ArrayList<Restaurant> favoris= new ArrayList<>();
+    private ArrayList<History> history = new ArrayList<>();
+    private Image profileImage;
+    private CommentList userComments;
 
+    private Image NEW_PROFILE = new Image("sample/data/Images/Profile_Picture/default_profile.jpg");
     public Profile(String username, String password, String firstName, String lastName, String email, Image profileImage){
         this.username = username;
         this.password = password;
@@ -21,6 +22,16 @@ public class Profile {
         this.lastName = lastName;
         this.email = email;
         this.profileImage = profileImage;
+        this.userComments = new CommentList();
+    }
+
+    public Profile(String username, String password, String firstName, String lastName, String email){
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.profileImage = NEW_PROFILE;
         this.userComments = new CommentList();
     }
 
