@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -14,8 +13,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import sample.*;
 import sample.models.RestaurantPageModel;
-
-import java.util.Collection;
 
 public class RestaurantPageController {
     @FXML
@@ -36,6 +33,8 @@ public class RestaurantPageController {
     private ImageView websiteImage;
     @FXML
     private ImageView returnToHome;
+    @FXML
+    private ImageView addComment;
 
     @FXML
     private Label grade;
@@ -70,7 +69,10 @@ public class RestaurantPageController {
     private ListView<Pane> commentList;
 
     @FXML
-    private ScrollBar scrollBar;
+    private Pane afterListView;
+
+    @FXML
+    private TextField newComment;
 
     RestaurantPageModel model = new RestaurantPageModel();
 
@@ -114,7 +116,7 @@ public class RestaurantPageController {
             username.setFont(Font.font(null, FontWeight.BOLD, 14));
             username.setX(profilePicture.getFitWidth());
             username.setY(20);
-            pane.setPrefWidth(this.prefWidth);
+            pane.setPrefWidth(200);
             pane.getChildren().add(username);
             pane.getChildren().add(profilePicture);
             pane.getChildren().add(commentRestaurant);
@@ -122,17 +124,15 @@ public class RestaurantPageController {
 
         }
         commentList.setItems(panes);
-       /* for (int i = 0; i < commentList.getItems().size(); i++) {
-            int finalI = i;
-            commentList.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(profile.getFavori(finalI), profile));
-        }*/
+        commentList.setPrefWidth(233);
     }
 
     public void init(Restaurant restaurant, Profile profile){
         this.initCommentList(restaurant);
-        scrollBar.setOnMouseClicked(event -> System.out.println());
         if (profile.isNull()){
+            newComment.visibleProperty().setValue(false);
             fav.visibleProperty().setValue(false);
+            addComment.visibleProperty().setValue(false);
             returnToHome.setOnMouseClicked(event -> model.accessingTo(profile,"../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
         }
         else{
@@ -142,8 +142,8 @@ public class RestaurantPageController {
 
         if (profile.isFavori(restaurant)) fav.setSelected(true);
 
-        image.setFitHeight(175.0);
-        image.setFitWidth(270.0);
+        image.setFitHeight(170.0);
+        image.setFitWidth(233.0);
         image.setPreserveRatio(false);
         image.setImage(restaurant.getRestaurantPicture());
         phone.setY(phone.getY()-25);
@@ -151,8 +151,7 @@ public class RestaurantPageController {
         websiteImage.setY(websiteImage.getY()-25);
         websiteImage.setImage(websitePicture);
 
-        returnToHome.setY(70);
-        returnToHome.setX(200);
+        returnToHome.setX(180);
         returnToHome.setImage(backArrow);
 
         grade.setText(Double.toString(restaurant.getGrade()));
@@ -164,9 +163,28 @@ public class RestaurantPageController {
 
         model.setSchedule(new Label[]{monday,tuesday,wednesday,thursday,friday,saturday,sunday},restaurant);
         model.setSizeAndPosition(new ImageView[]{star1,star2,star3,star4,star5},restaurant.getGrade());
-        model.setScrollBar();
 
 
         fav.setOnMouseClicked(event -> {if (fav.isSelected()) profile.addFavori(restaurant); else profile.removeFavori(restaurant);});
+
+        newComment.setOnKeyPressed(event ->{
+            if(event.getCode().toString().equals("ENTER")) {
+                model.newComment(panes,newComment.getText(), profile, restaurant,this.prefWidth);
+                commentList.setPrefHeight(commentList.getHeight()+50);
+                commentList.refresh();
+                afterListView.setLayoutY(afterListView.getLayoutY()+50);
+                newComment.setText(null);
+            }
+        });
+        afterListView.setLayoutY(commentList.getHeight()+image.getFitHeight()+phone.getFitHeight()+website.getHeight()+50);
+
+        addComment.setImage(new Image(View.PLUS_BUTTON));
+        addComment.setOnMouseClicked(event ->{
+            model.newComment(panes,newComment.getText(), profile, restaurant,this.prefWidth);
+            commentList.setPrefHeight(commentList.getHeight()+50);
+            commentList.refresh();
+            afterListView.setLayoutY(afterListView.getLayoutY()+50);
+            newComment.setText(null);
+        });
     }
 }
