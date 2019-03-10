@@ -164,7 +164,7 @@ public class RestaurantPageController {
 
         model.setSchedule(new Label[]{monday,tuesday,wednesday,thursday,friday,saturday,sunday},restaurant);
         model.setSizeAndPosition(new ImageView[]{star1,star2,star3,star4,star5},restaurant.getGrade());
-
+        model.setScrollBar();
 
 
         fav.setOnMouseClicked(event -> {if (fav.isSelected()) profile.addFavori(restaurant); else profile.removeFavori(restaurant);});
