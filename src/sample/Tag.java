@@ -11,7 +11,7 @@ public enum Tag {
     Italien("#Italien "),
     Francais("#Français "),
     Fromage("#Fromage "),
-    Crepe("#Crepe "),
+    Crepe("#Crèpe "),
     Glace("#Glace "),
     Burger("#Burger "),
     Healthy("#Healthy "),
