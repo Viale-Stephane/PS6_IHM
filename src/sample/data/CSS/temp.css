@@ -96,13 +96,18 @@
     -fx-background-color: #ffffff;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-background-radius: 0;
-    -fx-border-bottom-color: #c70039;
+    -fx-border-color: #c70039;
+    -fx-border-width : 0 0 1 0;
     -fx-font: 10px "Arial", Gadget, sans-serif;
+    -fx-transition: all .15s ease;
+
 }
 
-.text-field:focused{
-    -fx-border-color: #c70039;
+.text-field:focused  {
+    -fx-border-width : 1;
+
 }
+
 .toggle-button:focused{
     -fx-text-align: center;
     -fx-background-color: #ff5733;

@@ -77,6 +77,6 @@
       </Pane>
       <Button fx:id="button" layoutX="6.0" layoutY="355.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="128.0" text="Créer" />
       <Hyperlink fx:id="logInLink" layoutX="135.0" layoutY="355.0" text="Connexion" underline="true" />
-      <Hyperlink fx:id="buttonRetour" layoutX="145.0" layoutY="375.0" text="retour" underline="true"/>
+      <Hyperlink fx:id="buttonRetour" layoutX="145.0" layoutY="375.0" text="Retour" underline="true"/>
    </children>
 </Pane>
