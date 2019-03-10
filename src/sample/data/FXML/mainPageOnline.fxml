@@ -6,32 +6,24 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.image.ImageView?>
-<VBox fx:id="mainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.OnlineController">
-   <children>
-      <Pane fx:id="mainPane" prefHeight="40.0" prefWidth="640.0">
-         <children>
-            <ImageView fx:id="filterButton">
-               <image></image>
-            </ImageView>
-            <TextField fx:id="researchBar" layoutX="40.0" prefHeight="40.0" prefWidth="170.0" promptText="Recherche" />
-            <ImageView fx:id="profile" fitHeight="25.0" fitWidth="23.0" layoutX="45.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
-               <image></image>
-            </ImageView>
-            <ImageView fx:id="search" fitHeight="25.0" fitWidth="23.0" layoutX="45.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
-               <image></image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane id="map" fx:id="map" prefHeight="400.0" prefWidth="640.0">
-         <Pane fx:id="rightPane" prefHeight="400.0" prefWidth="200.0"/>
-         <Pane fx:id="leftPane" prefHeight="400.0" prefWidth="200.0" layoutX="440.0"/>
-      </Pane>
-      <Pane prefHeight="40.0" prefWidth="640.0">
-         <children>
-            <ImageView fx:id="info" fitHeight="25.0" fitWidth="23.0" layoutX="45.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
-               <image></image>
-            </ImageView>
-         </children>
-      </Pane>
-   </children>
+<VBox prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.controllers.OnlineController">
+   <Pane prefHeight="40.0" prefWidth="640.0">
+      <ImageView fx:id="filterButton"/>
+      <TextField fx:id="researchBar" layoutX="40.0" prefHeight="40.0" prefWidth="170.0" promptText="Recherche"/>
+      <ImageView fx:id="profile" fitHeight="25.0" fitWidth="23.0" layoutX="45.0" layoutY="23.0" pickOnBounds="true"
+                 preserveRatio="true"/>
+      <ImageView fx:id="search" fitHeight="25.0" fitWidth="23.0" layoutX="45.0" layoutY="23.0" pickOnBounds="true"
+                 preserveRatio="true"/>
+   </Pane>
+
+   <Pane id="map" prefHeight="400.0" prefWidth="640.0">
+      <Pane fx:id="leftPane" prefHeight="400.0" prefWidth="250.0"/>
+      <Pane fx:id="midPane" prefHeight="400.0" prefWidth="190.0" layoutX="250.0"/>
+      <Pane fx:id="rightPane" prefHeight="400.0" prefWidth="200.0" layoutX="440.0"/>
+   </Pane>
+
+   <Pane prefHeight="40.0" prefWidth="640.0">
+      <ImageView fx:id="info" fitHeight="25.0" fitWidth="23.0" layoutX="45.0" layoutY="23.0" pickOnBounds="true"
+                 preserveRatio="true"/>
+   </Pane>
 </VBox>

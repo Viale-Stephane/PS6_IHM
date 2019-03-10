@@ -13,8 +13,6 @@ import sample.models.OnlineModel;
 
 
 public class OnlineController {
-    OnlineModel model = new OnlineModel();
-
     @FXML
     private TextField researchBar;
 
@@ -30,13 +28,16 @@ public class OnlineController {
     @FXML
     private Pane rightPane;
     @FXML
+    private Pane midPane;
+    @FXML
     private Pane leftPane;
 
     //-------------------------------
-    Image SEARCH_ICON = new Image(View.SEARCH_ICON);
-    Image DROP_DOWN_MENU = new Image(View.DROP_DOWN_MENU);
-    Image ORGANISATION_LOGO = new Image(View.ORGANISATION_LOGO);
+    private Image SEARCH_ICON = new Image(View.SEARCH_ICON);
+    private Image DROP_DOWN_MENU = new Image(View.DROP_DOWN_MENU);
+    private Image ORGANISATION_LOGO = new Image(View.ORGANISATION_LOGO);
 
+    OnlineModel model = new OnlineModel();
 
     public void init(Profile profile){
         search.setX(researchBar.getPrefWidth());
@@ -74,5 +75,8 @@ public class OnlineController {
 
         search.setOnMouseClicked(event -> System.out.println(model.search(leftPane, researchBar.getText(),profile)));
 
+        midPane.setOnMouseClicked(event -> model.clearPanes(leftPane, rightPane));
+        leftPane.setOnMouseClicked(event -> model.clearPanes(rightPane));
+        rightPane.setOnMouseClicked(event -> model.clearPanes(leftPane));
     }
 }
