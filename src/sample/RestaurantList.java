@@ -11,21 +11,21 @@ public class RestaurantList {
 
     private Image imageBK=new Image("sample/data/Images/Restaurants_Picture/burger-king.jpg");
     private Image imageDragonDor=new Image("sample/data/Images/Restaurants_Picture/DragonDor.jpg");
-    private Image imageFlunch=new Image("sample/data/Images/Restaurants_Picture/Flunch.jpg");
+    private Image imageFlunch=new Image("sample/data/Images/Restaurants_Picture/Flunch.png");
     private Image imageHippopotamus=new Image("sample/data/Images/Restaurants_Picture/Hippopotamus.jpg");
-    private Image imageLaBoucherie=new Image("sample/data/Images/Restaurants_Picture/LaBoucherie.jpg");
+    private Image imageLaBoucherie=new Image("sample/data/Images/Restaurants_Picture/LaBoucherie.png");
     private Image imageMacdo=new Image("sample/data/Images/Restaurants_Picture/Macdo.jpg");
-    private Image imageQuick=new Image("sample/data/Images/Restaurants_Picture/Quick.jpg");
-    private Image imageSushiSpirit=new Image("sample/data/Images/Restaurants_Picture/SushiSpirit.jpg");
+    private Image imageQuick=new Image("sample/data/Images/Restaurants_Picture/Quick.png");
+    private Image imageSushiSpirit=new Image("sample/data/Images/Restaurants_Picture/SushiSpirit.png");
 
     private Image imageLidL=new Image("sample/data/images/Commerce_Picture/lidl.jpg");
-    private Image imageBiocoop=new Image("sample/data/images/Commerce_Picture/biocoop.jpg");
-    private Image imageCarrefour=new Image("sample/data/images/Commerce_Picture/Carrefour.jpg");
-    private Image imageCasino=new Image("sample/data/images/Commerce_Picture/Casino.jpg");
-    private Image imageIntermache=new Image("sample/data/images/Commerce_Picture/Intermarche.jpg");
+    private Image imageBiocoop=new Image("sample/data/images/Commerce_Picture/biocoop.png");
+    private Image imageCarrefour=new Image("sample/data/images/Commerce_Picture/Carrefour.jpeg");
+    private Image imageCasino=new Image("sample/data/images/Commerce_Picture/Casino.png");
+    private Image imageIntermache=new Image("sample/data/images/Commerce_Picture/Intermarche.png");
     private Image imageLeclerc=new Image("sample/data/images/Commerce_Picture/Leclerc.jpg");
     private Image imageNatureo=new Image("sample/data/images/Commerce_Picture/natureo.jpg");
-    private Image imageOsushi=new Image("sample/data/images/Commerce_Picture/Oshushi.jpg");
+    private Image imageOsushi=new Image("sample/data/images/Commerce_Picture/Osushi.jpg");
 
     public RestaurantList(){
         this.restaurants = new ArrayList<>();
