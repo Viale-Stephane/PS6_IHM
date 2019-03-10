@@ -3,6 +3,7 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import sample.Profile;
 import sample.Tag;
 import sample.View;
@@ -13,9 +14,12 @@ import java.util.ArrayList;
 
 public class ResearchRestaurantController {
     @FXML
+    private Pane mainPane;
+    @FXML
     private ToggleButton toggleButtonRestaurant;
     @FXML
     private ToggleButton toggleButtonCommerce;
+
     @FXML
     private SplitMenuButton splitMenuFiltre;
     @FXML
@@ -58,8 +62,8 @@ public class ResearchRestaurantController {
 
 
 
-    ResearchRestaurantModel model = new ResearchRestaurantModel();
-    ArrayList<String> researchedTags = new ArrayList<>();
+    private ResearchRestaurantModel model = new ResearchRestaurantModel();
+    private ArrayList<String> researchedTags = new ArrayList<>();
 
 
     public void init(Profile profile){
@@ -84,12 +88,8 @@ public class ResearchRestaurantController {
         for(MenuItem menuItem : splitMenuFiltre.getItems()){
             menuItem.setOnAction(event -> model.addFiltre(menuItem.getText(),researchedTags,textFieldFiltres));
         }
-        buttonFiltre.setOnAction(event -> model.accessingTo(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags,profile));
+        buttonFiltre.setOnAction(event -> model.accessingTo(mainPane, this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags,profile));
 
-        //if(profile.isNull())
-        //buttonReturn.setOnAction(event -> model.accessingTo(profile, "../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
-        //else
-        //buttonReturn.setOnAction(event -> model.accessingTo(profile, View.HOME_ONLINE,View.CSS_FILE,"OnlineController"));
-
+        buttonReturn.setOnAction(event -> model.comeBackToHome(profile));
     }
 }

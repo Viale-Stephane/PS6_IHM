@@ -2,12 +2,11 @@ package sample.models;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import sample.*;
-import sample.controllers.OnlineController;
 import sample.controllers.RestaurantListController;
 
 import java.io.IOException;
@@ -15,8 +14,8 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 
 public class ResearchRestaurantModel extends Model {
-    Image FULL_STAR = new Image(View.FULL_STAR);
-    Image EMPTY_STAR = new Image(View.EMPTY_STAR);
+    private Image FULL_STAR = new Image(View.FULL_STAR);
+    private Image EMPTY_STAR = new Image(View.EMPTY_STAR);
 
     public ResearchRestaurantModel(){}
 
@@ -39,7 +38,7 @@ public class ResearchRestaurantModel extends Model {
         return null;
     }
 
-    public void accessingTo(int minStar, boolean isItARestaurant, double maxPrice, double maxDistance, ArrayList<String> tags, Profile profile){
+    public void accessingTo(Pane pane, int minStar, boolean isItARestaurant, double maxPrice, double maxDistance, ArrayList<String> tags, Profile profile) {
         if(profile.isNull()){
             profile = new Profile();
         }
@@ -53,13 +52,14 @@ public class ResearchRestaurantModel extends Model {
         String fxmlFile= View.RESTAURANT_LIST;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
+            Parent newLoadedPane = loader.load(getClass().getResourceAsStream(fxmlFile));
+            newLoadedPane.getStylesheets().add(View.CSS_FILE);
+
+            pane.getChildren().clear();
+            pane.getChildren().add(newLoadedPane);
+
             ((RestaurantListController) loader.getController()).init(profile,whiteListedRestaurant);
-            Main.stage.show();
+
 
         }catch (IOException e){
             e.printStackTrace();

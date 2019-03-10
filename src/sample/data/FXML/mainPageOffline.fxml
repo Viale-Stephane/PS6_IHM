@@ -19,8 +19,8 @@
    </Pane>
 
    <Pane id="map" prefHeight="400.0" prefWidth="640.0">
-      <Pane fx:id="leftPane" prefHeight="400.0" prefWidth="200.0"/>
-      <Pane fx:id="midPane" prefHeight="400.0" prefWidth="240.0" layoutX="200.0"/>
+      <Pane fx:id="leftPane" prefHeight="400.0" prefWidth="250.0"/>
+      <Pane fx:id="midPane" prefHeight="400.0" prefWidth="190.0" layoutX="250.0"/>
       <Pane fx:id="rightPane" prefHeight="400.0" prefWidth="200.0" layoutX="450.0"/>
    </Pane>
 
