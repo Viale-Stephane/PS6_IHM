@@ -15,8 +15,9 @@ import sample.models.RestaurantListModel;
 
 public class RestaurantListController {
     @FXML
+    private Pane mainPane;
+    @FXML
     private ListView<Pane> paneList;
-
     @FXML
     private Button goBack;
 
@@ -26,7 +27,7 @@ public class RestaurantListController {
     private ObservableList<Restaurant> items = FXCollections.observableArrayList();
 
     private int prefHeight = 100;
-    private int prefWidth = 200;
+    private int prefWidth = 218;
 
     RestaurantListModel model = new RestaurantListModel();
 
@@ -61,18 +62,20 @@ public class RestaurantListController {
             pane.getChildren().addAll(new ImageView[]{star1,star2,star3,star4,star5});
             pane.getChildren().addAll(schedule);
             panes.add(pane);
-
         }
+
         paneList.setItems(panes);
+
         for(int i=0; i<paneList.getItems().size();i++) {
             int finalI = i;
-            paneList.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(whiteListedRestaurant.getRestaurant(finalI),profile));
+            paneList.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(mainPane,whiteListedRestaurant.getRestaurant(finalI),profile));
             if((i+1) == paneList.getItems().size()){
                 goBack.setLayoutX(paneList.getWidth()-goBack.getWidth());
                 goBack.setLayoutY(paneList.getHeight()-goBack.getHeight());
 
             }
         }
-        //goBack.setOnMouseClicked(event -> model.accessingTo(profile,View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
+
+        goBack.setOnMouseClicked(event -> model.accessingTo(mainPane,profile,View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
     }
 }

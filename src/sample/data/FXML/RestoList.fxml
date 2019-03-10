@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
 
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.Pane?>
+<Pane fx:id="mainPane" fx:controller="sample.controllers.RestaurantListController" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml">
 
-
-<Pane fx:controller="sample.controllers.RestaurantListController" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
-    <ListView  fx:id="paneList" prefHeight="400.0" prefWidth="200.0" />
-    <Button fx:id="goBack" text="Retour"></Button>
+    <ListView fx:id="paneList" prefHeight="400.0" prefWidth="250.0"/>
+    <Button fx:id="goBack" text="Retour"/>
 </Pane>

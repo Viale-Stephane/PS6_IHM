@@ -14,7 +14,8 @@ import sample.models.RestaurantListModel;
 
 
 public class FavorisController {
-
+    @FXML
+    private Pane mainPane;
     @FXML
     private ListView<Pane> paneListView;
     @FXML
@@ -60,7 +61,7 @@ public class FavorisController {
         System.out.println(paneListView.getWidth());
         for(int i=0; i<paneListView.getItems().size();i++) {
             int finalI = i;
-            paneListView.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(profile.getFavori(finalI),profile));
+            paneListView.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(mainPane, profile.getFavori(finalI),profile));
             System.out.println(paneListView.getHeight());
             if((i+1) == paneListView.getItems().size()){
                 goBack.setLayoutX(paneListView.getWidth()-goBack.getWidth());

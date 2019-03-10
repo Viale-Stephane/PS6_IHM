@@ -80,28 +80,26 @@ public class Model {
         }
     }
 
-    public void accessRestaurantPage(Restaurant restaurant, Profile profile) {
-        String fxmlFile = View.RESTAURANT_PAGE;
+    public void accessRestaurantPage(Pane pane, Restaurant restaurant, Profile profile) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.getClass().getResource(fxmlFile);
-            Parent root = loader.load(getClass().getResourceAsStream(fxmlFile));
-            root.getStylesheets().add(View.CSS_FILE);
-            Scene scene = new Scene(root);
-            Main.stage.setScene(scene);
-            ((RestaurantPageController) loader.getController()).init(restaurant,profile);
-            Main.stage.show();
+            Parent newLoadedPane = loader.load(getClass().getResourceAsStream(View.RESTAURANT_PAGE));
+            newLoadedPane.getStylesheets().add(View.CSS_FILE);
 
+            pane.getChildren().clear();
+            pane.getChildren().add(newLoadedPane);
+
+            ((RestaurantPageController) loader.getController()).init(restaurant,profile);
         }catch (IOException e){
             e.printStackTrace();
         }
     }
 
-    public String search(String researchBarText,Profile profile) {
+    public String search(Pane pane, String researchBarText,Profile profile) {
         ArrayList<Restaurant> restaurants = Main.restaurantList.getRestaurants();
         for(Restaurant restaurant: restaurants){
             if(restaurant.getName().equals(researchBarText)){
-                this.accessRestaurantPage(restaurant,profile);
+                this.accessRestaurantPage(pane, restaurant,profile);
                 return "Accessing to the page of "+researchBarText+"..";
             }
         }

@@ -29,7 +29,7 @@ public class OfflineController {
     private ImageView info;
 
     @FXML
-    private Pane leftPane;
+    public Pane leftPane;
     @FXML
     private Pane midPane;
     @FXML
@@ -62,10 +62,10 @@ public class OfflineController {
 
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))
-                System.out.println(offlineModel.search(researchBar.getText(),new Profile()));
+                System.out.println(offlineModel.search(leftPane, researchBar.getText(),new Profile()));
         });
 
-        search.setOnMouseClicked(event -> System.out.println(offlineModel.search(researchBar.getText(),new Profile())));
+        search.setOnMouseClicked(event -> System.out.println(offlineModel.search(leftPane, researchBar.getText(),new Profile())));
         filterButton.setOnMouseClicked( event -> offlineModel.accessingTo(false, leftPane, rightPane, new Profile(),View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
         button2.setOnMouseClicked( event -> offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.LOG_IN,View.CSS_FILE,"LoginController"));
         button.setOnMouseClicked( event -> offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.SIGN_IN,View.CSS_FILE,"SignInController"));

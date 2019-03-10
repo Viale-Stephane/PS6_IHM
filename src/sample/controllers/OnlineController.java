@@ -63,15 +63,16 @@ public class OnlineController {
         circle.setRadius(17);
         this.profile.setClip(circle);
 
-        //this.profile.setOnMouseClicked(event -> this.model.accessingTo(profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
-        //filterButton.setOnMouseClicked(event -> this.model.accessingTo(profile,View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
-        //info.setOnMouseClicked(event -> this.model.accessingTo(profile,View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
+        this.profile.setOnMouseClicked(event -> this.model.accessingTo(true, leftPane, rightPane, profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
+        filterButton.setOnMouseClicked(event -> this.model.accessingTo(false, leftPane, rightPane, profile,View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
+        info.setOnMouseClicked(event -> this.model.accessingTo(true, leftPane, rightPane, profile,View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
 
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))
-                System.out.println(model.search(researchBar.getText(),profile));
+                System.out.println(model.search(leftPane, researchBar.getText(),profile));
         });
-        search.setOnMouseClicked(event -> System.out.println(model.search(researchBar.getText(),profile)));
+
+        search.setOnMouseClicked(event -> System.out.println(model.search(leftPane, researchBar.getText(),profile)));
 
     }
 }

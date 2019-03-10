@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class HistoryController {
     @FXML
+    private Pane mainPane;
+    @FXML
     private ListView<Pane> historyList;
     @FXML
     private Button goBack;
@@ -68,14 +70,14 @@ public class HistoryController {
         historyList.setItems(panes);
         for(int i=0; i<historyList.getItems().size();i++) {
             int finalI = i;
-            historyList.getItems().get(i).setOnMouseClicked((event -> model.accessRestaurantPage(history.get(finalI).getHistory(),profile)));
+            historyList.getItems().get(i).setOnMouseClicked((event -> model.accessRestaurantPage(mainPane, history.get(finalI).getHistory(),profile)));
             if((i+1) == historyList.getItems().size()){
                 goBack.setLayoutX(historyList.getWidth()-goBack.getWidth());
                 goBack.setLayoutY(historyList.getHeight()-goBack.getHeight());
 
             }
         }
-        //goBack.setOnMouseClicked(event -> model.accessingTo(profile, View.PROFILE,View.CSS_FILE,"ProfileController"));
+        goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
 
     }
 }
