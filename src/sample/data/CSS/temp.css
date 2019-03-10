@@ -131,6 +131,17 @@
     -fx-text-fill: #c70039;
 }
 
+.hyperlink {
+    -fx-text-fill: #c70039;
+}
+
+.hyperlink:hover{
+    -fx-text-fill: #ff5733;
+}
+.hyperlink:focused {
+     -fx-border-color: #c70039;
+}
+
 .pane{
 
     -fx-font: 10px "Arial", Gadget, sans-serif;
