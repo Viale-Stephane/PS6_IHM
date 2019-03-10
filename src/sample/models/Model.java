@@ -15,20 +15,15 @@ import java.util.ArrayList;
 
 public class Model {
 
-    public void accessingTo(boolean right, Pane leftPane, Pane rightPane, Profile profile, String fxmlFile, String cssFile, String controller){
+    public void accessingTo(Pane pane, Profile profile, String fxmlFile, String cssFile, String controller){
         try {
             FXMLLoader loader = new FXMLLoader();
 
             Pane newLoadedPane = loader.load(getClass().getResourceAsStream(fxmlFile));
             newLoadedPane.getStylesheets().add(cssFile);
 
-            leftPane.getChildren().clear();
-            rightPane.getChildren().clear();
-            if (right) {
-                rightPane.getChildren().add(newLoadedPane);
-            } else {
-                leftPane.getChildren().add(newLoadedPane);
-            }
+            pane.getChildren().clear();
+            pane.getChildren().add(newLoadedPane);
 
             switch(controller){
                 case "AddLocationController":
@@ -45,12 +40,6 @@ public class Model {
                     break;
                 case "LoginController":
                     ((LoginController) loader.getController()).init();
-                    break;
-                case "OfflineController":
-                    ((OfflineController) loader.getController()).init();
-                    break;
-                case "OnlineController":
-                    ((OnlineController) loader.getController()).init(profile);
                     break;
                 case "ProfileController":
                     ((ProfileController) loader.getController()).init(profile);
