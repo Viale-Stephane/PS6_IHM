@@ -3,8 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<Pane styleClass="main" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.201"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.SignInController">
+<Pane fx:id="mainPane" styleClass="main" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.controllers.SignInController">
 
    <Text layoutX="36.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enregistrement"
          wrappingWidth="128.0000001192093">

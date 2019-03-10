@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import sample.Profile;
 import sample.View;
@@ -12,11 +13,14 @@ import sample.models.SignInModel;
 
 
 public class SignInController {
+    @FXML
+    private Pane mainPane;
 
     @FXML
     private PasswordField inputPassword;
     @FXML
     private PasswordField inputPasswordVerification;
+
     @FXML
     private TextField inputEmail;
     @FXML
@@ -40,8 +44,8 @@ public class SignInController {
     SignInModel model = new SignInModel();
 
     public void init(){
-        //logInLink.setOnAction(event -> model.accessingTo(new Profile(), View.LOG_IN,View.CSS_FILE,"LoginController"));
-        //buttonRetour.setOnAction(event -> model.accessingTo(new Profile(), "../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
+        logInLink.setOnAction(event -> model.accessingTo(mainPane, new Profile(), View.LOG_IN,View.CSS_FILE,"LoginController"));
+        buttonRetour.setOnAction(event -> model.comeBackToHome(new Profile()));
         result.setWrappingWidth(160);
         button.setOnAction(event -> result.setText(model.creatingProfile(inputUsername.getText(),inputEmail.getText(),inputPassword.getText(),inputPasswordVerification.getText(),firstName.getText(),lastName.getText())));
 
