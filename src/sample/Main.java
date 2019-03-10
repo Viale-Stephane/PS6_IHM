@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.controllers.OfflineController;
 
@@ -35,6 +36,7 @@ public class Main extends Application {
 
         stage = new Stage();
         stage.setResizable(false);
+        stage.getIcons().add(new Image(View.ORGANISATION_LOGO));
         //create the view
         stage.setScene(new Scene(root));
         stage.setTitle(View.LABEL);
