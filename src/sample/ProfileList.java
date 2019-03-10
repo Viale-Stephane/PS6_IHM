@@ -44,6 +44,21 @@ public class ProfileList {
         administrator.addHistory(restolist.getRestaurant(0),new Date(112,0,14));
         administrator.addHistory(restolist.getRestaurant(1),new Date(119,11,12));
 
+        Paul.addFavori(restolist.getRestaurant(2));
+        Paul.addHistory(restolist.getRestaurant(2),new Date(117,3,14));
+        Paul.addHistory(restolist.getRestaurant(4),new Date(119,11,12));
+
+        Richard.addFavori(restolist.getRestaurant(0));
+        Richard.addHistory(restolist.getRestaurant(0),new Date(118,7,14));
+        Richard.addHistory(restolist.getRestaurant(2),new Date(119,11,12));
+
+        Camille.addFavori(restolist.getRestaurant(1));
+        Camille.addHistory(restolist.getRestaurant(1),new Date(117,7,2));
+        Camille.addHistory(restolist.getRestaurant(3),new Date(119,8,5));
+
+        Chloe.addHistory(restolist.getRestaurant(1),new Date(119,4,2));
+        Chloe.addHistory(restolist.getRestaurant(3),new Date(119,10,5));
+        
         Profile[] samples = {Paul, Balthazar, Richard, Camille, Chloe, Sabine, administrator};
         Richard.getUserComments().addComment(new Comment("Tres bon service avec de tres bon burger", Richard, restolist.getRestaurant(0)));
         Sabine.getUserComments().addComment(new Comment("Un fastfood classique, sans plus", Sabine, restolist.getRestaurant(0)));
