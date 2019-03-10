@@ -49,7 +49,7 @@ public class ProfileList {
         Sabine.getUserComments().addComment(new Comment("Un fastfood classique, sans plus", Sabine, restolist.getRestaurant(0)));
 
         Camille.getUserComments().addComment(new Comment("Accueil chaleureux et on est bien nourri !", Camille, restolist.getRestaurant(1)));
-        Chloe.getUserComments().addComment(new Comment("Un restaurant mitheux", Chloe, restolist.getRestaurant(1)));
+        Chloe.getUserComments().addComment(new Comment("Un restaurant miteux", Chloe, restolist.getRestaurant(1)));
 
         Paul.getUserComments().addComment(new Comment("Un kebab moyen mais pas cher", Paul, restolist.getRestaurant(2)));
         Richard.getUserComments().addComment(new Comment("Un tres bon kebab, je recommande !", Richard, restolist.getRestaurant(2)));
