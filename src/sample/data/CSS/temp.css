@@ -1,3 +1,6 @@
+.main {
+    -fx-background-color: white;
+}
 
 #map {
     -fx-background-image: url("../Images/map.PNG");

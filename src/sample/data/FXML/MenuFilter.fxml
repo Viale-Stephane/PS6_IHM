@@ -34,7 +34,7 @@
       <Pane prefHeight="81.0" prefWidth="250.0">
          <children>
             <Slider fx:id="slideBarPrice" layoutX="55.0" layoutY="46.0" max="500.0" value="100.0" />
-            <Label fx:id="labelPrice" layoutX="14.0" layoutY="6.0" text="Prix : 100€" />
+            <Label fx:id="labelPrice" layoutX="14.0" layoutY="6.0" text="Prix Maximum : 100€" />
             <Label fx:id="priceMax" layoutX="195.0" layoutY="45.0" text="500€" />
             <Label fx:id="priceMin" layoutX="37.0" layoutY="44.0" text="0€" />
          </children>
@@ -42,7 +42,7 @@
       <Pane prefHeight="81.0" prefWidth="250.0">
          <children>
             <Slider fx:id="slideBarDistance" layoutX="55.0" layoutY="46.0" value="20.0" />
-            <Label fx:id="labelDistance" layoutX="14.0" layoutY="6.0" text="Distance :20km" />
+            <Label fx:id="labelDistance" layoutX="14.0" layoutY="6.0" text="Distance Maximum :20km" />
             <Label fx:id="distanceMax" layoutX="195.0" layoutY="44.0" text="100km" />
             <Label fx:id="distanceMin" layoutX="29.0" layoutY="44.0" text="0km" />
          </children>

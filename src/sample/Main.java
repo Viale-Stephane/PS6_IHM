@@ -22,11 +22,8 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
 
         view = new View();
-        //create a controller
-
-        //attach controller
         //attach XML file
-        Parent root = loader.load(getClass().getResourceAsStream(View.HOME_OFFLINE));
+        Parent root = loader.load(getClass().getResourceAsStream(View.HOME_START));
 
         //attach css file
         root.getStylesheets().add(View.CSS_FILE);
@@ -35,7 +32,7 @@ public class Main extends Application {
         ((OfflineController) loader.getController()).init();
 
         stage = new Stage();
-        stage.setResizable(false);
+        //stage.setResizable(false);
         stage.getIcons().add(new Image(View.ORGANISATION_LOGO));
         //create the view
         stage.setScene(new Scene(root));

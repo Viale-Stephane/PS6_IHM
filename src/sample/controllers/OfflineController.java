@@ -29,21 +29,19 @@ public class OfflineController {
     private ImageView info;
 
     @FXML
-    private Pane rightPane;
-    @FXML
     private Pane leftPane;
+    @FXML
+    private Pane midPane;
+    @FXML
+    private Pane rightPane;
+
 
     //-------------------------------
-    Image SEARCH_ICON = new Image(View.SEARCH_ICON);
-    Image DROP_DOWN_MENU = new Image(View.DROP_DOWN_MENU);
-    Image ORGANISATION_LOGO = new Image(View.ORGANISATION_LOGO);
+    private Image SEARCH_ICON = new Image(View.SEARCH_ICON);
+    private Image DROP_DOWN_MENU = new Image(View.DROP_DOWN_MENU);
+    private Image ORGANISATION_LOGO = new Image(View.ORGANISATION_LOGO);
 
-    OfflineModel offlineModel = new OfflineModel();
-
-
-
-
-
+    private OfflineModel offlineModel = new OfflineModel();
 
     public void init() {
         search.setX(researchBar.getPrefWidth());
@@ -59,14 +57,22 @@ public class OfflineController {
         info.setX(550);
         info.setY(-info.getFitHeight()/2);
         info.setImage(ORGANISATION_LOGO);
+
+        offlineModel.clearPanes(leftPane, rightPane);
+
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))
                 System.out.println(offlineModel.search(researchBar.getText(),new Profile()));
         });
+
         search.setOnMouseClicked(event -> System.out.println(offlineModel.search(researchBar.getText(),new Profile())));
-        filterButton.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(),View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
-        button2.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(),View.LOG_IN,View.CSS_FILE,"LoginController"));
-        button.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(),View.SIGN_IN,View.CSS_FILE,"SignInController"));
-        info.setOnMouseClicked( event -> offlineModel.accessingTo(new Profile(),View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
+        filterButton.setOnMouseClicked( event -> offlineModel.accessingTo(false, leftPane, rightPane, new Profile(),View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
+        button2.setOnMouseClicked( event -> offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.LOG_IN,View.CSS_FILE,"LoginController"));
+        button.setOnMouseClicked( event -> offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.SIGN_IN,View.CSS_FILE,"SignInController"));
+        info.setOnMouseClicked( event -> offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
+
+        midPane.setOnMouseClicked(event -> offlineModel.clearPanes(leftPane, rightPane));
+        leftPane.setOnMouseClicked(event -> offlineModel.clearPanes(rightPane));
+        rightPane.setOnMouseClicked(event -> offlineModel.clearPanes(leftPane));
     }
 }

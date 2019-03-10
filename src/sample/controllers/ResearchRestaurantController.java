@@ -77,19 +77,19 @@ public class ResearchRestaurantController {
         filterStar5.setOnMouseClicked(event -> this.minStar = model.clickStar(5, filterStar1, filterStar2, filterStar3, filterStar4, filterStar5));
         model.initSlider(slideBarDistance, 20,10);
         model.initSlider(slideBarPrice,100,50);
-        slideBarPrice.setOnMouseClicked(event -> labelPrice.setText("Prix : "+((int)slideBarPrice.getValue())+"€"));
-        slideBarPrice.setOnMouseDragged(event -> labelPrice.setText("Prix : "+((int)slideBarPrice.getValue())+"€"));
-        slideBarDistance.setOnMouseClicked(event -> labelDistance.setText("Distance : "+((int)slideBarDistance.getValue())+"km"));
-        slideBarDistance.setOnMouseDragged(event -> labelDistance.setText("Distance : "+((int)slideBarDistance.getValue())+"km"));
+        slideBarPrice.setOnMouseClicked(event -> labelPrice.setText("Prix Maximum : "+((int)slideBarPrice.getValue())+"€"));
+        slideBarPrice.setOnMouseDragged(event -> labelPrice.setText("Prix Maximum : "+((int)slideBarPrice.getValue())+"€"));
+        slideBarDistance.setOnMouseClicked(event -> labelDistance.setText("Distance Maximum : "+((int)slideBarDistance.getValue())+"km"));
+        slideBarDistance.setOnMouseDragged(event -> labelDistance.setText("Distance Maximum : "+((int)slideBarDistance.getValue())+"km"));
         for(MenuItem menuItem : splitMenuFiltre.getItems()){
             menuItem.setOnAction(event -> model.addFiltre(menuItem.getText(),researchedTags,textFieldFiltres));
         }
         buttonFiltre.setOnAction(event -> model.accessingTo(this.minStar,toggleButtonRestaurant.isSelected(),slideBarPrice.getValue(),slideBarDistance.getValue(),this.researchedTags,profile));
 
-        if(profile.isNull())
-        buttonReturn.setOnAction(event -> model.accessingTo(profile, "../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
-        else
-        buttonReturn.setOnAction(event -> model.accessingTo(profile, View.HOME_ONLINE,View.CSS_FILE,"OnlineController"));
+        //if(profile.isNull())
+        //buttonReturn.setOnAction(event -> model.accessingTo(profile, "../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
+        //else
+        //buttonReturn.setOnAction(event -> model.accessingTo(profile, View.HOME_ONLINE,View.CSS_FILE,"OnlineController"));
 
     }
 }

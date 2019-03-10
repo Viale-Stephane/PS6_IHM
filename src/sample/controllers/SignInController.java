@@ -40,8 +40,8 @@ public class SignInController {
     SignInModel model = new SignInModel();
 
     public void init(){
-        logInLink.setOnAction(event -> model.accessingTo(new Profile(), View.LOG_IN,View.CSS_FILE,"LoginController"));
-        buttonRetour.setOnAction(event -> model.accessingTo(new Profile(), "../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
+        //logInLink.setOnAction(event -> model.accessingTo(new Profile(), View.LOG_IN,View.CSS_FILE,"LoginController"));
+        //buttonRetour.setOnAction(event -> model.accessingTo(new Profile(), "../"+View.HOME_OFFLINE,View.CSS_FILE,"OfflineController"));
         result.setWrappingWidth(160);
         button.setOnAction(event -> result.setText(model.creatingProfile(inputUsername.getText(),inputEmail.getText(),inputPassword.getText(),inputPasswordVerification.getText(),firstName.getText(),lastName.getText())));
 

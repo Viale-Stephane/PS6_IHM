@@ -21,7 +21,7 @@ public class LoginModel extends Model {
         ArrayList<Profile> profiles = Main.profileList.getProfiles();
         for(Profile profile : profiles){
             if(profile.getUsername().equals(identifiant) && profile.getPassword().equals(password)){
-                super.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE,"OnlineController");
+                //super.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE,"OnlineController");
             }
         }
     }

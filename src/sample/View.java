@@ -1,10 +1,8 @@
 package sample;
 
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
 public class View {
-    public final static String HOME_OFFLINE = "data/FXML/mainPageOffline.fxml";
+    public final static String HOME_START = "data/FXML/mainPageOffline.fxml";
+    public final static String HOME_OFFLINE = "../data/FXML/mainPageOffline.fxml";
     public final static String HOME_ONLINE = "../data/FXML/mainPageOnline.fxml";
     public final static String SIGN_IN = "../data/FXML/SignIn.fxml";
     public final static String LOG_IN = "../data/FXML/logIn.fxml";
@@ -29,6 +27,7 @@ public class View {
     public final static String PHONE_IMAGE = "sample/data/Images/phone-receiver.png";
     public final static String WEBSITE_IMAGE = "sample/data/Images/internet.png";
     public final static String BACK_ARROW = "sample/data/Images/back-arrow.png";
+    public final static String PLUS_BUTTON = "sample/data/images/plus_button.png";
 
 
     public static String CSS_FILE = "sample/data/CSS/temp.css";

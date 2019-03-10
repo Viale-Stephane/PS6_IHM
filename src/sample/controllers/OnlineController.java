@@ -63,9 +63,9 @@ public class OnlineController {
         circle.setRadius(17);
         this.profile.setClip(circle);
 
-        this.profile.setOnMouseClicked(event -> this.model.accessingTo(profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
-        filterButton.setOnMouseClicked(event -> this.model.accessingTo(profile,View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
-        info.setOnMouseClicked(event -> this.model.accessingTo(profile,View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
+        //this.profile.setOnMouseClicked(event -> this.model.accessingTo(profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
+        //filterButton.setOnMouseClicked(event -> this.model.accessingTo(profile,View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
+        //info.setOnMouseClicked(event -> this.model.accessingTo(profile,View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
 
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))

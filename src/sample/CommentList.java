@@ -19,7 +19,6 @@ public class CommentList {
 
     public void addComment(Comment comment){
         this.commentList.add(comment);
-        //comment.getProfile().getUserComments().addComment(comment);
     }
 
     public int size(){

@@ -28,7 +28,7 @@ public class SignInModel extends Model {
             return "les deux champs mot de passe ne sont pas identique";
         Profile profile = new Profile(username,password,firstName,lastName,email);
         Main.profileList.add(profile);
-        super.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE,"OnlineController");
+        //super.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE,"OnlineController");
         return null;
     }
 
