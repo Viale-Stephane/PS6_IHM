@@ -50,7 +50,6 @@ public class RestaurantList {
         Restaurant burgerKing = new Restaurant("BurgerKing", true,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes","www.bkvousecoute.fr","0422000150",schedule,3.2,20,20, new ArrayList<Tag>(Arrays.asList(Tag.Burger,Tag.FastFood)),imageBK);
         Restaurant chezBernard = new Restaurant("Chez Bernard", true,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes","www.bkvousecoute.fr","0422000150",schedule,4.4,50,10,new ArrayList<Tag>(Arrays.asList(Tag.Francais, Tag.Fromage, Tag.Healthy)),imageLidL);
         Restaurant kebab = new Restaurant("Kebabinou", true,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes","www.bkvousecoute.fr","0422000150",schedule,2.2,5,2, new ArrayList<Tag>(Arrays.asList(Tag.FastFood, Tag.Kebab)),imageLidL);
-        Restaurant degueulasse = new Restaurant("C'est dégueulasse", true,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes","www.bkvousecoute.fr","0422000150",schedule,1.2,109,50, new ArrayList<Tag>(Arrays.asList(Tag.Burger, Tag.Pizza, Tag.Kebab, Tag.FastFood)),imageLidL);
         Restaurant lidl = new Restaurant("LidL", false, "38 avenue de lidL, 06600 Antibes", "www.lidL.com", "0682392412", schedule, 4.2,3,5, new ArrayList<Tag>(Arrays.asList(Tag.Commerce, Tag.Sandwich, Tag.Salade, Tag.Healthy)),imageLidL);
 
 
@@ -107,14 +106,19 @@ public class RestaurantList {
         Restaurant resto49 = new Restaurant("Leclerc",false,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes", "www.siteweb.com","042205072075",schedule,2.2,37,8,new ArrayList<Tag>(Arrays.asList(Tag.Burger,Tag.FastFood)),imageLeclerc);
 
 
-        Restaurant[] listOfRestaurants = {burgerKing,chezBernard,kebab,degueulasse,lidl,resto0,resto1,resto2,resto3,resto4,resto5,resto6,resto7,resto8,resto9,resto10,resto11,resto12,resto13,resto14,resto15,resto16,resto17,resto18,resto19,resto20,resto21,resto22,resto23,resto24,resto25,resto26,resto27,resto28,resto29,resto30,resto31,resto32,resto33,resto34,resto35,resto36,resto37,resto38,resto39,resto40,resto41,resto42,resto43,resto44,resto45,resto46,resto47,resto48,resto49};
-        for(Restaurant restaurant:listOfRestaurants){
-            restaurant.getCommentList().addComment(new Comment("lolilolfezf lofzal fzealfzao lfzafza",restaurant));
-            restaurant.getCommentList().addComment(new Comment("lolilolfezf lofzal fzealfzao lfzafza",restaurant));
-            restaurant.getCommentList().addComment(new Comment("lolilolfezf lofzal fzealfzao lfzafza",restaurant));
-            restaurant.getCommentList().addComment(new Comment("lolilolfezf lofzal fzealfzao lfzafza",restaurant));
+        Restaurant[] listOfRestaurants = {burgerKing,chezBernard,kebab,lidl,resto0,resto1,resto2,resto3,resto4,resto5,resto6,resto7,resto8,resto9,resto10,resto11,resto12,resto13,resto14,resto15,resto16,resto17,resto18,resto19,resto20,resto21,resto22,resto23,resto24,resto25,resto26,resto27,resto28,resto29,resto30,resto31,resto32,resto33,resto34,resto35,resto36,resto37,resto38,resto39,resto40,resto41,resto42,resto43,resto44,resto45,resto46,resto47,resto48,resto49};
+        burgerKing.getCommentList().addComment(new Comment("Tres bon service avec de tres bon burger",burgerKing));
+        burgerKing.getCommentList().addComment(new Comment("Un fastfood classique, sans plus",burgerKing));
 
-        }
+        chezBernard.getCommentList().addComment(new Comment("Accueil chaleureux et on est bien nourri !",chezBernard));
+        chezBernard.getCommentList().addComment(new Comment("Un restaurant mitheux",chezBernard));
+
+        kebab.getCommentList().addComment(new Comment("Un kebab moyen mais pas cher",kebab));
+        kebab.getCommentList().addComment(new Comment("Un tres bon kebab, je recommande !",kebab));
+
+        lidl.getCommentList().addComment(new Comment("La qualité est a la hauteur de ces prix...",lidl));
+        lidl.getCommentList().addComment(new Comment("Pas cher et pas bon, génial !",lidl));
+        lidl.getCommentList().addComment(new Comment("Un endroit ou manger quand on est etudiant",lidl));
         this.restaurants.addAll(Arrays.asList(listOfRestaurants));
 
     }
