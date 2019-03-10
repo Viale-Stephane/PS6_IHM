@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import sample.Profile;
 import sample.View;
 import sample.models.OnlineModel;
@@ -32,6 +33,8 @@ public class OnlineController {
     @FXML
     private Pane leftPane;
 
+    @FXML
+    private Text errorDisplay;
     //-------------------------------
     Image SEARCH_ICON = new Image(View.SEARCH_ICON);
     Image DROP_DOWN_MENU = new Image(View.DROP_DOWN_MENU);
@@ -69,9 +72,9 @@ public class OnlineController {
 
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))
-                System.out.println(model.search(researchBar.getText(),profile));
+                errorDisplay.setText(model.search(researchBar.getText(), new Profile()));
         });
-        search.setOnMouseClicked(event -> System.out.println(model.search(researchBar.getText(),profile)));
+        search.setOnMouseClicked(event -> errorDisplay.setText(model.search(researchBar.getText(), profile)));
 
     }
 }

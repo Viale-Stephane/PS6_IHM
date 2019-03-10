@@ -98,6 +98,8 @@ public class Profile {
         return history;
     }
 
+    public History getHistory(int i){ return this.history.get(i);}
+
     public void addHistory(Restaurant restaurant, Date date){
         this.history.add(new History(restaurant,date));
     }

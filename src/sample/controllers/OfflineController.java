@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import sample.Profile;
 import sample.View;
 import sample.models.OfflineModel;
@@ -35,7 +36,8 @@ public class OfflineController {
     @FXML
     private Pane rightPane;
 
-
+    @FXML
+    private Text errorDisplay;
     //-------------------------------
     private Image SEARCH_ICON = new Image(View.SEARCH_ICON);
     private Image DROP_DOWN_MENU = new Image(View.DROP_DOWN_MENU);
@@ -62,10 +64,10 @@ public class OfflineController {
 
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))
-                System.out.println(offlineModel.search(researchBar.getText(),new Profile()));
+                errorDisplay.setText(offlineModel.search(researchBar.getText(), new Profile()));
         });
 
-        search.setOnMouseClicked(event -> System.out.println(offlineModel.search(researchBar.getText(),new Profile())));
+        search.setOnMouseClicked(event -> errorDisplay.setText(offlineModel.search(researchBar.getText(),new Profile())));
         filterButton.setOnMouseClicked( event -> offlineModel.accessingTo(false, leftPane, rightPane, new Profile(),View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
         button2.setOnMouseClicked( event -> offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.LOG_IN,View.CSS_FILE,"LoginController"));
         button.setOnMouseClicked( event -> offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.SIGN_IN,View.CSS_FILE,"SignInController"));

@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Text?>
 <VBox fx:id="mainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.OnlineController">
    <children>
       <Pane fx:id="mainPane" prefHeight="40.0" prefWidth="640.0">
@@ -23,6 +24,7 @@
          </children>
       </Pane>
       <Pane id="map" fx:id="map" prefHeight="400.0" prefWidth="640.0">
+         <Text fx:id="errorDisplay" layoutX="40" layoutY="15"></Text>
          <Pane fx:id="rightPane" prefHeight="400.0" prefWidth="200.0"/>
          <Pane fx:id="leftPane" prefHeight="400.0" prefWidth="200.0" layoutX="440.0"/>
       </Pane>
