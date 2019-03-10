@@ -20,7 +20,7 @@ public class RestaurantPageModel extends Model {
             star.setFitHeight(20);
             star.setFitWidth(20);
             star.setX(20*i);
-            star.setY(0);
+            star.setY(-2);
             i++;
             if(i<=grade){
                 star.setImage(FULL_STAR);

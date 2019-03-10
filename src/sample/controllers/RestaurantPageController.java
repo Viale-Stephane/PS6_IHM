@@ -42,7 +42,7 @@ public class RestaurantPageController {
     @FXML
     private Label restaurantName;
     @FXML
-    private Label adress;
+    private Text adress;
     @FXML
     private Label monday;
     @FXML
@@ -155,9 +155,9 @@ public class RestaurantPageController {
         returnToHome.setX(200);
         returnToHome.setImage(backArrow);
 
-
         grade.setText(Double.toString(restaurant.getGrade()));
         restaurantName.setText(restaurant.getName());
+        adress.setWrappingWidth(220);
         adress.setText(restaurant.getAdress());
         website.setText(restaurant.getWebsite());
         phoneNumber.setText(restaurant.getPhoneNumber());
