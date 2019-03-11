@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import sample.History;
 import sample.Profile;
-import sample.View;
 import sample.models.HistoryModel;
 
 import java.text.DateFormat;
@@ -78,6 +77,5 @@ public class HistoryController {
             }
         }
         goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
-
     }
 }
