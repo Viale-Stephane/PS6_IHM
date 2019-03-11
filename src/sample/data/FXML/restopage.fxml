@@ -107,7 +107,7 @@
                            promptText="Insérez votre commentaire ici.."/>
                 <ImageView fx:id="addComment" fitHeight="40" fitWidth="40"/>
             </HBox>
-            <ListView layoutY="40" fx:id="commentList"/>
+            <ListView layoutY="50" fx:id="commentList"/>
         </Pane>
 
         <Pane fx:id="afterListView" layoutX="10.0" prefHeight="25.0" prefWidth="219.0">
