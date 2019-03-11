@@ -103,7 +103,7 @@ public class Model {
                 return null;
             }
         }
-        return  "This location doesn't exist..";
+        return  "Ce lieu n'existe pas...";
     }
 
     public void clearPanes(Pane... panes) {
