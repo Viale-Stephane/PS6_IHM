@@ -68,10 +68,10 @@ public class OfflineController {
         });
 
         search.setOnMouseClicked(event -> errorDisplay.setText(offlineModel.search(leftPane, researchBar.getText(),new Profile())));
-        filterButton.setOnMouseClicked( event -> offlineModel.accessingTo(false, leftPane, rightPane, new Profile(),View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
-        button2.setOnMouseClicked( event -> offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.LOG_IN,View.CSS_FILE,"LoginController"));
-        button.setOnMouseClicked( event -> offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.SIGN_IN,View.CSS_FILE,"SignInController"));
-        info.setOnMouseClicked( event -> offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController"));
+        filterButton.setOnMouseClicked( event -> researchBar.setText(offlineModel.accessingTo(false, leftPane, rightPane, new Profile(),View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController")));
+        button2.setOnMouseClicked( event -> researchBar.setText(offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.LOG_IN,View.CSS_FILE,"LoginController")));
+        button.setOnMouseClicked( event -> researchBar.setText(offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.SIGN_IN,View.CSS_FILE,"SignInController")));
+        info.setOnMouseClicked( event -> researchBar.setText(offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController")));
 
         midPane.setOnMouseClicked(event -> offlineModel.clearPanes(leftPane, rightPane));
         leftPane.setOnMouseClicked(event -> offlineModel.clearPanes(rightPane));
