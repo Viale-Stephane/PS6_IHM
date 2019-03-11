@@ -51,7 +51,7 @@ public class MyRatingsController {
             image.setY(0);
 
             pane.setPrefHeight(this.prefHeight);
-            pane.setPrefWidth(this.prefWidth);
+            pane.setPrefWidth(this.prefWidth-20);
             restaurantName.setText(comment.getRestaurant().getName());
             pane.getChildren().add(image);
             pane.getChildren().add(restaurantName);
@@ -69,6 +69,9 @@ public class MyRatingsController {
 
             }
         }
+
+        goBack.setLayoutY(380-goBack.getHeight());
+        goBack.setLayoutX(170);
         goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
     }
 }

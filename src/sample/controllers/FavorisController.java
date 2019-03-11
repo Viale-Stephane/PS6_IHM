@@ -48,7 +48,7 @@ public class FavorisController {
             model.setSizeAndPosition(new ImageView[]{star1, star2, star3, star4, star5}, profile.getFavori(i).getGrade());
             pane.setId("pane"+i);
             pane.setPrefHeight(this.prefHeight);
-            pane.setPrefWidth(this.prefWidth);
+            pane.setPrefWidth(this.prefWidth-20);
             restaurantName.setText(profile.getFavori(i).getName());
             pane.getChildren().add(image);
             pane.getChildren().add(restaurantName);
@@ -69,6 +69,9 @@ public class FavorisController {
 
             }
         }
+
+        goBack.setLayoutY(380-goBack.getHeight());
+        goBack.setLayoutX(170);
         goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
     }
 }

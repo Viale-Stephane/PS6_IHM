@@ -58,7 +58,7 @@ public class HistoryController {
             model.setSizeAndPosition(new ImageView[]{star1, star2, star3, star4, star5}, history.get(i).getHistory().getGrade());
             pane.setId("pane"+i);
             pane.setPrefHeight(this.prefHeight);
-            pane.setPrefWidth(this.prefWidth);
+            pane.setPrefWidth(this.prefWidth-20);
             restaurantName.setText(history.get(i).getHistory().getName());
             pane.getChildren().add(image);
             pane.getChildren().add(restaurantName);
@@ -76,6 +76,8 @@ public class HistoryController {
 
             }
         }
+        goBack.setLayoutY(380-goBack.getHeight());
+        goBack.setLayoutX(160);
         goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
     }
 }

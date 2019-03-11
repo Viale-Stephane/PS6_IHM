@@ -53,7 +53,7 @@ public class RestaurantListController {
 
             pane.setId("pane"+i);
             pane.setPrefHeight(this.prefHeight);
-            pane.setPrefWidth(this.prefWidth);
+            pane.setPrefWidth(this.prefWidth-14);
 
             restaurantName.setText(whiteListedRestaurant.getRestaurant(i).getName());
 
@@ -72,10 +72,10 @@ public class RestaurantListController {
             if((i+1) == paneList.getItems().size()){
                 goBack.setLayoutX(paneList.getWidth()-goBack.getWidth());
                 goBack.setLayoutY(paneList.getHeight()-goBack.getHeight());
-
             }
         }
-
+        goBack.setLayoutY(380-goBack.getHeight());
+        goBack.setLayoutX(188);
         goBack.setOnMouseClicked(event -> model.accessingTo(mainPane,profile,View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController"));
     }
 }
