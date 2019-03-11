@@ -132,7 +132,7 @@ public class RestaurantPageController {
         if (profile.isNull()){
             newComment.visibleProperty().setValue(false);
             fav.visibleProperty().setValue(false);
-            //addComment.visibleProperty().setValue(false);
+            addComment.visibleProperty().setValue(false);
         }
         else{
             fav.visibleProperty().setValue(true);
@@ -167,7 +167,7 @@ public class RestaurantPageController {
         fav.setOnMouseClicked(event -> {if (fav.isSelected()) profile.addFavori(restaurant); else profile.removeFavori(restaurant);});
 
         newComment.setOnKeyPressed(event ->{
-            if(event.getCode().toString().equals("ENTER")) {
+            if(!newComment.getText().isEmpty() && event.getCode().toString().equals("ENTER")) {
                 model.newComment(panes,newComment.getText(), profile, restaurant,this.prefWidth);
                 commentList.setPrefHeight(commentList.getHeight()+50);
                 commentList.refresh();
@@ -180,14 +180,16 @@ public class RestaurantPageController {
 
         addComment.setImage(new Image(View.PLUS_BUTTON));
         addComment.setOnMouseClicked(event ->{
-            model.newComment(panes,newComment.getText(), profile, restaurant,this.prefWidth);
-            commentList.setPrefHeight(commentList.getHeight()+50);
-            commentList.refresh();
-            afterListView.setLayoutY(afterListView.getLayoutY()+50);
-            newComment.setText(null);
-            returnToHome.setLayoutY(returnToHome.getLayoutY()+50);
+            if(!newComment.getText().isEmpty()) {
+                model.newComment(panes, newComment.getText(), profile, restaurant, this.prefWidth);
+                commentList.setPrefHeight(commentList.getHeight() + 50);
+                commentList.refresh();
+                afterListView.setLayoutY(afterListView.getLayoutY() + 50);
+                newComment.setText(null);
+                returnToHome.setLayoutY(returnToHome.getLayoutY() + 50);
+            }
         });
 
-        returnToHome.setLayoutY(commentList.getHeight()+image.getFitHeight()+phone.getFitHeight()+website.getHeight()+50);
+        returnToHome.setLayoutY(commentList.getHeight()+image.getFitHeight()+phone.getFitHeight()+website.getHeight()+100);
     }
 }

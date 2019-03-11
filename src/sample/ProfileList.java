@@ -74,14 +74,6 @@ public class ProfileList {
         Paul.getUserComments().addComment(new Comment("Un endroit ou manger quand on est etudiant", Paul, restolist.getRestaurant(3)));
 
 
-
-
-
-        /*int i=0;
-        for(Profile profile: samples){
-            profile.getUserComments().addComment(new Comment("lolilolfezf lofzal fzealfzao lfzafza",profile,restolist.getRestaurant(i)));
-            i++;
-        }*/
         this.profiles.addAll(Arrays.asList(samples));
     }
 

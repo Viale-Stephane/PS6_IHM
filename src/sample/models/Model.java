@@ -100,7 +100,7 @@ public class Model {
         for(Restaurant restaurant: restaurants){
             if(restaurant.getName().equals(researchBarText)){
                 this.accessRestaurantPage(pane, restaurant,profile);
-                return "null";
+                return null;
             }
         }
         return  "This location doesn't exist..";
