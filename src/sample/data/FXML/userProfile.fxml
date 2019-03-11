@@ -7,37 +7,31 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="sample.controllers.ProfileController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <HBox prefHeight="70.0" prefWidth="200.0">
-         <children>
-            <Pane prefHeight="70.0" prefWidth="35.0">
-               <children>
-                  <ImageView fx:id="idPicture" fitHeight="70.0" fitWidth="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="135.0">
-               <children>
-                  <Label fx:id="lastName" layoutX="5.0" layoutY="14.0" prefHeight="17.0" prefWidth="60.0" text="Nom" />
-                  <Label fx:id="firstName" layoutX="70.0" layoutY="14.0" prefHeight="17.0" prefWidth="60.0" text="Prénom" />
-                  <Label fx:id="email" layoutX="5.0" layoutY="35.0" prefHeight="17.0" prefWidth="120.0" text="Email" />
-               </children>
-            </Pane>
-         </children>
-      </HBox>
-      <Pane prefHeight="280.0" prefWidth="200.0">
-         <children>
-            <Button fx:id="history" layoutX="53.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="Historique" />
-            <Button fx:id="favorites" layoutX="53.0" layoutY="41.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="Favoris" />
-            <Button fx:id="myRatings" layoutX="53.0" layoutY="80.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="Mes Avis" />
-            <Button fx:id="addLocation" layoutX="53.0" layoutY="120.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="Ajouter un lieu" />
-         </children>
+<VBox fx:id="mainPane" styleClass="main" fx:controller="sample.controllers.ProfileController" prefHeight="400.0" prefWidth="200.0"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+   <HBox prefHeight="70.0" prefWidth="200.0">
+      <Pane prefHeight="70.0" prefWidth="35.0">
+         <ImageView fx:id="idPicture" fitHeight="70.0" fitWidth="35.0" layoutY="14.0" pickOnBounds="true"
+                    preserveRatio="true"/>
       </Pane>
-      <Pane prefHeight="30.0" prefWidth="200.0">
-         <children>
-            <Button fx:id="goBack" layoutY="4.0" mnemonicParsing="false" text="Retour" />
-            <Button fx:id="logOut" layoutX="100.0" layoutY="4.0" mnemonicParsing="false" text="Se Déconnecter" />
-         </children>
+      <Pane prefHeight="200.0" prefWidth="135.0">
+         <Label fx:id="lastName" layoutX="5.0" layoutY="14.0" prefHeight="17.0" prefWidth="60.0" text="Nom"/>
+         <Label fx:id="firstName" layoutX="70.0" layoutY="14.0" prefHeight="17.0" prefWidth="60.0" text="Prénom"/>
+         <Label fx:id="email" layoutX="5.0" layoutY="35.0" prefHeight="17.0" prefWidth="120.0" text="Email"/>
       </Pane>
-   </children>
+   </HBox>
+   <Pane prefHeight="280.0" prefWidth="200.0">
+      <Button fx:id="history" layoutX="53.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0"
+              text="Historique"/>
+      <Button fx:id="favorites" layoutX="53.0" layoutY="41.0" mnemonicParsing="false" prefHeight="20.0"
+              prefWidth="100.0" text="Favoris"/>
+      <Button fx:id="myRatings" layoutX="53.0" layoutY="80.0" mnemonicParsing="false" prefHeight="20.0"
+              prefWidth="100.0" text="Mes Avis"/>
+      <Button fx:id="addLocation" layoutX="53.0" layoutY="120.0" mnemonicParsing="false" prefHeight="20.0"
+              prefWidth="100.0" text="Ajouter un lieu"/>
+   </Pane>
+   <Pane prefHeight="30.0" prefWidth="200.0">
+      <Button fx:id="goBack" layoutY="4.0" mnemonicParsing="false" text="Retour"/>
+      <Button fx:id="logOut" layoutX="100.0" layoutY="4.0" mnemonicParsing="false" text="Se Déconnecter"/>
+   </Pane>
 </VBox>

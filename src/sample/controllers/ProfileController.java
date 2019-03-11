@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import sample.Profile;
@@ -13,6 +14,8 @@ import sample.models.ProfileModel;
 
 
 public class ProfileController {
+    @FXML
+    private Pane mainPane;
     @FXML
     private Button history;
     @FXML
@@ -49,12 +52,12 @@ public class ProfileController {
         lastName.setText(profile.getFirstName());
         firstName.setText(profile.getLastName());
         email.setText(profile.getEmail());
-        //history.setOnMouseClicked( event -> model.accessingTo(profile, View.HISTORY,View.CSS_FILE,"HistoryController"));
-        //favorites.setOnMouseClicked( event -> model.accessingTo(profile,View.FAVORITES,View.CSS_FILE,"FavorisController"));
-        //myRatings.setOnMouseClicked( event -> model.accessingTo(profile,View.MY_RATINGS,View.CSS_FILE,"MyRatingsController"));
-        //addLocation.setOnMouseClicked( event -> model.accessingTo(profile,View.NEW_LOCATION,View.CSS_FILE,"AddLocationController"));
-        //logOut.setOnMouseClicked( event -> model.accessingTo(profile,"../"+View.HOME_OFFLINE, View.CSS_FILE,"OfflineController"));
-        //goBack.setOnMouseClicked(event -> model.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE,"OnlineController"));
+        history.setOnMouseClicked( event -> model.accessingTo(mainPane, profile, View.HISTORY,View.CSS_FILE,"HistoryController"));
+        favorites.setOnMouseClicked( event -> model.accessingTo(mainPane, profile,View.FAVORITES,View.CSS_FILE,"FavorisController"));
+        myRatings.setOnMouseClicked( event -> model.accessingTo(mainPane, profile,View.MY_RATINGS,View.CSS_FILE,"MyRatingsController"));
+        addLocation.setOnMouseClicked( event -> model.accessingTo(mainPane, profile,View.NEW_LOCATION,View.CSS_FILE,"AddLocationController"));
+        logOut.setOnMouseClicked( event -> model.comeBackToHome(new Profile()));
+        goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
     }
 
 }
