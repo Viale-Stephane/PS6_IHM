@@ -17,6 +17,8 @@ public class RestaurantList {
     private Image imageMacdo=new Image("sample/data/Images/Restaurants_Picture/Macdo.jpg");
     private Image imageQuick=new Image("sample/data/Images/Restaurants_Picture/Quick.png");
     private Image imageSushiSpirit=new Image("sample/data/Images/Restaurants_Picture/SushiSpirit.png");
+    private Image imageBernard=new Image("sample/data/Images/Restaurants_Picture/Bernard.jpg");
+    private Image imageKebab=new Image("sample/data/Images/Restaurants_Picture/Kebab.jpg");
 
     private Image imageLidL=new Image("sample/data/images/Commerce_Picture/lidl.jpg");
     private Image imageBiocoop=new Image("sample/data/images/Commerce_Picture/biocoop.png");
@@ -46,10 +48,10 @@ public class RestaurantList {
     }
 
     public void sampleRestaurant(){
-        String[] schedule = {"09h-12h", "09h-12h", "09h-12h", "09h-12h", "09h-12h", "09h-12h", "09h-12h"};
+        String[] schedule = {"09h-12h", "09h-12h", "09h-12h", "09h-12h30", "09h-12h", "09h-12h", "09h-13h30"};
         Restaurant burgerKing = new Restaurant("BurgerKing", true,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes","www.bkvousecoute.fr","0422000150",schedule,3.2,10,10, new ArrayList<Tag>(Arrays.asList(Tag.Burger,Tag.FastFood)),imageBK);
-        Restaurant chezBernard = new Restaurant("Chez Bernard", true,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes","www.bkvousecoute.fr","0422000150",schedule,4.4,5,10,new ArrayList<Tag>(Arrays.asList(Tag.Francais, Tag.Fromage, Tag.Healthy)),imageLidL);
-        Restaurant kebab = new Restaurant("Kebabinou", true,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes","www.bkvousecoute.fr","0422000150",schedule,2.2,5,2, new ArrayList<Tag>(Arrays.asList(Tag.FastFood, Tag.Kebab)),imageLidL);
+        Restaurant chezBernard = new Restaurant("Chez Bernard", true,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes","www.bkvousecoute.fr","0422000150",schedule,4.4,5,10,new ArrayList<Tag>(Arrays.asList(Tag.Francais, Tag.Fromage, Tag.Healthy)),imageBernard);
+        Restaurant kebab = new Restaurant("Kebab Shop", true,"36 avenue Weisweiller, Angle Route De Grasse, 06600 Antibes","www.bkvousecoute.fr","0422000150",schedule,2.2,5,2, new ArrayList<Tag>(Arrays.asList(Tag.FastFood, Tag.Kebab)),imageKebab);
         Restaurant lidl = new Restaurant("LidL", false, "38 avenue de lidL, 06600 Antibes", "www.lidL.com", "0682392412", schedule, 4.2,3,5, new ArrayList<Tag>(Arrays.asList(  Tag.Sandwich, Tag.Salade, Tag.Healthy)),imageLidL);
 
 
@@ -91,8 +93,8 @@ public class RestaurantList {
         Restaurant resto34 = new Restaurant("Flunch",true,"85 Avenue General de Gaulle, 06560 Valbonnes", "www.siteweb.com","042286819541",schedule,4.4,0,17,new ArrayList<Tag>(Arrays.asList(  Tag.Sandwich, Tag.Salade, Tag.Healthy)),imageFlunch);
         Restaurant resto35 = new Restaurant("O’Shushi",false,"150 Boulevard Jean Sébastien Bach, 06150 Cannes", "www.siteweb.com","042242638301",schedule,2.0,15,15,new ArrayList<Tag>(Arrays.asList(Tag.Pizza,Tag.FastFood)),imageOsushi);
         Restaurant resto36 = new Restaurant("Intermarché",false,"105 Avenue Jean Sébastien Bach, 06000 Nice", "www.siteweb.com","042280086990",schedule,2.4,37,50,new ArrayList<Tag>(Arrays.asList(Tag.Burger,Tag.FastFood)),imageIntermache);
-        Restaurant resto37 = new Restaurant("LiDL",false,"114 Boulevard St Barthélemy, 06150 Cannes", "www.siteweb.com","042291998592",schedule,4.1,39,17,new ArrayList<Tag>(Arrays.asList(Tag.Burger,Tag.FastFood)),imageLidL);
-        Restaurant resto38 = new Restaurant("Quick",true,"323 Avenue General de Gaulle, 06600 Antibes", "www.siteweb.com","042285386279",schedule,3.0,77,10,new ArrayList<Tag>(Arrays.asList(  Tag.Fromage, Tag.Salade, Tag.Healthy)),imageQuick);
+        Restaurant resto37 = new Restaurant("LiDL",false,"114 Boulevard St Barthélemy, 06150 Cannes", "www.siteweb.com","042291998592",schedule,4.1,19,17,new ArrayList<Tag>(Arrays.asList(Tag.Burger,Tag.FastFood)),imageLidL);
+        Restaurant resto38 = new Restaurant("Quick",true,"323 Avenue General de Gaulle, 06600 Antibes", "www.siteweb.com","042285386279",schedule,3.0,17,10,new ArrayList<Tag>(Arrays.asList(  Tag.Fromage, Tag.Salade, Tag.Healthy)),imageQuick);
         Restaurant resto39 = new Restaurant("Intermarché",false,"98 Boulevard Albert Cacot, 06000 Nice", "www.siteweb.com","042250356005",schedule,0.1,5,16,new ArrayList<Tag>(Arrays.asList(Tag.Burger,Tag.FastFood)),imageIntermache);
         Restaurant resto40 = new Restaurant("La Boucherie",true,"171 Avenue Jean Sébastien Bach, 06560 Valbonnes", "www.siteweb.com","042260123097",schedule,1.1,20,23,new ArrayList<Tag>(Arrays.asList(  Tag.Kebab, Tag.Japonais, Tag.Healthy)),imageLaBoucherie);
         Restaurant resto41 = new Restaurant("Quick",true,"179 Avenue Albert Cacot, 06410 Biot", "www.siteweb.com","042267783161",schedule,0.1,2,14,new ArrayList<Tag>(Arrays.asList(  Tag.Sandwich, Tag.Salade, Tag.Japonais)),imageQuick);
