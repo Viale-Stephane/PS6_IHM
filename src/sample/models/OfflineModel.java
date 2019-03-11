@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class OfflineModel extends Model {
 
-    public void accessingTo(boolean right, Pane leftPane, Pane rightPane, Profile profile, String fxmlFile, String cssFile, String controller){
+    public String accessingTo(boolean right, Pane leftPane, Pane rightPane, Profile profile, String fxmlFile, String cssFile, String controller){
         try {
             FXMLLoader loader = new FXMLLoader();
 
@@ -56,5 +56,6 @@ public class OfflineModel extends Model {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "";
     }
 }
