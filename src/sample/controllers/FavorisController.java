@@ -69,6 +69,6 @@ public class FavorisController {
 
             }
         }
-        //goBack.setOnMouseClicked(event -> model.accessingTo(profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
+        goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
     }
 }

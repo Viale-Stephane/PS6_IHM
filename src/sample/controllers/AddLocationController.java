@@ -131,6 +131,6 @@ public class AddLocationController {
 
 
         save.setOnAction( event -> model.addLocation(restaurant.getText(),toggleButtonRestaurant.isSelected(),adress.getText(),website.getText(),phoneNumber.getText(), new String[]{monday.getText(),thuesday.getText(),wednesday.getText(),thursday.getText(),friday.getText(),saturday.getText(),sunday.getText()},Integer.parseInt(grade.getText()),slideBarPrice.getValue(), slideBarDistance.getValue(),researchedTags, profile,picture));
-        //cancel.setOnAction( event -> model.accessingTo(profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
+        cancel.setOnAction( event -> model.comeBackToHome(profile));
     }
 }

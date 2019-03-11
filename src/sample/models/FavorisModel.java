@@ -1,25 +1,15 @@
 package sample.models;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
-import sample.Main;
-import sample.Profile;
 import sample.Restaurant;
 import sample.View;
-import sample.controllers.OnlineController;
-import sample.controllers.ProfileController;
-import sample.controllers.RestaurantPageController;
-
-import java.io.IOException;
 
 public class FavorisModel extends Model {
-    Image FULL_STAR = new Image(View.FULL_STAR);
-    Image EMPTY_STAR = new Image(View.EMPTY_STAR);
+    private Image FULL_STAR = new Image(View.FULL_STAR);
+    private Image EMPTY_STAR = new Image(View.EMPTY_STAR);
 
     public void setSizeAndPosition(ImageView[] stars, double grade){
         int i=0;

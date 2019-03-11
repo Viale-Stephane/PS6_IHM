@@ -1,22 +1,16 @@
 package sample.models;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.*;
-import sample.controllers.OnlineController;
-import sample.controllers.ProfileController;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
 public class AddLocationModel extends Model {
-    Image FULL_STAR = new Image(View.FULL_STAR);
-    Image EMPTY_STAR = new Image(View.EMPTY_STAR);
+    private Image FULL_STAR = new Image(View.FULL_STAR);
+    private Image EMPTY_STAR = new Image(View.EMPTY_STAR);
 
     public AddLocationModel(){
     }
@@ -25,7 +19,7 @@ public class AddLocationModel extends Model {
         Restaurant newRestaurant = new Restaurant(restaurant, kindRestaurant, adress, website, phoneNumber, schedule, grade, price, distance,tags,image);
         Main.restaurantList.addRestaurant(newRestaurant);
         String answer = "Adding the restaurant to our database..";
-        //this.accessingTo(profile,View.HOME_ONLINE,View.CSS_FILE, "OnlineController");
+        comeBackToHome(profile);
         return answer;
     }
 
@@ -74,14 +68,15 @@ public class AddLocationModel extends Model {
     }
 
     public boolean addFiltre(String newFiltre, ArrayList<Tag> researchedTags, TextField textFieldFiltres){
-        if(researchedTags.contains(newFiltre)){
+        if (researchedTags.contains(newFiltre)) {
             researchedTags.remove(newFiltre);
             textFieldFiltres.setText(researchedTags.toString());
             return false;
+        } else {
+            researchedTags.add(Tag.toTag(newFiltre));
+            textFieldFiltres.appendText(newFiltre);
+            return true;
         }
-        researchedTags.add(Tag.toTag(newFiltre));
-        textFieldFiltres.appendText(newFiltre);
-        return true;
     }
     public void initSlider(Slider slider, int tickUnit, int blockIncrement){
         slider.setShowTickLabels(true);
