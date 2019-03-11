@@ -67,16 +67,19 @@ public class AddLocationModel extends Model {
         }
     }
 
-    public boolean addFiltre(String newFiltre, ArrayList<Tag> researchedTags, TextField textFieldFiltres){
-        if (researchedTags.contains(newFiltre)) {
-            researchedTags.remove(newFiltre);
-            textFieldFiltres.setText(researchedTags.toString());
-            return false;
+    public void addFiltre(String newFiltre, ArrayList<Tag> researchedTags, TextField textFieldFiltres){
+
+        if (researchedTags.contains(Tag.toTag(newFiltre))) {
+            researchedTags.remove(Tag.toTag(newFiltre));
         } else {
             researchedTags.add(Tag.toTag(newFiltre));
             textFieldFiltres.appendText(newFiltre);
-            return true;
         }
+        String text="";
+        for(Tag tag:researchedTags){
+            text+=tag.getName();
+        }
+        textFieldFiltres.setText(text);
     }
     public void initSlider(Slider slider, int tickUnit, int blockIncrement){
         slider.setShowTickLabels(true);

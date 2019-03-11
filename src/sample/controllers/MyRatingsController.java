@@ -62,7 +62,7 @@ public class MyRatingsController {
         ratingList.setItems(panes);
         for(int i=0; i<ratingList.getItems().size();i++) {
             int finalI = i;
-            ratingList.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(mainPane, profile.getUserComments().get(finalI).getRestaurant(),profile));
+            ratingList.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(mainPane, profile.getUserComments().get(ratingList.getItems().size()-finalI -1).getRestaurant(),profile));
             if((i+1) == ratingList.getItems().size()){
                 goBack.setLayoutX(ratingList.getWidth()-goBack.getWidth());
                 goBack.setLayoutY(ratingList.getHeight()-goBack.getHeight());

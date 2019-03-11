@@ -60,7 +60,7 @@ public class FavorisController {
         paneListView.setItems(panes);
         for(int i=0; i<paneListView.getItems().size();i++) {
             int finalI = i;
-            paneListView.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(mainPane, profile.getFavori(finalI),profile));
+            paneListView.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(mainPane, profile.getFavori(paneListView.getItems().size()-(finalI+1)),profile));
             if((i+1) == paneListView.getItems().size()){
                 goBack.setLayoutX(paneListView.getWidth()-goBack.getWidth());
                 goBack.setLayoutY(paneListView.getHeight()-goBack.getHeight());

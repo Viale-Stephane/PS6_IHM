@@ -70,7 +70,7 @@ public class HistoryController {
         historyList.setItems(panes);
         for(int i=0; i<historyList.getItems().size();i++) {
             int finalI = i;
-            historyList.getItems().get(i).setOnMouseClicked((event -> model.accessRestaurantPage(mainPane, history.get(finalI).getHistory(),profile)));
+            historyList.getItems().get(i).setOnMouseClicked((event -> model.accessRestaurantPage(mainPane, history.get(historyList.getItems().size()-finalI-1).getHistory(),profile)));
             if((i+1) == historyList.getItems().size()){
                 goBack.setLayoutX(historyList.getWidth()-goBack.getWidth());
                 goBack.setLayoutY(historyList.getHeight()-goBack.getHeight());
