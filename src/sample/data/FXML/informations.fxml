@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="200.0" styleClass="main" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.controllers.ApplicationInformationsController">
+<VBox prefHeight="400.0" prefWidth="250.0" styleClass="main" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.controllers.ApplicationInformationsController">
 
    <Pane prefHeight="74.0" prefWidth="200.0">
-      <Label layoutX="39.0" layoutY="22.0" style="-fx-font-weight: bold;" text="Informations" textAlignment="CENTER">
+      <Label layoutX="64.0" layoutY="22.0" style="-fx-font-weight: bold;" text="Informations" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
@@ -18,20 +18,20 @@
    </Pane>
 
    <Pane prefHeight="109.0" prefWidth="200.0">
-      <ImageView fx:id="logo" fitHeight="75.0" fitWidth="75.0" layoutX="62.5" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="75.0" layoutY="5.0" style="-fx-font-weight: bold;" text="Georesto" textAlignment="CENTER" />
+      <ImageView fx:id="logo" fitHeight="75.0" fitWidth="75.0" layoutX="87.5" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="100.0" layoutY="5.0" style="-fx-font-weight: bold;" text="Georesto" textAlignment="CENTER" />
    </Pane>
 
    <Pane prefHeight="147.0" prefWidth="200.0">
-      <Label layoutX="19.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Application développée par :" textAlignment="CENTER" />
-      <Label layoutX="61.0" layoutY="46.0" text="Stéphane Viale" />
-      <Label layoutX="65.0" layoutY="65.0" text="Brice Graulier" />
-      <Label layoutX="61.0" layoutY="82.0" text="Vincent Coppé" />
-      <Label layoutX="49.0" layoutY="116.0" text="Armand Boulanger" />
-      <Label layoutX="26.0" layoutY="99.0" text="Barthélemy Passin-Cauneau" />
+      <Label layoutX="44.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Application développée par :" textAlignment="CENTER" />
+      <Label layoutX="86.0" layoutY="46.0" text="Stéphane Viale" />
+      <Label layoutX="90.0" layoutY="65.0" text="Brice Graulier" />
+      <Label layoutX="86.0" layoutY="82.0" text="Vincent Coppé" />
+      <Label layoutX="74.0" layoutY="116.0" text="Armand Boulanger" />
+      <Label layoutX="51.0" layoutY="99.0" text="Barthélemy Passin-Cauneau" />
    </Pane>
 
    <Pane prefHeight="70.0" prefWidth="200.0">
-      <Button fx:id="goBack" layoutX="74.0" layoutY="23.0" mnemonicParsing="false" text="Retour" />
+      <Button fx:id="goBack" layoutX="99.0" layoutY="23.0" mnemonicParsing="false" text="Retour" />
    </Pane>
 </VBox>
