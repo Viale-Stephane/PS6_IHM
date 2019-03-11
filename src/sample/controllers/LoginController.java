@@ -33,7 +33,9 @@ public class LoginController {
     LoginModel model = new LoginModel();
 
     public void init() {
-        button.setOnAction(event -> model.connecting(inputUsername.getText(), inputPassword.getText()));
+        button.setOnAction(event ->{
+            model.connecting(inputUsername.getText(), inputPassword.getText());
+        });
         signInLink.setOnAction(event -> model.accessingTo(mainPane, new Profile(), View.SIGN_IN,View.CSS_FILE,"SignInController"));
         buttonRetour.setOnAction(event -> model.comeBackToHome(new Profile()));
         passwordForget.setOnAction(event -> {

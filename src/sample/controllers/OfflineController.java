@@ -63,11 +63,16 @@ public class OfflineController {
         offlineModel.clearPanes(leftPane, rightPane);
 
         researchBar.setOnKeyPressed(event ->{
-            if(event.getCode().toString().equals("ENTER"))
-                errorDisplay.setText(offlineModel.search(leftPane, researchBar.getText(),new Profile()));
+            if(event.getCode().toString().equals("ENTER")) {
+                rightPane.getChildren().clear();
+                errorDisplay.setText(offlineModel.search(leftPane, researchBar.getText(), new Profile()));
+            }
         });
 
-        search.setOnMouseClicked(event -> errorDisplay.setText(offlineModel.search(leftPane, researchBar.getText(),new Profile())));
+        search.setOnMouseClicked(event ->{
+            rightPane.getChildren().clear();
+            errorDisplay.setText(offlineModel.search(leftPane, researchBar.getText(),new Profile()));
+        });
         filterButton.setOnMouseClicked( event -> researchBar.setText(offlineModel.accessingTo(false, leftPane, rightPane, new Profile(),View.MENU_FILTER,View.CSS_FILE,"ResearchRestaurantController")));
         button2.setOnMouseClicked( event -> researchBar.setText(offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.LOG_IN,View.CSS_FILE,"LoginController")));
         button.setOnMouseClicked( event -> researchBar.setText(offlineModel.accessingTo(true, leftPane, rightPane, new Profile(),View.SIGN_IN,View.CSS_FILE,"SignInController")));

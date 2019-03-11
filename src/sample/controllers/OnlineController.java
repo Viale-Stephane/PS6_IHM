@@ -72,10 +72,15 @@ public class OnlineController {
         info.setOnMouseClicked(event -> researchBar.setText(this.model.accessingTo(true, leftPane, rightPane, profile,View.INFORMATIONS,View.CSS_FILE,"ApplicationInformationsController")));
 
         researchBar.setOnKeyPressed(event ->{
-            if(event.getCode().toString().equals("ENTER"))
+            if(event.getCode().toString().equals("ENTER")) {
+                rightPane.getChildren().clear();
                 errorDisplay.setText(model.search(leftPane, researchBar.getText(), profile));
+            }
         });
-        search.setOnMouseClicked(event -> errorDisplay.setText(model.search(leftPane,researchBar.getText(), profile)));
+        search.setOnMouseClicked(event ->{
+            rightPane.getChildren().clear();
+            errorDisplay.setText(model.search(leftPane,researchBar.getText(), profile));
+        });
 
         midPane.setOnMouseClicked(event -> model.clearPanes(leftPane, rightPane));
         leftPane.setOnMouseClicked(event -> model.clearPanes(rightPane));
