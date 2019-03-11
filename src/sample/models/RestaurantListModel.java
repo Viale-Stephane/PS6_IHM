@@ -20,7 +20,7 @@ public class RestaurantListModel extends Model {
             star.setX(15*i);
             star.setY(15);
             i++;
-            if(i<grade){
+            if(i<=grade){
                 star.setImage(FULL_STAR);
             }else{
                 star.setImage(EMPTY_STAR);
