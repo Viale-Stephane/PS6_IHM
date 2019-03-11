@@ -43,7 +43,7 @@ public class HistoryController {
             Label restaurantName = new Label();
             Label date = new Label();
             ImageView star1 = new ImageView(), star2 = new ImageView(), star3 = new ImageView(), star4 = new ImageView(), star5 = new ImageView();
-            ImageView image = new ImageView(profile.getFavori(i).getRestaurantPicture());
+            ImageView image = new ImageView(profile.getHistory(i).getHistory().getRestaurantPicture());
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             String today = formatter.format(history.get(i).getDate());
             date.setText(today);

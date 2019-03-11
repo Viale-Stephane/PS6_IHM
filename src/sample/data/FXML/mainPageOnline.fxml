@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <VBox prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.controllers.OnlineController">
    <Pane prefHeight="40.0" prefWidth="640.0">
       <ImageView fx:id="filterButton"/>

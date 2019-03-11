@@ -32,7 +32,7 @@ public class Main extends Application {
         ((OfflineController) loader.getController()).init();
 
         stage = new Stage();
-        //stage.setResizable(false);
+        stage.setResizable(false);
         stage.getIcons().add(new Image(View.ORGANISATION_LOGO));
         //create the view
         stage.setScene(new Scene(root));

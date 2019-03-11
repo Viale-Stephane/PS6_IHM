@@ -1,7 +1,7 @@
 package sample;
 
 public class View {
-    public final static String HOME_START = "data/FXML/mainPageOffline.fxml";
+    final static String HOME_START = "data/FXML/mainPageOffline.fxml";
     public final static String HOME_OFFLINE = "../data/FXML/mainPageOffline.fxml";
     public final static String HOME_ONLINE = "../data/FXML/mainPageOnline.fxml";
     public final static String SIGN_IN = "../data/FXML/SignIn.fxml";
