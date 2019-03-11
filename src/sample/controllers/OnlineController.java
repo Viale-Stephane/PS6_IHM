@@ -73,11 +73,9 @@ public class OnlineController {
 
         researchBar.setOnKeyPressed(event ->{
             if(event.getCode().toString().equals("ENTER"))
-                errorDisplay.setText(model.search(leftPane, researchBar.getText(), new Profile()));
+                errorDisplay.setText(model.search(leftPane, researchBar.getText(), profile));
         });
         search.setOnMouseClicked(event -> errorDisplay.setText(model.search(leftPane,researchBar.getText(), profile)));
-
-        search.setOnMouseClicked(event -> System.out.println(model.search(leftPane, researchBar.getText(),profile)));
 
         midPane.setOnMouseClicked(event -> model.clearPanes(leftPane, rightPane));
         leftPane.setOnMouseClicked(event -> model.clearPanes(rightPane));

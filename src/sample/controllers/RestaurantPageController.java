@@ -173,6 +173,7 @@ public class RestaurantPageController {
                 commentList.refresh();
                 afterListView.setLayoutY(afterListView.getLayoutY()+50);
                 newComment.setText(null);
+                returnToHome.setLayoutY(returnToHome.getLayoutY()+50);
             }
         });
         afterListView.setLayoutY(commentList.getHeight()+image.getFitHeight()+phone.getFitHeight()+website.getHeight()+50);
@@ -184,6 +185,9 @@ public class RestaurantPageController {
             commentList.refresh();
             afterListView.setLayoutY(afterListView.getLayoutY()+50);
             newComment.setText(null);
+            returnToHome.setLayoutY(returnToHome.getLayoutY()+50);
         });
+
+        returnToHome.setLayoutY(commentList.getHeight()+image.getFitHeight()+phone.getFitHeight()+website.getHeight()+50);
     }
 }
