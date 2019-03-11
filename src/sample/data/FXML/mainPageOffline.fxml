@@ -23,7 +23,7 @@
       <Text fx:id="errorDisplay" layoutX="40" layoutY="15"></Text>
       <Pane fx:id="leftPane" prefHeight="400.0" prefWidth="250.0"/>
       <Pane fx:id="midPane" prefHeight="400.0" prefWidth="190.0" layoutX="250.0"/>
-      <Pane fx:id="rightPane" prefHeight="400.0" prefWidth="200.0" layoutX="450.0"/>
+      <Pane fx:id="rightPane" prefHeight="400.0" prefWidth="250.0" layoutX="400.0"/>
    </Pane>
 
    <Pane prefHeight="33.0" prefWidth="608.0">

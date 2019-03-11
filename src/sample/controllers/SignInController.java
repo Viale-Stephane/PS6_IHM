@@ -46,7 +46,7 @@ public class SignInController {
     public void init(){
         logInLink.setOnAction(event -> model.accessingTo(mainPane, new Profile(), View.LOG_IN,View.CSS_FILE,"LoginController"));
         buttonRetour.setOnAction(event -> model.comeBackToHome(new Profile()));
-        result.setWrappingWidth(160);
+        result.setWrappingWidth(185);
         button.setOnAction(event -> result.setText(model.creatingProfile(inputUsername.getText(),inputEmail.getText(),inputPassword.getText(),inputPasswordVerification.getText(),firstName.getText(),lastName.getText())));
 
     }

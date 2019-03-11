@@ -25,7 +25,7 @@ public class FavorisController {
     private ObservableList<Restaurant> items = FXCollections.observableArrayList();
 
     private int prefHeight = 100;
-    private int prefWidth = 200;
+    private int prefWidth = 250;
 
     FavorisModel model = new FavorisModel();
 
@@ -71,7 +71,8 @@ public class FavorisController {
         }
 
         goBack.setLayoutY(380-goBack.getHeight());
-        goBack.setLayoutX(170);
-        goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
+        goBack.setLayoutX(205);
+        goBack.setOnMouseClicked(event -> model.accessingTo(mainPane,profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
+        //goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
     }
 }

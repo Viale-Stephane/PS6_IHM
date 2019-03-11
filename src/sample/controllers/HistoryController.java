@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import sample.History;
 import sample.Profile;
+import sample.View;
 import sample.models.HistoryModel;
 
 import java.text.DateFormat;
@@ -33,7 +34,7 @@ public class HistoryController {
     private ObservableList<History> items = FXCollections.observableArrayList();
 
     private int prefHeight = 100;
-    private int prefWidth = 200;
+    private int prefWidth = 250;
 
     public void init(Profile profile) {
         ArrayList<History> history = profile.getHistory();
@@ -77,7 +78,7 @@ public class HistoryController {
             }
         }
         goBack.setLayoutY(380-goBack.getHeight());
-        goBack.setLayoutX(160);
-        goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
+        goBack.setLayoutX(205);
+        goBack.setOnMouseClicked(event -> model.accessingTo(mainPane,profile, View.PROFILE,View.CSS_FILE,"ProfileController"));
     }
 }
