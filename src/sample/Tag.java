@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 public enum Tag {
     FastFood("#FastFood "),
-    Pizza("#Pizza" ),
+    Pizza("#Pizza " ),
     Chinois("#Chinois "),
     Sushi("#Sushi "),
     Japonais("#Japonais "),
