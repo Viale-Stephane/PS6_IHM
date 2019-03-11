@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 <Pane fx:id="mainPane" styleClass="main" prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.controllers.SignInController">
 
-   <Text layoutX="61.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enregistrement"
+   <Text fx:id="title" layoutX="61.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enregistrement"
          wrappingWidth="128.0000001192093">
       <font>
          <Font name="Calibri" size="20.0"/>
