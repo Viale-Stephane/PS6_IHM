@@ -51,7 +51,7 @@ public class MyRatingsController {
             image.setY(0);
 
             pane.setPrefHeight(this.prefHeight);
-            pane.setPrefWidth(this.prefWidth-20);
+            pane.setPrefWidth(this.prefWidth-44);
             restaurantName.setText(comment.getRestaurant().getName());
             pane.getChildren().add(image);
             pane.getChildren().add(restaurantName);

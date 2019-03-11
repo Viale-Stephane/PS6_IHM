@@ -29,6 +29,13 @@
     -fx-text-fill: #c70039;
 }
 
+#restaurantName{
+    -fx-font: 20px "Arial Black", Gadget, sans-serif, bold;
+    -fx-fill: #c70039;
+    -fx-text-fill: #c70039;
+    -fx-text-alignment: center;
+}
+
 .button,.toggle-button{
       -fx-background-color: #c70039;
       -fx-border: none;

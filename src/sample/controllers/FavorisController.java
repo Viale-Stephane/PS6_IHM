@@ -31,7 +31,7 @@ public class FavorisController {
 
     public void init(Profile profile) {
         items.addAll(profile.getFavoris());
-        for(int i=0 ;i<profile.getFavoris().size();i++){
+        for(int i=profile.getFavoris().size() -1 ;i>=0;i--){
             Pane pane = new Pane();
             Label restaurantName = new Label();
             Label monday = new Label(), thuesday = new Label(), wednesday = new Label(), thursday = new Label(), friday = new Label(), saturday = new Label(), sunday = new Label();
@@ -48,7 +48,7 @@ public class FavorisController {
             model.setSizeAndPosition(new ImageView[]{star1, star2, star3, star4, star5}, profile.getFavori(i).getGrade());
             pane.setId("pane"+i);
             pane.setPrefHeight(this.prefHeight);
-            pane.setPrefWidth(this.prefWidth-20);
+            pane.setPrefWidth(this.prefWidth-44);
             restaurantName.setText(profile.getFavori(i).getName());
             pane.getChildren().add(image);
             pane.getChildren().add(restaurantName);
@@ -58,11 +58,9 @@ public class FavorisController {
 
         }
         paneListView.setItems(panes);
-        System.out.println(paneListView.getWidth());
         for(int i=0; i<paneListView.getItems().size();i++) {
             int finalI = i;
             paneListView.getItems().get(i).setOnMouseClicked(event -> model.accessRestaurantPage(mainPane, profile.getFavori(finalI),profile));
-            System.out.println(paneListView.getHeight());
             if((i+1) == paneListView.getItems().size()){
                 goBack.setLayoutX(paneListView.getWidth()-goBack.getWidth());
                 goBack.setLayoutY(paneListView.getHeight()-goBack.getHeight());
@@ -73,6 +71,5 @@ public class FavorisController {
         goBack.setLayoutY(380-goBack.getHeight());
         goBack.setLayoutX(205);
         goBack.setOnMouseClicked(event -> model.accessingTo(mainPane,profile,View.PROFILE,View.CSS_FILE,"ProfileController"));
-        //goBack.setOnMouseClicked(event -> model.comeBackToHome(profile));
     }
 }

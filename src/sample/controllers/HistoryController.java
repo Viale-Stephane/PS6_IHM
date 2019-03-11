@@ -39,7 +39,7 @@ public class HistoryController {
     public void init(Profile profile) {
         ArrayList<History> history = profile.getHistory();
         items.addAll(history);
-        for (int i = 0; i < history.size(); i++) {
+        for (int i = history.size() -1; i >= 0; i--) {
             Pane pane = new Pane();
             Label restaurantName = new Label();
             Label date = new Label();
@@ -59,7 +59,7 @@ public class HistoryController {
             model.setSizeAndPosition(new ImageView[]{star1, star2, star3, star4, star5}, history.get(i).getHistory().getGrade());
             pane.setId("pane"+i);
             pane.setPrefHeight(this.prefHeight);
-            pane.setPrefWidth(this.prefWidth-20);
+            pane.setPrefWidth(this.prefWidth-44);
             restaurantName.setText(history.get(i).getHistory().getName());
             pane.getChildren().add(image);
             pane.getChildren().add(restaurantName);

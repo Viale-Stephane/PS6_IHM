@@ -14,6 +14,8 @@ import javafx.scene.text.Text;
 import sample.*;
 import sample.models.RestaurantPageModel;
 
+import java.util.Date;
+
 public class RestaurantPageController {
     @FXML
     private ImageView image;
@@ -39,7 +41,7 @@ public class RestaurantPageController {
     @FXML
     private Label grade;
     @FXML
-    private Label restaurantName;
+    private Text restaurantName;
     @FXML
     private Text adress;
     @FXML
@@ -128,6 +130,7 @@ public class RestaurantPageController {
     }
 
     public void init(Restaurant restaurant, Profile profile){
+        profile.addHistory(restaurant,new Date());
         this.initCommentList(restaurant);
         if (profile.isNull()){
             newComment.visibleProperty().setValue(false);
@@ -142,7 +145,7 @@ public class RestaurantPageController {
         if (profile.isFavori(restaurant)) fav.setSelected(true);
 
         image.setFitHeight(170.0);
-        image.setFitWidth(233.0);
+        image.setFitWidth(230.0);
         image.setPreserveRatio(false);
         image.setImage(restaurant.getRestaurantPicture());
         phone.setY(phone.getY()-25);
@@ -190,6 +193,6 @@ public class RestaurantPageController {
             }
         });
 
-        returnToHome.setLayoutY(commentList.getHeight()+image.getFitHeight()+phone.getFitHeight()+website.getHeight()+100);
+        returnToHome.setLayoutY(commentList.getHeight()+image.getFitHeight()+phone.getFitHeight()+website.getHeight());
     }
 }

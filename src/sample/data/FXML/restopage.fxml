@@ -25,11 +25,11 @@
             </Label>
         </Pane>
 
-        <Label fx:id="restaurantName" layoutY="170" layoutX="5.0" text="Burger King">
+        <Text fx:id="restaurantName" layoutY="188" wrappingWidth="236" text="Burger King">
              <font>
                 <Font name="Gadugi" size="19.0" />
              </font>
-        </Label>
+        </Text>
 
         <Pane layoutX="9.0" layoutY="266.0" prefHeight="25.0" prefWidth="219.0">
             <ImageView fx:id="websiteImage" fitHeight="15.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true"/>
