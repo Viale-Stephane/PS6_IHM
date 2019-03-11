@@ -68,8 +68,8 @@ public class RestaurantPageController {
     @FXML
     private ListView<Pane> commentList;
 
-    @FXML
-    private Pane afterListView;
+    //@FXML
+    //private Pane afterListView;
 
     @FXML
     private TextField newComment;
@@ -171,12 +171,12 @@ public class RestaurantPageController {
                 model.newComment(panes,newComment.getText(), profile, restaurant,this.prefWidth);
                 commentList.setPrefHeight(commentList.getHeight()+50);
                 commentList.refresh();
-                afterListView.setLayoutY(afterListView.getLayoutY()+50);
-                newComment.setText(null);
+                //afterListView.setLayoutY(afterListView.getLayoutY()+50);
+                newComment.setText("");
                 returnToHome.setLayoutY(returnToHome.getLayoutY()+50);
             }
         });
-        afterListView.setLayoutY(commentList.getHeight()+image.getFitHeight()+phone.getFitHeight()+website.getHeight()+50);
+        //afterListView.setLayoutY(commentList.getHeight()+image.getFitHeight()+phone.getFitHeight()+website.getHeight()+50);
 
         addComment.setImage(new Image(View.PLUS_BUTTON));
         addComment.setOnMouseClicked(event ->{
@@ -184,8 +184,8 @@ public class RestaurantPageController {
                 model.newComment(panes, newComment.getText(), profile, restaurant, this.prefWidth);
                 commentList.setPrefHeight(commentList.getHeight() + 50);
                 commentList.refresh();
-                afterListView.setLayoutY(afterListView.getLayoutY() + 50);
-                newComment.setText(null);
+                //afterListView.setLayoutY(afterListView.getLayoutY() + 50);
+                newComment.setText("");
                 returnToHome.setLayoutY(returnToHome.getLayoutY() + 50);
             }
         });

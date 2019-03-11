@@ -101,19 +101,18 @@
             </Label>
         </Pane>
 
+
+
+
         <Pane layoutY="370.0">
             <HBox>
                 <TextField fx:id="newComment" prefWidth="193.0" prefHeight="40"
                            promptText="Insérez votre commentaire ici.."/>
                 <ImageView fx:id="addComment" fitHeight="40" fitWidth="40"/>
             </HBox>
-            <ListView layoutY="50" fx:id="commentList"/>
-        </Pane>
-
-        <Pane fx:id="afterListView" layoutX="10.0" prefHeight="25.0" prefWidth="219.0">
+            <ListView layoutY="40" fx:id="commentList"/>
             <ImageView fx:id="returnToHome" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true"/>
         </Pane>
-
       <RadioButton fx:id="fav" alignment="BOTTOM_LEFT">favoris</RadioButton>
     </Pane>
 </ScrollPane>
