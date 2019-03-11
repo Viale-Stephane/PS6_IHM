@@ -23,6 +23,12 @@
     -fx-background-repeat: no-repeat;
 }
 
+#title, #lastName, #firstName, #email{
+    -fx-font: 12px "Arial Black", Gadget, sans-serif, bold;
+    -fx-fill: #c70039;
+    -fx-text-fill: #c70039;
+}
+
 .button,.toggle-button{
       -fx-background-color: #c70039;
       -fx-border: none;
