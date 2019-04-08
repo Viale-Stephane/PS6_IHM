@@ -12,3 +12,6 @@
 *.properties
 *.lst
 out/*
+app/src/*[tT]est*/*
+.idea
+.gradle
