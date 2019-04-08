@@ -11,5 +11,4 @@
 *.jar
 *.properties
 *.lst
-*.xml
 out/*
