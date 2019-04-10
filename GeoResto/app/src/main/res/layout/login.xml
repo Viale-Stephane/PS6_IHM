@@ -6,25 +6,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="189dp"
-        android:contentDescription="Loginsss"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Login"
-        android:visibility="visible"
-        tools:text="@tools:sample/cities" />
-
-
-
-
-    <ImageView
-        android:id="@+id/imageView"
+    <TextView
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[1]" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20sp"
+        android:text="@string/connect"
+        android:textColor="#428bca"
+        android:textSize="60sp" />
+    <TextView
+        android:id="@+id/stringUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="120sp"
+        android:textSize="40sp"
+        android:text="@string/username" />
 
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="170sp"
+        android:ems="12"
+        android:inputType="textPersonName"
+        android:hint="jean@hotmail.fr" />
+
+    <TextView
+        android:id="@+id/stringPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="230sp"
+        android:textSize="40sp"
+        android:text="@string/password" />
+
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="62sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="290sp"
+        android:ems="12"
+        android:hint="*********"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="212dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="360sp"
+        android:text="@string/connect"
+        android:background="#428bca"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="212dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="430sp"
+        android:background="#428bca"
+        android:text="@string/register"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="500sp"
+        android:text="@string/passwordForgotten" />
 </android.support.v7.widget.ContentFrameLayout>
