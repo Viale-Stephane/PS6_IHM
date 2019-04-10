@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">GeoResto</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_login">Login</string>
+
     <string name="connect">Se connecter</string>
     <string name="menu">menu</string>
 </resources>
