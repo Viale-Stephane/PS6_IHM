@@ -13,29 +13,30 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_maps_online);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Button connect = (Button) findViewById(R.id.connect);
+        /*Button connect = (Button) findViewById(R.id.connect);
 
         connect.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View connect) {
-                startActivity(new Intent(MapsActivity.this, LoginActivity.class));
+
+                startActivity(new Intent(MapsActivityOnline.this, LoginActivity.class));
 
             }
 
-        });
+        });*/
     }
 
 
