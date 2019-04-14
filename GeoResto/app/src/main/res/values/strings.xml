@@ -2,6 +2,7 @@
     <string name="app_name">GeoResto</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">register</string>
     <string name="username">Adresse email</string>
     <string name="password">Mot de passe</string>
     <string name="connect">Se connecter</string>
@@ -9,4 +10,10 @@
     <string name="passwordForgotten">Mot de passe oublié ?</string>
     <string name="menu">menu</string>
     <string name="disconnect">Se déconnecter</string>
+    <string name="title_activity_mapsOnline">MapsOnline</string>
+    <string name="history">Historique</string>
+    <string name="favourites">Favoris</string>
+    <string name="comments">Mes avis</string>
+    <string name="newLocation">Ajouter un lieu</string>
+    <string name="logOut">Se déconnecter</string>
 </resources>

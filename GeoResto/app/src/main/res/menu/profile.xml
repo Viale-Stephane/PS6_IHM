@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:title="Username"
+            android:icon="@drawable/default_profile">
+        </item>
+    </group>
+    <group>
+        <item
+            android:title="@string/history">
+        </item>
+        <item
+            android:title="@string/favourites">
+        </item>
+        <item
+            android:title="@string/comments">
+        </item>
+        <item
+            android:title="@string/newLocation">
+        </item>
+    </group>
+    <group>
+        <item
+            android:title="@string/logOut">
+        </item>
+    </group>
+</menu>
