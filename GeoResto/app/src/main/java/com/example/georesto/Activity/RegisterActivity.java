@@ -1,7 +1,9 @@
-package com.example.georesto;
+package com.example.georesto.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.example.georesto.R;
 
 public class RegisterActivity extends Activity {
     @Override

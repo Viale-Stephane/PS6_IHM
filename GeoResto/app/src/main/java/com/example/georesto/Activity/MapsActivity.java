@@ -1,4 +1,4 @@
-package com.example.georesto;
+package com.example.georesto.Activity;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.georesto.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

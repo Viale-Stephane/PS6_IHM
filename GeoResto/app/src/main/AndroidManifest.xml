@@ -32,7 +32,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".Activity.MapsActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +42,7 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MapsActivityOnline"
+            android:name=".Activity.MapsActivityOnline"
             android:label="@string/title_activity_mapsOnline">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -58,7 +58,7 @@
         </activity>
 
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activity.RegisterActivity"
             android:label="@string/title_activity_register">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

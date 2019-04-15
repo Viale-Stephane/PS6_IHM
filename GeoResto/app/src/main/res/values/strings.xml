@@ -16,4 +16,6 @@
     <string name="comments">Mes avis</string>
     <string name="newLocation">Ajouter un lieu</string>
     <string name="logOut">Se déconnecter</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

@@ -1,28 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <group
+        >
         <item
+            android:iconTint="@color/design_default_color_primary"
+            android:icon="@drawable/default_profile"
             android:title="Username"
-            android:icon="@drawable/default_profile">
+            android:id="@+id/username"
+            app:showAsAction="always"
+            >
+
+        </item>
+        <item
+            android:id="@+id/mail"
+            android:title="email">
         </item>
     </group>
     <group>
         <item
-            android:title="@string/history">
+            android:title="@string/history"
+            android:id="@+id/history">
         </item>
         <item
-            android:title="@string/favourites">
+            android:title="@string/favourites"
+            android:id="@+id/favourites">
         </item>
         <item
-            android:title="@string/comments">
+            android:title="@string/comments"
+            android:id="@+id/comments">
         </item>
         <item
-            android:title="@string/newLocation">
+            android:title="@string/newLocation"
+            android:id="@+id/newLocation">
         </item>
     </group>
     <group>
         <item
-            android:title="@string/logOut">
+            android:title="@string/logOut"
+            android:id="@+id/logOut">
         </item>
     </group>
 </menu>
