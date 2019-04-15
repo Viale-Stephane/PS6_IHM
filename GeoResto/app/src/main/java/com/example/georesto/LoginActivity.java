@@ -40,9 +40,9 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
         });
     }
 
-    private Profile connect(String username, String password){
+    private Profile connect(String login, String password){
         for(Profile profile : ProfileList.getProfiles()){
-            if(profile.getUsername().equals(username) && profile.getPassword().equals(password)){
+            if((profile.getUsername().equals(login) || profile.getEmail().equals(login)) && profile.getPassword().equals(password)){
                 return profile;
             }
         }
