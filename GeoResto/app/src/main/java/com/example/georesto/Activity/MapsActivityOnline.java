@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 
 import com.example.georesto.Model.MapsActivityOnlineModel;
@@ -34,24 +34,26 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps_online);
+        setContentView(R.layout.main);
+
+        findViewById(R.id.connect).setVisibility(View.GONE);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerMapsOnline);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerMaps);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        profileView = (NavigationView) findViewById(R.id.profile);
+        profileView = (NavigationView) findViewById(R.id.profileNav);
         profileView.setNavigationItemSelectedListener(this);
         profileView.getMenu().clear();
         profileView.inflateMenu(R.menu.profile);
 
-        model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail));
+        model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail), findViewById(R.id.usernameProfile));
 
         searchView = (NavigationView) findViewById(R.id.research);
         searchView.setNavigationItemSelectedListener(this);
@@ -64,7 +66,7 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         // Inflate the menu; this adds items to the action bar if it is present.
         profileView.getMenu().clear();
         profileView.inflateMenu(R.menu.profile);
-        model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail));
+        model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail),findViewById(R.id.usernameProfile));
         return true;
     }
 
@@ -86,7 +88,7 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
                 break;
             default:
                 profileView.inflateMenu(R.menu.profile);
-                model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail));
+                model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail), findViewById(R.id.usernameProfile));
                 break;
         }
 
