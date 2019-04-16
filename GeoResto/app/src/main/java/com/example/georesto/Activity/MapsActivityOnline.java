@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 
 import com.example.georesto.Model.MapsActivityOnlineModel;
@@ -52,13 +53,23 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         profileView.setNavigationItemSelectedListener(this);
         profileView.getMenu().clear();
         profileView.inflateMenu(R.menu.profile);
-
         model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail), findViewById(R.id.usernameProfile));
 
         searchView = (NavigationView) findViewById(R.id.research);
         searchView.setNavigationItemSelectedListener(this);
         searchView.getMenu().clear();
         searchView.inflateMenu(R.menu.research);
+
+        ImageButton profileButton = findViewById(R.id.accessProfile);
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!drawer.isDrawerOpen(profileView))
+                    drawer.openDrawer(profileView);
+                else
+                    drawer.closeDrawer(profileView);
+            }
+        });
     }
 
     @Override

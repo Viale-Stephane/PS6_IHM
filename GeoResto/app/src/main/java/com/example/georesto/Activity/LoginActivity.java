@@ -13,7 +13,6 @@ import com.example.georesto.Profile;
 import com.example.georesto.ProfileList;
 import com.example.georesto.R;
 
-
 public class LoginActivity extends Activity { // sans oublier l'implémentation de l'interface OnClickListener
     private ProfileList profileList = new ProfileList();
     private LoginModel model = new LoginModel();
