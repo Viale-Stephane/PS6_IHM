@@ -2,11 +2,16 @@ package com.example.georesto.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.georesto.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -16,7 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap mMap;
 
@@ -38,6 +43,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
+
         Button connect = (Button) findViewById(R.id.connect);
 
         connect.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +53,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(new Intent(MapsActivity.this, LoginActivity.class));
             }
         });
+
+        NavigationView profileView = (NavigationView) findViewById(R.id.profileNav);
+        profileView.setNavigationItemSelectedListener(this);
+
+        ImageButton logo = (ImageButton) findViewById(R.id.logo);
+
+        logo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View info) {
+                profileView.getMenu().clear();
+                profileView.inflateMenu(R.menu.info);
+                drawer.openDrawer(profileView);
+            }
+        });
+
     }
 
 
@@ -69,4 +90,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        return false;
+    }
 }

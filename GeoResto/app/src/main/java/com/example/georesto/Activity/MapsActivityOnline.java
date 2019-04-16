@@ -9,7 +9,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.georesto.Model.MapsActivityOnlineModel;
 import com.example.georesto.Model.ProfileList;
@@ -62,10 +64,26 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!drawer.isDrawerOpen(profileView))
+                TextView headerUsername = findViewById(R.id.usernameProfile);
+                TextView headerMail = findViewById(R.id.mailProfile);
+                if (!drawer.isDrawerOpen(profileView)) {
                     drawer.openDrawer(profileView);
-                else
+                    headerUsername.setText("OUGABOUGA");
+                    headerMail.setText("FOAKOAZKFOZA");
+                } else {
                     drawer.closeDrawer(profileView);
+                    headerUsername.setText("GéoResto");
+                }
+            }
+        });
+
+        ImageButton logo = (ImageButton) findViewById(R.id.logo);
+
+        logo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View info) {
+                profileView.getMenu().clear();
+                profileView.inflateMenu(R.menu.info);
+                drawer.openDrawer(profileView);
             }
         });
     }
