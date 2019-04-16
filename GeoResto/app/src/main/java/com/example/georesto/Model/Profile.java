@@ -1,4 +1,4 @@
-package com.example.georesto;
+package com.example.georesto.Model;
 
 import android.media.Image;
 
@@ -7,7 +7,7 @@ public class Profile {
     private String firstName, lastName, email;
     private Image profileImage;
 
-    public Profile(String username, String password, String firstName, String lastName, String email, Image profileImage){
+    public Profile(String username, String password, String firstName, String lastName, String email, Image profileImage) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;

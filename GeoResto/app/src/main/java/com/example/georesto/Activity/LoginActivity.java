@@ -5,17 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.georesto.Model.LoginModel;
-import com.example.georesto.Profile;
-import com.example.georesto.ProfileList;
+import com.example.georesto.Model.ProfileList;
 import com.example.georesto.R;
 
 public class LoginActivity extends Activity { // sans oublier l'implémentation de l'interface OnClickListener
     private ProfileList profileList = new ProfileList();
     private LoginModel model = new LoginModel();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +28,7 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
 
         connect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View connect) {
-                if(model.connect(username.getText().toString(),password.getText().toString()) != null) {
+                if (model.connect(username.getText().toString(), password.getText().toString()) != null) {
                     startActivity(new Intent(LoginActivity.this, MapsActivityOnline.class));
                 } else {
                     wrongIdentifiers.setText("Identifiants incorrects");

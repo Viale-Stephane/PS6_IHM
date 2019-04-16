@@ -1,9 +1,9 @@
 package com.example.georesto.Activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
@@ -11,9 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
-
 import com.example.georesto.Model.MapsActivityOnlineModel;
-import com.example.georesto.ProfileList;
+import com.example.georesto.Model.ProfileList;
 import com.example.georesto.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,7 +30,6 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
     private int menuToChooseLeftSide = R.menu.research;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +43,10 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerMaps);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
         profileView = (NavigationView) findViewById(R.id.profileNav);
         profileView.setNavigationItemSelectedListener(this);
         profileView.getMenu().clear();
@@ -64,7 +62,7 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!drawer.isDrawerOpen(profileView))
+                if (!drawer.isDrawerOpen(profileView))
                     drawer.openDrawer(profileView);
                 else
                     drawer.closeDrawer(profileView);
@@ -77,14 +75,14 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         // Inflate the menu; this adds items to the action bar if it is present.
         profileView.getMenu().clear();
         profileView.inflateMenu(R.menu.profile);
-        model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail),findViewById(R.id.usernameProfile));
+        model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail), findViewById(R.id.usernameProfile));
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         profileView.getMenu().clear();
-        switch(menuToChooseRightSide){
+        switch (menuToChooseRightSide) {
             case R.menu.history:
                 profileView.inflateMenu(R.menu.history);
                 break;
@@ -126,8 +124,6 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         openOptionsMenu();
         return true;
     }
-
-
 
 
     /**

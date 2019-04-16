@@ -2,10 +2,9 @@
 
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/drawerMaps"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
 
     <android.support.v7.widget.ContentFrameLayout
@@ -26,9 +25,10 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/logo"
-            android:scaleType="fitXY"
             android:layout_marginBottom="25dp"
+            android:background="@drawable/logo"
+            android:contentDescription="@string/LogoDescription"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/logo" />
 
 
@@ -40,13 +40,13 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/research"/>
+        app:menu="@menu/research" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/profileNav"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:fitsSystemWindows="true" />
 
 </android.support.v4.widget.DrawerLayout>

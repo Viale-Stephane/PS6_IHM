@@ -1,13 +1,12 @@
 package com.example.georesto.Activity;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toolbar;
 
 import com.example.georesto.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -68,7 +67,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
-
 
 
 }
