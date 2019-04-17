@@ -37,7 +37,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/research" />
+        app:headerLayout="@layout/research" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/profileNav"

@@ -23,4 +23,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="LogoDescription">GéoResto Logo</string>
     <string name="app_logo">Logo de l\'application</string>
+    <string name="search">Rechercher</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="commerce">Commerce</string>
 </resources>

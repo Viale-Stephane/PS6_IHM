@@ -7,11 +7,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.example.georesto.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,7 +24,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,NavigationView.OnNavigationItemSelectedListener {
+
+    private DrawerLayout drawerMap;
+    private NavigationView searchView;
+
+    private Spinner spinner;
+    private static final String[] paths = {"item 1", "item 2", "item 3"};
 
     private GoogleMap mMap;
 
@@ -38,10 +50,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         findViewById(R.id.accessProfile).setVisibility(View.GONE);
         findViewById(R.id.usernameProfile).setVisibility(View.GONE);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerMaps);
+        drawerMap = (DrawerLayout) findViewById(R.id.drawerMaps);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, drawerMap, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerMap.addDrawerListener(toggle);
         toggle.syncState();
 
 
@@ -53,6 +65,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        searchView = findViewById(R.id.research);
+
         NavigationView profileView = (NavigationView) findViewById(R.id.profileNav);
         profileView.setNavigationItemSelectedListener(this);
 
@@ -62,9 +76,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View info) {
                 profileView.getMenu().clear();
                 profileView.inflateMenu(R.menu.info);
-                drawer.openDrawer(profileView);
+                drawerMap.openDrawer(profileView);
             }
         });
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, paths);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        toolbar.setNavigationOnClickListener(v -> {
+            if (!drawerMap.isDrawerOpen(searchView)) {
+                drawerMap.openDrawer(searchView);
+
+                spinner = findViewById(R.id.tagSpinner);
+                spinner.setAdapter(adapter);
+            } else {
+                drawerMap.closeDrawer(searchView);
+            }
+        });
+
 
     }
 

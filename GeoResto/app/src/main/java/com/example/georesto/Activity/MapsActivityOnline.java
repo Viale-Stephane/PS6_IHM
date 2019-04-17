@@ -7,10 +7,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.georesto.Model.ProfileList;
@@ -24,15 +28,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+    private static final String[] paths = {"item 1", "item 2", "item 3"};
+
     private DrawerLayout drawerMap;
     private NavigationView profileView;
     private NavigationView searchView;
 
+    private SearchView search;
+    private Spinner tagSpinner;
+
     private int rightSideMenu = R.menu.profile;
-    private int leftSideMenu = R.menu.research;
-
+    private int leftSideMenu = R.layout.research;
     private GoogleMap mMap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,20 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
             profileView.getMenu().clear();
             profileView.inflateMenu(R.menu.info);
             drawerMap.openDrawer(profileView);
+        });
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, paths);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        toolbar.setNavigationOnClickListener(v -> {
+            if (!drawerMap.isDrawerOpen(searchView)) {
+                drawerMap.openDrawer(searchView);
+
+                tagSpinner = findViewById(R.id.tagSpinner);
+                tagSpinner.setAdapter(adapter);
+            } else {
+                drawerMap.closeDrawer(searchView);
+            }
         });
     }
 
@@ -164,13 +185,13 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         profileView = findViewById(R.id.profileNav);
         profileView.setNavigationItemSelectedListener(this);
         profileView.getMenu().clear();
-        profileView.inflateMenu(R.menu.profile);
+        profileView.inflateMenu(rightSideMenu);
 
         // LeftView
         searchView = findViewById(R.id.research);
         searchView.setNavigationItemSelectedListener(this);
-        searchView.getMenu().clear();
-        searchView.inflateMenu(R.menu.research);
+        //searchView.getMenu().clear();
+        //searchView.inflateMenu(leftSideMenu);
     }
 
 
