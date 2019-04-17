@@ -30,12 +30,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-
-        findViewById(R.id.accessProfile).setVisibility(View.GONE);
-        findViewById(R.id.usernameProfile).setVisibility(View.GONE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        findViewById(R.id.accessProfile).setVisibility(View.GONE);
+        findViewById(R.id.usernameProfile).setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerMaps);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,9 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         Button connect = (Button) findViewById(R.id.connect);
-
         connect.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View connect) {
                 startActivity(new Intent(MapsActivity.this, LoginActivity.class));
             }

@@ -2,6 +2,7 @@ package com.example.georesto.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -9,11 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.georesto.Model.MapsActivityOnlineModel;
 import com.example.georesto.Model.ProfileList;
 import com.example.georesto.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,11 +24,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
-    private MapsActivityOnlineModel model = new MapsActivityOnlineModel();
+    private DrawerLayout drawerMap;
+    private NavigationView profileView;
+    private NavigationView searchView;
+
+    private int rightSideMenu = R.menu.profile;
+    private int leftSideMenu = R.menu.research;
+
     private GoogleMap mMap;
-    private NavigationView profileView, searchView;
-    private int menuToChooseRightSide = R.menu.profile;
-    private int menuToChooseLeftSide = R.menu.research;
 
 
     @Override
@@ -39,53 +41,45 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
 
         findViewById(R.id.connect).setVisibility(View.GONE);
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        configureGMaps();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerMaps);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        configureDrawerLayout();
 
-        profileView = (NavigationView) findViewById(R.id.profileNav);
-        profileView.setNavigationItemSelectedListener(this);
-        profileView.getMenu().clear();
-        profileView.inflateMenu(R.menu.profile);
-        model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail), findViewById(R.id.usernameProfile));
+        configureSideViews();
 
-        searchView = (NavigationView) findViewById(R.id.research);
-        searchView.setNavigationItemSelectedListener(this);
-        searchView.getMenu().clear();
-        searchView.inflateMenu(R.menu.research);
+        setPersonalInformation();
 
         ImageButton profileButton = findViewById(R.id.accessProfile);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView headerUsername = findViewById(R.id.usernameProfile);
-                TextView headerMail = findViewById(R.id.mailProfile);
-                if (!drawer.isDrawerOpen(profileView)) {
-                    drawer.openDrawer(profileView);
-                    headerUsername.setText("OUGABOUGA");
-                    headerMail.setText("FOAKOAZKFOZA");
-                } else {
-                    drawer.closeDrawer(profileView);
-                    headerUsername.setText("GéoResto");
-                }
+        profileButton.setOnClickListener(v -> {
+            TextView headerUsername = findViewById(R.id.usernameProfile);
+            TextView headerMail = findViewById(R.id.mailProfile);
+            if (!drawerMap.isDrawerOpen(profileView)) {
+                drawerMap.openDrawer(profileView);
+                headerUsername.setText("OUGABOUGA");
+                headerMail.setText("FOAKOAZKFOZA");
+            } else {
+                drawerMap.closeDrawer(profileView);
+                headerUsername.setText("GéoResto");
             }
         });
 
-        ImageButton logo = (ImageButton) findViewById(R.id.logo);
-
-        logo.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View info) {
-                profileView.getMenu().clear();
-                profileView.inflateMenu(R.menu.info);
-                drawer.openDrawer(profileView);
-            }
+        ImageButton logo = findViewById(R.id.logo);
+        logo.setOnClickListener(info -> {
+            profileView.getMenu().clear();
+            profileView.inflateMenu(R.menu.info);
+            drawerMap.openDrawer(profileView);
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (this.drawerMap.isDrawerOpen(rightSideMenu)) {
+            this.drawerMap.closeDrawer(rightSideMenu);
+        } else if (this.drawerMap.isDrawerOpen(leftSideMenu)) {
+            this.drawerMap.closeDrawer(leftSideMenu);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -93,14 +87,14 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         // Inflate the menu; this adds items to the action bar if it is present.
         profileView.getMenu().clear();
         profileView.inflateMenu(R.menu.profile);
-        model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail), findViewById(R.id.usernameProfile));
+        setPersonalInformation();
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         profileView.getMenu().clear();
-        switch (menuToChooseRightSide) {
+        switch (rightSideMenu) {
             case R.menu.history:
                 profileView.inflateMenu(R.menu.history);
                 break;
@@ -115,7 +109,7 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
                 break;
             default:
                 profileView.inflateMenu(R.menu.profile);
-                model.setPersonalInformation(profileView.getMenu().findItem(R.id.username), profileView.getMenu().findItem(R.id.mail), findViewById(R.id.usernameProfile));
+                setPersonalInformation();
                 break;
         }
 
@@ -123,18 +117,18 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.history) {
-            menuToChooseRightSide = R.menu.history;
+            rightSideMenu = R.menu.history;
         } else if (id == R.id.favourites) {
-            menuToChooseRightSide = R.menu.favourite;
+            rightSideMenu = R.menu.favourite;
         } else if (id == R.id.comments) {
-            menuToChooseRightSide = R.menu.comments;
+            rightSideMenu = R.menu.comments;
         } else if (id == R.id.newLocation) {
-            menuToChooseRightSide = R.menu.new_location;
+            rightSideMenu = R.menu.new_location;
         } else if (id == R.id.logOut) {
             ProfileList.setCurrentUser(null);
             startActivity(new Intent(MapsActivityOnline.this, MapsActivity.class));
@@ -143,6 +137,54 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         return true;
     }
 
+    public void setPersonalInformation() {
+        MenuItem username = profileView.getMenu().findItem(R.id.username);
+        MenuItem mail = profileView.getMenu().findItem(R.id.mail);
+        TextView usernameProfile = findViewById(R.id.usernameProfile);
+
+        username.setTitle(ProfileList.getCurrentUser().getUsername());
+        mail.setTitle(ProfileList.getCurrentUser().getEmail());
+        usernameProfile.setText(ProfileList.getCurrentUser().getUsername());
+    }
+
+
+    // ----------------------
+    //     CONFIGURATION
+    // ----------------------
+
+    private void configureDrawerLayout() {
+        drawerMap = findViewById(R.id.drawerMaps);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerMap, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerMap.addDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    private void configureSideViews() {
+        // RightView
+        profileView = findViewById(R.id.profileNav);
+        profileView.setNavigationItemSelectedListener(this);
+        profileView.getMenu().clear();
+        profileView.inflateMenu(R.menu.profile);
+
+        // LeftView
+        searchView = findViewById(R.id.research);
+        searchView.setNavigationItemSelectedListener(this);
+        searchView.getMenu().clear();
+        searchView.inflateMenu(R.menu.research);
+    }
+
+
+    // --------------------
+    //     GoogleMaps
+    // --------------------
+
+    private void configureGMaps() {
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        assert mapFragment != null;
+        mapFragment.getMapAsync(this);
+    }
 
     /**
      * Manipulates the map once available.
