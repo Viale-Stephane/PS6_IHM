@@ -1,4 +1,4 @@
-package com.example.georesto.activity;
+package com.example.georesto.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.georesto.R;
-import com.example.georesto.model.LoginModel;
-import com.example.georesto.model.ProfileList;
+import com.example.georesto.Model.LoginModel;
+import com.example.georesto.Model.ProfileList;
 
 public class LoginActivity extends Activity { // sans oublier l'implémentation de l'interface OnClickListener
     private ProfileList profileList = new ProfileList();
@@ -24,6 +24,7 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
 
         findViewById(R.id.accessProfile).setVisibility(View.GONE);
         findViewById(R.id.usernameProfile).setVisibility(View.GONE);
+        findViewById(R.id.mailProfile).setVisibility(View.GONE);
 
         Button connect = findViewById(R.id.connect);
         Button register = findViewById(R.id.register);

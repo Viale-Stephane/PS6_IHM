@@ -1,4 +1,4 @@
-package com.example.georesto.activity;
+package com.example.georesto.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,8 +13,8 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.example.georesto.R;
-import com.example.georesto.model.Profile;
-import com.example.georesto.model.ProfileList;
+import com.example.georesto.Model.Profile;
+import com.example.georesto.Model.ProfileList;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

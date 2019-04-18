@@ -1,4 +1,4 @@
-package com.example.georesto.model;
+package com.example.georesto.Model;
 
 
 import java.util.ArrayList;

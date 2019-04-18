@@ -1,4 +1,4 @@
-package com.example.georesto.activity;
+package com.example.georesto.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ public class MapsActivityOffline extends MapsActivity {
         findViewById(R.id.accessProfile).setVisibility(View.GONE);
         findViewById(R.id.usernameProfile).setVisibility(View.GONE);
         findViewById(R.id.home_button).setVisibility(View.GONE);
+        findViewById(R.id.mailProfile).setVisibility(View.GONE);
 
         Button connect = findViewById(R.id.accessToLogin);
         connect.setOnClickListener(v -> startActivity(new Intent(MapsActivityOffline.this, LoginActivity.class)));

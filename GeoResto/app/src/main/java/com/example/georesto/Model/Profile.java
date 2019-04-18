@@ -1,4 +1,4 @@
-package com.example.georesto.model;
+package com.example.georesto.Model;
 
 public class Profile {
     private String username, password;

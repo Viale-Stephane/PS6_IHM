@@ -1,4 +1,4 @@
-package com.example.georesto.activity;
+package com.example.georesto.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.georesto.R;
-import com.example.georesto.model.ProfileList;
+import com.example.georesto.Model.ProfileList;
 
 
 public class MapsActivityOnline extends MapsActivity {
@@ -28,21 +28,10 @@ public class MapsActivityOnline extends MapsActivity {
 
         ImageButton profileButton = findViewById(R.id.accessProfile);
         profileButton.setOnClickListener(v -> {
-            /*TextView headerUsername = findViewById(R.id.usernameProfile);
-            TextView headerMail = findViewById(R.id.mailProfile);
-            if (!drawerMap.isDrawerOpen(profileView)) {
-                drawerMap.openDrawer(profileView);
-                headerUsername.setText("YES");
-                headerMail.setText("NO");
-            } else {
-                drawerMap.closeDrawer(profileView);
-                headerUsername.setText("GéoResto");
-            }*/
             profileView.getMenu().clear();
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateMenu(R.menu.profile);
             setPersonalInformation();
-            profileView.inflateHeaderView(R.layout.profile_header);
             drawerMap.openDrawer(profileView);
         });
     }
@@ -103,23 +92,16 @@ public class MapsActivityOnline extends MapsActivity {
     }
 
     public void setPersonalInformation() {
-        MenuItem username = profileView.getMenu().findItem(R.id.username);
-        MenuItem mail = profileView.getMenu().findItem(R.id.mail);
+        TextView mailProfile = findViewById(R.id.mailProfile);
         TextView usernameProfile = findViewById(R.id.usernameProfile);
-        // TextView firstName = findViewById(R.id.firstName);
-        // TextView lastName = findViewById(R.id.lastName);
 
-        username.setTitle(user.getUsername());
-        mail.setTitle(user.getEmail());
+        mailProfile.setText(user.getEmail());
         usernameProfile.setText(user.getUsername());
-        // firstName.setText(user.getFirstName());
-        // lastName.setText(user.getLastName());
 
         ImageView avatar = findViewById(R.id.accessProfile);
         int imageResource = getResources().getIdentifier(user.getLinkImage(), null, this.getPackageName());
         avatar.setBackgroundResource(imageResource);
-        // avatar = findViewById(R.id.profileImage);
-        // avatar.setBackgroundResource(imageResource);
+
     }
 
 
@@ -136,7 +118,6 @@ public class MapsActivityOnline extends MapsActivity {
         profileView = findViewById(R.id.profileNav);
         profileView.setNavigationItemSelectedListener(this);
         profileView.removeHeaderView(profileView.getHeaderView(0));
-        profileView.inflateHeaderView(R.layout.profile_header);
         profileView.inflateMenu(R.menu.profile);
     }
 }

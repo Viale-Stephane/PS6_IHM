@@ -1,4 +1,4 @@
-package com.example.georesto.activity;
+package com.example.georesto.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.georesto.R;
-import com.example.georesto.model.Profile;
-import com.example.georesto.model.ProfileList;
+import com.example.georesto.Model.Profile;
+import com.example.georesto.Model.ProfileList;
 
 
 public class RegisterActivity extends Activity {
@@ -22,6 +22,8 @@ public class RegisterActivity extends Activity {
 
         findViewById(R.id.accessProfile).setVisibility(View.GONE);
         findViewById(R.id.usernameProfile).setVisibility(View.GONE);
+        findViewById(R.id.mailProfile).setVisibility(View.GONE);
+
 
         EditText mail = (EditText) findViewById(R.id.newMail);
         EditText username = (EditText) findViewById(R.id.newUsername);

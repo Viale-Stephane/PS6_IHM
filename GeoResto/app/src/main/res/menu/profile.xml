@@ -2,22 +2,6 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
-    <group
-        >
-        <item
-            android:iconTint="@color/design_default_color_primary"
-            android:icon="@drawable/default_profile"
-            android:title="Username"
-            android:id="@+id/username"
-            app:showAsAction="always"
-            >
-
-        </item>
-        <item
-            android:id="@+id/mail"
-            android:title="email">
-        </item>
-    </group>
     <group>
         <item
             android:title="@string/history"
