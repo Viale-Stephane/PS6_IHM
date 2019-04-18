@@ -12,17 +12,25 @@
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <Button
-            android:id="@+id/connect"
+            android:id="@+id/accessToLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="10dp"
             android:text="@string/connect" />
 
+        <Button
+            android:id="@+id/accessToRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:text="@string/register" />
+
         <ImageButton
             android:id="@+id/accessProfile"
             android:layout_width="61dp"
-            android:layout_height="63dp"
+            android:layout_height="58dp"
             android:layout_gravity="end"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/app_logo"
@@ -36,6 +44,17 @@
             android:layout_marginEnd="10dp"
             android:text="@string/mail"
             android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/home_button"
+            android:layout_width="61dp"
+            android:layout_height="58dp"
+            android:layout_gravity="start"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/homeButton"
+            android:src="@drawable/home"
+            android:background="@null"
+            android:scaleType="fitXY" />
 
     </android.support.v7.widget.Toolbar>
 

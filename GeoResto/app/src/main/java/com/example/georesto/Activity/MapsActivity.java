@@ -49,6 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         findViewById(R.id.accessProfile).setVisibility(View.GONE);
         findViewById(R.id.usernameProfile).setVisibility(View.GONE);
+        findViewById(R.id.home_button).setVisibility(View.GONE);
 
         drawerMap = (DrawerLayout) findViewById(R.id.drawerMaps);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -58,10 +59,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        Button connect = (Button) findViewById(R.id.connect);
+        Button connect = (Button) findViewById(R.id.accessToLogin);
         connect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View connect) {
                 startActivity(new Intent(MapsActivity.this, LoginActivity.class));
+            }
+        });
+
+        Button register = (Button) findViewById(R.id.accessToRegister);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapsActivity.this, RegisterActivity.class));
+            }
+        });
+
+        Button accessToRegister = (Button) findViewById(R.id.accessToRegister);
+        accessToRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapsActivity.this, RegisterActivity.class));
             }
         });
 

@@ -51,7 +51,10 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
 
         user = ProfileList.getCurrentUser();
 
-        findViewById(R.id.connect).setVisibility(View.GONE);
+        findViewById(R.id.accessToLogin).setVisibility(View.GONE);
+        findViewById(R.id.accessToRegister).setVisibility(View.GONE);
+        findViewById(R.id.home_button).setVisibility(View.GONE);
+
         //findViewById(R.id.accessProfile).setBackgroundResource(user.);
 
         //TextView userProfile = findViewById(R.id.usernameProfile);

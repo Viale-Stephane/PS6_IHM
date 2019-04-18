@@ -32,4 +32,5 @@
     <string name="pseudonyme">pseudonyme</string>
     <string name="nom">Nom</string>
     <string name="prenom">Prénom</string>
+    <string name="homeButton">homeButton</string>
 </resources>
