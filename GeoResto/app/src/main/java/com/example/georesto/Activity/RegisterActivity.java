@@ -54,7 +54,7 @@ public class RegisterActivity extends Activity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, MapsActivity.class));
+                startActivity(new Intent(RegisterActivity.this, MapsActivityOffline.class));
             }
         });
 

@@ -53,7 +53,7 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MapsActivity.class));
+                startActivity(new Intent(LoginActivity.this, MapsActivityOffline.class));
             }
         });
 
