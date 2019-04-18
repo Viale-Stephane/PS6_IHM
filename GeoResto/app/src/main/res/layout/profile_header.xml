@@ -25,15 +25,11 @@
     <TextView
         android:id="@+id/firstName"
         android:layout_width="381dp"
-        android:layout_height="51dp"
-        android:text="prenom"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:layout_height="51dp" />
 
     <TextView
         android:id="@+id/lastName"
         android:layout_width="381dp"
-        android:layout_height="51dp"
-        android:text="nom"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:layout_height="51dp" />
 
 </LinearLayout>

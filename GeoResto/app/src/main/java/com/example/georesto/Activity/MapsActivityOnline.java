@@ -55,11 +55,6 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         findViewById(R.id.accessToRegister).setVisibility(View.GONE);
         findViewById(R.id.home_button).setVisibility(View.GONE);
 
-        //findViewById(R.id.accessProfile).setBackgroundResource(user.);
-
-        //TextView userProfile = findViewById(R.id.usernameProfile);
-        //userProfile.setContentDescription(user.getUsername());
-
         configureGMaps();
 
         configureDrawerLayout();
@@ -83,6 +78,7 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
             profileView.getMenu().clear();
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateMenu(R.menu.profile);
+            setPersonalInformation();
             profileView.inflateHeaderView(R.layout.profile_header);
             drawerMap.openDrawer(profileView);
         });
@@ -181,13 +177,20 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         MenuItem username = profileView.getMenu().findItem(R.id.username);
         MenuItem mail = profileView.getMenu().findItem(R.id.mail);
         TextView usernameProfile = findViewById(R.id.usernameProfile);
-        /*ImageView avatar = (ImageView) findViewById(R.id.profileImage);
-        int imageRessource = getResources().getIdentifier(user.getLinkImage(), null, this.getPackageName());
+        TextView firstName = findViewById(R.id.firstName);
+        TextView lastName = findViewById(R.id.lastName);
 
-        avatar.setImageResource(imageRessource);*/
         username.setTitle(user.getUsername());
         mail.setTitle(user.getEmail());
         usernameProfile.setText(user.getUsername());
+        //firstName.setText(user.getFirstName());
+        //lastName.setText(user.getLastName());
+
+        ImageView avatar = (ImageView) findViewById(R.id.accessProfile);
+        int imageRessource = getResources().getIdentifier(user.getLinkImage(), null, this.getPackageName());
+        avatar.setBackgroundResource(imageRessource);
+        avatar = (ImageView) findViewById(R.id.profileImage);
+        //avatar.setBackgroundResource(imageRessource);
     }
 
 
