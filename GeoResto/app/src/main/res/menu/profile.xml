@@ -4,9 +4,13 @@
     >
     <group>
         <item
-            android:title="@string/history"
+            android:title=""
             android:id="@+id/history">
         </item>
+        <item
+        android:title="@string/history"
+        android:id="@+id/gtrz">
+    </item>
         <item
             android:title="@string/favourites"
             android:id="@+id/favourites">
