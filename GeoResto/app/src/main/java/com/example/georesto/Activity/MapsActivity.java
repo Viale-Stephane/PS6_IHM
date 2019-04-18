@@ -75,7 +75,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         logo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View info) {
                 profileView.getMenu().clear();
+                profileView.removeHeaderView(profileView.getHeaderView(0));
                 profileView.inflateMenu(R.menu.info);
+                profileView.inflateHeaderView(R.layout.info_header);
                 drawerMap.openDrawer(profileView);
             }
         });

@@ -27,9 +27,16 @@ public class ProfileList {
     private void instantiateProfiles() {
         Profile admin = new Profile("admin", "", "administrator", "administrator", "administrator@gmail.com", null);
         Profile noName = new Profile("", "", "noName", "noLastName", "noNameIsNice@gmail.com", null);
+        Profile camille = new Profile("CamBou", "azerty", "Camille", "Bourgeois", "camille.bourgeois@hotmail.com", null);
+        Profile elvis = new Profile("Elvis", "azerty", "Elvis", "Pressé", "elvisLeBG@orange.fr", "@drawable/elvis");
+        Profile richard = new Profile("GrisonLover", "azerty", "Richard", "Cuterie", "richouCute@gmail.com", null);
+
         profiles.addAll(Arrays.asList(
                 admin,
-                noName
+                noName,
+                camille,
+                elvis,
+                richard
         ));
     }
 }

@@ -16,8 +16,9 @@ import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ImageView;
 
-import com.example.georesto.Model.ProfileList;
+import com.example.georesto.Model.*;
 import com.example.georesto.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,6 +35,8 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
     private NavigationView profileView;
     private NavigationView searchView;
 
+    private Profile user;
+
     private SearchView search;
     private Spinner tagSpinner;
 
@@ -46,7 +49,13 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        user = ProfileList.getCurrentUser();
+
         findViewById(R.id.connect).setVisibility(View.GONE);
+        //findViewById(R.id.accessProfile).setBackgroundResource(user.);
+
+        //TextView userProfile = findViewById(R.id.usernameProfile);
+        //userProfile.setContentDescription(user.getUsername());
 
         configureGMaps();
 
@@ -58,7 +67,7 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
 
         ImageButton profileButton = findViewById(R.id.accessProfile);
         profileButton.setOnClickListener(v -> {
-            TextView headerUsername = findViewById(R.id.usernameProfile);
+            /*TextView headerUsername = findViewById(R.id.usernameProfile);
             TextView headerMail = findViewById(R.id.mailProfile);
             if (!drawerMap.isDrawerOpen(profileView)) {
                 drawerMap.openDrawer(profileView);
@@ -67,13 +76,20 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
             } else {
                 drawerMap.closeDrawer(profileView);
                 headerUsername.setText("GéoResto");
-            }
+            }*/
+            profileView.getMenu().clear();
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateMenu(R.menu.profile);
+            profileView.inflateHeaderView(R.layout.profile_header);
+            drawerMap.openDrawer(profileView);
         });
 
         ImageButton logo = findViewById(R.id.logo);
         logo.setOnClickListener(info -> {
             profileView.getMenu().clear();
+            profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateMenu(R.menu.info);
+            profileView.inflateHeaderView(R.layout.info_header);
             drawerMap.openDrawer(profileView);
         });
 
@@ -162,10 +178,13 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         MenuItem username = profileView.getMenu().findItem(R.id.username);
         MenuItem mail = profileView.getMenu().findItem(R.id.mail);
         TextView usernameProfile = findViewById(R.id.usernameProfile);
+        /*ImageView avatar = (ImageView) findViewById(R.id.profileImage);
+        int imageRessource = getResources().getIdentifier(user.getLinkImage(), null, this.getPackageName());
 
-        username.setTitle(ProfileList.getCurrentUser().getUsername());
-        mail.setTitle(ProfileList.getCurrentUser().getEmail());
-        usernameProfile.setText(ProfileList.getCurrentUser().getUsername());
+        avatar.setImageResource(imageRessource);*/
+        username.setTitle(user.getUsername());
+        mail.setTitle(user.getEmail());
+        usernameProfile.setText(user.getUsername());
     }
 
 
@@ -185,7 +204,9 @@ public class MapsActivityOnline extends FragmentActivity implements OnMapReadyCa
         profileView = findViewById(R.id.profileNav);
         profileView.setNavigationItemSelectedListener(this);
         profileView.getMenu().clear();
+        profileView.removeHeaderView(profileView.getHeaderView(0));
         profileView.inflateMenu(rightSideMenu);
+        profileView.inflateHeaderView(R.layout.profile_header);
 
         // LeftView
         searchView = findViewById(R.id.research);

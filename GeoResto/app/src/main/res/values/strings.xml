@@ -26,4 +26,5 @@
     <string name="search">Rechercher</string>
     <string name="restaurant">Restaurant</string>
     <string name="commerce">Commerce</string>
+    <string name="profileImageDescription">Image de profil</string>
 </resources>
