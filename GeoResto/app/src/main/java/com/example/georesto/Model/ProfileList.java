@@ -39,4 +39,21 @@ public class ProfileList {
                 richard
         ));
     }
+
+    public static String addProfile(Profile profile, String passwordConfirmation) {
+        if (!profile.getPassword().equals(passwordConfirmation)) {
+            return "Mots de passe différents";
+        } else {
+            for (Profile existingProfile : profiles) {
+                if (profile.getUsername().equals(existingProfile.getUsername())) {
+                    return "Nom d'utilisateur déjà existant";
+                } else if (profile.getEmail().equals(existingProfile.getEmail())) {
+                    return "Email déjà existant";
+                }
+            }
+        }
+        profiles.add(profile);
+        currentUser = profile;
+        return "Connexion en cours..";
+    }
 }

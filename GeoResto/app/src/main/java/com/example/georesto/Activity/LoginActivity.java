@@ -21,6 +21,7 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         Button connect = findViewById(R.id.connect);
+        Button register = findViewById(R.id.register);
         TextView passwordForgotten = findViewById(R.id.passwordForgotten);
         final EditText username = findViewById(R.id.username);
         final EditText password = findViewById(R.id.password);
@@ -37,7 +38,7 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
 
         });
 
-        passwordForgotten.setOnClickListener(new View.OnClickListener() {
+        register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View passwordForgotten) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }

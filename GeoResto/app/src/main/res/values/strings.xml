@@ -3,7 +3,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_register">register</string>
-    <string name="username">Adresse email</string>
+    <string name="mail">Adresse email</string>
+    <string name="username">Nom d\'utilisateur</string>
     <string name="password">Mot de passe</string>
     <string name="connect">Se connecter</string>
     <string name="register">S\'inscrire</string>
@@ -27,4 +28,8 @@
     <string name="restaurant">Restaurant</string>
     <string name="commerce">Commerce</string>
     <string name="profileImageDescription">Image de profil</string>
+    <string name="password_confirmation">Confirmez le mot de passe</string>
+    <string name="pseudonyme">pseudonyme</string>
+    <string name="nom">Nom</string>
+    <string name="prenom">Prénom</string>
 </resources>
