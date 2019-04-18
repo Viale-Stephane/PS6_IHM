@@ -1,4 +1,4 @@
-package com.example.georesto.Activity;
+package com.example.georesto.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,9 +9,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.georesto.Model.LoginModel;
-import com.example.georesto.Model.ProfileList;
 import com.example.georesto.R;
+import com.example.georesto.model.LoginModel;
+import com.example.georesto.model.ProfileList;
 
 public class LoginActivity extends Activity { // sans oublier l'implémentation de l'interface OnClickListener
     private ProfileList profileList = new ProfileList();
@@ -53,7 +53,7 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,MapsActivity.class));
+                startActivity(new Intent(LoginActivity.this, MapsActivity.class));
             }
         });
 

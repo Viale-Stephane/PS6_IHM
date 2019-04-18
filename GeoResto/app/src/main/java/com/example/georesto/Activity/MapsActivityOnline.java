@@ -1,4 +1,4 @@
-package com.example.georesto.Activity;
+package com.example.georesto.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,13 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.ImageView;
 
-import com.example.georesto.Model.*;
 import com.example.georesto.R;
+import com.example.georesto.model.Profile;
+import com.example.georesto.model.ProfileList;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

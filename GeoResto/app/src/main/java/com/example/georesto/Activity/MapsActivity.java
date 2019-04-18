@@ -1,4 +1,4 @@
-package com.example.georesto.Activity;
+package com.example.georesto.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.georesto.R;
@@ -24,17 +23,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,NavigationView.OnNavigationItemSelectedListener {
-
+    private static final String[] paths = {"item 1", "item 2", "item 3"};
     private DrawerLayout drawerMap;
     private NavigationView searchView;
-
     private Spinner spinner;
-    private static final String[] paths = {"item 1", "item 2", "item 3"};
-
     private GoogleMap mMap;
 
     @Override
@@ -56,7 +50,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 this, drawerMap, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerMap.addDrawerListener(toggle);
         toggle.syncState();
-
 
 
         Button connect = (Button) findViewById(R.id.accessToLogin);

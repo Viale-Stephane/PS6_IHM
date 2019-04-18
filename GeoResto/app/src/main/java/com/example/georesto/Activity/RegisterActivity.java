@@ -1,18 +1,17 @@
-package com.example.georesto.Activity;
+package com.example.georesto.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.georesto.Model.Profile;
-import com.example.georesto.Model.ProfileList;
 import com.example.georesto.R;
+import com.example.georesto.model.Profile;
+import com.example.georesto.model.ProfileList;
 
 
 public class RegisterActivity extends Activity {
@@ -44,8 +43,8 @@ public class RegisterActivity extends Activity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongNewProfile.setText(ProfileList.addProfile(new Profile(username.getText().toString(),password.getText().toString(),firstName.getText().toString(),lastName.getText().toString(),mail.getText().toString(), "@drawable/default_profile"), passwordConfirmation.getText().toString()));
-                if(wrongNewProfile.getText().toString().equals("Connexion en cours..")) {
+                wrongNewProfile.setText(ProfileList.addProfile(new Profile(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), mail.getText().toString(), "@drawable/default_profile"), passwordConfirmation.getText().toString()));
+                if (wrongNewProfile.getText().toString().equals("Connexion en cours..")) {
                     startActivity(new Intent(RegisterActivity.this, MapsActivityOnline.class));
                 }
             }
@@ -55,10 +54,10 @@ public class RegisterActivity extends Activity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this,MapsActivity.class));
+                startActivity(new Intent(RegisterActivity.this, MapsActivity.class));
             }
         });
-        
+
         Button accessToRegister = (Button) findViewById(R.id.accessToRegister);
         accessToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +65,7 @@ public class RegisterActivity extends Activity {
                 startActivity(new Intent(RegisterActivity.this, RegisterActivity.class));
             }
         });
-        
+
         Button accessToLogin = (Button) findViewById(R.id.accessToLogin);
         accessToLogin.setOnClickListener(new View.OnClickListener() {
             @Override

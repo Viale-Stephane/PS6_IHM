@@ -1,4 +1,4 @@
-package com.example.georesto.Model;
+package com.example.georesto.model;
 
 
 public class LoginModel {
