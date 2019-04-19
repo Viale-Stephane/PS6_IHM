@@ -6,9 +6,14 @@ import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.georesto.R;
 import com.example.georesto.Model.ProfileList;
@@ -33,12 +38,12 @@ public class MapsActivityOnline extends MapsActivity {
             rightSideMenu = R.layout.profile;
             drawerMap.openDrawer(profileView);
             if(rightSideMenu == R.layout.profile) {
-                this.profileButton();
+                this.profileActions();
             }
         });
     }
 
-    public void profileButton() {
+    public void profileActions() {
         View currentHeader = profileView.getHeaderView(0);
         Button history = currentHeader.findViewById(R.id.historyButton);
         Button favourites = currentHeader.findViewById(R.id.favouritesButton);
@@ -77,6 +82,24 @@ public class MapsActivityOnline extends MapsActivity {
         });
     }
 
+    public void newLocationActions() {
+        View currentHeader = profileView.getHeaderView(0);
+        ToggleButton restaurantButton = currentHeader.findViewById(R.id.restaurantButton);
+        ToggleButton commerceButton = currentHeader.findViewById(R.id.commerceButton);
+        EditText nameLocation = currentHeader.findViewById(R.id.editTextNameLocation);
+        RatingBar ratingBar = currentHeader.findViewById(R.id.ratingBar);
+        EditText adress = currentHeader.findViewById(R.id.editTextAdress);
+        EditText website = currentHeader.findViewById(R.id.editTextWebsite);
+        EditText phoneNumber = currentHeader.findViewById(R.id.editTextPhoneNumber);
+        Spinner tagList = currentHeader.findViewById(R.id.tagSpinner);
+        TextView price = currentHeader.findViewById(R.id.price);
+        SeekBar seekBarPrice = currentHeader.findViewById(R.id.seekBarPrice);
+        TextView distance = currentHeader.findViewById(R.id.distance);
+        SeekBar seekBarDistance = currentHeader.findViewById(R.id.seekBarDistance);
+        Button cancel = currentHeader.findViewById(R.id.cancelButton);
+        Button next = currentHeader.findViewById(R.id.nextButton);
+    }
+
     public void setPersonalInformation() {
         TextView mailProfile = findViewById(R.id.mailProfile);
         TextView usernameProfile = findViewById(R.id.usernameProfile);
@@ -110,6 +133,6 @@ public class MapsActivityOnline extends MapsActivity {
         profileView.removeHeaderView(profileView.getHeaderView(0));
         profileView.inflateHeaderView(R.layout.profile);
         rightSideMenu = R.layout.profile;
-        this.profileButton();
+        this.profileActions();
     }
 }
