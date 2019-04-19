@@ -33,4 +33,23 @@
     <string name="nom">Nom</string>
     <string name="prenom">Prénom</string>
     <string name="homeButton">homeButton</string>
+    <string name="nameLocation">Nom du lieu</string>
+    <string name="adress">Adresse</string>
+    <string name="website">Site web</string>
+    <string name="phoneNumber">Téléphone</string>
+    <string name="filtersAdded">Filtres Ajoutés</string>
+    <string name="currentPrice">Prix: 20€</string>
+    <string name="currentDistance">Distance: 5km</string>
+    <string name="newPicture">Ajouter une photo</string>
+    <string name="schedule">Horaires</string>
+    <string name="mondayText">Lundi</string>
+    <string name="tuesdayText">Mardi</string>
+    <string name="wednesdayText">Mercredi</string>
+    <string name="thursdayText">Jeudi</string>
+    <string name="fridayText">Vendredi</string>
+    <string name="saturdayText">Samedi</string>
+    <string name="sundayText">Dimanche</string>
+    <string name="cancel">Retour</string>
+    <string name="next">suivant</string>
+    <string name="validate">Valider</string>
 </resources>
