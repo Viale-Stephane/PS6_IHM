@@ -45,7 +45,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/info_header" />
+        app:headerLayout="@layout/profile" />
 
 </android.support.v4.widget.DrawerLayout>
 

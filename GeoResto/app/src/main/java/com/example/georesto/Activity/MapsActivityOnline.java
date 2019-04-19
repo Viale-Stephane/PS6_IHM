@@ -3,9 +3,9 @@ package com.example.georesto.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,72 +23,58 @@ public class MapsActivityOnline extends MapsActivity {
         findViewById(R.id.accessToLogin).setVisibility(View.GONE);
         findViewById(R.id.accessToRegister).setVisibility(View.GONE);
         findViewById(R.id.home_button).setVisibility(View.GONE);
-
         setPersonalInformation();
 
         ImageButton profileButton = findViewById(R.id.accessProfile);
         profileButton.setOnClickListener(v -> {
-            profileView.getMenu().clear();
             profileView.removeHeaderView(profileView.getHeaderView(0));
-            profileView.inflateMenu(R.menu.profile);
+            profileView.inflateHeaderView(R.layout.profile);
             setPersonalInformation();
+            rightSideMenu = R.layout.profile;
             drawerMap.openDrawer(profileView);
+            if(rightSideMenu == R.layout.profile) {
+                this.profileButton();
+            }
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        profileView.getMenu().clear();
-        profileView.inflateMenu(R.menu.profile);
-        setPersonalInformation();
-        return true;
-    }
+    public void profileButton() {
+        View currentHeader = profileView.getHeaderView(0);
+        Button history = currentHeader.findViewById(R.id.historyButton);
+        Button favourites = currentHeader.findViewById(R.id.favouritesButton);
+        Button comments = currentHeader.findViewById(R.id.commentsButton);
+        Button newLocation = currentHeader.findViewById(R.id.newLocationButton);
+        Button logOut = currentHeader.findViewById(R.id.logOutButton);
+        history.setOnClickListener(v -> {
+                profileView.removeHeaderView(profileView.getHeaderView(0));
+                profileView.inflateHeaderView(R.layout.history);
+                rightSideMenu = R.layout.history;
+        });
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        profileView.getMenu().clear();
-        switch (rightSideMenu) {
-            case R.menu.history:
-                profileView.inflateMenu(R.menu.history);
-                break;
-            case R.menu.favourite:
-                profileView.inflateMenu(R.menu.favourite);
-                break;
-            case R.menu.comments:
-                profileView.inflateMenu(R.menu.comments);
-                break;
-            case R.menu.new_location:
-                profileView.inflateMenu(R.menu.new_location);
-                break;
-            default:
-                profileView.inflateMenu(R.menu.profile);
-                setPersonalInformation();
-                break;
-        }
+        favourites.setOnClickListener(v -> {
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateHeaderView(R.layout.favourites);
+            rightSideMenu = R.layout.favourites;
+        });
 
-        return true;
-    }
+        comments.setOnClickListener(v -> {
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateHeaderView(R.layout.comments);
+            rightSideMenu = R.layout.comments;
+        });
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        newLocation.setOnClickListener(v -> {
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateHeaderView(R.layout.new_location);
+            rightSideMenu = R.layout.new_location;
+        });
 
-        if (id == R.id.history) {
-            rightSideMenu = R.menu.history;
-        } else if (id == R.id.favourites) {
-            rightSideMenu = R.menu.favourite;
-        } else if (id == R.id.comments) {
-            rightSideMenu = R.menu.comments;
-        } else if (id == R.id.newLocation) {
-            rightSideMenu = R.menu.new_location;
-        } else if (id == R.id.logOut) {
+        logOut.setOnClickListener(v -> {
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            rightSideMenu = R.layout.info;
             ProfileList.setCurrentUser(null);
             startActivity(new Intent(MapsActivityOnline.this, MapsActivityOffline.class));
-        }
-        openOptionsMenu();
-        return true;
+        });
     }
 
     public void setPersonalInformation() {
@@ -104,6 +90,10 @@ public class MapsActivityOnline extends MapsActivity {
 
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        return false;
+    }
 
     // ----------------------
     //     CONFIGURATION
@@ -118,6 +108,8 @@ public class MapsActivityOnline extends MapsActivity {
         profileView = findViewById(R.id.profileNav);
         profileView.setNavigationItemSelectedListener(this);
         profileView.removeHeaderView(profileView.getHeaderView(0));
-        profileView.inflateMenu(R.menu.profile);
+        profileView.inflateHeaderView(R.layout.profile);
+        rightSideMenu = R.layout.profile;
+        this.profileButton();
     }
 }

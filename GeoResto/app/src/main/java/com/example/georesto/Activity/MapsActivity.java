@@ -30,7 +30,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected DrawerLayout drawerMap;
     protected NavigationView profileView;
     protected NavigationView searchView;
-    protected int rightSideMenu = R.menu.info;
+    protected int rightSideMenu = R.layout.info;
     protected int leftSideMenu = R.layout.research;
 
     // Search Side
@@ -57,10 +57,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         ImageButton logo = findViewById(R.id.logo);
         logo.setOnClickListener(info -> {
-            profileView.getMenu().clear();
-            profileView.removeHeaderView(profileView.getHeaderView(0));
-            profileView.inflateMenu(R.menu.info);
-            profileView.inflateHeaderView(R.layout.info_header);
+           profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateHeaderView(R.layout.info);
             drawerMap.openDrawer(profileView);
         });
 
