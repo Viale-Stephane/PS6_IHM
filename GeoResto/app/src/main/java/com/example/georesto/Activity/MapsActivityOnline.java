@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.example.georesto.Model.Restaurant;
 import com.example.georesto.R;
 import com.example.georesto.Model.ProfileList;
 
@@ -37,9 +38,7 @@ public class MapsActivityOnline extends MapsActivity {
             setPersonalInformation();
             rightSideMenu = R.layout.profile;
             drawerMap.openDrawer(profileView);
-            if(rightSideMenu == R.layout.profile) {
-                this.profileActions();
-            }
+            this.profileActions();
         });
     }
 
@@ -72,6 +71,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
+            newLocationActions(null);
         });
 
         logOut.setOnClickListener(v -> {
@@ -82,7 +82,7 @@ public class MapsActivityOnline extends MapsActivity {
         });
     }
 
-    public void newLocationActions() {
+    public void newLocationActions(Restaurant restaurant) {
         View currentHeader = profileView.getHeaderView(0);
         ToggleButton restaurantButton = currentHeader.findViewById(R.id.restaurantButton);
         ToggleButton commerceButton = currentHeader.findViewById(R.id.commerceButton);
@@ -98,6 +98,47 @@ public class MapsActivityOnline extends MapsActivity {
         SeekBar seekBarDistance = currentHeader.findViewById(R.id.seekBarDistance);
         Button cancel = currentHeader.findViewById(R.id.cancelButton);
         Button next = currentHeader.findViewById(R.id.nextButton);
+        if(restaurant!= null) {
+            System.out.println(restaurant.getGrade());
+            restaurantButton.setChecked(restaurant.isKindRestaurant());
+            commerceButton.setChecked(!restaurant.isKindRestaurant());
+            nameLocation.setText(restaurant.getName());
+            ratingBar.setRating(((float) restaurant.getGrade()));
+            adress.setText(restaurant.getAdress());
+            website.setText(restaurant.getWebsite());
+            phoneNumber.setText(restaurant.getPhoneNumber());
+            // tagList
+            price.setText("Prix : " + restaurant.getPrice() + " €");
+            seekBarPrice.setProgress((int) restaurant.getPrice());
+            distance.setText("Distance : " + restaurant.getDistance() + " km");
+            seekBarDistance.setProgress((int) restaurant.getDistance());
+        }
+
+        cancel.setOnClickListener(v -> {
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateHeaderView(R.layout.profile);
+            rightSideMenu = R.layout.profile;
+            profileActions();
+        });
+
+        next.setOnClickListener(v -> {
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateHeaderView(R.layout.new_location_schedule);
+            rightSideMenu = R.layout.new_location_schedule;
+            Restaurant newRestaurant = new Restaurant(nameLocation.getText().toString(),restaurantButton.isActivated(),adress.getText().toString(), website.getText().toString(),phoneNumber.getText().toString(),null,ratingBar.getRating(),seekBarPrice.getProgress(),seekBarDistance.getProgress(),null);
+            newLocationScheduleActions(newRestaurant);
+        });
+    }
+
+    public void newLocationScheduleActions(Restaurant restaurant) {
+        View currentHeader = profileView.getHeaderView(0);
+        Button cancel = currentHeader.findViewById(R.id.cancelButton);
+        cancel.setOnClickListener(v -> {
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateHeaderView(R.layout.new_location);
+            rightSideMenu = R.layout.new_location;
+            newLocationActions(restaurant);
+        });
     }
 
     public void setPersonalInformation() {
