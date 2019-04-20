@@ -29,6 +29,17 @@
             android:scaleType="fitXY"
             app:srcCompat="@drawable/logo" />
 
+        <ImageButton
+            android:id="@+id/location"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/location"
+            android:contentDescription="@string/UpdatePosition"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/location" />
+
     </android.support.v7.widget.ContentFrameLayout>
 
     <android.support.design.widget.NavigationView

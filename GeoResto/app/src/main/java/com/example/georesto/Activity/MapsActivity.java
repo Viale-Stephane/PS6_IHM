@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -62,22 +65,21 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     // Model
     protected Profile user;
 
-    public boolean isServicesOK(){
+    public boolean isServicesOK() {
         Log.d(TAG, "isServicesOK: checking google services version");
 
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MapsActivity.this);
 
-        if(available == ConnectionResult.SUCCESS){
+        if (available == ConnectionResult.SUCCESS) {
             //everything is fine and the user can make map requests
             Log.d(TAG, "isServicesOK: Google Play Services is working");
             return true;
-        }
-        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
             //an error occured but we can resolve it
             Log.d(TAG, "isServicesOK: an error occured but we can fix it");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MapsActivity.this, available, 4);
             dialog.show();
-        }else{
+        } else {
             Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
         }
         return false;
@@ -89,7 +91,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         setContentView(R.layout.main);
 
         user = ProfileList.getCurrentUser();
-        if(isServicesOK()){
+        if (isServicesOK()) {
             getLocationPermissions();
             statusCheck();
         }
@@ -100,9 +102,14 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         ImageButton logo = findViewById(R.id.logo);
         logo.setOnClickListener(info -> {
-           profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.info);
             drawerMap.openDrawer(profileView);
+        });
+
+        ImageButton position = findViewById(R.id.location);
+        position.setOnClickListener(info -> {
+            getDeviceLocation();
         });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -166,28 +173,28 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
     private void getLocationPermissions() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.ACCESS_COARSE_LOCATION};
+                Manifest.permission.ACCESS_COARSE_LOCATION};
 
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this.getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionGranted = true;
                 configureGMaps();
             } else {
-            ActivityCompat.requestPermissions(this,permissions,LOCATION_PERMISSION_REQUEST_CODE);
+                ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
             }
         } else {
-            ActivityCompat.requestPermissions(this,permissions,LOCATION_PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
 
     private void moveCamera(LatLng latLng, float zoom) {
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
-    private void getDeviceLocation(){
+    private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the current location");
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        LocationManager locationManager = (LocationManager)  this.getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
         try {
@@ -206,7 +213,9 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                                 public void onLocationChanged(android.location.Location location) {
                                     double latitude = location.getLatitude();
                                     double longitude = location.getLongitude();
-                                    Log.d(TAG, "onLocationChanged: " + latitude + "  " +longitude);
+                                    LatLng position = new LatLng(latitude, longitude);
+                                    Log.d(TAG, "onLocationChanged: " + latitude + "  " + longitude);
+                                    moveCamera(position, DEFAULT_ZOOM);
                                 }
 
                                 @Override
@@ -228,8 +237,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                     }
                 });
             }
-        } catch (SecurityException e){
-            Log.d(TAG,"getDeviceLocation: Security Exception: " + e.getMessage());
+        } catch (SecurityException e) {
+            Log.d(TAG, "getDeviceLocation: Security Exception: " + e.getMessage());
         }
     }
 
@@ -237,16 +246,16 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         mLocationPermissionGranted = false;
         switch (requestCode) {
-            case LOCATION_PERMISSION_REQUEST_CODE:{
-                if(grantResults.length > 0) {
-                    for(int i = 0; i < grantResults.length; i++) {
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+            case LOCATION_PERMISSION_REQUEST_CODE: {
+                if (grantResults.length > 0) {
+                    for (int i = 0; i < grantResults.length; i++) {
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionGranted = false;
                             return;
                         }
                     }
                     mLocationPermissionGranted = true;
-                    Log.d(TAG,"getLocationPermission: granted");
+                    Log.d(TAG, "getLocationPermission: granted");
                     configureGMaps();
                     //Initialize map
                 }
@@ -254,23 +263,32 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         }
     }
 
-    private void configureGMaps(){
+    private void configureGMaps() {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(MapsActivity.this);
     }
 
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        Toast.makeText(this,"maps is ready", Toast.LENGTH_SHORT).show();
-        Log.d(TAG,"onMapReady: maps is ready");
+        Toast.makeText(this, "maps is ready", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onMapReady: maps is ready");
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-134, -47);
-        if(mLocationPermissionGranted){
+        if (mLocationPermissionGranted) {
             getDeviceLocation();
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             mMap.setMyLocationEnabled(true);
         }
 
