@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.georesto.Model.NewLocationModel;
+import com.example.georesto.Model.ProfileModel;
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
@@ -51,38 +52,33 @@ public class MapsActivityOnline extends MapsActivity {
     }
 
     public void profileActions() {
-        View currentHeader = profileView.getHeaderView(0);
-        Button history = currentHeader.findViewById(R.id.historyButton);
-        Button favourites = currentHeader.findViewById(R.id.favouritesButton);
-        Button comments = currentHeader.findViewById(R.id.commentsButton);
-        Button newLocation = currentHeader.findViewById(R.id.newLocationButton);
-        Button logOut = currentHeader.findViewById(R.id.logOutButton);
-        history.setOnClickListener(v -> {
+        ProfileModel profileModel = new ProfileModel(profileView);
+        profileModel.getHistoryButton().setOnClickListener(v -> {
                 profileView.removeHeaderView(profileView.getHeaderView(0));
                 profileView.inflateHeaderView(R.layout.history);
                 rightSideMenu = R.layout.history;
         });
 
-        favourites.setOnClickListener(v -> {
+        profileModel.getFavouritesButton().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.favourites);
             rightSideMenu = R.layout.favourites;
         });
 
-        comments.setOnClickListener(v -> {
+        profileModel.getCommentsButton().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.comments);
             rightSideMenu = R.layout.comments;
         });
 
-        newLocation.setOnClickListener(v -> {
+        profileModel.getNewLocationButton().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
             newLocationActions(null);
         });
 
-        logOut.setOnClickListener(v -> {
+        profileModel.getLogOutButton().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             rightSideMenu = R.layout.info;
             ProfileList.setCurrentUser(null);
