@@ -38,6 +38,7 @@ public class NewLocationModel {
     //------------------------------------//
     private final List<Tag> tags = new ArrayList<>();
     private List<Tag> currentFilters;
+    private boolean isInit;
 
 
     public NewLocationModel(NavigationView profileView) {
@@ -60,6 +61,7 @@ public class NewLocationModel {
         //-------------------------------------------------------//
         this.tags.addAll(Tag.getFullList());
         this.currentFilters = new ArrayList<>();
+        this.isInit = true;
     }
 
     public void init(Restaurant restaurant) {
@@ -71,7 +73,14 @@ public class NewLocationModel {
             this.adress.setText(restaurant.getAdress());
             this.website.setText(restaurant.getWebsite());
             this.phoneNumber.setText(restaurant.getPhoneNumber());
-            //this.actualFilters.setText(restaurant.getTags().toString());
+
+            this.currentFilters = restaurant.getTags();
+            String filters = "";
+            for(int i = 0; i < currentFilters.size(); i++) {
+                filters += currentFilters.get(i).getName();
+            }
+            this.actualFilters.setText(filters);
+
             this.price.setText("Prix : " + restaurant.getPrice() + " €");
             this.seekBarPrice.setProgress((int) restaurant.getPrice());
             this.distance.setText("Distance : " + restaurant.getDistance() + " km");
@@ -112,21 +121,24 @@ public class NewLocationModel {
         this.tagList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                boolean isInTheList = false;
-                String filters = "";
-                for (Tag tag : currentFilters) {
-                    if(tag != null && tagList.getItemAtPosition(position) == tag) {
-                        currentFilters.remove(tag);
-                        isInTheList = true;
-                        break;
+                if (isInit == false) {
+                    boolean isInTheList = false;
+                    String filters = "";
+                    for (Tag tag : currentFilters) {
+                        if (tag != null && tagList.getItemAtPosition(position) == tag) {
+                            currentFilters.remove(tag);
+                            isInTheList = true;
+                            break;
+                        }
                     }
+                    if (!isInTheList)
+                        currentFilters.add((Tag) tagList.getItemAtPosition(position));
+                    for (int i = 0; i < currentFilters.size(); i++) {
+                        filters += currentFilters.get(i).getName();
+                    }
+                    actualFilters.setText(filters);
                 }
-                if(!isInTheList)
-                    currentFilters.add((Tag) tagList.getItemAtPosition(position));
-                for(int i = 0; i < currentFilters.size(); i++) {
-                    filters += currentFilters.get(i).getName();
-                }
-                actualFilters.setText(filters);
+                isInit = false;
             }
 
             @Override
@@ -182,8 +194,12 @@ public class NewLocationModel {
         return this.next;
     }
 
-    public List<Tag> getTags() {
-        return this.tags;
+    public List<Tag> getTags() {//for array spinner adapter
+        return tags;
+    }
+
+    public List<Tag> getCurrentFilters() {
+        return this.currentFilters;
     }
 
     public String getNameOfTheLocation() {

@@ -114,7 +114,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location_schedule);
             rightSideMenu = R.layout.new_location_schedule;
-            Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(),newLocationModel.isARestaurant(),newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(),newLocationModel.getPhoneNumberOfTheLocation(),null,newLocationModel.getRatingOfTheLocation(),newLocationModel.getPriceOfTheLocation(),newLocationModel.getDistanceOfTheLocation(),null);
+            Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(),newLocationModel.isARestaurant(),newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(),newLocationModel.getPhoneNumberOfTheLocation(),null,newLocationModel.getRatingOfTheLocation(),newLocationModel.getPriceOfTheLocation(),newLocationModel.getDistanceOfTheLocation(),newLocationModel.getCurrentFilters());
             newLocationScheduleActions(newRestaurant);
         });
     }

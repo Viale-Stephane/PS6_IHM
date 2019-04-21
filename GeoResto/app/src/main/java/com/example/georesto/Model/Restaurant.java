@@ -1,15 +1,16 @@
 package com.example.georesto.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Restaurant {
     private String restaurant, adress, website, phoneNumber;
     private String[] schedule;
-    private ArrayList<Tag> tags;
+    private List<Tag> tags;
     private double grade, price, distance;
     private boolean kindRestaurant;
 
-    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, ArrayList<Tag> tags){
+    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, List<Tag> tags){
         this.restaurant=restaurant;
         this.kindRestaurant = kindRestaurant;
         this.adress=adress;
@@ -38,7 +39,7 @@ public class Restaurant {
         return this.restaurant;
     }
 
-    public ArrayList<Tag> getTags(){ return this.tags;}
+    public List<Tag> getTags(){ return this.tags;}
 
     public void printRestaurant(){
         System.out.println("Le nom du restaurant est : "+this.restaurant);
