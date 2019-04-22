@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "120846521672",
+    "firebase_url": "https://georesto-2dbaa.firebaseio.com",
+    "project_id": "georesto-2dbaa",
+    "storage_bucket": "georesto-2dbaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120846521672:android:2b33150c7ca5e969",
+        "android_client_info": {
+          "package_name": "com.example.georesto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120846521672-9tkr9kf0t5lj1f1f18ej6e7cvcf3scvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKN4UoP_rxFfMqa-kRNLtzkLl2_RBCIF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120846521672-9tkr9kf0t5lj1f1f18ej6e7cvcf3scvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
