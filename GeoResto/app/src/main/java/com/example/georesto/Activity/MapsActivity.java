@@ -6,9 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -32,6 +29,7 @@ import android.widget.Toast;
 
 import com.example.georesto.Model.Profile;
 import com.example.georesto.Model.ProfileList;
+import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -42,7 +40,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -64,6 +61,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
     // Model
     protected Profile user;
+    protected RestaurantList restaurantList = new RestaurantList();
 
     public boolean isServicesOK() {
         Log.d(TAG, "isServicesOK: checking google services version");

@@ -39,6 +39,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/monday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -69,6 +70,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/tuesday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -100,6 +102,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/wednesday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -131,6 +134,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/thursday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -161,6 +165,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/friday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -191,6 +196,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/saturday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -222,6 +228,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/sunday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"

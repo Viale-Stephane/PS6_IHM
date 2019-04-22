@@ -18,8 +18,10 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.georesto.Model.NewLocationModel;
+import com.example.georesto.Model.NewLocationScheduleModel;
 import com.example.georesto.Model.ProfileModel;
 import com.example.georesto.Model.Restaurant;
+import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
 import com.example.georesto.Model.ProfileList;
@@ -111,18 +113,26 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.inflateHeaderView(R.layout.new_location_schedule);
             rightSideMenu = R.layout.new_location_schedule;
             Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(),newLocationModel.isARestaurant(),newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(),newLocationModel.getPhoneNumberOfTheLocation(),null,newLocationModel.getRatingOfTheLocation(),newLocationModel.getPriceOfTheLocation(),newLocationModel.getDistanceOfTheLocation(),newLocationModel.getCurrentFilters());
-            newLocationScheduleActions(newRestaurant);
+            this.newLocationScheduleActions(newRestaurant);
         });
     }
 
     public void newLocationScheduleActions(Restaurant restaurant) {
-        View currentHeader = profileView.getHeaderView(0);
-        Button cancel = currentHeader.findViewById(R.id.cancelButton);
-        cancel.setOnClickListener(v -> {
+        NewLocationScheduleModel newLocationScheduleModel = new NewLocationScheduleModel(profileView);
+
+        newLocationScheduleModel.getCancelButton().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
-            newLocationActions(restaurant);
+            this.newLocationActions(restaurant);
+        });
+
+        newLocationScheduleModel.getValidateButton().setOnClickListener(v -> {
+            restaurant.addSchedule(newLocationScheduleModel.getSchedule());
+            restaurantList.addRestaurant(restaurant);
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateHeaderView(R.layout.profile);
+            this.profileActions();
         });
     }
 

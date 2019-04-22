@@ -53,6 +53,10 @@ public class Restaurant {
         System.out.println("Le restaurant a pour note : "+grade);
     }
 
+    public void addSchedule(String[] schedule) {
+        this.schedule = schedule;
+    }
+
     public String getSchedule(int dayNumber) {
         switch(dayNumber){
             case 0:
