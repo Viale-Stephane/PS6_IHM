@@ -43,6 +43,8 @@ public class ProfileList {
     public static String addProfile(Profile profile, String passwordConfirmation) {
         if (!profile.getPassword().equals(passwordConfirmation)) {
             return "Mots de passe différents";
+        } else if(profile.getEmail().equals("") || profile.getFirstName().equals("") || profile.getLastName().equals("") || profile.getPassword().equals("") || profile.getUsername().equals("")){
+            return "Veuillez remplir toutes les informations";
         } else {
             for (Profile existingProfile : profiles) {
                 if (profile.getUsername().equals(existingProfile.getUsername())) {

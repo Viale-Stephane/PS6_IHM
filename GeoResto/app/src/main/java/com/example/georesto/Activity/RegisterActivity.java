@@ -5,9 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 
 import com.example.georesto.R;
 import com.example.georesto.Model.Profile;
@@ -34,6 +38,11 @@ public class RegisterActivity extends Activity {
         TextView wrongNewProfile = (TextView) findViewById(R.id.wrongNewProfile);
         Button loginButton = (Button) findViewById(R.id.connect);
         Button registerButton = (Button) findViewById(R.id.register);
+        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
+
+        //hide password text
+        password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        passwordConfirmation.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,5 +84,20 @@ public class RegisterActivity extends Activity {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    // show password
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    passwordConfirmation.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    passwordConfirmation.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
     }
 }
