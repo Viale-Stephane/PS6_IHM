@@ -44,6 +44,7 @@ public class MapsActivityOnline extends MapsActivity {
 
         ImageButton profileButton = findViewById(R.id.accessProfile);
         profileButton.setOnClickListener(v -> {
+            drawerMap.closeDrawer(searchView);
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.profile);
             setPersonalInformation();

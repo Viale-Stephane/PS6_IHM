@@ -54,7 +54,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected NavigationView profileView;
     protected NavigationView searchView;
     protected int rightSideMenu = R.layout.info;
-    protected int leftSideMenu = R.layout.research;
 
     // Search Side
     protected Spinner tagSpinner;
@@ -115,8 +114,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         toolbar.setNavigationOnClickListener(v -> {
             if (!drawerMap.isDrawerOpen(searchView)) {
+                drawerMap.closeDrawer(profileView);
                 drawerMap.openDrawer(searchView);
-
                 tagSpinner = findViewById(R.id.tagSpinner);
                 tagSpinner.setAdapter(adapter);
             } else {
@@ -127,10 +126,10 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
     @Override
     public void onBackPressed() {
-        if (this.drawerMap.isDrawerOpen(rightSideMenu)) {
-            this.drawerMap.closeDrawer(rightSideMenu);
-        } else if (this.drawerMap.isDrawerOpen(leftSideMenu)) {
-            this.drawerMap.closeDrawer(leftSideMenu);
+        if (this.drawerMap.isDrawerOpen(profileView)) {
+            this.drawerMap.closeDrawer(profileView);
+        } else if (this.drawerMap.isDrawerOpen(searchView)) {
+            this.drawerMap.closeDrawer(searchView);
         } else {
             super.onBackPressed();
         }
