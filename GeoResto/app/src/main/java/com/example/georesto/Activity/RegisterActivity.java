@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 
+import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.R;
 import com.example.georesto.Model.Profile;
 import com.example.georesto.Model.ProfileList;
@@ -54,7 +55,7 @@ public class RegisterActivity extends Activity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongNewProfile.setText(ProfileList.addProfile(new Profile(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), mail.getText().toString(), "@drawable/default_profile"), passwordConfirmation.getText().toString()));
+                wrongNewProfile.setText(ProfileList.addProfile(new Profile(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), mail.getText().toString(), "@drawable/default_profile", new RestaurantList().getRestaurants()), passwordConfirmation.getText().toString()));
                 if (wrongNewProfile.getText().toString().equals("Connexion en cours..")) {
                     startActivity(new Intent(RegisterActivity.this, MapsActivityOnline.class));
                 }

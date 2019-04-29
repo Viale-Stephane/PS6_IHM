@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -31,6 +33,7 @@ import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
 import com.example.georesto.Model.ProfileList;
+import com.example.georesto.View.MyAdapter;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -64,9 +67,10 @@ public class MapsActivityOnline extends MapsActivity {
     public void profileActions() {
         ProfileModel profileModel = new ProfileModel(profileView);
         profileModel.getHistoryButton().setOnClickListener(v -> {
-                profileView.removeHeaderView(profileView.getHeaderView(0));
-                profileView.inflateHeaderView(R.layout.history);
-                rightSideMenu = R.layout.history;
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateHeaderView(R.layout.history);
+            displayHistory();
+            rightSideMenu = R.layout.history;
         });
 
         profileModel.getFavouritesButton().setOnClickListener(v -> {
@@ -94,6 +98,12 @@ public class MapsActivityOnline extends MapsActivity {
             ProfileList.setCurrentUser(null);
             startActivity(new Intent(MapsActivityOnline.this, MapsActivityOffline.class));
         });
+    }
+
+    public void displayHistory() {
+        RecyclerView rv = findViewById(R.id.history);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(new MyAdapter(ProfileList.getCurrentUser().getHistorique()));
     }
 
     public void newLocationActions(Restaurant restaurant) {
