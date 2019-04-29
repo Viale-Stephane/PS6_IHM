@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.example.georesto.Model.Profile;
 import com.example.georesto.Model.ProfileList;
+import com.example.georesto.Model.Restaurant;
 import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -272,8 +273,14 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         mMap = googleMap;
         Toast.makeText(this, "maps is ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: maps is ready");
+        this.restaurantList.sampleRestaurant();
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-134, -47);
+        for (Restaurant resto : this.restaurantList.getRestaurants()
+        ) {
+
+            resto.setMarkerOnMap(mMap);
+        }
         if (mLocationPermissionGranted) {
             getDeviceLocation();
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

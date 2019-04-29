@@ -1,5 +1,10 @@
 package com.example.georesto.Model;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +12,11 @@ public class Restaurant {
     private String restaurant, adress, website, phoneNumber;
     private String[] schedule;
     private List<Tag> tags;
+    private LatLng position;
     private double grade, price, distance;
     private boolean kindRestaurant;
 
-    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, List<Tag> tags){
+    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, List<Tag> tags, LatLng position){
         this.restaurant=restaurant;
         this.kindRestaurant = kindRestaurant;
         this.adress=adress;
@@ -21,6 +27,7 @@ public class Restaurant {
         this.price=price;
         this.distance=distance;
         this.tags = tags;
+        this.position = position;
     }
 
     public double getGrade(){
@@ -37,6 +44,22 @@ public class Restaurant {
 
     public String getName(){
         return this.restaurant;
+    }
+
+    public void setMarkerOnMap(GoogleMap map) {
+        if(this.kindRestaurant) {
+            map.addMarker(new MarkerOptions()
+                    .position(this.position)
+                    .title(this.restaurant)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+        } else {
+            map.addMarker(new MarkerOptions()
+                    .position(this.position)
+                    .title(this.restaurant)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+        }
+
     }
 
     public List<Tag> getTags(){ return this.tags;}
