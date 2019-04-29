@@ -105,11 +105,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             drawerMap.openDrawer(profileView);
         });
 
-        ImageButton position = findViewById(R.id.location);
-        position.setOnClickListener(info -> {
-            getDeviceLocation();
-        });
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -271,6 +266,9 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.setPadding(0,120,0,0);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         Toast.makeText(this, "maps is ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: maps is ready");
         this.restaurantList.sampleRestaurant();
