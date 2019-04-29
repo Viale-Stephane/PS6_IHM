@@ -1,15 +1,20 @@
 package com.example.georesto.Model;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TimePicker;
+import android.widget.ToggleButton;
 
 import com.example.georesto.R;
 
 public class NewLocationScheduleModel {
-    EditText monday, tuesday, wednesday, thursday, friday, saturday, sunday;
-    Button cancel, validate;
+    private EditText monday, tuesday, wednesday, thursday, friday, saturday, sunday;
+    private Button cancel, validate;
+    private ToggleButton selectedDay;
 
     public NewLocationScheduleModel(NavigationView profileView) {
         View currentHeader = profileView.getHeaderView(0);
@@ -24,6 +29,21 @@ public class NewLocationScheduleModel {
         this.validate = currentHeader.findViewById(R.id.validateButton);
     }
 
+    public EditText getMonday(){
+        return this.monday;
+    }
+
+    public EditText getTuesday() { return this.tuesday; }
+
+    public EditText getWednesday() { return this.wednesday; }
+
+    public EditText getThursday() { return this.thursday; }
+
+    public EditText getFriday() { return this.friday; }
+
+    public EditText getSaturday() { return this.saturday; }
+
+    public EditText getSunday() { return  this.sunday; }
 
     public Button getCancelButton() {
         return this.cancel;
@@ -31,6 +51,11 @@ public class NewLocationScheduleModel {
 
     public Button getValidateButton() {
         return this.validate;
+    }
+
+    public EditText[] getDays() {
+        EditText[] days = {monday,tuesday,wednesday,thursday,friday,saturday,sunday};
+        return days;
     }
 
     public String[] getSchedule() {
