@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.example.georesto.Model.Profile;
 import com.example.georesto.Model.ProfileList;
+import com.example.georesto.Model.Restaurant;
 import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -54,7 +55,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected NavigationView profileView;
     protected NavigationView searchView;
     protected int rightSideMenu = R.layout.info;
-    protected int leftSideMenu = R.layout.research;
 
     // Search Side
     protected Spinner tagSpinner;
@@ -105,18 +105,13 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             drawerMap.openDrawer(profileView);
         });
 
-        ImageButton position = findViewById(R.id.location);
-        position.setOnClickListener(info -> {
-            getDeviceLocation();
-        });
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         toolbar.setNavigationOnClickListener(v -> {
             if (!drawerMap.isDrawerOpen(searchView)) {
+                drawerMap.closeDrawer(profileView);
                 drawerMap.openDrawer(searchView);
-
                 tagSpinner = findViewById(R.id.tagSpinner);
                 tagSpinner.setAdapter(adapter);
             } else {
@@ -127,10 +122,10 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
     @Override
     public void onBackPressed() {
-        if (this.drawerMap.isDrawerOpen(rightSideMenu)) {
-            this.drawerMap.closeDrawer(rightSideMenu);
-        } else if (this.drawerMap.isDrawerOpen(leftSideMenu)) {
-            this.drawerMap.closeDrawer(leftSideMenu);
+        if (this.drawerMap.isDrawerOpen(profileView)) {
+            this.drawerMap.closeDrawer(profileView);
+        } else if (this.drawerMap.isDrawerOpen(searchView)) {
+            this.drawerMap.closeDrawer(searchView);
         } else {
             super.onBackPressed();
         }
@@ -271,10 +266,19 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.setPadding(0,120,0,0);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         Toast.makeText(this, "maps is ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: maps is ready");
+        this.restaurantList.sampleRestaurant();
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-134, -47);
+        for (Restaurant resto : this.restaurantList.getRestaurants()
+        ) {
+
+            resto.setMarkerOnMap(mMap);
+        }
         if (mLocationPermissionGranted) {
             getDeviceLocation();
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
