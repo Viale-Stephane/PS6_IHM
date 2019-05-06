@@ -2,11 +2,11 @@ package com.example.georesto.Activity;
 
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -153,7 +153,8 @@ public class MapsActivityOnline extends MapsActivity {
             } else {
                 schedule = null;
             }
-            Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), schedule, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getCurrentFilters(), position);
+            Bitmap image =((BitmapDrawable)newLocationModel.getRestaurantPicture().getDrawable()).getBitmap();
+            Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), schedule, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getCurrentFilters(), position, image);
             this.newLocationScheduleActions(newRestaurant, position);
         });
     }

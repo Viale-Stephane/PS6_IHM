@@ -68,6 +68,7 @@ public class NewLocationModel {
 
     public void init(Restaurant restaurant) {
         if(restaurant != null) {
+            this.restaurantPicture.setImageBitmap(restaurant.getPicture());
             this.restaurantButton.setChecked(restaurant.isKindRestaurant());
             this.commerceButton.setChecked(!restaurant.isKindRestaurant());
             this.nameLocation.setText(restaurant.getName());

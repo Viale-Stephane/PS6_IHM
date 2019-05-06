@@ -31,9 +31,7 @@ public class NewLocationScheduleModel {
 
     public void init(Restaurant restaurant){
         // return "de "+this.openingHour+":"+this.openingMin+" à "+this.endingHour+":"+this.endingMin;
-        System.out.println("            f   ijfeaijfe   jife    ijfe    ifj fjie    i   zj");
         if(restaurant.getCompleteSchedule() != null) {
-            System.out.println("test                                                                                 " + restaurant.getSchedule(0));
         this.getMonday().setText(restaurant.getSchedule(0));
         this.getTuesday().setText(restaurant.getSchedule(1));
         this.getWednesday().setText(restaurant.getSchedule(2));

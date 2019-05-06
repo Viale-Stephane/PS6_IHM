@@ -1,5 +1,6 @@
 package com.example.georesto.Model;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.support.annotation.NonNull;
 
@@ -18,8 +19,9 @@ public class Restaurant {
     private LatLng position;
     private double grade, price, distance;
     private boolean kindRestaurant;
+    private Bitmap restaurantPicture;
 
-    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position) {
+    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position,Bitmap restaurantPicture) {
         this.restaurant = restaurant;
         this.kindRestaurant = kindRestaurant;
         this.adress = adress;
@@ -31,6 +33,7 @@ public class Restaurant {
         this.distance = 0;
         this.tags = tags;
         this.position = position;
+        this.restaurantPicture = restaurantPicture;
     }
 
     public double getGrade() {
@@ -146,5 +149,9 @@ public class Restaurant {
         string.append("Le restaurant a pour note : ").append(grade);
 
         return string.toString();
+    }
+
+    public Bitmap getPicture() {
+        return this.restaurantPicture;
     }
 }
