@@ -127,7 +127,6 @@ public class MapsActivityOnline extends MapsActivity {
         newLocationModel.clickOnCommerceButton();
         newLocationModel.selectTagInTagList();
         newLocationModel.onClickOnSeekBarPrice();
-        newLocationModel.onClickOnSeekBarDistance();
 
         newLocationModel.getCancel().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
@@ -147,8 +146,8 @@ public class MapsActivityOnline extends MapsActivity {
             } else {
                 schedule = null;
             }
-            Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), schedule, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getDistanceOfTheLocation(), newLocationModel.getCurrentFilters(), position);
-                this.newLocationScheduleActions(newRestaurant,position);
+            Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), schedule, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getCurrentFilters(), position);
+            this.newLocationScheduleActions(newRestaurant,position);
 
         });
     }

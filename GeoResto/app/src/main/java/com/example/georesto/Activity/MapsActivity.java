@@ -288,7 +288,9 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         for (Restaurant resto : this.restaurantList.getRestaurants()
         ) {
             resto.setMarkerOnMap(mMap);
-            resto.setDistance(userLocation);
+            if (userLocation!=null) {
+                resto.setDistance(userLocation);
+            }
         }
 
         if (mLocationPermissionGranted) {
