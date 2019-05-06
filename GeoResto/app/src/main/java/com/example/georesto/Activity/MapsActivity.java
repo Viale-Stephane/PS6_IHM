@@ -263,6 +263,13 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         mapFragment.getMapAsync(MapsActivity.this);
     }
 
+    void updateMapsMarker(RestaurantList list){
+        mMap.clear();
+        for (Restaurant resto : list.getRestaurants()
+        ) {
+            resto.setMarkerOnMap(mMap);
+        }
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

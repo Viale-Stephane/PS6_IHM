@@ -49,6 +49,8 @@ import java.util.List;
 
 public class MapsActivityOnline extends MapsActivity {
 
+    Boolean isAddingLocation = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +117,8 @@ public class MapsActivityOnline extends MapsActivity {
     public void newLocationActions(Restaurant restaurant,LatLng position) {
         NewLocationModel newLocationModel = new NewLocationModel(profileView);
         newLocationModel.init(restaurant);
+        isAddingLocation = true;
+
 
         final ArrayAdapter<Tag> spinnerArrayAdapter = new ArrayAdapter<Tag>(this,R.layout.support_simple_spinner_dropdown_item,newLocationModel.getTags());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -130,6 +134,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.inflateHeaderView(R.layout.profile);
             rightSideMenu = R.layout.profile;
             profileActions();
+            isAddingLocation = false;
         });
 
         newLocationModel.getNext().setOnClickListener(v -> {
@@ -190,8 +195,10 @@ public class MapsActivityOnline extends MapsActivity {
         newLocationScheduleModel.getValidateButton().setOnClickListener(v -> {
             restaurant.addSchedule(newLocationScheduleModel.getSchedule());
             restaurantList.addRestaurant(restaurant);
+            updateMapsMarker(restaurantList);
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.profile);
+            isAddingLocation = false;
             this.profileActions();
         });
     }
@@ -313,14 +320,13 @@ public class MapsActivityOnline extends MapsActivity {
         }
 
         googleMap.setOnMapLongClickListener(point -> {
-            profileView.removeHeaderView(profileView.getHeaderView(0));
-            profileView.inflateHeaderView(R.layout.new_location);
-            rightSideMenu = R.layout.new_location;
-            mMap.addMarker(new MarkerOptions()
-                            .position(point)
-                            .title("df"));
-            drawerMap.openDrawer(profileView);
-            newLocationActions(null,point);
-    });
+            if(!isAddingLocation) {
+                profileView.removeHeaderView(profileView.getHeaderView(0));
+                profileView.inflateHeaderView(R.layout.new_location);
+                rightSideMenu = R.layout.new_location;
+                newLocationActions(null,point);
+                drawerMap.openDrawer(profileView);
+            }
+        });
     }
 }
