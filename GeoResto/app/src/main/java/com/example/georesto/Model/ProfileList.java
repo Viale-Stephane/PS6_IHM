@@ -24,9 +24,27 @@ public class ProfileList {
         currentUser = user;
     }
 
+    public static String addProfile(Profile profile, String passwordConfirmation) {
+        if (!profile.getPassword().equals(passwordConfirmation)) {
+            return "Mots de passe différents";
+        } else if (profile.getEmail().equals("") || profile.getFirstName().equals("") || profile.getLastName().equals("") || profile.getPassword().equals("") || profile.getUsername().equals("")) {
+            return "Veuillez remplir toutes les informations";
+        } else {
+            for (Profile existingProfile : profiles) {
+                if (profile.getUsername().equals(existingProfile.getUsername())) {
+                    return "Nom d'utilisateur déjà existant";
+                } else if (profile.getEmail().equals(existingProfile.getEmail())) {
+                    return "Email déjà existant";
+                }
+            }
+        }
+        profiles.add(profile);
+        currentUser = profile;
+        return "Connexion en cours..";
+    }
+
     private void instantiateProfiles() {
-        ArrayList<Restaurant> history = new ArrayList<>();
-        history.addAll(new RestaurantList().getRestaurants());
+        ArrayList<Restaurant> history = new ArrayList<>(new RestaurantList().getRestaurants());
 
         Profile admin = new Profile("admin", "", "administrator", "administrator", "administrator@gmail.com", "@drawable/default_profile", history);
         Profile noName = new Profile("", "", "noName", "noLastName", "noNameIsNice@gmail.com", "@drawable/default_profile", history);
@@ -41,24 +59,5 @@ public class ProfileList {
                 elvis,
                 richard
         ));
-    }
-
-    public static String addProfile(Profile profile, String passwordConfirmation) {
-        if (!profile.getPassword().equals(passwordConfirmation)) {
-            return "Mots de passe différents";
-        } else if(profile.getEmail().equals("") || profile.getFirstName().equals("") || profile.getLastName().equals("") || profile.getPassword().equals("") || profile.getUsername().equals("")){
-            return "Veuillez remplir toutes les informations";
-        } else {
-            for (Profile existingProfile : profiles) {
-                if (profile.getUsername().equals(existingProfile.getUsername())) {
-                    return "Nom d'utilisateur déjà existant";
-                } else if (profile.getEmail().equals(existingProfile.getEmail())) {
-                    return "Email déjà existant";
-                }
-            }
-        }
-        profiles.add(profile);
-        currentUser = profile;
-        return "Connexion en cours..";
     }
 }
