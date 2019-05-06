@@ -30,8 +30,6 @@ public class NewLocationModel {
     private TextView actualFilters;
     private TextView price;
     private SeekBar seekBarPrice;
-    private TextView distance;
-    private SeekBar seekBarDistance;
     private Button cancel;
     private Button next;
 
@@ -54,8 +52,6 @@ public class NewLocationModel {
         this.actualFilters = currentHeader.findViewById(R.id.actualFilters);
         this.price = currentHeader.findViewById(R.id.price);
         this.seekBarPrice = currentHeader.findViewById(R.id.seekBarPrice);
-        this.distance = currentHeader.findViewById(R.id.distance);
-        this.seekBarDistance = currentHeader.findViewById(R.id.seekBarDistance);
         this.cancel = currentHeader.findViewById(R.id.cancelButton);
         this.next = currentHeader.findViewById(R.id.nextButton);
         //-------------------------------------------------------//
@@ -83,14 +79,11 @@ public class NewLocationModel {
 
             this.price.setText("Prix : " + restaurant.getPrice() + " €");
             this.seekBarPrice.setProgress((int) restaurant.getPrice());
-            this.distance.setText("Distance : " + restaurant.getDistance() + " km");
-            this.seekBarDistance.setProgress((int) restaurant.getDistance());
+
         } else {
             this.seekBarPrice.setProgress(20);
-            this.seekBarDistance.setProgress(5);
         }
         this.seekBarPrice.setMax(500);
-        this.seekBarDistance.setMax(100);
     }
 
     public void setAdapterToTagList(ArrayAdapter<Tag> spinnerArrayAdapter) {
@@ -167,25 +160,6 @@ public class NewLocationModel {
         });
     }
 
-    public void onClickOnSeekBarDistance() {
-        seekBarDistance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                distance.setText("Distance: "+ progress + " km");
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                distance.setText("Distance: "+ seekBarDistance.getProgress() + " km");
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                distance.setText("Distance: "+ seekBarDistance.getProgress() + " km");
-            }
-        });
-    }
-
     public Button getCancel() {
         return this.cancel;
     }
@@ -228,9 +202,5 @@ public class NewLocationModel {
 
     public double getPriceOfTheLocation() {
         return this.seekBarPrice.getProgress();
-    }
-
-    public double getDistanceOfTheLocation() {
-        return this.seekBarDistance.getProgress();
     }
 }
