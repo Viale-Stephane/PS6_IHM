@@ -6,16 +6,16 @@ public class Profile {
     private String username, password;
     private String firstName, lastName, email;
     private String linkImage;
-    private ArrayList<Restaurant> historique;
+    private ArrayList<Restaurant> history;
 
-    public Profile(String username, String password, String firstName, String lastName, String email, String linkImage, ArrayList<Restaurant> historique) {
+    public Profile(String username, String password, String firstName, String lastName, String email, String linkImage, ArrayList<Restaurant> history) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.linkImage = linkImage;
-        this.historique = historique;
+        this.history = history;
     }
 
     public String getFirstName() { return this.firstName; }
@@ -36,5 +36,5 @@ public class Profile {
 
     public String getLinkImage() { return this.linkImage; }
 
-    public ArrayList<Restaurant> getHistorique() { return this.historique; }
+    public ArrayList<Restaurant> getHistory() { return this.history; }
 }

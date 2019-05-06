@@ -1,5 +1,6 @@
 package com.example.georesto.Activity;
 
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -15,38 +16,26 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.example.georesto.Model.NewLocationModel;
 import com.example.georesto.Model.NewLocationScheduleModel;
 import com.example.georesto.Model.PopUpTimePickerModel;
+import com.example.georesto.Model.ProfileList;
 import com.example.georesto.Model.ProfileModel;
 import com.example.georesto.Model.Restaurant;
-import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
-import com.example.georesto.Model.ProfileList;
 import com.example.georesto.View.MyAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class MapsActivityOnline extends MapsActivity {
@@ -100,7 +89,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
-            newLocationActions(null,new LatLng(0,0));
+            newLocationActions(null, new LatLng(0, 0));
         });
 
         profileModel.getLogOutButton().setOnClickListener(v -> {
@@ -114,7 +103,7 @@ public class MapsActivityOnline extends MapsActivity {
     public void displayHistory() {
         RecyclerView rv = findViewById(R.id.history);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new MyAdapter(ProfileList.getCurrentUser().getHistorique()));
+        rv.setAdapter(new MyAdapter(ProfileList.getCurrentUser().getHistory()));
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -138,7 +127,7 @@ public class MapsActivityOnline extends MapsActivity {
 
         });
 
-        final ArrayAdapter<Tag> spinnerArrayAdapter = new ArrayAdapter<Tag>(this,R.layout.support_simple_spinner_dropdown_item,newLocationModel.getTags());
+        final ArrayAdapter<Tag> spinnerArrayAdapter = new ArrayAdapter<Tag>(this, R.layout.support_simple_spinner_dropdown_item, newLocationModel.getTags());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         newLocationModel.setAdapterToTagList(spinnerArrayAdapter);
         newLocationModel.clickOnRestaurantButton();
@@ -159,46 +148,45 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.inflateHeaderView(R.layout.new_location_schedule);
             rightSideMenu = R.layout.new_location_schedule;
             String[] schedule;
-            if(restaurant !=null) {
+            if (restaurant != null) {
                 schedule = restaurant.getCompleteSchedule();
             } else {
                 schedule = null;
             }
             Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), schedule, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getCurrentFilters(), position);
-            this.newLocationScheduleActions(newRestaurant,position);
-
+            this.newLocationScheduleActions(newRestaurant, position);
         });
     }
 
-    public void newLocationScheduleActions(Restaurant restaurant,LatLng position) {
+    public void newLocationScheduleActions(Restaurant restaurant, LatLng position) {
         NewLocationScheduleModel newLocationScheduleModel = new NewLocationScheduleModel(profileView);
         newLocationScheduleModel.init(restaurant);
         newLocationScheduleModel.getMonday().setOnClickListener(v -> {
-            this.popUpTimePickerActions(newLocationScheduleModel.getDays(),0);
+            this.popUpTimePickerActions(newLocationScheduleModel.getDays(), 0);
         });
 
         newLocationScheduleModel.getTuesday().setOnClickListener(v -> {
-                this.popUpTimePickerActions(newLocationScheduleModel.getDays(),1);
+            this.popUpTimePickerActions(newLocationScheduleModel.getDays(), 1);
         });
 
         newLocationScheduleModel.getWednesday().setOnClickListener(v -> {
-                this.popUpTimePickerActions(newLocationScheduleModel.getDays(),2);
+            this.popUpTimePickerActions(newLocationScheduleModel.getDays(), 2);
         });
 
         newLocationScheduleModel.getThursday().setOnClickListener(v -> {
-                this.popUpTimePickerActions(newLocationScheduleModel.getDays(),3);
+            this.popUpTimePickerActions(newLocationScheduleModel.getDays(), 3);
         });
 
         newLocationScheduleModel.getFriday().setOnClickListener(v -> {
-                this.popUpTimePickerActions(newLocationScheduleModel.getDays(),4);
+            this.popUpTimePickerActions(newLocationScheduleModel.getDays(), 4);
         });
 
         newLocationScheduleModel.getSaturday().setOnClickListener(v -> {
-                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays(),5);
+            MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays(), 5);
         });
 
         newLocationScheduleModel.getSunday().setOnClickListener(v -> {
-                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays(),6);
+            MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays(), 6);
         });
 
         newLocationScheduleModel.getCancelButton().setOnClickListener(v -> {
@@ -206,7 +194,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
-            this.newLocationActions(restaurant,position);
+            this.newLocationActions(restaurant, position);
         });
 
         newLocationScheduleModel.getValidateButton().setOnClickListener(v -> {
@@ -231,7 +219,7 @@ public class MapsActivityOnline extends MapsActivity {
         alertDialogCongratulations.show();
         PopUpTimePickerModel popUpTimePickerModel = new PopUpTimePickerModel(view);
         popUpTimePickerModel.getCancel().setOnClickListener(_v -> {
-            if(popUpTimePickerModel.isEndingSchedule() == false)
+            if (popUpTimePickerModel.isEndingSchedule() == false)
                 alertDialogCongratulations.cancel();
             else {
                 popUpTimePickerModel.cancelEndingSchedule();
@@ -240,22 +228,22 @@ public class MapsActivityOnline extends MapsActivity {
         });
 
         popUpTimePickerModel.getNext().setOnClickListener(_v -> {
-            if(popUpTimePickerModel.isEndingSchedule()){
+            if (popUpTimePickerModel.isEndingSchedule()) {
                 popUpTimePickerModel.takeTime();
                 String toggleButtonId = popUpTimePickerModel.whichToggleButtonIsChecked();
-                if(toggleButtonId.equals("day")) {
+                if (toggleButtonId.equals("day")) {
                     days[dayNumber].setText(popUpTimePickerModel.schedulize());
                 } else if (toggleButtonId.equals("fullWeek")) {
-                    for(int i = 0; i < 7; i++) {
+                    for (int i = 0; i < 7; i++) {
                         days[i].setText(popUpTimePickerModel.schedulize());
                     }
                 } else if (toggleButtonId.equals("week")) {
-                    for(int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 5; i++) {
                         days[i].setText(popUpTimePickerModel.schedulize());
                     }
                 }
                 alertDialogCongratulations.cancel();
-            }else {
+            } else {
                 popUpTimePickerModel.takeTime();
                 popUpTimePickerModel.setSchedule("Horaire de fermeture");
             }
@@ -310,6 +298,16 @@ public class MapsActivityOnline extends MapsActivity {
         mMap = googleMap;
 
         googleMap.getUiSettings().setCompassEnabled(true);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         googleMap.setMyLocationEnabled(true);
         googleMap.setPadding(0, 120, 0, 0);
         googleMap.getUiSettings().setZoomControlsEnabled(true);

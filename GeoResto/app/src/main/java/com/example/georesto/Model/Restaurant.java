@@ -1,13 +1,14 @@
 package com.example.georesto.Model;
 
 import android.location.Location;
+import android.support.annotation.NonNull;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Restaurant {
@@ -18,18 +19,30 @@ public class Restaurant {
     private double grade, price, distance;
     private boolean kindRestaurant;
 
-    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position){
-        this.restaurant=restaurant;
+    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position) {
+        this.restaurant = restaurant;
         this.kindRestaurant = kindRestaurant;
-        this.adress=adress;
-        this.website=website;
-        this.phoneNumber=phoneNumber;
-        this.schedule=schedule;
-        this.grade=grade;
-        this.price=price;
+        this.adress = adress;
+        this.website = website;
+        this.phoneNumber = phoneNumber;
+        this.schedule = schedule;
+        this.grade = grade;
+        this.price = price;
         this.distance = 0;
         this.tags = tags;
         this.position = position;
+    }
+
+    public double getGrade() {
+        return this.grade;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
+
+    public double getDistance() {
+        return this.distance;
     }
 
     public void setDistance(LatLng userLocation) {
@@ -42,61 +55,18 @@ public class Restaurant {
         loc2.setLongitude(userLocation.longitude);
 
         this.distance = loc1.distanceTo(loc2);
-
     }
 
-    public double getGrade(){
-        return this.grade;
-    }
-
-    public double getPrice(){
-        return this.price;
-    }
-
-    public double getDistance(){
-        return this.distance;
-    }
-
-    public String getName(){
+    public String getName() {
         return this.restaurant;
     }
 
-    public void setMarkerOnMap(GoogleMap map) {
-        if(this.kindRestaurant) {
-            map.addMarker(new MarkerOptions()
-                    .position(this.position)
-                    .title(this.restaurant)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
-        } else {
-            map.addMarker(new MarkerOptions()
-                    .position(this.position)
-                    .title(this.restaurant)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-        }
-
-    }
-
-    public List<Tag> getTags(){ return this.tags;}
-
-    public void printRestaurant(){
-        System.out.println("Le nom du restaurant est : "+this.restaurant);
-        System.out.println("L'adresse du restaurant est : "+this.adress);
-        System.out.println("Le site internet du restaurant est : "+this.website);
-        System.out.println("Le numéro de téléphone du restaurant est : "+this.phoneNumber);
-        System.out.println("L'emploi du temps du restaurant est le suivant : ");
-        for(int i=0;i<schedule.length;i++){
-            System.out.println("Jour "+i+" le restaurant a pour horaires "+schedule[i]);
-        }
-        System.out.println("Le restaurant a pour note : "+grade);
-    }
-
-    public void addSchedule(String[] schedule) {
-        this.schedule = schedule;
+    public List<Tag> getTags() {
+        return this.tags;
     }
 
     public String getSchedule(int dayNumber) {
-        switch(dayNumber){
+        switch (dayNumber) {
             case 0:
                 return this.schedule[0];
             case 1:
@@ -127,17 +97,54 @@ public class Restaurant {
         return this.phoneNumber;
     }
 
-    public boolean isKindRestaurant() {
-        return this.kindRestaurant;
-    }
-
     public String[] getCompleteSchedule() {
-        if(schedule != null)
+        if (schedule != null)
             return this.schedule;
         return null;
     }
 
+    public boolean isKindRestaurant() {
+        return this.kindRestaurant;
+    }
+
     public void setPosition(LatLng position) {
         this.position = position;
+    }
+
+    public void addSchedule(String[] schedule) {
+        this.schedule = schedule;
+    }
+
+    public void setMarkerOnMap(GoogleMap map) {
+        DecimalFormat df = new DecimalFormat("####.###");
+        if (this.kindRestaurant) {
+            map.addMarker(new MarkerOptions()
+                    .position(this.position)
+                    .title(df.format(distance/1000) + " km")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+        } else {
+            map.addMarker(new MarkerOptions()
+                    .position(this.position)
+                    .title(df.format(distance/1000) + " km")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+        }
+
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder("Le nom du restaurant est : " + this.restaurant + "\n" +
+                "L'adresse du restaurant est : " + this.adress + "\n" +
+                "Le site internet du restaurant est : " + this.website + "\n" +
+                "Le numéro de téléphone du restaurant est : " + this.phoneNumber + "\n" +
+                "L'emploi du temps du restaurant est le suivant : ");
+        for (int i = 0; i < schedule.length; i++) {
+            string.append("Jour ").append(i).append(" le restaurant a pour horaires ").append(schedule[i]);
+        }
+        string.append("Le restaurant a pour note : ").append(grade);
+
+        return string.toString();
     }
 }
