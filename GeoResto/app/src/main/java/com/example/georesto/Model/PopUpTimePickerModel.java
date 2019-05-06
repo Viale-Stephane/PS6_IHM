@@ -5,12 +5,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.ToggleButton;
 
 import com.example.georesto.R;
 
 public class PopUpTimePickerModel {
     private TimePicker simpleTimePicker;
     private Button cancel, next;
+    private ToggleButton dayButton, fullWeekButton, weekButton;
     private TextView schedule;
     private int openingHour, openingMin, endingHour, endingMin;
     private boolean endingSchedule;
@@ -19,6 +21,9 @@ public class PopUpTimePickerModel {
         this.simpleTimePicker = popUp.findViewById(R.id.simpleTimePicker);
         this.cancel = popUp.findViewById(R.id.cancelButton);
         this.next = popUp.findViewById(R.id.nextButton);
+        this.dayButton = popUp.findViewById(R.id.dayButton);
+        this.fullWeekButton = popUp.findViewById(R.id.fullWeekButton);
+        this.weekButton = popUp.findViewById(R.id.weekButton);
         this.simpleTimePicker.setIs24HourView(true);
         this.schedule = popUp.findViewById(R.id.schedule);
         this.openingHour = -1;
@@ -34,6 +39,30 @@ public class PopUpTimePickerModel {
 
     public Button getCancel(){
         return this.cancel;
+    }
+
+    public void clickOnDayButton() {
+        this.dayButton.setOnClickListener(v -> {
+            this.dayButton.setChecked(true);
+            this.fullWeekButton.setChecked(false);
+            this.weekButton.setChecked(false);
+        });
+    }
+
+    public void clickOnFullWeekButton() {
+        this.fullWeekButton.setOnClickListener(v -> {
+            this.dayButton.setChecked(false);
+            this.fullWeekButton.setChecked(true);
+            this.weekButton.setChecked(false);
+        });
+    }
+
+    public void clickOnWeekButton() {
+        this.weekButton.setOnClickListener(v -> {
+            this.dayButton.setChecked(false);
+            this.fullWeekButton.setChecked(false);
+            this.weekButton.setChecked(true);
+        });
     }
 
 
