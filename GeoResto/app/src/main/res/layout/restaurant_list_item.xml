@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="125dp"
     android:padding="20dip">
 
     <LinearLayout
@@ -14,12 +14,12 @@
         <TextView
             android:id="@+id/restaurant_list_item_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="70dp" />
 
         <TextView
             android:id="@+id/restaurant_list_item_description"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
