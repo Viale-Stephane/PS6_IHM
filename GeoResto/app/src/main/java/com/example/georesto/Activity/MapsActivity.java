@@ -102,28 +102,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         configureDrawerLayout();
 
         configureSideViews();
-
-        locationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
-                for (Location location : locationResult.getLocations()) {
-                    // Update UI with location data
-                    // ...
-                    mMap.clear();
-                    Log.d(TAG,"restorant" + restaurantList.getRestaurants().size());
-                    for (Restaurant resto : restaurantList.getRestaurants()
-                    ) {
-                        if(userLocation!=null) {
-                            resto.setDistance(userLocation);
-                        }
-                        resto.setMarkerOnMap(mMap);
-                    }
-                }
-            }
-        };
+        
 
         ImageButton logo = findViewById(R.id.logo);
         logo.setOnClickListener(info -> {
@@ -187,8 +166,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     Boolean mLocationPermissionGranted = false;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15.0f;
-    private LatLng userLocation;
-    // GoogleMaps
+    LatLng userLocation;
+     // GoogleMaps
     protected GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
@@ -321,6 +300,14 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         googleMap.getUiSettings().setZoomControlsEnabled(true);
 
         Log.d(TAG, "onMapReady: maps is ready");
+        mMap.clear();
+        for (Restaurant resto : this.restaurantList.getRestaurants()
+        ) {
+            if (userLocation!=null) {
+                resto.setDistance(userLocation);
+            }
+            resto.setMarkerOnMap(mMap);
+        }
 
         if (mLocationPermissionGranted) {
             getDeviceLocation();
@@ -336,14 +323,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             }
         }
 
-        mMap.clear();
-        for (Restaurant resto : this.restaurantList.getRestaurants()
-        ) {
-            if (userLocation!=null) {
-                resto.setDistance(userLocation);
-            }
-            resto.setMarkerOnMap(mMap);
-        }
     }
     
 

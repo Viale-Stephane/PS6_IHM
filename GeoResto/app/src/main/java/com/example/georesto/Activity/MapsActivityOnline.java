@@ -86,7 +86,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
-            newLocationActions(null,new LatLng(0,0));
+            newLocationActions(null, new LatLng(0, 0));
         });
 
         profileModel.getLogOutButton().setOnClickListener(v -> {
@@ -103,7 +103,7 @@ public class MapsActivityOnline extends MapsActivity {
         rv.setAdapter(new MyAdapter(ProfileList.getCurrentUser().getHistory()));
     }
 
-    public void newLocationActions(Restaurant restaurant,LatLng position) {
+    public void newLocationActions(Restaurant restaurant, LatLng position) {
         NewLocationModel newLocationModel = new NewLocationModel(profileView);
         newLocationModel.init(restaurant);
         isAddingLocation = true;
@@ -130,17 +130,17 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.inflateHeaderView(R.layout.new_location_schedule);
             rightSideMenu = R.layout.new_location_schedule;
             String[] schedule;
-            if(restaurant !=null) {
+            if (restaurant != null) {
                 schedule = restaurant.getCompleteSchedule();
             } else {
                 schedule = null;
             }
             Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), schedule, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getCurrentFilters(), position);
-            this.newLocationScheduleActions(newRestaurant,position);
+            this.newLocationScheduleActions(newRestaurant, position);
         });
     }
 
-    public void newLocationScheduleActions(Restaurant restaurant,LatLng position) {
+    public void newLocationScheduleActions(Restaurant restaurant, LatLng position) {
         NewLocationScheduleModel newLocationScheduleModel = new NewLocationScheduleModel(profileView);
         newLocationScheduleModel.init(restaurant);
         newLocationScheduleModel.getMonday().setOnClickListener(v -> {
@@ -176,7 +176,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
-            this.newLocationActions(restaurant,position);
+            this.newLocationActions(restaurant, position);
         });
 
         newLocationScheduleModel.getValidateButton().setOnClickListener(v -> {
@@ -213,14 +213,14 @@ public class MapsActivityOnline extends MapsActivity {
             if (popUpTimePickerModel.isEndingSchedule()) {
                 popUpTimePickerModel.takeTime();
                 String toggleButtonId = popUpTimePickerModel.whichToggleButtonIsChecked();
-                if(toggleButtonId.equals("day")) {
+                if (toggleButtonId.equals("day")) {
                     days[dayNumber].setText(popUpTimePickerModel.schedulize());
                 } else if (toggleButtonId.equals("fullWeek")) {
-                    for(int i = 0; i < 7; i++) {
+                    for (int i = 0; i < 7; i++) {
                         days[i].setText(popUpTimePickerModel.schedulize());
                     }
                 } else if (toggleButtonId.equals("week")) {
-                    for(int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 5; i++) {
                         days[i].setText(popUpTimePickerModel.schedulize());
                     }
                 }
@@ -280,6 +280,16 @@ public class MapsActivityOnline extends MapsActivity {
         mMap = googleMap;
 
         googleMap.getUiSettings().setCompassEnabled(true);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         googleMap.setMyLocationEnabled(true);
         googleMap.setPadding(0, 120, 0, 0);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
