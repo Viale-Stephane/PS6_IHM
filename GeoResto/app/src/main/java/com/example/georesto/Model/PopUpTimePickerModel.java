@@ -65,6 +65,15 @@ public class PopUpTimePickerModel {
         });
     }
 
+    public String whichToggleButtonIsChecked() {
+        if(this.dayButton.isChecked())
+            return "day";
+        else if (this.fullWeekButton.isChecked())
+            return "fullWeek";
+        else
+            return "week";
+    }
+
 
     public void takeTime() {
         if(this.openingHour == -1 || this.openingMin == -1 || this.endingSchedule == false) {

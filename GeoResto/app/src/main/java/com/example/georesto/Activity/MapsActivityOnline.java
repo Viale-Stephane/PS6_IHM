@@ -136,13 +136,15 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location_schedule);
             rightSideMenu = R.layout.new_location_schedule;
-            Restaurant newRestaurant;
+            String[] schedule;
             if(restaurant !=null) {
-                newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), restaurant.getCompleteSchedule(), newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getDistanceOfTheLocation(), newLocationModel.getCurrentFilters(), position);
+                schedule = restaurant.getCompleteSchedule();
             } else {
-                newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), null, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getDistanceOfTheLocation(), newLocationModel.getCurrentFilters(), position);
-                this.newLocationScheduleActions(newRestaurant,position);
+                schedule = null;
             }
+            Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), schedule, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getDistanceOfTheLocation(), newLocationModel.getCurrentFilters(), position);
+                this.newLocationScheduleActions(newRestaurant,position);
+
         });
     }
 
@@ -216,7 +218,18 @@ public class MapsActivityOnline extends MapsActivity {
         popUpTimePickerModel.getNext().setOnClickListener(_v -> {
             if(popUpTimePickerModel.isEndingSchedule()){
                 popUpTimePickerModel.takeTime();
-                days[dayNumber].setText(popUpTimePickerModel.schedulize());
+                String toggleButtonId = popUpTimePickerModel.whichToggleButtonIsChecked();
+                if(toggleButtonId.equals("day")) {
+                    days[dayNumber].setText(popUpTimePickerModel.schedulize());
+                } else if (toggleButtonId.equals("fullWeek")) {
+                    for(int i = 0; i < 7; i++) {
+                        days[i].setText(popUpTimePickerModel.schedulize());
+                    }
+                } else if (toggleButtonId.equals("week")) {
+                    for(int i = 0; i < 5; i++) {
+                        days[i].setText(popUpTimePickerModel.schedulize());
+                    }
+                }
                 alertDialogCongratulations.cancel();
             }else {
                 popUpTimePickerModel.takeTime();

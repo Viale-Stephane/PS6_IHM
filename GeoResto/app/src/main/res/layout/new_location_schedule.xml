@@ -40,15 +40,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:focusable="false"
             android:id="@+id/monday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:hint="@string/schedule"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/tuesdayLayout"
@@ -71,6 +73,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:focusable="false"
             android:id="@+id/tuesday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -103,6 +106,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:focusable="false"
             android:id="@+id/wednesday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -135,6 +139,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:focusable="false"
             android:id="@+id/thursday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -166,6 +171,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:focusable="false"
             android:id="@+id/friday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -197,6 +203,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:focusable="false"
             android:id="@+id/saturday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -229,6 +236,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:focusable="false"
             android:id="@+id/sunday"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
