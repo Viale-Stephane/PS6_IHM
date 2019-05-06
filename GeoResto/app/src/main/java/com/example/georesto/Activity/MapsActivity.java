@@ -41,6 +41,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -156,8 +157,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     //     GoogleMaps
     // --------------------
 
-    private static final String TAG = "MapsActivity";
-    private Boolean mLocationPermissionGranted = false;
+    static final String TAG = "MapsActivity";
+    Boolean mLocationPermissionGranted = false;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15.0f;
     // GoogleMaps
@@ -184,7 +185,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
-    private void getDeviceLocation() {
+    void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the current location");
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -266,19 +267,20 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.getUiSettings().setCompassEnabled(true);
-        mMap.setPadding(0,120,0,0);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-        Toast.makeText(this, "maps is ready", Toast.LENGTH_SHORT).show();
+
+        googleMap.getUiSettings().setCompassEnabled(true);
+        googleMap.setMyLocationEnabled(true);
+        googleMap.setPadding(0,120,0,0);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+
         Log.d(TAG, "onMapReady: maps is ready");
+
         this.restaurantList.sampleRestaurant();
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-134, -47);
         for (Restaurant resto : this.restaurantList.getRestaurants()
         ) {
-
             resto.setMarkerOnMap(mMap);
         }
+
         if (mLocationPermissionGranted) {
             getDeviceLocation();
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -291,10 +293,13 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            mMap.setMyLocationEnabled(true);
         }
 
+
+
     }
+
+
 
     public void statusCheck() {
         final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);

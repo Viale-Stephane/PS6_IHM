@@ -1,12 +1,16 @@
 package com.example.georesto.Activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -34,6 +38,7 @@ import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
 import com.example.georesto.Model.ProfileList;
 import com.example.georesto.View.MyAdapter;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -276,5 +281,45 @@ public class MapsActivityOnline extends MapsActivity {
         profileView.inflateHeaderView(R.layout.profile);
         rightSideMenu = R.layout.profile;
         this.profileActions();
+    }
+
+    // ---------------------------------
+    //          MAPS
+    // ---------------------------------
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        googleMap.getUiSettings().setCompassEnabled(true);
+        googleMap.setMyLocationEnabled(true);
+        googleMap.setPadding(0, 120, 0, 0);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+
+        Log.d(TAG, "onMapReady: maps is ready");
+
+        this.restaurantList.sampleRestaurant();
+        for (Restaurant resto : this.restaurantList.getRestaurants()
+        ) {
+            resto.setMarkerOnMap(mMap);
+        }
+
+        if (mLocationPermissionGranted) {
+            getDeviceLocation();
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+        }
+
+        googleMap.setOnMapLongClickListener(point -> {
+
+        });
     }
 }
