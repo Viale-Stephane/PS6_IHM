@@ -40,6 +40,7 @@ import com.example.georesto.Model.ProfileList;
 import com.example.georesto.View.MyAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,7 +95,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
-            newLocationActions(null);
+            newLocationActions(null,new LatLng(0,0));
         });
 
         profileModel.getLogOutButton().setOnClickListener(v -> {
@@ -111,7 +112,7 @@ public class MapsActivityOnline extends MapsActivity {
         rv.setAdapter(new MyAdapter(ProfileList.getCurrentUser().getHistorique()));
     }
 
-    public void newLocationActions(Restaurant restaurant) {
+    public void newLocationActions(Restaurant restaurant,LatLng position) {
         NewLocationModel newLocationModel = new NewLocationModel(profileView);
         newLocationModel.init(restaurant);
 
@@ -136,15 +137,16 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.inflateHeaderView(R.layout.new_location_schedule);
             rightSideMenu = R.layout.new_location_schedule;
             Restaurant newRestaurant;
-            if(restaurant !=null)
-                newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(),newLocationModel.isARestaurant(),newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(),newLocationModel.getPhoneNumberOfTheLocation(),restaurant.getCompleteSchedule(),newLocationModel.getRatingOfTheLocation(),newLocationModel.getPriceOfTheLocation(),newLocationModel.getDistanceOfTheLocation(),newLocationModel.getCurrentFilters(),new LatLng(0,0));
-            else
-                newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(),newLocationModel.isARestaurant(),newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(),newLocationModel.getPhoneNumberOfTheLocation(), null,newLocationModel.getRatingOfTheLocation(),newLocationModel.getPriceOfTheLocation(),newLocationModel.getDistanceOfTheLocation(),newLocationModel.getCurrentFilters(),new LatLng(0,0));
-            this.newLocationScheduleActions(newRestaurant);
+            if(restaurant !=null) {
+                newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), restaurant.getCompleteSchedule(), newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getDistanceOfTheLocation(), newLocationModel.getCurrentFilters(), position);
+            } else {
+                newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), null, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getDistanceOfTheLocation(), newLocationModel.getCurrentFilters(), position);
+                this.newLocationScheduleActions(newRestaurant,position);
+            }
         });
     }
 
-    public void newLocationScheduleActions(Restaurant restaurant) {
+    public void newLocationScheduleActions(Restaurant restaurant,LatLng position) {
         NewLocationScheduleModel newLocationScheduleModel = new NewLocationScheduleModel(profileView);
         newLocationScheduleModel.init(restaurant);
         newLocationScheduleModel.getMonday().setOnClickListener(v -> {
@@ -180,7 +182,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
-            this.newLocationActions(restaurant);
+            this.newLocationActions(restaurant,position);
         });
 
         newLocationScheduleModel.getValidateButton().setOnClickListener(v -> {
@@ -298,7 +300,14 @@ public class MapsActivityOnline extends MapsActivity {
         }
 
         googleMap.setOnMapLongClickListener(point -> {
-
-        });
+            profileView.removeHeaderView(profileView.getHeaderView(0));
+            profileView.inflateHeaderView(R.layout.new_location);
+            rightSideMenu = R.layout.new_location;
+            mMap.addMarker(new MarkerOptions()
+                            .position(point)
+                            .title("df"));
+            drawerMap.openDrawer(profileView);
+            newLocationActions(null,point);
+    });
     }
 }

@@ -121,4 +121,8 @@ public class Restaurant {
             return this.schedule;
         return null;
     }
+
+    public void setPosition(LatLng position) {
+        this.position = position;
+    }
 }
