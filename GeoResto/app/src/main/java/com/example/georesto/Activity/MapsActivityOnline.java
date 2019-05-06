@@ -5,7 +5,9 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,6 +51,7 @@ import java.util.List;
 
 public class MapsActivityOnline extends MapsActivity {
 
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     Boolean isAddingLocation = false;
 
     @Override
@@ -113,12 +116,27 @@ public class MapsActivityOnline extends MapsActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new MyAdapter(ProfileList.getCurrentUser().getHistorique()));
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE  && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ImageView restaurantPicture = findViewById(R.id.restaurantPicture);
+            restaurantPicture.setImageBitmap(imageBitmap);
+        }
+    }
     public void newLocationActions(Restaurant restaurant,LatLng position) {
         NewLocationModel newLocationModel = new NewLocationModel(profileView);
         newLocationModel.init(restaurant);
         isAddingLocation = true;
 
+        newLocationModel.getPictureLayout().setOnClickListener(v -> {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+
+        });
 
         final ArrayAdapter<Tag> spinnerArrayAdapter = new ArrayAdapter<Tag>(this,R.layout.support_simple_spinner_dropdown_item,newLocationModel.getTags());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);

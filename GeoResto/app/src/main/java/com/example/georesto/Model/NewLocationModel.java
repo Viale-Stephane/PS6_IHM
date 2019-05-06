@@ -1,11 +1,13 @@
 package com.example.georesto.Model;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -19,6 +21,8 @@ import java.util.List;
 
 public class NewLocationModel {
     private View currentHeader;
+    private ConstraintLayout pictureLayout;
+    private ImageView restaurantPicture;
     private ToggleButton restaurantButton;
     private ToggleButton commerceButton;
     private EditText nameLocation;
@@ -41,6 +45,8 @@ public class NewLocationModel {
 
     public NewLocationModel(NavigationView profileView) {
         this.currentHeader = profileView.getHeaderView(0);
+        this.pictureLayout = currentHeader.findViewById(R.id.pictureLayout);
+        this.restaurantPicture = currentHeader.findViewById(R.id.restaurantPicture);
         this.restaurantButton = currentHeader.findViewById(R.id.restaurantButton);
         this.commerceButton = currentHeader.findViewById(R.id.commerceButton);
         this.nameLocation = currentHeader.findViewById(R.id.editTextNameLocation);
@@ -158,6 +164,16 @@ public class NewLocationModel {
                 price.setText("Prix: "+ seekBarPrice.getProgress() + " €");
             }
         });
+    }
+
+
+
+    public ConstraintLayout getPictureLayout() {
+        return this.pictureLayout;
+    }
+
+    public ImageView getRestaurantPicture() {
+        return this.restaurantPicture;
     }
 
     public Button getCancel() {
