@@ -214,7 +214,13 @@ public class MapsActivityOnline extends MapsActivity {
             } else {
                 schedule = null;
             }
-            Bitmap image =((BitmapDrawable)newLocationModel.getRestaurantPicture().getDrawable()).getBitmap();
+            BitmapDrawable drawable =((BitmapDrawable)newLocationModel.getRestaurantPicture().getDrawable());
+            Bitmap image;
+            if(drawable != null) {
+                image = drawable.getBitmap();
+            } else {
+                image = null;
+            }
             Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), schedule, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getCurrentFilters(), position, image);
             this.newLocationScheduleActions(newRestaurant, position);
         });
@@ -274,7 +280,7 @@ public class MapsActivityOnline extends MapsActivity {
         LayoutInflater li = LayoutInflater.from(this);
         View view = li.inflate(R.layout.time_wheel_view, null);
 
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(view);
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
