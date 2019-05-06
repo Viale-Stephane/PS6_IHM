@@ -29,6 +29,21 @@ public class NewLocationScheduleModel {
         this.validate = currentHeader.findViewById(R.id.validateButton);
     }
 
+    public void init(Restaurant restaurant){
+        // return "de "+this.openingHour+":"+this.openingMin+" à "+this.endingHour+":"+this.endingMin;
+        System.out.println("            f   ijfeaijfe   jife    ijfe    ifj fjie    i   zj");
+        if(restaurant.getCompleteSchedule() != null) {
+            System.out.println("test                                                                                 " + restaurant.getSchedule(0));
+        this.getMonday().setText(restaurant.getSchedule(0));
+        this.getTuesday().setText(restaurant.getSchedule(1));
+        this.getWednesday().setText(restaurant.getSchedule(2));
+        this.getThursday().setText(restaurant.getSchedule(3));
+        this.getFriday().setText(restaurant.getSchedule(4));
+        this.getSaturday().setText(restaurant.getSchedule(5));
+        this.getSunday().setText(restaurant.getSchedule(6));
+        }
+    }
+
     public EditText getMonday(){
         return this.monday;
     }

@@ -135,70 +135,48 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location_schedule);
             rightSideMenu = R.layout.new_location_schedule;
-            Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(),newLocationModel.isARestaurant(),newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(),newLocationModel.getPhoneNumberOfTheLocation(),null,newLocationModel.getRatingOfTheLocation(),newLocationModel.getPriceOfTheLocation(),newLocationModel.getDistanceOfTheLocation(),newLocationModel.getCurrentFilters(),new LatLng(0,0));
+            Restaurant newRestaurant;
+            if(restaurant !=null)
+                newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(),newLocationModel.isARestaurant(),newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(),newLocationModel.getPhoneNumberOfTheLocation(),restaurant.getCompleteSchedule(),newLocationModel.getRatingOfTheLocation(),newLocationModel.getPriceOfTheLocation(),newLocationModel.getDistanceOfTheLocation(),newLocationModel.getCurrentFilters(),new LatLng(0,0));
+            else
+                newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(),newLocationModel.isARestaurant(),newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(),newLocationModel.getPhoneNumberOfTheLocation(), null,newLocationModel.getRatingOfTheLocation(),newLocationModel.getPriceOfTheLocation(),newLocationModel.getDistanceOfTheLocation(),newLocationModel.getCurrentFilters(),new LatLng(0,0));
             this.newLocationScheduleActions(newRestaurant);
         });
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     public void newLocationScheduleActions(Restaurant restaurant) {
         NewLocationScheduleModel newLocationScheduleModel = new NewLocationScheduleModel(profileView);
-        newLocationScheduleModel.getMonday().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays());
-                return true;
-            }
-        });
-        newLocationScheduleModel.getTuesday().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays());
-                return true;
-            }
+        newLocationScheduleModel.init(restaurant);
+        newLocationScheduleModel.getMonday().setOnClickListener(v -> {
+            this.popUpTimePickerActions(newLocationScheduleModel.getDays(),0);
         });
 
-        newLocationScheduleModel.getWednesday().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays());
-                return true;
-            }
+        newLocationScheduleModel.getTuesday().setOnClickListener(v -> {
+                this.popUpTimePickerActions(newLocationScheduleModel.getDays(),1);
         });
 
-        newLocationScheduleModel.getThursday().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays());
-                return true;
-            }
+        newLocationScheduleModel.getWednesday().setOnClickListener(v -> {
+                this.popUpTimePickerActions(newLocationScheduleModel.getDays(),2);
         });
 
-        newLocationScheduleModel.getFriday().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays());
-                return true;
-            }
+        newLocationScheduleModel.getThursday().setOnClickListener(v -> {
+                this.popUpTimePickerActions(newLocationScheduleModel.getDays(),3);
         });
 
-        newLocationScheduleModel.getSaturday().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays());
-                return true;
-            }
+        newLocationScheduleModel.getFriday().setOnClickListener(v -> {
+                this.popUpTimePickerActions(newLocationScheduleModel.getDays(),4);
         });
 
-        newLocationScheduleModel.getSunday().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays());
-                return true;
-            }
+        newLocationScheduleModel.getSaturday().setOnClickListener(v -> {
+                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays(),5);
+        });
+
+        newLocationScheduleModel.getSunday().setOnClickListener(v -> {
+                MapsActivityOnline.this.popUpTimePickerActions(newLocationScheduleModel.getDays(),6);
         });
 
         newLocationScheduleModel.getCancelButton().setOnClickListener(v -> {
+            restaurant.addSchedule(newLocationScheduleModel.getSchedule());
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
@@ -214,15 +192,15 @@ public class MapsActivityOnline extends MapsActivity {
         });
     }
 
-    public void popUpTimePickerActions(EditText[] days) {
+    public void popUpTimePickerActions(EditText[] days, int dayNumber) {
         LayoutInflater li = LayoutInflater.from(this);
         View view = li.inflate(R.layout.time_wheel_view, null);
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme);
         alertDialogBuilder.setView(view);
         AlertDialog alertDialogCongratulations = alertDialogBuilder.create();
-        alertDialogCongratulations.show();
         alertDialogCongratulations.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        alertDialogCongratulations.show();
         PopUpTimePickerModel popUpTimePickerModel = new PopUpTimePickerModel(view);
         popUpTimePickerModel.getCancel().setOnClickListener(_v -> {
             if(popUpTimePickerModel.isEndingSchedule() == false)
@@ -234,17 +212,18 @@ public class MapsActivityOnline extends MapsActivity {
         });
 
         popUpTimePickerModel.getNext().setOnClickListener(_v -> {
-            System.out.println(popUpTimePickerModel.isEndingSchedule());
             if(popUpTimePickerModel.isEndingSchedule()){
                 popUpTimePickerModel.takeTime();
-                days[0].setText(popUpTimePickerModel.schedulize());
-                //set horaires
+                days[dayNumber].setText(popUpTimePickerModel.schedulize());
                 alertDialogCongratulations.cancel();
             }else {
                 popUpTimePickerModel.takeTime();
                 popUpTimePickerModel.setSchedule("Horaire de fermeture");
             }
         });
+        popUpTimePickerModel.clickOnDayButton();
+        popUpTimePickerModel.clickOnFullWeekButton();
+        popUpTimePickerModel.clickOnWeekButton();
     }
 
     public void setPersonalInformation() {

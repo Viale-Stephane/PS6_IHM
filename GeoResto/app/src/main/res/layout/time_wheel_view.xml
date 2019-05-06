@@ -32,7 +32,7 @@
         tools:layout_editor_absoluteX="120dp">
 
         <ToggleButton
-            android:id="@+id/selectedDayButton"
+            android:id="@+id/dayButton"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
@@ -41,12 +41,12 @@
             android:checked="true"
             android:textOff="Aujourd'hui"
             android:textOn="Aujourd'hui"
-            app:layout_constraintEnd_toStartOf="@+id/weeklyButton"
+            app:layout_constraintEnd_toStartOf="@+id/fullWeekButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ToggleButton
-            android:id="@+id/weeklyButton"
+            android:id="@+id/fullWeekButton"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
