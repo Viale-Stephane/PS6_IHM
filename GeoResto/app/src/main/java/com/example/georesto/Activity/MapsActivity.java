@@ -161,6 +161,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     Boolean mLocationPermissionGranted = false;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15.0f;
+    private LatLng userLocation;
     // GoogleMaps
     protected GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -199,8 +200,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful() && task.getResult() != null) {
                             Location currentLocation = (Location) task.getResult();
-                            LatLng position = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                            moveCamera(position, DEFAULT_ZOOM);
+                            userLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                            moveCamera(userLocation, DEFAULT_ZOOM);
                         } else {
                             locationManager.requestLocationUpdates(bestProvider, 1000, 0, new LocationListener() {
                                 @Override
@@ -268,6 +269,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         for (Restaurant resto : list.getRestaurants()
         ) {
             resto.setMarkerOnMap(mMap);
+            resto.setDistance(userLocation);
         }
     }
 
@@ -286,6 +288,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         for (Restaurant resto : this.restaurantList.getRestaurants()
         ) {
             resto.setMarkerOnMap(mMap);
+            resto.setDistance(userLocation);
         }
 
         if (mLocationPermissionGranted) {
@@ -302,11 +305,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             }
         }
 
-
-
     }
-
-
+    
 
     public void statusCheck() {
         final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);

@@ -1,5 +1,7 @@
 package com.example.georesto.Model;
 
+import android.location.Location;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -16,7 +18,7 @@ public class Restaurant {
     private double grade, price, distance;
     private boolean kindRestaurant;
 
-    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, double distance, List<Tag> tags, LatLng position){
+    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position){
         this.restaurant=restaurant;
         this.kindRestaurant = kindRestaurant;
         this.adress=adress;
@@ -25,9 +27,22 @@ public class Restaurant {
         this.schedule=schedule;
         this.grade=grade;
         this.price=price;
-        this.distance=distance;
+        this.distance = 0;
         this.tags = tags;
         this.position = position;
+    }
+
+    public void setDistance(LatLng userLocation) {
+        Location loc1 = new Location("");
+        loc1.setLatitude(position.latitude);
+        loc1.setLongitude(position.longitude);
+
+        Location loc2 = new Location("");
+        loc2.setLatitude(userLocation.latitude);
+        loc2.setLongitude(userLocation.longitude);
+
+        this.distance = loc1.distanceTo(loc2);
+
     }
 
     public double getGrade(){
@@ -39,7 +54,7 @@ public class Restaurant {
     }
 
     public double getDistance(){
-        return this.price;
+        return this.distance;
     }
 
     public String getName(){
