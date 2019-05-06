@@ -35,6 +35,8 @@ import com.example.georesto.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -56,6 +58,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected NavigationView profileView;
     protected NavigationView searchView;
     protected int rightSideMenu = R.layout.info;
+    private LocationCallback locationCallback;
+
 
     // Search Side
     protected Spinner tagSpinner;
@@ -88,7 +92,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
+        this.restaurantList.sampleRestaurant();
         user = ProfileList.getCurrentUser();
         if (isServicesOK()) {
             getLocationPermissions();
@@ -98,6 +102,28 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         configureDrawerLayout();
 
         configureSideViews();
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    // Update UI with location data
+                    // ...
+                    mMap.clear();
+                    Log.d(TAG,"restorant" + restaurantList.getRestaurants().size());
+                    for (Restaurant resto : restaurantList.getRestaurants()
+                    ) {
+                        if(userLocation!=null) {
+                            resto.setDistance(userLocation);
+                        }
+                        resto.setMarkerOnMap(mMap);
+                    }
+                }
+            }
+        };
 
         ImageButton logo = findViewById(R.id.logo);
         logo.setOnClickListener(info -> {
@@ -191,7 +217,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
-        String bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
+        String bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
         try {
             if (mLocationPermissionGranted) {
                 Task location = mFusedLocationProviderClient.getLastLocation();
@@ -208,9 +234,9 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                                 public void onLocationChanged(android.location.Location location) {
                                     double latitude = location.getLatitude();
                                     double longitude = location.getLongitude();
-                                    LatLng position = new LatLng(latitude, longitude);
+                                    userLocation = new LatLng(latitude, longitude);
                                     Log.d(TAG, "onLocationChanged: " + latitude + "  " + longitude);
-                                    moveCamera(position, DEFAULT_ZOOM);
+                                    moveCamera(userLocation, DEFAULT_ZOOM);
                                 }
 
                                 @Override
@@ -264,12 +290,14 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         mapFragment.getMapAsync(MapsActivity.this);
     }
 
-    void updateMapsMarker(RestaurantList list){
+    void updateMapsMarker(RestaurantList list) {
         mMap.clear();
         for (Restaurant resto : list.getRestaurants()
         ) {
+            if (userLocation!=null) {
+                resto.setDistance(userLocation);
+            }
             resto.setMarkerOnMap(mMap);
-            resto.setDistance(userLocation);
         }
     }
 
@@ -278,20 +306,21 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         mMap = googleMap;
 
         googleMap.getUiSettings().setCompassEnabled(true);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         googleMap.setMyLocationEnabled(true);
         googleMap.setPadding(0,120,0,0);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
 
         Log.d(TAG, "onMapReady: maps is ready");
-
-        this.restaurantList.sampleRestaurant();
-        for (Restaurant resto : this.restaurantList.getRestaurants()
-        ) {
-            resto.setMarkerOnMap(mMap);
-            if (userLocation!=null) {
-                resto.setDistance(userLocation);
-            }
-        }
 
         if (mLocationPermissionGranted) {
             getDeviceLocation();
@@ -307,6 +336,14 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             }
         }
 
+        mMap.clear();
+        for (Restaurant resto : this.restaurantList.getRestaurants()
+        ) {
+            if (userLocation!=null) {
+                resto.setDistance(userLocation);
+            }
+            resto.setMarkerOnMap(mMap);
+        }
     }
     
 

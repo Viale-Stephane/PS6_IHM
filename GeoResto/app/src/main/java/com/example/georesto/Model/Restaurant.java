@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Restaurant {
@@ -115,16 +116,17 @@ public class Restaurant {
     }
 
     public void setMarkerOnMap(GoogleMap map) {
+        DecimalFormat df = new DecimalFormat("####.###");
         if (this.kindRestaurant) {
             map.addMarker(new MarkerOptions()
                     .position(this.position)
-                    .title(this.restaurant)
+                    .title(df.format(distance/1000) + " km")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
         } else {
             map.addMarker(new MarkerOptions()
                     .position(this.position)
-                    .title(this.restaurant)
+                    .title(df.format(distance/1000) + " km")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
         }
 
