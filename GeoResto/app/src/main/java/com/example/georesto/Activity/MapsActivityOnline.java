@@ -3,10 +3,12 @@ package com.example.georesto.Activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -23,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.georesto.Model.NewLocationModel;
 import com.example.georesto.Model.NewLocationScheduleModel;
@@ -37,10 +40,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+
+import static android.media.MediaRecorder.VideoSource.CAMERA;
+
 
 public class MapsActivityOnline extends MapsActivity {
 
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int GALLERY = 0;
+    private static final int CAMERA = 1;
     Boolean isAddingLocation = false;
 
     @Override
@@ -105,26 +113,79 @@ public class MapsActivityOnline extends MapsActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new MyAdapter(ProfileList.getCurrentUser().getHistory()));
     }
+
+
+    private void showPictureDialog(){
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+        pictureDialog.setTitle("Choisissez l'action que vous souhaitez réaliser");
+        String[] pictureDialogItems = {
+                "Choissisez une photo depuis votre galerie",
+                "Prennez une nouvelle photo avec votre caméra" };
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                choosePhotoFromGallery();
+                                break;
+                            case 1:
+                                takePhotoFromCamera();
+                                break;
+                        }
+                    }
+                });
+        pictureDialog.show();
+    }
+
+    public void choosePhotoFromGallery() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(galleryIntent, GALLERY);
+    }
+
+    private void takePhotoFromCamera() {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, CAMERA);
+            }
+    }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE  && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == this.RESULT_CANCELED) {
+            return;
+        }
+        if (requestCode == GALLERY) {
+            if (data != null) {
+                Uri contentURI = data.getData();
+                ImageView restaurantPicture = findViewById(R.id.restaurantPicture);
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                    restaurantPicture.setImageBitmap(bitmap);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } else if (requestCode == CAMERA) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             ImageView restaurantPicture = findViewById(R.id.restaurantPicture);
-            restaurantPicture.setImageBitmap(imageBitmap);
+            restaurantPicture.setImageBitmap(thumbnail);
         }
     }
+
     public void newLocationActions(Restaurant restaurant,LatLng position) {
         NewLocationModel newLocationModel = new NewLocationModel(profileView);
         newLocationModel.init(restaurant);
         isAddingLocation = true;
 
         newLocationModel.getPictureLayout().setOnClickListener(v -> {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-
+            this.showPictureDialog();
         });
 
         final ArrayAdapter<Tag> spinnerArrayAdapter = new ArrayAdapter<Tag>(this, R.layout.support_simple_spinner_dropdown_item, newLocationModel.getTags());
@@ -215,13 +276,13 @@ public class MapsActivityOnline extends MapsActivity {
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme);
         alertDialogBuilder.setView(view);
-        AlertDialog alertDialogCongratulations = alertDialogBuilder.create();
-        alertDialogCongratulations.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        alertDialogCongratulations.show();
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
         PopUpTimePickerModel popUpTimePickerModel = new PopUpTimePickerModel(view);
         popUpTimePickerModel.getCancel().setOnClickListener(_v -> {
             if (popUpTimePickerModel.isEndingSchedule() == false)
-                alertDialogCongratulations.cancel();
+                alertDialog.cancel();
             else {
                 popUpTimePickerModel.cancelEndingSchedule();
                 popUpTimePickerModel.setSchedule("Horaire d'ouverture");
@@ -243,7 +304,7 @@ public class MapsActivityOnline extends MapsActivity {
                         days[i].setText(popUpTimePickerModel.schedulize());
                     }
                 }
-                alertDialogCongratulations.cancel();
+                alertDialog.cancel();
             } else {
                 popUpTimePickerModel.takeTime();
                 popUpTimePickerModel.setSchedule("Horaire de fermeture");
