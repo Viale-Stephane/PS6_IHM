@@ -2,6 +2,7 @@ package com.example.georesto.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +45,48 @@ public class RegisterActivity extends Activity {
         //hide password text
         password.setTransformationMethod(PasswordTransformationMethod.getInstance());
         passwordConfirmation.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            TextView textMail = findViewById(R.id.textMail);
+            TextView textPassword = findViewById(R.id.textPassword);
+            TextView textPasswordConfirmation = findViewById(R.id.textConfirmPassword);
+            TextView textUsername = findViewById(R.id.textUsername);
+            TextView textFirstName = findViewById(R.id.textFirstName);
+            TextView textLastName = findViewById(R.id.textLastName);
+            //leftside
+            textMail.setX(-500);
+            textMail.setY(-50);
+            mail.setX(-500);
+            mail.setY(-50);
+            textPassword.setX(-500);
+            textPassword.setY(-50);
+            password.setX(-500);
+            password.setY(-50);
+            checkBox.setX(-500);
+            checkBox.setY(-50);
+            textPasswordConfirmation.setX(-500);
+            textPasswordConfirmation.setY(-50);
+            passwordConfirmation.setX(-500);
+            passwordConfirmation.setY(-50);
+            //right side//
+            textUsername.setX(500);
+            textUsername.setY(-725);
+            username.setX(500);
+            username.setY(-725);
+            textLastName.setX(500);
+            textLastName.setY(-725);
+            lastName.setX(500);
+            lastName.setY(-725);
+            textFirstName.setX(500);
+            textFirstName.setY(-625);
+            firstName.setX(500);
+            firstName.setY(-675);
+
+
+            //buttons//
+            loginButton.setY(-675);
+            registerButton.setY(-675);
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
