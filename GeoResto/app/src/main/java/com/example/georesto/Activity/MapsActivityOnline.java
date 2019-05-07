@@ -82,12 +82,12 @@ public class MapsActivityOnline extends MapsActivity {
     LatLng position = new LatLng(0,0);
     List<Address> address = null;
     NewLocationModel newLocationModel;
-    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+    Geocoder geocoder = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        geocoder = new Geocoder(this, Locale.getDefault());
         findViewById(R.id.accessToLogin).setVisibility(View.GONE);
         findViewById(R.id.accessToRegister).setVisibility(View.GONE);
         findViewById(R.id.home_button).setVisibility(View.GONE);
