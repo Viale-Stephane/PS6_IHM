@@ -125,7 +125,7 @@ public class Restaurant {
         if (this.kindRestaurant) {
             map.addMarker(new MarkerOptions()
                     .position(this.position)
-                    .title(df.format(distance/1000) + " km")
+                    .title(this.restaurant)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
         } else {
