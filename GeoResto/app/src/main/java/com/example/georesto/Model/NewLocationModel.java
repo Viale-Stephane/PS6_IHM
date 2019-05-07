@@ -210,8 +210,8 @@ public class NewLocationModel {
         return this.restaurantButton.isChecked();
     }
 
-    public String getAdressOfTheLocation() {
-        return this.adress.getText().toString();
+    public EditText getAdressTextField() {
+        return this.adress;
     }
 
     public String getWebsiteOfTheLocation() {

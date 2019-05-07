@@ -3,19 +3,40 @@ package com.example.georesto.Activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.IntentSender;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.database.DatabaseErrorHandler;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.UserHandle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,7 +61,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Locale;
 
 import static android.media.MediaRecorder.VideoSource.CAMERA;
 
@@ -52,6 +80,9 @@ public class MapsActivityOnline extends MapsActivity {
     Boolean isAddingLocation = false;
     Boolean isAddingPosition = false;
     LatLng position = new LatLng(0,0);
+    List<Address> address = null;
+    NewLocationModel newLocationModel;
+    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +128,7 @@ public class MapsActivityOnline extends MapsActivity {
 
         profileModel.getNewLocationButton().setOnClickListener(v -> {
             position = new LatLng(0,0);
-            Log.d(TAG, "profileActions: "+position);
+            address = null;
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
@@ -185,7 +216,7 @@ public class MapsActivityOnline extends MapsActivity {
     }
 
     public void newLocationActions(Restaurant restaurant) {
-        NewLocationModel newLocationModel = new NewLocationModel(profileView);
+        newLocationModel = new NewLocationModel(profileView);
         newLocationModel.init(restaurant);
         isAddingLocation = true;
 
@@ -209,16 +240,22 @@ public class MapsActivityOnline extends MapsActivity {
             isAddingLocation = false;
         });
 
+       if (address != null){
+            newLocationModel.getAdressTextField().setText(address.get(0).getAddressLine(0));
+       } else {
+           newLocationModel.getAdressTextField().setText("");
+       }
+
         newLocationModel.getPosition().setOnClickListener(v -> {
             isAddingPosition = true;
             drawerMap.closeDrawer(profileView);
-            newLocationModel.getPosition().setText("Changer la position");
+            newLocationModel.getPosition().setText("Changer");
         });
 
         if(position.latitude == 0 && position.longitude == 0) {
-            newLocationModel.getPosition().setText("Définir la position");
+            newLocationModel.getPosition().setText("Choisir");
         }  else {
-            newLocationModel.getPosition().setText("Changer la position");
+            newLocationModel.getPosition().setText("Changer");
         }
 
         newLocationModel.getNext().setOnClickListener(v -> {
@@ -238,7 +275,7 @@ public class MapsActivityOnline extends MapsActivity {
             } else {
                 image = null;
             }
-            Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressOfTheLocation(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), schedule, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getCurrentFilters(), position, image);
+            Restaurant newRestaurant = new Restaurant(newLocationModel.getNameOfTheLocation(), newLocationModel.isARestaurant(), newLocationModel.getAdressTextField().getText().toString(), newLocationModel.getWebsiteOfTheLocation(), newLocationModel.getPhoneNumberOfTheLocation(), schedule, newLocationModel.getRatingOfTheLocation(), newLocationModel.getPriceOfTheLocation(), newLocationModel.getCurrentFilters(), position, image);
             this.newLocationScheduleActions(newRestaurant, position);
         });
     }
@@ -425,13 +462,22 @@ public class MapsActivityOnline extends MapsActivity {
                 profileView.inflateHeaderView(R.layout.new_location);
                 rightSideMenu = R.layout.new_location;
                 this.position = point;
+                try {
+                    this.address = geocoder.getFromLocation(point.latitude,point.longitude,1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 newLocationActions(null);
                 drawerMap.openDrawer(profileView);
             }
-            Log.d(TAG, "onMapReady:"+ isAddingPosition);
             if(isAddingPosition) {
-                Log.d(TAG, "onMapReady: mabitehuohu");
+                try {
+                    this.address = geocoder.getFromLocation(point.latitude,point.longitude,1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 this.position = point;
+                newLocationModel.getAdressTextField().setText(address.get(0).getAddressLine(0));
                 drawerMap.openDrawer(profileView);
             }
         });

@@ -109,13 +109,13 @@
 
         <EditText
             android:id="@+id/editTextAdress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="90dp"
             android:layout_marginTop="8dp"
             android:hint="@string/adress"
             android:textAlignment="center"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintLeft_toRightOf="@+id/positionButton"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
         <EditText
             android:id="@+id/editTextWebsite"
@@ -185,15 +185,15 @@
 
         <Button
             android:id="@+id/positionButton"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="position sur la carte"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="choisir"
             android:textColor="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seekBarPrice"
-
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar"
             tools:ignore="MissingConstraints" />
 
 
@@ -202,7 +202,6 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         tools:layout_editor_absoluteX="0dp">
 
@@ -213,8 +212,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/cancel"
             android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="@string/cancel"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -227,8 +226,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/next"
             android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="@string/next"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
