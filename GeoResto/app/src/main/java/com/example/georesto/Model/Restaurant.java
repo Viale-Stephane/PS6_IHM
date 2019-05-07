@@ -114,6 +114,8 @@ public class Restaurant {
         this.position = position;
     }
 
+    public LatLng getPosition() { return this.position; }
+
     public void addSchedule(String[] schedule) {
         this.schedule = schedule;
     }
