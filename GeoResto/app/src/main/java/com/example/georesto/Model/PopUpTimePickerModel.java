@@ -41,6 +41,12 @@ public class PopUpTimePickerModel {
         return this.cancel;
     }
 
+    public ToggleButton getDayButton() { return this.dayButton; }
+
+    public ToggleButton getFullWeekButton() { return this.fullWeekButton; }
+
+    public ToggleButton getWeekButton() { return  this.weekButton; }
+
     public void clickOnDayButton() {
         this.dayButton.setOnClickListener(v -> {
             this.dayButton.setChecked(true);
@@ -98,6 +104,31 @@ public class PopUpTimePickerModel {
     }
 
     public String schedulize() {
-        return "de "+this.openingHour+":"+this.openingMin+" à "+this.endingHour+":"+this.endingMin;
+        String openingMin, openingHour, endingMin, endingHour;
+        if(this.openingMin<10){
+            openingMin = "0"+this.openingMin;
+        } else {
+            openingMin = Integer.toString(this.openingMin);
+        }
+
+        if (this.openingHour<10) {
+            openingHour = "0"+this.openingHour;
+        } else {
+            openingHour = Integer.toString(this.openingHour);
+        }
+
+        if (this.endingHour<10) {
+            endingHour = "0"+this.endingHour;
+        } else {
+            endingHour = Integer.toString(this.endingHour);
+        }
+
+        if (this.endingMin<10) {
+            endingMin = "0"+this.endingMin;
+        } else {
+            endingMin = Integer.toString(this.endingMin);
+        }
+
+        return "de "+openingHour+":"+openingMin+" à "+endingHour+":"+endingMin;
     }
 }
