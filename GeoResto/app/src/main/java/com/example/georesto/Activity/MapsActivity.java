@@ -22,6 +22,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -35,15 +36,12 @@ import com.example.georesto.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -57,8 +55,9 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected DrawerLayout drawerMap;
     protected NavigationView profileView;
     protected NavigationView searchView;
+    View main;
     protected int rightSideMenu = R.layout.info;
-    private LocationCallback locationCallback;
+
 
 
     // Search Side
@@ -92,6 +91,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        View main = findViewById(R.id.main);
         this.restaurantList.sampleRestaurant();
         user = ProfileList.getCurrentUser();
         if (isServicesOK()) {

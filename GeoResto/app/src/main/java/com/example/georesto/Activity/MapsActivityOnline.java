@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,9 +41,11 @@ import com.example.georesto.R;
 import com.example.georesto.View.MyAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
 
 public class MapsActivityOnline extends MapsActivity {
 
@@ -54,6 +57,9 @@ public class MapsActivityOnline extends MapsActivity {
     List<Address> address = null;
     NewLocationModel newLocationModel;
     Geocoder geocoder = null;
+    View main;
+    Snackbar newLocationTips = null, newLocationTips2 = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +69,8 @@ public class MapsActivityOnline extends MapsActivity {
         findViewById(R.id.accessToRegister).setVisibility(View.GONE);
         findViewById(R.id.home_button).setVisibility(View.GONE);
         setPersonalInformation();
-
+        newLocationTips = Snackbar.make(drawerMap,"Cliquez longuement sur la carte pour ajouter un lieu",4000);
+        newLocationTips2 = Snackbar.make(drawerMap,"Cliquez longuement sur la carte pour choisir ou modifier l'adresse",4000);
         ImageButton profileButton = findViewById(R.id.accessProfile);
         profileButton.setOnClickListener(v -> {
             drawerMap.closeDrawer(searchView);
@@ -221,6 +228,7 @@ public class MapsActivityOnline extends MapsActivity {
             isAddingPosition = true;
             drawerMap.closeDrawer(profileView);
             newLocationModel.getPosition().setText("Changer");
+            newLocationTips2.show();
         });
 
         if(position.latitude == 0 && position.longitude == 0) {
@@ -404,7 +412,7 @@ public class MapsActivityOnline extends MapsActivity {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        newLocationTips.show();
         googleMap.getUiSettings().setCompassEnabled(true);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
