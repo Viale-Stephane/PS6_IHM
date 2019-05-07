@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.georesto.R;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class NewLocationModel {
     private ToggleButton restaurantButton;
     private ToggleButton commerceButton;
     private EditText nameLocation;
-    private  RatingBar ratingBar;
+    private RatingBar ratingBar;
     private EditText adress;
     private EditText website;
     private EditText phoneNumber;
@@ -36,11 +37,13 @@ public class NewLocationModel {
     private SeekBar seekBarPrice;
     private Button cancel;
     private Button next;
+    private Button position;
 
     //------------------------------------//
     private final List<Tag> tags = new ArrayList<>();
     private List<Tag> currentFilters;
     private boolean isInit;
+
 
 
     public NewLocationModel(NavigationView profileView) {
@@ -60,6 +63,7 @@ public class NewLocationModel {
         this.seekBarPrice = currentHeader.findViewById(R.id.seekBarPrice);
         this.cancel = currentHeader.findViewById(R.id.cancelButton);
         this.next = currentHeader.findViewById(R.id.nextButton);
+        this.position = currentHeader.findViewById(R.id.positionButton);
         //-------------------------------------------------------//
         this.tags.addAll(Tag.getFullList());
         this.currentFilters = new ArrayList<>();
@@ -76,6 +80,9 @@ public class NewLocationModel {
             this.adress.setText(restaurant.getAdress());
             this.website.setText(restaurant.getWebsite());
             this.phoneNumber.setText(restaurant.getPhoneNumber());
+            if(restaurant.getPosition()!=new LatLng(0,0)) {
+                this.position.setText("Changer la position");
+            }
 
             this.currentFilters = restaurant.getTags();
             String filters = "";
@@ -169,6 +176,8 @@ public class NewLocationModel {
 
 
 
+
+
     public ConstraintLayout getPictureLayout() {
         return this.pictureLayout;
     }
@@ -220,4 +229,6 @@ public class NewLocationModel {
     public double getPriceOfTheLocation() {
         return this.seekBarPrice.getProgress();
     }
+
+    public Button getPosition(){ return this.position; }
 }

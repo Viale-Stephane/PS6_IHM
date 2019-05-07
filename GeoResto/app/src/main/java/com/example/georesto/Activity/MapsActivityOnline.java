@@ -50,6 +50,8 @@ public class MapsActivityOnline extends MapsActivity {
     private static final int GALLERY = 0;
     private static final int CAMERA = 1;
     Boolean isAddingLocation = false;
+    Boolean isAddingPosition = false;
+    LatLng position = new LatLng(0,0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,10 +96,12 @@ public class MapsActivityOnline extends MapsActivity {
         });
 
         profileModel.getNewLocationButton().setOnClickListener(v -> {
+            position = new LatLng(0,0);
+            Log.d(TAG, "profileActions: "+position);
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
-            newLocationActions(null, new LatLng(0, 0));
+            newLocationActions(null);
         });
 
         profileModel.getLogOutButton().setOnClickListener(v -> {
@@ -106,6 +110,7 @@ public class MapsActivityOnline extends MapsActivity {
             ProfileList.setCurrentUser(null);
             startActivity(new Intent(MapsActivityOnline.this, MapsActivityOffline.class));
         });
+
     }
 
     public void displayHistory() {
@@ -179,7 +184,7 @@ public class MapsActivityOnline extends MapsActivity {
         }
     }
 
-    public void newLocationActions(Restaurant restaurant,LatLng position) {
+    public void newLocationActions(Restaurant restaurant) {
         NewLocationModel newLocationModel = new NewLocationModel(profileView);
         newLocationModel.init(restaurant);
         isAddingLocation = true;
@@ -203,6 +208,18 @@ public class MapsActivityOnline extends MapsActivity {
             profileActions();
             isAddingLocation = false;
         });
+
+        newLocationModel.getPosition().setOnClickListener(v -> {
+            isAddingPosition = true;
+            drawerMap.closeDrawer(profileView);
+            newLocationModel.getPosition().setText("Changer la position");
+        });
+
+        if(position.latitude == 0 && position.longitude == 0) {
+            newLocationModel.getPosition().setText("Définir la position");
+        }  else {
+            newLocationModel.getPosition().setText("Changer la position");
+        }
 
         newLocationModel.getNext().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
@@ -262,7 +279,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
             rightSideMenu = R.layout.new_location;
-            this.newLocationActions(restaurant, position);
+            this.newLocationActions(restaurant);
         });
 
         newLocationScheduleModel.getValidateButton().setOnClickListener(v -> {
@@ -407,7 +424,14 @@ public class MapsActivityOnline extends MapsActivity {
                 profileView.removeHeaderView(profileView.getHeaderView(0));
                 profileView.inflateHeaderView(R.layout.new_location);
                 rightSideMenu = R.layout.new_location;
-                newLocationActions(null,point);
+                this.position = point;
+                newLocationActions(null);
+                drawerMap.openDrawer(profileView);
+            }
+            Log.d(TAG, "onMapReady:"+ isAddingPosition);
+            if(isAddingPosition) {
+                Log.d(TAG, "onMapReady: mabitehuohu");
+                this.position = point;
                 drawerMap.openDrawer(profileView);
             }
         });
