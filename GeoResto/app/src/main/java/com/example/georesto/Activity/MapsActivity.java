@@ -102,7 +102,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         configureDrawerLayout();
 
         configureSideViews();
-        
+
 
         ImageButton logo = findViewById(R.id.logo);
         logo.setOnClickListener(info -> {
