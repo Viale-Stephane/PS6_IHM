@@ -23,70 +23,68 @@
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/simpleTimePicker"
-        tools:layout_editor_absoluteX="120dp">
 
-        <ToggleButton
-            android:id="@+id/dayButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:textSize="8sp"
-            android:layout_weight="1"
-            android:checked="true"
-            android:textOff="Aujourd'hui"
-            android:textOn="Aujourd'hui"
-            app:layout_constraintEnd_toStartOf="@+id/fullWeekButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <ToggleButton
+        android:id="@+id/dayButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="396dp"
+        android:layout_weight="1"
+        android:checked="true"
+        android:textOff="Aujourd'hui"
+        android:textOn="Aujourd'hui"
+        android:textSize="8sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule" />
 
-        <ToggleButton
-            android:id="@+id/fullWeekButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:textOff="Toute la semaine"
-            android:textOn="Toute la semaine"
-            android:textSize="8sp"
-            app:layout_constraintEnd_toStartOf="@+id/weekButton"
-            app:layout_constraintTop_toTopOf="parent" />
+    <ToggleButton
+        android:id="@+id/fullWeekButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="396dp"
+        android:layout_marginEnd="30dp"
+        android:layout_weight="1"
+        android:textOff="Toute la semaine"
+        android:textOn="Toute la semaine"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toStartOf="@+id/weekButton"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toEndOf="@+id/dayButton"
+        app:layout_constraintTop_toBottomOf="@+id/schedule" />
 
-        <ToggleButton
-            android:id="@+id/weekButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+    <ToggleButton
+        android:id="@+id/weekButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
 
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:textOff="Du lundi au vendredi"
-            android:textOn="Du lundi au vendredi"
-            android:textSize="8sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+        android:layout_marginTop="396dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:textOff="Du lundi au vendredi"
+        android:textOn="Du lundi au vendredi"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule" />
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="452dp"
         android:text="@string/cancel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule" />
 
     <Button
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="452dp"
+        android:layout_marginEnd="28dp"
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule" />
 </android.support.constraint.ConstraintLayout>

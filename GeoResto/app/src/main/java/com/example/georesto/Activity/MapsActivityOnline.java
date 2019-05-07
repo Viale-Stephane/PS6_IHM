@@ -3,33 +3,16 @@ package com.example.georesto.Activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.IntentSender;
-import android.content.ServiceConnection;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.UserHandle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -44,9 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.georesto.Model.NewLocationModel;
 import com.example.georesto.Model.NewLocationScheduleModel;
@@ -59,19 +40,9 @@ import com.example.georesto.R;
 import com.example.georesto.View.MyAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
-
-import static android.media.MediaRecorder.VideoSource.CAMERA;
-
 
 public class MapsActivityOnline extends MapsActivity {
 
@@ -333,15 +304,30 @@ public class MapsActivityOnline extends MapsActivity {
     public void popUpTimePickerActions(EditText[] days, int dayNumber) {
         LayoutInflater li = LayoutInflater.from(this);
         View view = li.inflate(R.layout.time_wheel_view, null);
+        PopUpTimePickerModel popUpTimePickerModel = new PopUpTimePickerModel(view);
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(view);
         AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        Display display = getWindowManager().getDefaultDisplay();
+        int mwidth = (int)(display.getWidth()*0.95);
+        int mheight = (int)(display.getHeight()*0.95);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            popUpTimePickerModel.getDayButton().setY(-1000);
+            popUpTimePickerModel.getDayButton().setX(1265);
+            popUpTimePickerModel.getWeekButton().setY(-850);
+            popUpTimePickerModel.getFullWeekButton().setY(-700);
+            popUpTimePickerModel.getFullWeekButton().setX(635);
+            popUpTimePickerModel.getCancel().setY(-700);
+            popUpTimePickerModel.getNext().setY(-700);
+        }
+        System.out.println(mwidth);
+        System.out.println(mheight);
         alertDialog.show();
-        PopUpTimePickerModel popUpTimePickerModel = new PopUpTimePickerModel(view);
+        alertDialog.getWindow().setLayout(mwidth, mheight);
+        System.out.println(popUpTimePickerModel.getSimpleTimePicker());
         popUpTimePickerModel.getCancel().setOnClickListener(_v -> {
-            if (popUpTimePickerModel.isEndingSchedule() == false)
+            if (!popUpTimePickerModel.isEndingSchedule())
                 alertDialog.cancel();
             else {
                 popUpTimePickerModel.cancelEndingSchedule();

@@ -1,5 +1,6 @@
 package com.example.georesto.Model;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,19 @@ import com.example.georesto.R;
 public class PopUpTimePickerModel {
     private TimePicker simpleTimePicker;
     private Button cancel, next;
+
+    public ToggleButton getDayButton() {
+        return dayButton;
+    }
+
+    public ToggleButton getFullWeekButton() {
+        return fullWeekButton;
+    }
+
+    public ToggleButton getWeekButton() {
+        return weekButton;
+    }
+
     private ToggleButton dayButton, fullWeekButton, weekButton;
     private TextView schedule;
     private int openingHour, openingMin, endingHour, endingMin;
@@ -33,6 +47,10 @@ public class PopUpTimePickerModel {
         this.endingSchedule = false;
     }
 
+    public TimePicker getSimpleTimePicker() {
+        return this.simpleTimePicker;
+    }
+
     public Button getNext(){
         return this.next;
     }
@@ -41,11 +59,6 @@ public class PopUpTimePickerModel {
         return this.cancel;
     }
 
-    public ToggleButton getDayButton() { return this.dayButton; }
-
-    public ToggleButton getFullWeekButton() { return this.fullWeekButton; }
-
-    public ToggleButton getWeekButton() { return  this.weekButton; }
 
     public void clickOnDayButton() {
         this.dayButton.setOnClickListener(v -> {
