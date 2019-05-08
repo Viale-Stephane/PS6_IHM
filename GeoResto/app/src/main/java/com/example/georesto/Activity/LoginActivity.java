@@ -40,6 +40,9 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
             register.setX(400);
             register.setY(-175);
             passwordForgotten.setY(-175);
+            passwordForgotten.setX(-400);
+            wrongIdentifiers.setY(-250);
+            wrongIdentifiers.setX(275);
         }
 
         connect.setOnClickListener(new View.OnClickListener() {
