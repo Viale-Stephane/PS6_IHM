@@ -23,6 +23,28 @@ public class Profile {
         this.userComments = new CommentList();
     }
 
+    public void updateDistance(RestaurantList restaurantList) {
+        for(Restaurant updatedRestaurant: restaurantList.getRestaurants()) {
+            for (Restaurant restaurant : this.favourite.getRestaurants()) {
+                if (updatedRestaurant == restaurant) {
+                    restaurant.setDistance(updatedRestaurant.getDistance());
+                }
+            }
+            for (Restaurant restaurant : this.history.getRestaurants()) {
+                if(updatedRestaurant == restaurant) {
+                    restaurant.setDistance(updatedRestaurant.getDistance());
+                }
+            }
+            for(Comment comment : this.userComments.getCommentList()) {
+                if(updatedRestaurant == comment.getRestaurant()) {
+                    comment.getRestaurant().setDistance(updatedRestaurant.getDistance());
+
+                }
+            }
+        }
+
+    }
+
     public String getFirstName() { return this.firstName; }
 
     public String getLastName() { return this.lastName; }

@@ -62,8 +62,14 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
     // Model
     protected Profile user;
-    protected RestaurantList restaurantList = new RestaurantList();
-    protected ProfileList profileList = new ProfileList();
+
+    //mocks
+    public static RestaurantList restaurantList = new RestaurantList();
+    public static ProfileList profileList = new ProfileList();
+
+    //variables
+    protected boolean init = true;
+
 
     public boolean isServicesOK() {
         Log.d(TAG, "isServicesOK: checking google services version");
@@ -87,8 +93,11 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        this.restaurantList.sampleRestaurant(this);
-        this.profileList.instantiateProfiles(this.restaurantList);
+        if(init) {
+            restaurantList.sampleRestaurant(this);
+            profileList.instantiateProfiles(restaurantList);
+            init = false;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         View main = findViewById(R.id.main);
@@ -299,8 +308,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         Log.d(TAG, "onMapReady: maps is ready");
         mMap.clear();
-        for (Restaurant resto : this.restaurantList.getRestaurants()
-        ) {
+        for (Restaurant resto : restaurantList.getRestaurants()) {
             if (userLocation!=null) {
                 resto.setDistance(userLocation);
             }

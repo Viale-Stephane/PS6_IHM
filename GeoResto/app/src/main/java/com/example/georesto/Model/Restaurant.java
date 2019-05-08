@@ -55,6 +55,10 @@ public class Restaurant {
         return this.commentList;
     }
 
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }
+
     public void setDistance(LatLng userLocation) {
         Location loc1 = new Location("");
         loc1.setLatitude(position.latitude);
@@ -63,8 +67,8 @@ public class Restaurant {
         Location loc2 = new Location("");
         loc2.setLatitude(userLocation.latitude);
         loc2.setLongitude(userLocation.longitude);
-
         this.distance = loc1.distanceTo(loc2);
+        System.out.println(this.restaurant+" : "+this.distance);
     }
 
     public String getName() {

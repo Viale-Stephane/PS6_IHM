@@ -64,6 +64,7 @@ public class MapsActivityOnline extends MapsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        init = false;
         super.onCreate(savedInstanceState);
         geocoder = new Geocoder(this, Locale.getDefault());
         findViewById(R.id.accessToLogin).setVisibility(View.GONE);
@@ -125,28 +126,31 @@ public class MapsActivityOnline extends MapsActivity {
 
     }
 
-    private void displayComments() {
-        RecyclerView rv = findViewById(R.id.comments);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        CommentAdapter adapter =new CommentAdapter(ProfileList.getCurrentUser().getUserComments(),this.drawerMap,this.profileView,this.searchView);
-        rv.setAdapter(adapter);
-    }
-
-    private void displayFavourite() {
-        RecyclerView rv = findViewById(R.id.favourite);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        RestaurantAdapter adapter =new RestaurantAdapter(ProfileList.getCurrentUser().getFavourite(),this.drawerMap,this.profileView,this.searchView);
-        rv.setAdapter(adapter);
-    }
-
     public void displayHistory() {
+        System.out.println("bonjour1    "+ProfileList.getCurrentUser().getHistory().size());
+        ProfileList.getCurrentUser().updateDistance(restaurantList);
+        System.out.println("bonjour2    "+ProfileList.getCurrentUser().getHistory().size());
         RecyclerView rv = findViewById(R.id.history);
         rv.setLayoutManager(new LinearLayoutManager(this));
         RestaurantAdapter adapter =new RestaurantAdapter(ProfileList.getCurrentUser().getHistory(),this.drawerMap,this.profileView,this.searchView);
         rv.setAdapter(adapter);
     }
 
+    private void displayFavourite() {
+        ProfileList.getCurrentUser().updateDistance(restaurantList);
+        RecyclerView rv = findViewById(R.id.favourite);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        RestaurantAdapter adapter =new RestaurantAdapter(ProfileList.getCurrentUser().getFavourite(),this.drawerMap,this.profileView,this.searchView);
+        rv.setAdapter(adapter);
+    }
 
+    private void displayComments() {
+        ProfileList.getCurrentUser().updateDistance(restaurantList);
+        RecyclerView rv = findViewById(R.id.comments);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        CommentAdapter adapter =new CommentAdapter(ProfileList.getCurrentUser().getUserComments(),this.drawerMap,this.profileView,this.searchView);
+        rv.setAdapter(adapter);
+    }
 
     private void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);

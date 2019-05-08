@@ -60,7 +60,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         private final TextView name;
         private final ImageView picture;
         private final TextView description;
-
+        private final TextView distance;
         private Restaurant currentResto;
 
         CommentViewHolder(@NonNull View itemView) {
@@ -69,6 +69,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             this.name = itemView.findViewById(R.id.restaurant_list_item_name);
             this.picture = itemView.findViewById(R.id.restaurant_list_item_image);
             this.description = itemView.findViewById(R.id.restaurant_list_item_description);
+            this.distance = itemView.findViewById(R.id.restaurant_list_item_distance);
         }
 
         void display(Comment comment) {
@@ -76,6 +77,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             name.setText(currentResto.getName());
             picture.setImageBitmap(currentResto.getPicture());
             description.setText(comment.getComment());
+            distance.setText("distance :"+ Integer.toString((int)currentResto.getDistance()/1000) + " km");
         }
 
         public View getItemView() {
