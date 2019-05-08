@@ -7,8 +7,9 @@ public class Profile {
     private String firstName, lastName, email;
     private String linkImage;
     private ArrayList<Restaurant> history;
+    private ArrayList<Restaurant> favourite;
 
-    public Profile(String username, String password, String firstName, String lastName, String email, String linkImage, ArrayList<Restaurant> history) {
+    public Profile(String username, String password, String firstName, String lastName, String email, String linkImage, ArrayList<Restaurant> history, ArrayList<Restaurant> favourite) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -16,6 +17,7 @@ public class Profile {
         this.email = email;
         this.linkImage = linkImage;
         this.history = history;
+        this.favourite = favourite;
     }
 
     public String getFirstName() { return this.firstName; }
@@ -37,4 +39,6 @@ public class Profile {
     public String getLinkImage() { return this.linkImage; }
 
     public ArrayList<Restaurant> getHistory() { return this.history; }
+
+    public ArrayList<Restaurant> getFavourite() { return this.favourite; }
 }

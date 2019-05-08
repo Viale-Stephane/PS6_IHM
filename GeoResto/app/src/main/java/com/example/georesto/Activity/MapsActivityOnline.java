@@ -96,6 +96,7 @@ public class MapsActivityOnline extends MapsActivity {
         profileModel.getFavouritesButton().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.favourites);
+            displayFavourite();
             rightSideMenu = R.layout.favourites;
         });
 
@@ -121,6 +122,13 @@ public class MapsActivityOnline extends MapsActivity {
             startActivity(new Intent(MapsActivityOnline.this, MapsActivityOffline.class));
         });
 
+    }
+
+    private void displayFavourite() {
+        RecyclerView rv = findViewById(R.id.favourite);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        MyAdapter adapter =new MyAdapter(ProfileList.getCurrentUser().getFavourite(),this.drawerMap,this.profileView,this.searchView);
+        rv.setAdapter(adapter);
     }
 
     public void displayHistory() {
