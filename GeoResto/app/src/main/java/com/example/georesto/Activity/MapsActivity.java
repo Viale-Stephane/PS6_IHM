@@ -63,6 +63,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     // Model
     protected Profile user;
     protected RestaurantList restaurantList = new RestaurantList();
+    protected ProfileList profileList = new ProfileList();
 
     public boolean isServicesOK() {
         Log.d(TAG, "isServicesOK: checking google services version");
@@ -86,10 +87,11 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.restaurantList.sampleRestaurant(this);
+        this.profileList.instantiateProfiles(this.restaurantList);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         View main = findViewById(R.id.main);
-        this.restaurantList.sampleRestaurant();
         user = ProfileList.getCurrentUser();
         if (isServicesOK()) {
             getLocationPermissions();

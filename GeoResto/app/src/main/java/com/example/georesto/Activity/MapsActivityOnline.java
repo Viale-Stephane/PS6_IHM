@@ -24,6 +24,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -125,8 +126,10 @@ public class MapsActivityOnline extends MapsActivity {
     public void displayHistory() {
         RecyclerView rv = findViewById(R.id.history);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new MyAdapter(ProfileList.getCurrentUser().getHistory()));
+        MyAdapter adapter =new MyAdapter(ProfileList.getCurrentUser().getHistory(),this.drawerMap,this.profileView,this.searchView);
+        rv.setAdapter(adapter);
     }
+
 
 
     private void showPictureDialog(){
@@ -430,7 +433,6 @@ public class MapsActivityOnline extends MapsActivity {
 
         Log.d(TAG, "onMapReady: maps is ready");
 
-        this.restaurantList.sampleRestaurant();
         for (Restaurant resto : this.restaurantList.getRestaurants()
         ) {
             resto.setMarkerOnMap(mMap);
