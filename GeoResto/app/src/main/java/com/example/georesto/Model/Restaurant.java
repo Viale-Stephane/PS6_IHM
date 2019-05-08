@@ -20,6 +20,8 @@ public class Restaurant {
     private double grade, price, distance;
     private boolean kindRestaurant;
     private Bitmap restaurantPicture;
+    private CommentList commentList;
+
 
     public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position,Bitmap restaurantPicture) {
         this.restaurant = restaurant;
@@ -34,6 +36,7 @@ public class Restaurant {
         this.tags = tags;
         this.position = position;
         this.restaurantPicture = restaurantPicture;
+        this.commentList = new CommentList();
     }
 
     public double getGrade() {
@@ -46,6 +49,10 @@ public class Restaurant {
 
     public double getDistance() {
         return this.distance;
+    }
+
+    public CommentList getCommentList(){
+        return this.commentList;
     }
 
     public void setDistance(LatLng userLocation) {

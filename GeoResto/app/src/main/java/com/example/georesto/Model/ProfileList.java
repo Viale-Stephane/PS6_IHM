@@ -43,8 +43,8 @@ public class ProfileList {
     }
 
     public void instantiateProfiles(RestaurantList restaurantList) {
-        ArrayList<Restaurant> history = new ArrayList<>(restaurantList.getRestaurants());
-        ArrayList<Restaurant> favourite = new ArrayList<>(restaurantList.getRestaurants());
+        RestaurantList history = restaurantList;
+        RestaurantList favourite = restaurantList;
 
         Profile admin = new Profile("admin", "", "administrator", "administrator", "administrator@gmail.com", "@drawable/default_profile", history, favourite);
         Profile noName = new Profile("", "", "noName", "noLastName", "noNameIsNice@gmail.com", "@drawable/default_profile", history, favourite);
@@ -52,6 +52,19 @@ public class ProfileList {
         Profile camille = new Profile("CamBou", "azerty", "Camille", "Bourgeois", "camille.bourgeois@hotmail.com", "@drawable/camille", history, favourite);
         Profile elvis = new Profile("Elvis", "azerty", "Elvis", "Pressé", "elvisLeBG@orange.fr", "@drawable/elvis", history, favourite);
         Profile richard = new Profile("GrisonLover", "azerty", "Richard", "Cuterie", "richouCute@gmail.com", "@drawable/richard", history, favourite);
+
+        richard.getUserComments().addComment(new Comment("Tres bon service avec de tres bon burger", richard, restaurantList.getRestaurant(0)));
+        noName.getUserComments().addComment(new Comment("Un fastfood classique, sans plus", noName, restaurantList.getRestaurant(0)));
+
+        camille.getUserComments().addComment(new Comment("Accueil chaleureux et on est bien nourri !", camille, restaurantList.getRestaurant(1)));
+        elvis.getUserComments().addComment(new Comment("Un restaurant miteux", elvis, restaurantList.getRestaurant(1)));
+
+        admin.getUserComments().addComment(new Comment("Un kebab moyen mais pas cher", admin, restaurantList.getRestaurant(2)));
+        richard.getUserComments().addComment(new Comment("Un tres bon kebab, je recommande !", richard, restaurantList.getRestaurant(2)));
+
+        camille.getUserComments().addComment(new Comment("La qualité est a la hauteur de ces prix...", camille, restaurantList.getRestaurant(3)));
+        elvis.getUserComments().addComment(new Comment("Pas cher et pas bon, génial !", elvis, restaurantList.getRestaurant(3)));
+        admin.getUserComments().addComment(new Comment("Un endroit ou manger quand on est etudiant", admin, restaurantList.getRestaurant(3)));
 
         profiles.addAll(Arrays.asList(
                 admin,

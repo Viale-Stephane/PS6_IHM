@@ -1,6 +1,5 @@
 package com.example.georesto.View;
 
-import android.app.AlertDialog;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -11,23 +10,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.georesto.Model.Comment;
 import com.example.georesto.Model.CommentList;
 import com.example.georesto.Model.Restaurant;
-import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.R;
 
-import java.util.ArrayList;
+public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-
-    private RestaurantList restaurants;
-    private MyViewHolder myViewHolder;
+    private CommentList commentList;
+    private CommentViewHolder viewHolder;
     private DrawerLayout drawerMap;
     private NavigationView profileView;
     private NavigationView searchView;
 
-    public MyAdapter(RestaurantList restaurants, DrawerLayout drawerMap, NavigationView profileView, NavigationView searchView) {
-        this.restaurants = restaurants;
+    public CommentAdapter(CommentList commentList, DrawerLayout drawerMap, NavigationView profileView, NavigationView searchView) {
+        this.commentList = commentList;
         this.drawerMap = drawerMap;
         this.profileView = profileView;
         this.searchView = searchView;
@@ -35,18 +32,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View view = inflater.inflate(R.layout.restaurant_list_item, viewGroup, false);
-        this.myViewHolder = new MyViewHolder(view);
-        return this.myViewHolder;
+        this.viewHolder = new CommentViewHolder(view);
+        return this.viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        Restaurant restaurant = this.restaurants.getRestaurant(i);
-        myViewHolder.display(restaurant);
-        myViewHolder.getItemView().setOnClickListener(v -> {
+    public void onBindViewHolder(@NonNull CommentViewHolder commentViewHolder, int i) {
+        Comment comment = this.commentList.get(i);
+        commentViewHolder.display(comment);
+        commentViewHolder.getItemView().setOnClickListener(v -> {
             this.drawerMap.closeDrawer(this.profileView);
             this.drawerMap.openDrawer(this.searchView);
             searchView.removeHeaderView(searchView.getHeaderView(0));
@@ -56,17 +53,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return this.restaurants.size();
+        return this.commentList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class CommentViewHolder extends RecyclerView.ViewHolder {
         private final TextView name;
         private final ImageView picture;
         private final TextView description;
 
         private Restaurant currentResto;
 
-        MyViewHolder(@NonNull View itemView) {
+        CommentViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.name = itemView.findViewById(R.id.restaurant_list_item_name);
@@ -74,11 +71,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             this.description = itemView.findViewById(R.id.restaurant_list_item_description);
         }
 
-        void display(Restaurant restaurant) {
-            currentResto = restaurant;
-            name.setText(restaurant.getName());
-            picture.setImageBitmap(restaurant.getPicture());
-            description.setText(restaurant.getAdress());
+        void display(Comment comment) {
+            currentResto = comment.getRestaurant();
+            name.setText(currentResto.getName());
+            picture.setImageBitmap(currentResto.getPicture());
+            description.setText(comment.getComment());
         }
 
         public View getItemView() {
@@ -86,3 +83,4 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 }
+

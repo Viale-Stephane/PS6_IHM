@@ -39,6 +39,7 @@ import com.example.georesto.Model.ProfileModel;
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
+import com.example.georesto.View.CommentAdapter;
 import com.example.georesto.View.MyAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -103,6 +104,7 @@ public class MapsActivityOnline extends MapsActivity {
         profileModel.getCommentsButton().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.comments);
+            displayComments();
             rightSideMenu = R.layout.comments;
         });
 
@@ -122,6 +124,13 @@ public class MapsActivityOnline extends MapsActivity {
             startActivity(new Intent(MapsActivityOnline.this, MapsActivityOffline.class));
         });
 
+    }
+
+    private void displayComments() {
+        RecyclerView rv = findViewById(R.id.comments);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        CommentAdapter adapter =new CommentAdapter(ProfileList.getCurrentUser().getUserComments(),this.drawerMap,this.profileView,this.searchView);
+        rv.setAdapter(adapter);
     }
 
     private void displayFavourite() {
