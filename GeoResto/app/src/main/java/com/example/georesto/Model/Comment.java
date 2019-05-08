@@ -1,9 +1,9 @@
 package com.example.georesto.Model;
 
 public class Comment {
-    Profile profile;
-    String comment;
-    Restaurant restaurant;
+    private Profile profile;
+    private String comment;
+    private Restaurant restaurant;
 
     public Comment( String comment, Profile profile, Restaurant restaurant){
         this.profile = profile;

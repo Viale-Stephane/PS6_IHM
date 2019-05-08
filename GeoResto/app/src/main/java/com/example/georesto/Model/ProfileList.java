@@ -48,9 +48,9 @@ public class ProfileList {
 
         Profile admin = new Profile("admin", "", "administrator", "administrator", "administrator@gmail.com", "@drawable/default_profile", history, favourite);
         Profile noName = new Profile("", "", "noName", "noLastName", "noNameIsNice@gmail.com", "@drawable/default_profile", history, favourite);
-        Profile camille = new Profile("CamBou", "azerty", "Camille", "Bourgeois", "camille.bourgeois@hotmail.com", "@drawable/camille", history, favourite);
-        Profile elvis = new Profile("Elvis", "azerty", "Elvis", "Pressé", "elvisLeBG@orange.fr", "@drawable/elvis", history, favourite);
-        Profile richard = new Profile("GrisonLover", "azerty", "Richard", "Cuterie", "richouCute@gmail.com", "@drawable/richard", history, favourite);
+        Profile camille = new Profile("camille", "azerty", "Camille", "Bourgeois", "camille.bourgeois@hotmail.com", "@drawable/camille", history, favourite);
+        Profile elvis = new Profile("elvis", "azerty", "Elvis", "Pressé", "elvisLeBG@orange.fr", "@drawable/elvis", history, favourite);
+        Profile richard = new Profile("richard", "azerty", "Richard", "Cuterie", "richouCute@gmail.com", "@drawable/richard", history, favourite);
 
         richard.getUserComments().addComment(new Comment("Tres bon service avec de tres bon burger", richard, restaurantList.getRestaurant(0)));
         noName.getUserComments().addComment(new Comment("Un fastfood classique, sans plus", noName, restaurantList.getRestaurant(0)));
@@ -72,5 +72,10 @@ public class ProfileList {
                 elvis,
                 richard
         ));
+        for(Profile profile : profiles) {
+            for(Comment comment: profile.getUserComments().getCommentList()) {
+                comment.getRestaurant().getCommentList().addComment(comment);
+            }
+        }
     }
 }

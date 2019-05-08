@@ -34,18 +34,6 @@ public class RestaurantList {
         Restaurant carrefourAntibes = new Restaurant("Carrefour", false, "Chemin de Saint-Claude, 06600 Antibes", "www.carrefour.fr", "0682392412", schedule, 4.2, 3, new ArrayList<>(Arrays.asList(Tag.Francais, Tag.FastFood, Tag.Healthy)), new LatLng(43.603813, 7.089160), bitmap);
         Restaurant[] listOfRestaurants = {burgerKing, mcDonaldS, ilRistorante, laCiteDOr, carrefourAntibes};
 
-        burgerKing.getCommentList().addComment(new Comment("Tres bon service avec de tres bon burger",burgerKing));
-        burgerKing.getCommentList().addComment(new Comment("Un fastfood classique, sans plus",burgerKing));
-
-        mcDonaldS.getCommentList().addComment(new Comment("Accueil chaleureux et on est bien nourri !",mcDonaldS));
-        mcDonaldS.getCommentList().addComment(new Comment("Un restaurant miteux",mcDonaldS));
-
-        /*kebab.getCommentList().addComment(new Comment("Un kebab moyen mais pas cher",kebab));
-        kebab.getCommentList().addComment(new Comment("Un tres bon kebab, je recommande !",kebab));*/
-
-        carrefourAntibes.getCommentList().addComment(new Comment("La qualité est a la hauteur de ces prix...",carrefourAntibes));
-        carrefourAntibes.getCommentList().addComment(new Comment("Pas cher et pas bon, génial !",carrefourAntibes));
-        carrefourAntibes.getCommentList().addComment(new Comment("Un endroit ou manger quand on est etudiant",carrefourAntibes));
         this.restaurants.addAll(Arrays.asList(listOfRestaurants));
     }
 
