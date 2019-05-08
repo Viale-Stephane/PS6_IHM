@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.Model.RestaurantList;
+import com.example.georesto.Model.RestaurantModel;
 import com.example.georesto.R;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.MyViewHolder> {
@@ -21,6 +22,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
     private DrawerLayout drawerMap;
     private NavigationView profileView;
     private NavigationView searchView;
+    private RestaurantModel restaurantModel;
 
     public RestaurantAdapter(RestaurantList restaurants, DrawerLayout drawerMap, NavigationView profileView, NavigationView searchView) {
         this.restaurants = restaurants;
@@ -47,6 +49,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             this.drawerMap.openDrawer(this.searchView);
             searchView.removeHeaderView(searchView.getHeaderView(0));
             searchView.inflateHeaderView(R.layout.info_restaurant);
+            restaurantModel = new RestaurantModel(searchView);
+            restaurantModel.init(restaurant);
         });
     }
 

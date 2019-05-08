@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.georesto.Model.Comment;
 import com.example.georesto.Model.CommentList;
 import com.example.georesto.Model.Restaurant;
+import com.example.georesto.Model.RestaurantModel;
 import com.example.georesto.R;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
@@ -22,6 +23,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     private DrawerLayout drawerMap;
     private NavigationView profileView;
     private NavigationView searchView;
+    private RestaurantModel restaurantModel;
 
     public CommentAdapter(CommentList commentList, DrawerLayout drawerMap, NavigationView profileView, NavigationView searchView) {
         this.commentList = commentList;
@@ -48,6 +50,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             this.drawerMap.openDrawer(this.searchView);
             searchView.removeHeaderView(searchView.getHeaderView(0));
             searchView.inflateHeaderView(R.layout.info_restaurant);
+            restaurantModel = new RestaurantModel(searchView);
+            restaurantModel.init(comment.getRestaurant());
         });
     }
 
