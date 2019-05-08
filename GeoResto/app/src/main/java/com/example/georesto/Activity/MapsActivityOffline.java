@@ -48,6 +48,5 @@ public class MapsActivityOffline extends MapsActivity {
         profileView.setNavigationItemSelectedListener(this);
         profileView.removeHeaderView(profileView.getHeaderView(0));
         profileView.inflateHeaderView(R.layout.info);
-        rightSideMenu = R.layout.info;
     }
 }

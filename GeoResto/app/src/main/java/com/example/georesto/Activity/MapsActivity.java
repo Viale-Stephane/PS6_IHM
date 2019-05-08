@@ -52,8 +52,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected DrawerLayout drawerMap;
     protected NavigationView profileView;
     protected NavigationView searchView;
-    View main;
-    protected int rightSideMenu = R.layout.info;
 
 
 
@@ -93,14 +91,15 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+
         if(init) {
             restaurantList.sampleRestaurant(this);
             profileList.instantiateProfiles(restaurantList);
             init = false;
         }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        View main = findViewById(R.id.main);
         user = ProfileList.getCurrentUser();
         if (isServicesOK()) {
             getLocationPermissions();

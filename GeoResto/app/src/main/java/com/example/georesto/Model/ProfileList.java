@@ -45,7 +45,6 @@ public class ProfileList {
     public void instantiateProfiles(RestaurantList restaurantList) {
         RestaurantList history = restaurantList;
         RestaurantList favourite = restaurantList;
-        System.out.println("bonjour"+history.getRestaurants().size());
 
         Profile admin = new Profile("admin", "", "administrator", "administrator", "administrator@gmail.com", "@drawable/default_profile", history, favourite);
         Profile noName = new Profile("", "", "noName", "noLastName", "noNameIsNice@gmail.com", "@drawable/default_profile", history, favourite);

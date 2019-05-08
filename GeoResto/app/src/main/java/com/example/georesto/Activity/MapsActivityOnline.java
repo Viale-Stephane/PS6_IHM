@@ -79,7 +79,6 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.profile);
             setPersonalInformation();
-            rightSideMenu = R.layout.profile;
             drawerMap.openDrawer(profileView);
             this.profileActions();
         });
@@ -91,21 +90,18 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.history);
             displayHistory();
-            rightSideMenu = R.layout.history;
         });
 
         profileModel.getFavouritesButton().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.favourites);
             displayFavourite();
-            rightSideMenu = R.layout.favourites;
         });
 
         profileModel.getCommentsButton().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.comments);
             displayComments();
-            rightSideMenu = R.layout.comments;
         });
 
         profileModel.getNewLocationButton().setOnClickListener(v -> {
@@ -113,13 +109,11 @@ public class MapsActivityOnline extends MapsActivity {
             address = null;
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
-            rightSideMenu = R.layout.new_location;
             newLocationActions(null);
         });
 
         profileModel.getLogOutButton().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
-            rightSideMenu = R.layout.info;
             ProfileList.setCurrentUser(null);
             startActivity(new Intent(MapsActivityOnline.this, MapsActivityOffline.class));
         });
@@ -127,9 +121,7 @@ public class MapsActivityOnline extends MapsActivity {
     }
 
     public void displayHistory() {
-        System.out.println("bonjour1    "+ProfileList.getCurrentUser().getHistory().size());
         ProfileList.getCurrentUser().updateDistance(restaurantList);
-        System.out.println("bonjour2    "+ProfileList.getCurrentUser().getHistory().size());
         RecyclerView rv = findViewById(R.id.history);
         rv.setLayoutManager(new LinearLayoutManager(this));
         RestaurantAdapter adapter =new RestaurantAdapter(ProfileList.getCurrentUser().getHistory(),this.drawerMap,this.profileView,this.searchView);
@@ -236,7 +228,6 @@ public class MapsActivityOnline extends MapsActivity {
         newLocationModel.getCancel().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.profile);
-            rightSideMenu = R.layout.profile;
             profileActions();
             isAddingLocation = false;
         });
@@ -263,7 +254,6 @@ public class MapsActivityOnline extends MapsActivity {
         newLocationModel.getNext().setOnClickListener(v -> {
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location_schedule);
-            rightSideMenu = R.layout.new_location_schedule;
             String[] schedule;
             if (restaurant != null) {
                 schedule = restaurant.getCompleteSchedule();
@@ -317,7 +307,6 @@ public class MapsActivityOnline extends MapsActivity {
             restaurant.addSchedule(newLocationScheduleModel.getSchedule());
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.new_location);
-            rightSideMenu = R.layout.new_location;
             this.newLocationActions(restaurant);
         });
 
@@ -352,11 +341,8 @@ public class MapsActivityOnline extends MapsActivity {
             popUpTimePickerModel.getCancel().setY(-700);
             popUpTimePickerModel.getNext().setY(-700);
         }
-        System.out.println(mwidth);
-        System.out.println(mheight);
         alertDialog.show();
         alertDialog.getWindow().setLayout(mwidth, mheight);
-        System.out.println(popUpTimePickerModel.getSimpleTimePicker());
         popUpTimePickerModel.getCancel().setOnClickListener(_v -> {
             if (!popUpTimePickerModel.isEndingSchedule())
                 alertDialog.cancel();
@@ -424,7 +410,6 @@ public class MapsActivityOnline extends MapsActivity {
         profileView.setNavigationItemSelectedListener(this);
         profileView.removeHeaderView(profileView.getHeaderView(0));
         profileView.inflateHeaderView(R.layout.profile);
-        rightSideMenu = R.layout.profile;
         this.profileActions();
     }
 
@@ -476,7 +461,6 @@ public class MapsActivityOnline extends MapsActivity {
             if(!isAddingLocation) {
                 profileView.removeHeaderView(profileView.getHeaderView(0));
                 profileView.inflateHeaderView(R.layout.new_location);
-                rightSideMenu = R.layout.new_location;
                 this.position = point;
                 try {
                     this.address = geocoder.getFromLocation(point.latitude,point.longitude,1);

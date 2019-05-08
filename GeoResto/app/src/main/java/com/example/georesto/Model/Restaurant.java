@@ -68,7 +68,6 @@ public class Restaurant {
         loc2.setLatitude(userLocation.latitude);
         loc2.setLongitude(userLocation.longitude);
         this.distance = loc1.distanceTo(loc2);
-        System.out.println(this.restaurant+" : "+this.distance);
     }
 
     public String getName() {
