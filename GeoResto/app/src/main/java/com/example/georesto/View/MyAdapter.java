@@ -48,6 +48,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         myViewHolder.getItemView().setOnClickListener(v -> {
             this.drawerMap.closeDrawer(this.profileView);
             this.drawerMap.openDrawer(this.searchView);
+            searchView.removeHeaderView(searchView.getHeaderView(0));
+            searchView.inflateHeaderView(R.layout.info_restaurant);
         });
     }
 
