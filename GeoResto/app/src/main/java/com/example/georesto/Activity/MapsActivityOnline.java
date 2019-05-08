@@ -40,6 +40,7 @@ import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
 import com.example.georesto.View.CommentAdapter;
 import com.example.georesto.View.RestaurantAdapter;
+import com.example.georesto.View.RestaurantSuggestionAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 

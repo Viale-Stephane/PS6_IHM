@@ -59,4 +59,5 @@
     <string name="restaurant_image">Restaurant Image</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
+    <string name="nom_du_lieu">Nom du lieu</string>
 </resources>
