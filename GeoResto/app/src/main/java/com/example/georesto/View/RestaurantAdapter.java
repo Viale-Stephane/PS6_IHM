@@ -1,6 +1,5 @@
 package com.example.georesto.View;
 
-import android.app.AlertDialog;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -11,14 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.georesto.Model.CommentList;
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.R;
 
-import java.util.ArrayList;
-
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.MyViewHolder> {
 
     private RestaurantList restaurants;
     private MyViewHolder myViewHolder;
@@ -26,7 +22,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private NavigationView profileView;
     private NavigationView searchView;
 
-    public MyAdapter(RestaurantList restaurants, DrawerLayout drawerMap, NavigationView profileView, NavigationView searchView) {
+    public RestaurantAdapter(RestaurantList restaurants, DrawerLayout drawerMap, NavigationView profileView, NavigationView searchView) {
         this.restaurants = restaurants;
         this.drawerMap = drawerMap;
         this.profileView = profileView;

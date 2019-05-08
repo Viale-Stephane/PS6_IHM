@@ -24,7 +24,6 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -40,7 +39,7 @@ import com.example.georesto.Model.Restaurant;
 import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
 import com.example.georesto.View.CommentAdapter;
-import com.example.georesto.View.MyAdapter;
+import com.example.georesto.View.RestaurantAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -136,14 +135,14 @@ public class MapsActivityOnline extends MapsActivity {
     private void displayFavourite() {
         RecyclerView rv = findViewById(R.id.favourite);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        MyAdapter adapter =new MyAdapter(ProfileList.getCurrentUser().getFavourite(),this.drawerMap,this.profileView,this.searchView);
+        RestaurantAdapter adapter =new RestaurantAdapter(ProfileList.getCurrentUser().getFavourite(),this.drawerMap,this.profileView,this.searchView);
         rv.setAdapter(adapter);
     }
 
     public void displayHistory() {
         RecyclerView rv = findViewById(R.id.history);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        MyAdapter adapter =new MyAdapter(ProfileList.getCurrentUser().getHistory(),this.drawerMap,this.profileView,this.searchView);
+        RestaurantAdapter adapter =new RestaurantAdapter(ProfileList.getCurrentUser().getHistory(),this.drawerMap,this.profileView,this.searchView);
         rv.setAdapter(adapter);
     }
 
