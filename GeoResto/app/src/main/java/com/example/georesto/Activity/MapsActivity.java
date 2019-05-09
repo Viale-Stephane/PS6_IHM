@@ -125,9 +125,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                 drawerMap.closeDrawer(profileView);
                 drawerMap.openDrawer(searchView);
 
-                searchView.removeHeaderView(searchView.getHeaderView(0));
-                searchView.inflateHeaderView(R.layout.research);
-                this.configureSearchView();
+                new SearchActivity(this, searchView);
             } else {
                 drawerMap.closeDrawer(searchView);
             }
@@ -162,10 +160,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         // LeftView
         searchView = findViewById(R.id.research);
         searchView.setNavigationItemSelectedListener(this);
-    }
-
-    protected void configureSearchView() {
-        new SearchActivity(this);
     }
 
     // --------------------

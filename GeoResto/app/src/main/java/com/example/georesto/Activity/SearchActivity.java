@@ -1,13 +1,12 @@
 package com.example.georesto.Activity;
 
-import android.media.Rating;
+import android.app.Activity;
 import android.support.design.widget.NavigationView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RatingBar;
-import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,9 +18,8 @@ import com.example.georesto.R;
 import java.util.ArrayList;
 
 class SearchActivity {
-    private final MapsActivity activity;
-    private NavigationView searchView;
-    private final SearchView search;
+    private final Activity activity;
+    private final NavigationView search;
     private final ToggleButton toggleRestaurant;
     private final ToggleButton toggleCommerce;
     private final Spinner tagSpinner;
@@ -32,16 +30,17 @@ class SearchActivity {
     private final SeekBar distanceSeekBar;
     private final RatingBar ratingBar;
     private final Button filterButton;
-
     private ArrayList<Tag> tagsToShow;
     private boolean isInit;
 
-    SearchActivity(MapsActivity mapsActivity) {
-        this.activity = mapsActivity;
-        this.searchView = mapsActivity.findViewById(R.id.research);
-        View currentHeader = searchView.getHeaderView(0);
+    SearchActivity(Activity parent, NavigationView view) {
+        this.activity = parent;
+        this.search = parent.findViewById(R.id.research);
 
-        this.search = currentHeader.findViewById(R.id.research_search);
+        search.removeHeaderView(search.getHeaderView(0));
+        search.inflateHeaderView(R.layout.research);
+
+        View currentHeader = view.getHeaderView(0);
         this.toggleRestaurant = currentHeader.findViewById(R.id.research_toggle_restaurant);
         this.toggleCommerce = currentHeader.findViewById(R.id.research_toggle_commerce);
         this.tagSpinner = currentHeader.findViewById(R.id.research_tag_spinner);
@@ -60,8 +59,9 @@ class SearchActivity {
         this.configureSeekBars();
 
         filterButton.setOnClickListener(v -> {
-            this.searchView.removeHeaderView(searchView.getHeaderView(0));
-            this.searchView.inflateHeaderView(R.layout.info);
+            this.search.removeHeaderView(view
+                    .getHeaderView(0));
+            this.search.inflateHeaderView(R.layout.info);
         });
     }
 
