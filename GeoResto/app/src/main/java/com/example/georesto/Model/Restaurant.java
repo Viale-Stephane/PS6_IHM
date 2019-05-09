@@ -143,6 +143,9 @@ public class Restaurant {
                 i=4;
                 break;
         }
+        if (this.schedule[i].equals("")) {
+            return "Fermé Aujourd'hui";
+        }
         openingHours = this.schedule[i].split(" ")[1];
         closingHours = this.schedule[i].split(" ")[3];
         opHours = Integer.parseInt(openingHours.split(":")[0]) + Integer.parseInt(openingHours.split(":")[1])/60;

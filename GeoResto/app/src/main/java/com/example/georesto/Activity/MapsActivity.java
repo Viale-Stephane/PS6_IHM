@@ -123,6 +123,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                getDeviceLocation();
                                 for (Restaurant resto : restaurantList.getRestaurants()) {
                                     resto.setDistance(userLocation);
                                 }
@@ -212,7 +213,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     }
 
     void getDeviceLocation() {
-        Log.d(TAG, "getDeviceLocation: getting the current location");
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
