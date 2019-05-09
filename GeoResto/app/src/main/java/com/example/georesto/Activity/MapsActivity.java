@@ -19,7 +19,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -40,12 +39,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Task;
 
+import java.text.DecimalFormat;
+
 
 public abstract class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     static final String TAG = "MapsActivity";
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15.0f;
+    public static final DecimalFormat df = new DecimalFormat("####.###");
     //mocks
     public static RestaurantList restaurantList = new RestaurantList();
     public static ProfileList profileList = new ProfileList();
@@ -111,6 +113,31 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         configureSideViews();
 
+        Thread t= new Thread(){
+            @Override
+            public void run(){
+                while(!isInterrupted()){
+                    try {
+                        Thread.sleep(1000);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                getDeviceLocation();
+                                for (Restaurant resto : restaurantList.getRestaurants()) {
+                                    resto.setDistance(userLocation);
+                                }
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        };
+
+        t.start();
 
         ImageButton logo = findViewById(R.id.logo);
         logo.setOnClickListener(info -> {
@@ -186,7 +213,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     }
 
     void getDeviceLocation() {
-        Log.d(TAG, "getDeviceLocation: getting the current location");
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -264,9 +290,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         mMap.clear();
         for (Restaurant resto : list.getRestaurants()
         ) {
-            if (userLocation != null) {
-                resto.setDistance(userLocation);
-            }
             resto.setMarkerOnMap(mMap);
         }
     }

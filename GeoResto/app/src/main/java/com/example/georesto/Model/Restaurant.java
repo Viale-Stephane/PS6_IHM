@@ -9,8 +9,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.text.DecimalFormat;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
+
+import static com.example.georesto.Activity.MapsActivity.df;
 
 public class Restaurant {
     private String restaurant, address, website, phoneNumber;
@@ -21,6 +28,7 @@ public class Restaurant {
     private boolean kindRestaurant;
     private Bitmap restaurantPicture;
     private CommentList commentList;
+    private static final DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 
     public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position,Bitmap restaurantPicture) {
@@ -60,14 +68,16 @@ public class Restaurant {
     }
 
     public void setDistance(LatLng userLocation) {
-        Location loc1 = new Location("");
-        loc1.setLatitude(position.latitude);
-        loc1.setLongitude(position.longitude);
+        if(userLocation!= null) {
+            Location loc1 = new Location("");
+            loc1.setLatitude(position.latitude);
+            loc1.setLongitude(position.longitude);
 
-        Location loc2 = new Location("");
-        loc2.setLatitude(userLocation.latitude);
-        loc2.setLongitude(userLocation.longitude);
-        this.distance = loc1.distanceTo(loc2);
+            Location loc2 = new Location("");
+            loc2.setLatitude(userLocation.latitude);
+            loc2.setLongitude(userLocation.longitude);
+            this.distance = loc1.distanceTo(loc2);
+        }
     }
 
     public String getName() {
@@ -96,6 +106,58 @@ public class Restaurant {
                 return this.schedule[6];
         }
         return null;
+    }
+
+    public String isItOpen(){
+        Date date = new Date();
+        String currentDay = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date);
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);   // assigns calendar to given date
+        calendar.get(Calendar.HOUR_OF_DAY);
+        String openingHours = "";
+        String closingHours = "";
+        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY) + calendar.get(Calendar.MINUTE)/60;
+        int opHours = 0;
+        int clHours= 0;
+        int i=0;
+        String result = "";
+        switch (currentDay) {
+            case "Monday":
+                i=0;
+                break;
+            case "Tuesday":
+                i=1;
+                break;
+            case "Wednesday":
+                i=2;
+                break;
+            case "Thursday":
+                i=3;
+            case "Sunday":
+                i=6;
+                break;
+            case "Saturday":
+                i=5;
+                break;
+            case "Friday" :
+                i=4;
+                break;
+        }
+        if (this.schedule[i].equals("")) {
+            return "Fermé Aujourd'hui";
+        }
+        openingHours = this.schedule[i].split(" ")[1];
+        closingHours = this.schedule[i].split(" ")[3];
+        opHours = Integer.parseInt(openingHours.split(":")[0]) + Integer.parseInt(openingHours.split(":")[1])/60;
+        clHours = Integer.parseInt(closingHours.split(":")[0]) + Integer.parseInt(closingHours.split(":")[1])/60;
+        if ( hourOfDay > opHours && hourOfDay < clHours) {
+            result = "Ouvert: ferme à " + closingHours;
+        } else if (hourOfDay < opHours || hourOfDay > clHours) {
+            result = "Fermé: ouvre à " + openingHours;
+            result = "Fermé: ouvre à " + openingHours;
+        }
+
+        return result;
     }
 
     public String getWebsite() {
@@ -131,7 +193,6 @@ public class Restaurant {
     }
 
     public void setMarkerOnMap(GoogleMap map) {
-        DecimalFormat df = new DecimalFormat("####.###");
         if (this.kindRestaurant) {
             map.addMarker(new MarkerOptions()
                     .position(this.position)
@@ -144,7 +205,6 @@ public class Restaurant {
                     .title(df.format(distance/1000) + " km")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
         }
-
     }
 
     @NonNull

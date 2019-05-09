@@ -27,7 +27,7 @@ public class RestaurantList {
     }
 
     public void sampleRestaurant(Context context) {
-        String[] schedule = {"09h-12h", "09h-12h", "09h-12h", "09h-12h", "09h-12h", "09h-12h", "09h-12h"};
+        String[] schedule = {"de 09:00 à 19:00", "de 09:00 à 19:00", "de 09:00 à 19:00", "de 09:00 à 19:00", "de 09:00 à 19:00", "de 09:00 à 19:00", "de 09:00 à 19:00"};
         //ArrayList<Tag> tagsBK = (ArrayList<Tag>) Arrays.asList(Tag.Pizza,Tag.Burger);
         //tagsBK.add(Tag.FastFood);
         //tagsBK.add(Tag.Burger);

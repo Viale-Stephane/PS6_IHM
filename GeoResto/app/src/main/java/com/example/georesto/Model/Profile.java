@@ -70,4 +70,11 @@ public class Profile {
     public RestaurantList getHistory() { return this.history; }
 
     public RestaurantList getFavourite() { return this.favourite; }
+
+    public ArrayList<Restaurant> getFavourites() { return this.favourite.getRestaurants(); }
+
+    public void addFavourite(Restaurant restaurant) { this.favourite.getRestaurants().add(restaurant); }
+
+    public void removeFavourite(Restaurant restaurant) { this.favourite.getRestaurants().remove(restaurant); }
+
 }

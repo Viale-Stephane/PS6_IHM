@@ -13,7 +13,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -41,7 +40,6 @@ import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
 import com.example.georesto.View.CommentAdapter;
 import com.example.georesto.View.RestaurantAdapter;
-import com.example.georesto.View.RestaurantSuggestionAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -68,12 +66,13 @@ public class MapsActivityOnline extends MapsActivity {
     protected void onCreate(Bundle savedInstanceState) {
         init = false;
         super.onCreate(savedInstanceState);
+
         geocoder = new Geocoder(this, Locale.getDefault());
         findViewById(R.id.accessToLogin).setVisibility(View.GONE);
         findViewById(R.id.accessToRegister).setVisibility(View.GONE);
         findViewById(R.id.home_button).setVisibility(View.GONE);
         setPersonalInformation();
-        newLocationTips = Snackbar.make(drawerMap,"Cliquez longuement sur la carte pour ajouter un lieu",4000);
+        newLocationTips = Snackbar.make(drawerMap,"Cliquez longuement sur la carte pour ajouter un lieu ",4000);
         newLocationTips2 = Snackbar.make(drawerMap,"Cliquez longuement sur la carte pour choisir ou modifier l'adresse",4000);
         ImageButton profileButton = findViewById(R.id.accessProfile);
         profileButton.setOnClickListener(v -> {

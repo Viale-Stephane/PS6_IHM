@@ -12,13 +12,17 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.georesto.Model.ProfileList;
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.R;
+
+import java.util.ArrayList;
 
 public class RestaurantActivity {
     private Activity parent;
@@ -40,6 +44,9 @@ public class RestaurantActivity {
     private TextView saturday;
     private TextView sunday;
 
+    private ImageButton buttonStar;
+    private boolean favourite;
+
     private Button addContact;
     private Button rappel;
 
@@ -55,6 +62,7 @@ public class RestaurantActivity {
         this.name = currentHeader.findViewById(R.id.infoRes_name);
         this.picture = currentHeader.findViewById(R.id.infoRes_picture);
         this.ratingBar = currentHeader.findViewById(R.id.infoRes_rate);
+        this.ratingBar.setIsIndicator(true);
         this.address = currentHeader.findViewById(R.id.infoRes_address);
         this.website = currentHeader.findViewById(R.id.infoRes_website);
         this.phone = currentHeader.findViewById(R.id.infoRes_tel);
@@ -66,12 +74,18 @@ public class RestaurantActivity {
         this.saturday = currentHeader.findViewById(R.id.infoRes_saturday);
         this.sunday = currentHeader.findViewById(R.id.infoRes_sunday);
 
+        this.buttonStar = currentHeader.findViewById(R.id.infoRes_star);
+        this.favourite = false;
+
         this.addContact = currentHeader.findViewById(R.id.buttonAddContact);
         this.rappel = currentHeader.findViewById(R.id.buttonAddRappel);
 
         this.setRestaurantInformation(restaurant);
 
+        this.setFavourite(restaurant);
+
         this.configureAddContact();
+        this.configureAddRemind();
     }
 
     private void configureAddContact() {
@@ -86,6 +100,19 @@ public class RestaurantActivity {
                     Toast.makeText(parent.getApplicationContext(), "Le contact existe déjà",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    private void configureAddRemind() {
+        rappel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_EDIT);
+                intent.setType("vnd.android.cursor.item/event");
+                intent.putExtra("title", "Réservation "+restaurant.getName());
+                intent.putExtra("eventLocation", restaurant.getAddress());
+                parent.startActivity(intent);
             }
         });
     }
@@ -131,16 +158,28 @@ public class RestaurantActivity {
         this.sunday.setText(restaurant.getSchedule(6));
     }
 
-        /*
-        rappel.setOnClickListener(new View.OnClickListener() {
+    private void setFavourite(Restaurant restaurant) {
+        buttonStar.setImageResource(android.R.drawable.star_big_off);
+        for(Restaurant res: ProfileList.getCurrentUser().getFavourites()) {
+            if(res.equals(restaurant)) {
+                buttonStar.setImageResource(android.R.drawable.star_big_on);
+                favourite = true;
+                break;
+            }
+        }
+
+        buttonStar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_EDIT);
-                intent.setType("vnd.android.cursor.item/event");
-                intent.putExtra("title", "Réservation "+restaurant.getName());
-                intent.putExtra("eventLocation", restaurant.getAddress());
-                startActivity(intent);
+            public void onClick(View view) {
+                if (favourite){
+                    buttonStar.setImageResource(android.R.drawable.star_big_off);
+                    ProfileList.getCurrentUser().removeFavourite(restaurant);
+                } else {
+                    buttonStar.setImageResource(android.R.drawable.star_big_on);
+                    ProfileList.getCurrentUser().addFavourite(restaurant);
+                }
+                favourite = !favourite;
             }
         });
-        */
+    }
 }
