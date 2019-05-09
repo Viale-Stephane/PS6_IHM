@@ -140,10 +140,10 @@ public class Restaurant {
                 i=4;
                 break;
         }
-        openingHours = this.schedule[i].split("-")[0];
-        closingHours = this.schedule[i].split("-")[1];
-        opHours = Integer.parseInt(openingHours.split("h")[0]) + Integer.parseInt(openingHours.split("h")[1])/60;
-        clHours = Integer.parseInt(closingHours.split("h")[0]) + Integer.parseInt(closingHours.split("h")[1])/60;
+        openingHours = this.schedule[i].split(" ")[1];
+        closingHours = this.schedule[i].split(" ")[3];
+        opHours = Integer.parseInt(openingHours.split(":")[0]) + Integer.parseInt(openingHours.split(":")[1])/60;
+        clHours = Integer.parseInt(closingHours.split(":")[0]) + Integer.parseInt(closingHours.split(":")[1])/60;
         if ( hourOfDay > opHours && hourOfDay < clHours) {
             result = "Ouvert: ferme à " + closingHours;
         } else if (hourOfDay < opHours || hourOfDay > clHours) {

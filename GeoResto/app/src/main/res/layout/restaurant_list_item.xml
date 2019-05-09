@@ -42,8 +42,8 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:maxWidth="150dp"
-            android:id="@+id/horaireActuel"
-            android:text="Ouvert: ferme à 18h00"/>
+            android:id="@+id/restaurant_list_item_horaire"
+            android:text="Ou0"/>
     </LinearLayout>
 
     <ImageView

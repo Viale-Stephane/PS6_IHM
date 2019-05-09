@@ -66,6 +66,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
         private final ImageView picture;
         private final TextView description;
         private final TextView distance;
+        private final TextView horaire;
 
         private Restaurant currentResto;
 
@@ -76,6 +77,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             this.picture = itemView.findViewById(R.id.restaurant_list_item_image);
             this.description = itemView.findViewById(R.id.restaurant_list_item_description);
             this.distance = itemView.findViewById(R.id.restaurant_list_item_distance);
+            this.horaire = itemView.findViewById(R.id.restaurant_list_item_horaire);
+
         }
 
         void display(Restaurant restaurant) {
@@ -84,6 +87,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             picture.setImageBitmap(restaurant.getPicture());
             description.setText(restaurant.getAddress());
             distance.setText("distance :" + Integer.toString((int) restaurant.getDistance() / 1000) + " km");
+            horaire.setText(restaurant.isItOpen());
         }
 
         public View getItemView() {
