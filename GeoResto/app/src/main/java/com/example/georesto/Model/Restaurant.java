@@ -10,13 +10,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
+
+import static com.example.georesto.Activity.MapsActivity.df;
 
 public class Restaurant {
     private String restaurant, address, website, phoneNumber;
@@ -187,7 +188,6 @@ public class Restaurant {
     }
 
     public void setMarkerOnMap(GoogleMap map) {
-        DecimalFormat df = new DecimalFormat("####.###");
         if (this.kindRestaurant) {
             map.addMarker(new MarkerOptions()
                     .position(this.position)

@@ -16,6 +16,8 @@ import com.example.georesto.Activity.RestaurantActivity;
 import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.R;
 
+import static com.example.georesto.Activity.MapsActivity.df;
+
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.MyViewHolder> {
 
     private Activity parent;
@@ -86,7 +88,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             name.setText(restaurant.getName());
             picture.setImageBitmap(restaurant.getPicture());
             description.setText(restaurant.getAddress());
-            distance.setText("distance :" + Integer.toString((int) restaurant.getDistance() / 1000) + " km");
+            distance.setText("distance :" + df.format(restaurant.getDistance()/1000) + " km");
             horaire.setText(restaurant.isItOpen());
         }
 

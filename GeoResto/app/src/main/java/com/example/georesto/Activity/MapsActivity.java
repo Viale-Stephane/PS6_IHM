@@ -39,12 +39,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Task;
 
+import java.text.DecimalFormat;
+
 
 public abstract class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     static final String TAG = "MapsActivity";
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15.0f;
+    public static final DecimalFormat df = new DecimalFormat("####.###");
     //mocks
     public static RestaurantList restaurantList = new RestaurantList();
     public static ProfileList profileList = new ProfileList();
