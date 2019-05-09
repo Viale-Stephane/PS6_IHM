@@ -31,10 +31,10 @@ public class Restaurant {
     private static final DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 
-    public Restaurant(String restaurant, boolean kindRestaurant, String address, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position,Bitmap restaurantPicture) {
+    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position,Bitmap restaurantPicture) {
         this.restaurant = restaurant;
         this.kindRestaurant = kindRestaurant;
-        this.address = address;
+        this.address = adress;
         this.website = website;
         this.phoneNumber = phoneNumber;
         this.schedule = schedule;
@@ -210,7 +210,7 @@ public class Restaurant {
     @NonNull
     @Override
     public String toString() {
-        StringBuilder string = new StringBuilder("Le nom du restaurant est : " + this.restaurant + "\n" +
+        /*StringBuilder string = new StringBuilder("Le nom du restaurant est : " + this.restaurant + "\n" +
                 "L'adresse du restaurant est : " + this.address + "\n" +
                 "Le site internet du restaurant est : " + this.website + "\n" +
                 "Le numéro de téléphone du restaurant est : " + this.phoneNumber + "\n" +
@@ -218,9 +218,9 @@ public class Restaurant {
         for (int i = 0; i < schedule.length; i++) {
             string.append("Jour ").append(i).append(" le restaurant a pour horaires ").append(schedule[i]);
         }
-        string.append("Le restaurant a pour note : ").append(grade);
+        string.append("Le restaurant a pour note : ").append(grade);*/
 
-        return string.toString();
+        return this.getName();
     }
 
     public Bitmap getPicture() {
