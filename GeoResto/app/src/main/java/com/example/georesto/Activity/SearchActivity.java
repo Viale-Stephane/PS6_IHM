@@ -18,7 +18,7 @@ import com.example.georesto.R;
 import java.util.ArrayList;
 
 class SearchActivity {
-    private final Activity activity;
+    private final Activity parent;
     private final NavigationView search;
     private final ToggleButton toggleRestaurant;
     private final ToggleButton toggleCommerce;
@@ -30,12 +30,13 @@ class SearchActivity {
     private final SeekBar distanceSeekBar;
     private final RatingBar ratingBar;
     private final Button filterButton;
+
     private ArrayList<Tag> tagsToShow;
     private boolean isInit;
 
     // Parent Activity, Navigation View to show
     SearchActivity(Activity parent, NavigationView view) {
-        this.activity = parent;
+        this.parent = parent;
         this.search = parent.findViewById(R.id.research);
 
         search.removeHeaderView(search.getHeaderView(0));
@@ -54,6 +55,7 @@ class SearchActivity {
         this.filterButton = currentHeader.findViewById(R.id.research_filter);
 
         tagsToShow = new ArrayList<>();
+        isInit = true;
 
         this.configureToggles();
         this.configureSpinner();
@@ -71,17 +73,17 @@ class SearchActivity {
         priceSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                priceShow.setText("Prix : " + progress + " €");
+                priceShow.setText(String.format(parent.getString(R.string.priceSeekBarText), progress));
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                priceShow.setText("Prix : " + seekBar.getProgress() + " €");
+                priceShow.setText(String.format(parent.getString(R.string.priceSeekBarText), seekBar.getProgress()));
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                priceShow.setText("Prix : " + seekBar.getProgress() + " €");
+                priceShow.setText(String.format(parent.getString(R.string.priceSeekBarText), seekBar.getProgress()));
             }
         });
 
@@ -89,24 +91,24 @@ class SearchActivity {
         distanceSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                distanceShow.setText("Distance : " + progress + " km");
+                distanceShow.setText(String.format(parent.getString(R.string.distanceSeekBarText), progress));
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                distanceShow.setText("Distance : " + seekBar.getProgress() + " km");
+                distanceShow.setText(String.format(parent.getString(R.string.distanceSeekBarText), seekBar.getProgress()));
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                distanceShow.setText("Distance : " + seekBar.getProgress() + " km");
+                distanceShow.setText(String.format(parent.getString(R.string.distanceSeekBarText), seekBar.getProgress()));
             }
         });
     }
 
     private void configureSpinner() {
         ArrayList<Tag> tags = new ArrayList<>(Tag.getFullList());
-        final ArrayAdapter<Tag> spinnerArrayAdapter = new ArrayAdapter<>(activity, R.layout.support_simple_spinner_dropdown_item, tags);
+        final ArrayAdapter<Tag> spinnerArrayAdapter = new ArrayAdapter<>(parent, R.layout.support_simple_spinner_dropdown_item, tags);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         tagSpinner.setAdapter(spinnerArrayAdapter);
 
@@ -121,9 +123,8 @@ class SearchActivity {
                         tagsToShow.add(currentTag);
                     }
                     updateTagShow();
-                } else {
-                    isInit = false;
                 }
+                isInit = false;
             }
 
             @Override

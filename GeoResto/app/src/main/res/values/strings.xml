@@ -60,4 +60,6 @@
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
     <string name="nom_du_lieu">Nom du lieu</string>
+    <string name="priceSeekBarText">Prix : %d €</string>
+    <string name="distanceSeekBarText">Distance : %d km</string>
 </resources>
