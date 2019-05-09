@@ -1,14 +1,21 @@
 package com.example.georesto.Activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.R;
@@ -69,15 +76,43 @@ public class RestaurantActivity {
 
     private void configureAddContact() {
         addContact.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_INSERT);
-            intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
-            intent.putExtra(ContactsContract.Intents.Insert.NAME, restaurant.getName());
-            intent.putExtra(ContactsContract.Intents.Insert.PHONE, restaurant.getPhoneNumber());
-            intent.putExtra(ContactsContract.Intents.Insert.POSTAL, restaurant.getAddress());
-            if (intent.resolveActivity(parent.getPackageManager()) != null) {
-                parent.startActivity(intent);
+            if (getContactPermissions()) {
+                Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(restaurant.getPhoneNumber()));
+                Cursor cursor = parent.getContentResolver().query(lookupUri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.PhoneLookup._ID}, null, null, null);
+                if (cursor != null && !cursor.moveToFirst()) {
+                    this.createContact(restaurant);
+                    cursor.close();
+                } else {
+                    Toast.makeText(parent.getApplicationContext(), "Le contact existe déjà",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    private void createContact(Restaurant restaurant) {
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+        intent.putExtra(ContactsContract.Intents.Insert.NAME, restaurant.getName());
+        intent.putExtra(ContactsContract.Intents.Insert.PHONE, restaurant.getPhoneNumber());
+        intent.putExtra(ContactsContract.Intents.Insert.POSTAL, restaurant.getAddress());
+        if (intent.resolveActivity(parent.getPackageManager()) != null) {
+            parent.startActivity(intent);
+        }
+    }
+
+    private boolean getContactPermissions() {
+        String[] permissions = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS};
+        boolean permission = true;
+        if (ContextCompat.checkSelfPermission(parent.getApplicationContext(), Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(parent, permissions, 1);
+            permission = false;
+        }
+        if (ContextCompat.checkSelfPermission(parent.getApplicationContext(), Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(parent, permissions, 2);
+            permission = false;
+        }
+        return permission;
     }
 
     private void setRestaurantInformation(Restaurant restaurant) {
