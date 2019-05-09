@@ -9,12 +9,17 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class RestaurantList {
     private ArrayList<Restaurant> restaurants = new ArrayList<>();
 
     public RestaurantList() {
+    }
+
+    public RestaurantList(List<Restaurant> restaurants) {
+        this.restaurants.addAll(restaurants);
     }
 
     public void addRestaurant(Restaurant restaurant) {

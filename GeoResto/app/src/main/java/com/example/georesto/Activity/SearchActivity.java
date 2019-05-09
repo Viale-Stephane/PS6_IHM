@@ -2,47 +2,57 @@ package com.example.georesto.Activity;
 
 import android.app.Activity;
 import android.support.design.widget.NavigationView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.example.georesto.Model.ProfileList;
+import com.example.georesto.Model.RestaurantList;
 import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
+import com.example.georesto.Service.FilterService;
+import com.example.georesto.View.RestaurantAdapter;
 
 import java.util.ArrayList;
 
 class SearchActivity {
     private final Activity parent;
-    private final NavigationView search;
-    private final ToggleButton toggleRestaurant;
-    private final ToggleButton toggleCommerce;
-    private final Spinner tagSpinner;
-    private final TextView tagShow;
-    private final TextView priceShow;
-    private final SeekBar priceSeekBar;
-    private final TextView distanceShow;
-    private final SeekBar distanceSeekBar;
-    private final RatingBar ratingBar;
-    private final Button filterButton;
+    private final NavigationView searchView;
+    private final FilterService filterService;
 
+    private SearchView searchBar;
+    private ToggleButton toggleRestaurant;
+    private ToggleButton toggleCommerce;
+    private Spinner tagSpinner;
+    private TextView tagShow;
+    private TextView priceShow;
+    private SeekBar priceSeekBar;
+    private TextView distanceShow;
+    private SeekBar distanceSeekBar;
+    private RatingBar ratingBar;
+    private Button filterButton;
     private ArrayList<Tag> tagsToShow;
     private boolean isInit;
 
     // Parent Activity, Navigation View to show
     SearchActivity(Activity parent, NavigationView view) {
         this.parent = parent;
-        this.search = parent.findViewById(R.id.research);
+        this.searchView = parent.findViewById(R.id.research);
 
-        search.removeHeaderView(search.getHeaderView(0));
-        search.inflateHeaderView(R.layout.research);
+        searchView.removeHeaderView(searchView.getHeaderView(0));
+        searchView.inflateHeaderView(R.layout.research);
 
         View currentHeader = view.getHeaderView(0);
+        this.searchBar = currentHeader.findViewById(R.id.research_search);
         this.toggleRestaurant = currentHeader.findViewById(R.id.research_toggle_restaurant);
         this.toggleCommerce = currentHeader.findViewById(R.id.research_toggle_commerce);
         this.tagSpinner = currentHeader.findViewById(R.id.research_tag_spinner);
@@ -54,19 +64,46 @@ class SearchActivity {
         this.ratingBar = currentHeader.findViewById(R.id.research_rating_bar);
         this.filterButton = currentHeader.findViewById(R.id.research_filter);
 
-        tagsToShow = new ArrayList<>();
-        isInit = true;
+
+        this.tagsToShow = new ArrayList<>();
+        this.isInit = true;
 
         this.configureToggles();
         this.configureSpinner();
         this.configureSeekBars();
 
-        filterButton.setOnClickListener(v -> {
-            // TODO : LA RECHERCHE MDR
-            //this.search.removeHeaderView(view.getHeaderView(0));
-            //this.search.inflateHeaderView(R.layout.info);
+        filterService = new FilterService(MapsActivity.restaurantList);
+
+        filterButton.setOnClickListener(v -> filter(searchBar.getQuery()));
+
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
         });
     }
+
+    private void filter(CharSequence query) {
+        RestaurantList rl = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getNumStars()));
+        System.out.println(rl);
+        searchView.removeHeaderView(searchView.getHeaderView(0));
+        searchView.inflateHeaderView(R.layout.result);
+        RecyclerView rv = searchView.findViewById(R.id.result);
+        rv.setLayoutManager(new LinearLayoutManager(parent));
+        RestaurantAdapter adapter =new RestaurantAdapter(parent, searchView, rl);
+        rv.setAdapter(adapter);
+    }
+
+    // ------------------ //
+    //   CONFIGURATION    //
+    // ------------------ //
 
     private void configureSeekBars() {
         priceSeekBar.setProgress(20);
