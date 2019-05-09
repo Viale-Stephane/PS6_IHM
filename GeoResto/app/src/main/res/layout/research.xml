@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <SearchView
-        android:id="@+id/search"
+        android:id="@+id/research_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -19,6 +19,7 @@
         android:orientation="horizontal">
 
         <ToggleButton
+            android:id="@+id/research_toggle_restaurant"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -28,6 +29,7 @@
             android:textOn="@string/restaurant" />
 
         <ToggleButton
+            android:id="@+id/research_toggle_commerce"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -38,13 +40,14 @@
     </LinearLayout>
 
     <Spinner
-        android:id="@+id/tagSpinner"
+        android:id="@+id/research_tag_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="8dp" />
 
     <TextView
+        android:id="@+id/research_tag_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -54,6 +57,7 @@
         android:textAlignment="center" />
 
     <TextView
+        android:id="@+id/research_price_show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -61,12 +65,14 @@
         android:text="@string/currentPrice" />
 
     <SeekBar
+        android:id="@+id/research_price_seek_bar"
         android:layout_width="match_parent"
         android:layout_height="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
 
     <TextView
+        android:id="@+id/research_distance_show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -74,6 +80,7 @@
         android:text="@string/currentDistance" />
 
     <SeekBar
+        android:id="@+id/research_distance_seek_bar"
         android:layout_width="match_parent"
         android:layout_height="16dp"
         android:layout_marginStart="8dp"
@@ -87,13 +94,14 @@
         android:layout_marginStart="8dp"/>
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/research_rating_bar"
         android:layout_width="236dp"
         android:layout_height="44dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp" />
 
     <Button
+        android:id="@+id/research_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

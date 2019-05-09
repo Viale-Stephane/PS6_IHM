@@ -19,7 +19,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -39,35 +38,37 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 
 public abstract class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
+    static final String TAG = "MapsActivity";
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private static final float DEFAULT_ZOOM = 15.0f;
+    //mocks
+    public static RestaurantList restaurantList = new RestaurantList();
+    public static ProfileList profileList = new ProfileList();
     // Testing Spinner
     protected final String[] paths = {"item 1", "item 2", "item 3"};
-
     // Navigation Things
     protected DrawerLayout drawerMap;
     protected NavigationView profileView;
     protected NavigationView searchView;
-
-
-
     // Search Side
     protected Spinner tagSpinner;
-
     // Model
     protected Profile user;
-
-    //mocks
-    public static RestaurantList restaurantList = new RestaurantList();
-    public static ProfileList profileList = new ProfileList();
-
     //variables
     protected boolean init = true;
+    // GoogleMaps
+    protected GoogleMap mMap;
 
+
+    Boolean mLocationPermissionGranted = false;
+    LatLng userLocation;
+
+    private FusedLocationProviderClient mFusedLocationProviderClient;
 
     public boolean isServicesOK() {
         Log.d(TAG, "isServicesOK: checking google services version");
@@ -94,13 +95,14 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-
-        if(init) {
+        if (init) {
             restaurantList.sampleRestaurant(this);
             profileList.instantiateProfiles(restaurantList);
             init = false;
         }
+
         user = ProfileList.getCurrentUser();
+
         if (isServicesOK()) {
             getLocationPermissions();
         }
@@ -124,8 +126,9 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             if (!drawerMap.isDrawerOpen(searchView)) {
                 drawerMap.closeDrawer(profileView);
                 drawerMap.openDrawer(searchView);
-                tagSpinner = findViewById(R.id.tagSpinner);
-                tagSpinner.setAdapter(adapter);
+                this.configureSearchView();
+                //tagSpinner = findViewById(R.id.tagSpinner);
+                //tagSpinner.setAdapter(adapter);
             } else {
                 drawerMap.closeDrawer(searchView);
             }
@@ -149,7 +152,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     // ----------------------
     //     CONFIGURATION
     // ----------------------
-
     private void configureDrawerLayout() {
         drawerMap = findViewById(R.id.drawerMaps);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerMap, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -163,20 +165,15 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         searchView.setNavigationItemSelectedListener(this);
     }
 
+    protected void configureSearchView() {
+        new SearchActivity(this);
+    }
+
+    ;
 
     // --------------------
     //     GoogleMaps
     // --------------------
-
-    static final String TAG = "MapsActivity";
-    Boolean mLocationPermissionGranted = false;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 15.0f;
-    LatLng userLocation;
-     // GoogleMaps
-    protected GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
-
     private void getLocationPermissions() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -206,40 +203,37 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         try {
             if (mLocationPermissionGranted) {
                 Task location = mFusedLocationProviderClient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful() && task.getResult() != null) {
-                            Location currentLocation = (Location) task.getResult();
-                            userLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                            moveCamera(userLocation, DEFAULT_ZOOM);
-                        } else {
-                            locationManager.requestLocationUpdates(bestProvider, 1000, 0, new LocationListener() {
-                                @Override
-                                public void onLocationChanged(android.location.Location location) {
-                                    double latitude = location.getLatitude();
-                                    double longitude = location.getLongitude();
-                                    userLocation = new LatLng(latitude, longitude);
-                                    Log.d(TAG, "onLocationChanged: " + latitude + "  " + longitude);
-                                    moveCamera(userLocation, DEFAULT_ZOOM);
-                                }
+                location.addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        Location currentLocation = (Location) task.getResult();
+                        userLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                        moveCamera(userLocation, DEFAULT_ZOOM);
+                    } else {
+                        locationManager.requestLocationUpdates(bestProvider, 1000, 0, new LocationListener() {
+                            @Override
+                            public void onLocationChanged(Location location1) {
+                                double latitude = location1.getLatitude();
+                                double longitude = location1.getLongitude();
+                                userLocation = new LatLng(latitude, longitude);
+                                Log.d(TAG, "onLocationChanged: " + latitude + "  " + longitude);
+                                moveCamera(userLocation, DEFAULT_ZOOM);
+                            }
 
-                                @Override
-                                public void onStatusChanged(String provider, int status, Bundle extras) {
+                            @Override
+                            public void onStatusChanged(String provider, int status, Bundle extras) {
 
-                                }
+                            }
 
-                                @Override
-                                public void onProviderEnabled(String provider) {
+                            @Override
+                            public void onProviderEnabled(String provider) {
 
-                                }
+                            }
 
-                                @Override
-                                public void onProviderDisabled(String provider) {
+                            @Override
+                            public void onProviderDisabled(String provider) {
 
-                                }
-                            });
-                        }
+                            }
+                        });
                     }
                 });
             }
@@ -254,8 +248,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         switch (requestCode) {
             case LOCATION_PERMISSION_REQUEST_CODE: {
                 if (grantResults.length > 0) {
-                    for (int i = 0; i < grantResults.length; i++) {
-                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    for (int grantResult : grantResults) {
+                        if (grantResult != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionGranted = false;
                             return;
                         }
@@ -279,7 +273,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         mMap.clear();
         for (Restaurant resto : list.getRestaurants()
         ) {
-            if (userLocation!=null) {
+            if (userLocation != null) {
                 resto.setDistance(userLocation);
             }
             resto.setMarkerOnMap(mMap);
@@ -302,13 +296,13 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             return;
         }
         googleMap.setMyLocationEnabled(true);
-        googleMap.setPadding(0,120,0,0);
+        googleMap.setPadding(0, 120, 0, 0);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
 
         Log.d(TAG, "onMapReady: maps is ready");
         mMap.clear();
         for (Restaurant resto : restaurantList.getRestaurants()) {
-            if (userLocation!=null) {
+            if (userLocation != null) {
                 resto.setDistance(userLocation);
             }
             resto.setMarkerOnMap(mMap);
@@ -329,13 +323,4 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         }
 
     }
-/**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
 }
