@@ -12,11 +12,9 @@ import android.widget.TextView;
 
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.Model.RestaurantList;
-import com.example.georesto.Model.RestaurantModel;
+import com.example.georesto.Activity.RestaurantActivity;
 import com.example.georesto.R;
 import com.example.georesto.Model.Tag;
-
-import org.w3c.dom.Text;
 
 public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<RestaurantSuggestionAdapter.RestaurantSuggestionViewHolder>  {
 
@@ -25,7 +23,7 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
     private DrawerLayout drawerMap;
     private NavigationView profileView;
     private NavigationView searchView;
-    private RestaurantModel restaurantModel;
+    private RestaurantActivity restaurantModel;
 
     public RestaurantSuggestionAdapter(RestaurantList restaurants, DrawerLayout drawerMap, NavigationView profileView, NavigationView searchView) {
 
@@ -57,14 +55,14 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
     public void onBindViewHolder(@NonNull RestaurantSuggestionViewHolder restaurantSuggestionViewHolder, int i) {
         Restaurant restaurant = this.restaurants.getRestaurant(i);
         restaurantSuggestionViewHolder.display(restaurant);
-        restaurantSuggestionViewHolder.getItemView().setOnClickListener(v -> {
+        /*restaurantSuggestionViewHolder.getItemView().setOnClickListener(v -> {
             this.drawerMap.closeDrawer(this.profileView);
             this.drawerMap.openDrawer(this.searchView);
             searchView.removeHeaderView(searchView.getHeaderView(0));
             searchView.inflateHeaderView(R.layout.info_restaurant);
-            restaurantModel = new RestaurantModel(searchView);
+            restaurantModel = new RestaurantActivity(searchView);
             restaurantModel.init(restaurant);
-        });
+        });*/
     }
 
 

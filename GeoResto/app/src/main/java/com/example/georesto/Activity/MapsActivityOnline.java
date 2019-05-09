@@ -126,7 +126,7 @@ public class MapsActivityOnline extends MapsActivity {
         ProfileList.getCurrentUser().updateDistance(restaurantList);
         RecyclerView rv = findViewById(R.id.history);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        RestaurantAdapter adapter =new RestaurantAdapter(ProfileList.getCurrentUser().getHistory(),this.drawerMap,this.profileView,this.searchView);
+        RestaurantAdapter adapter =new RestaurantAdapter(this, profileView,ProfileList.getCurrentUser().getHistory());
         rv.setAdapter(adapter);
     }
 
@@ -134,7 +134,7 @@ public class MapsActivityOnline extends MapsActivity {
         ProfileList.getCurrentUser().updateDistance(restaurantList);
         RecyclerView rv = findViewById(R.id.favourite);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        RestaurantAdapter adapter =new RestaurantAdapter(ProfileList.getCurrentUser().getFavourite(),this.drawerMap,this.profileView,this.searchView);
+        RestaurantAdapter adapter =new RestaurantAdapter(this, profileView,ProfileList.getCurrentUser().getFavourite());
         rv.setAdapter(adapter);
     }
 
@@ -142,7 +142,7 @@ public class MapsActivityOnline extends MapsActivity {
         ProfileList.getCurrentUser().updateDistance(restaurantList);
         RecyclerView rv = findViewById(R.id.comments);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        CommentAdapter adapter =new CommentAdapter(ProfileList.getCurrentUser().getUserComments(),this.drawerMap,this.profileView,this.searchView);
+        CommentAdapter adapter =new CommentAdapter(this, profileView,ProfileList.getCurrentUser().getUserComments());
         rv.setAdapter(adapter);
     }
 
@@ -181,17 +181,6 @@ public class MapsActivityOnline extends MapsActivity {
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takePictureIntent, CAMERA);
             }
-    }
-
-    public void insertRestaurantToContact(Restaurant restaurant) {
-        Intent intent = new Intent(Intent.ACTION_INSERT);
-        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
-        intent.putExtra(ContactsContract.Intents.Insert.NAME, restaurant.getName());
-        intent.putExtra(ContactsContract.Intents.Insert.PHONE, restaurant.getPhoneNumber());
-        intent.putExtra(ContactsContract.Intents.Insert.POSTAL, restaurant.getAddress());
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
     }
 
     @Override

@@ -33,6 +33,7 @@ class SearchActivity {
     private ArrayList<Tag> tagsToShow;
     private boolean isInit;
 
+    // Parent Activity, Navigation View to show
     SearchActivity(Activity parent, NavigationView view) {
         this.activity = parent;
         this.search = parent.findViewById(R.id.research);
@@ -59,9 +60,9 @@ class SearchActivity {
         this.configureSeekBars();
 
         filterButton.setOnClickListener(v -> {
-            this.search.removeHeaderView(view
-                    .getHeaderView(0));
-            this.search.inflateHeaderView(R.layout.info);
+            // TODO : LA RECHERCHE MDR
+            //this.search.removeHeaderView(view.getHeaderView(0));
+            //this.search.inflateHeaderView(R.layout.info);
         });
     }
 

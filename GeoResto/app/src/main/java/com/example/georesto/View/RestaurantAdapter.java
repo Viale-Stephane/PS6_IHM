@@ -1,5 +1,6 @@
 package com.example.georesto.View;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -11,24 +12,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.georesto.Model.Restaurant;
+import com.example.georesto.Activity.RestaurantActivity;
 import com.example.georesto.Model.RestaurantList;
-import com.example.georesto.Model.RestaurantModel;
 import com.example.georesto.R;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.MyViewHolder> {
 
+    private Activity parent;
+    private NavigationView navigationView;
+    private NavigationView searchView;
     private RestaurantList restaurants;
+
     private MyViewHolder myViewHolder;
     private DrawerLayout drawerMap;
-    private NavigationView profileView;
-    private NavigationView searchView;
-    private RestaurantModel restaurantModel;
 
-    public RestaurantAdapter(RestaurantList restaurants, DrawerLayout drawerMap, NavigationView profileView, NavigationView searchView) {
+    public RestaurantAdapter(Activity parent, NavigationView navigationView, RestaurantList restaurants) {
+        this.parent = parent;
+        this.navigationView = navigationView;
+
         this.restaurants = restaurants;
-        this.drawerMap = drawerMap;
-        this.profileView = profileView;
-        this.searchView = searchView;
+        this.drawerMap = parent.findViewById(R.id.drawerMaps);
+        this.searchView = parent.findViewById(R.id.research);
     }
 
     @NonNull
@@ -45,12 +49,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
         Restaurant restaurant = this.restaurants.getRestaurant(i);
         myViewHolder.display(restaurant);
         myViewHolder.getItemView().setOnClickListener(v -> {
-            this.drawerMap.closeDrawer(this.profileView);
+            this.drawerMap.closeDrawer(this.navigationView);
             this.drawerMap.openDrawer(this.searchView);
-            searchView.removeHeaderView(searchView.getHeaderView(0));
-            searchView.inflateHeaderView(R.layout.info_restaurant);
-            restaurantModel = new RestaurantModel(searchView);
-            restaurantModel.init(restaurant);
+
+            new RestaurantActivity(parent, searchView, restaurant);
         });
     }
 
@@ -81,7 +83,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             name.setText(restaurant.getName());
             picture.setImageBitmap(restaurant.getPicture());
             description.setText(restaurant.getAddress());
-            distance.setText("distance :"+ Integer.toString((int)restaurant.getDistance()/1000) + " km");
+            distance.setText("distance :" + Integer.toString((int) restaurant.getDistance() / 1000) + " km");
         }
 
         public View getItemView() {

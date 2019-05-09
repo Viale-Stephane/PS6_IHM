@@ -1,5 +1,8 @@
-package com.example.georesto.Model;
+package com.example.georesto.Activity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
 import android.view.View;
 import android.widget.Button;
@@ -7,9 +10,14 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.georesto.Model.Restaurant;
 import com.example.georesto.R;
 
-public class RestaurantModel {
+public class RestaurantActivity {
+    private Activity parent;
+    private NavigationView navigationView;
+    private Restaurant restaurant;
+
     private View currentHeader;
     private TextView name;
     private ImageView picture;
@@ -28,8 +36,15 @@ public class RestaurantModel {
     private Button addContact;
     private Button rappel;
 
-    public RestaurantModel(NavigationView resView) {
-        this.currentHeader = resView.getHeaderView(0);
+    public RestaurantActivity(Activity parent, NavigationView navigationView, Restaurant restaurant) {
+        this.parent = parent;
+        this.navigationView = navigationView;
+        this.restaurant = restaurant;
+
+        navigationView.removeHeaderView(navigationView.getHeaderView(0));
+        navigationView.inflateHeaderView(R.layout.info_restaurant);
+
+        this.currentHeader = navigationView.getHeaderView(0);
         this.name = currentHeader.findViewById(R.id.infoRes_name);
         this.picture = currentHeader.findViewById(R.id.infoRes_picture);
         this.ratingBar = currentHeader.findViewById(R.id.infoRes_rate);
@@ -46,9 +61,26 @@ public class RestaurantModel {
 
         this.addContact = currentHeader.findViewById(R.id.buttonAddContact);
         this.rappel = currentHeader.findViewById(R.id.buttonAddRappel);
+
+        this.setRestaurantInformation(restaurant);
+
+        this.configureAddContact();
     }
 
-    public void init(Restaurant restaurant) {
+    private void configureAddContact() {
+        addContact.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_INSERT);
+            intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+            intent.putExtra(ContactsContract.Intents.Insert.NAME, restaurant.getName());
+            intent.putExtra(ContactsContract.Intents.Insert.PHONE, restaurant.getPhoneNumber());
+            intent.putExtra(ContactsContract.Intents.Insert.POSTAL, restaurant.getAddress());
+            if (intent.resolveActivity(parent.getPackageManager()) != null) {
+                parent.startActivity(intent);
+            }
+        });
+    }
+
+    private void setRestaurantInformation(Restaurant restaurant) {
         this.name.setText(restaurant.getName());
         this.picture.setImageBitmap(restaurant.getPicture());
         this.ratingBar.setRating(((float) restaurant.getGrade()));
@@ -62,6 +94,7 @@ public class RestaurantModel {
         this.friday.setText(restaurant.getSchedule(4));
         this.saturday.setText(restaurant.getSchedule(5));
         this.sunday.setText(restaurant.getSchedule(6));
+    }
 
         /*
         rappel.setOnClickListener(new View.OnClickListener() {
@@ -75,5 +108,4 @@ public class RestaurantModel {
             }
         });
         */
-    }
 }

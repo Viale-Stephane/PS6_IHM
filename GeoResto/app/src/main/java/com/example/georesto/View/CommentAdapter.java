@@ -1,5 +1,6 @@
 package com.example.georesto.View;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -13,23 +14,25 @@ import android.widget.TextView;
 import com.example.georesto.Model.Comment;
 import com.example.georesto.Model.CommentList;
 import com.example.georesto.Model.Restaurant;
-import com.example.georesto.Model.RestaurantModel;
+import com.example.georesto.Activity.RestaurantActivity;
 import com.example.georesto.R;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
 
+    private Activity parent;
     private CommentList commentList;
     private CommentViewHolder viewHolder;
     private DrawerLayout drawerMap;
     private NavigationView profileView;
     private NavigationView searchView;
-    private RestaurantModel restaurantModel;
 
-    public CommentAdapter(CommentList commentList, DrawerLayout drawerMap, NavigationView profileView, NavigationView searchView) {
+    public CommentAdapter(Activity parent, NavigationView navigationView, CommentList commentList) {
+        this.parent = parent;
+        this.profileView = navigationView;
+
         this.commentList = commentList;
-        this.drawerMap = drawerMap;
-        this.profileView = profileView;
-        this.searchView = searchView;
+        this.drawerMap = parent.findViewById(R.id.drawerMaps);
+        this.searchView = parent.findViewById(R.id.research);
     }
 
     @NonNull
@@ -50,8 +53,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             this.drawerMap.openDrawer(this.searchView);
             searchView.removeHeaderView(searchView.getHeaderView(0));
             searchView.inflateHeaderView(R.layout.info_restaurant);
-            restaurantModel = new RestaurantModel(searchView);
-            restaurantModel.init(comment.getRestaurant());
+            new RestaurantActivity(parent, searchView, comment.getRestaurant());
         });
     }
 
@@ -81,7 +83,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             name.setText(currentResto.getName());
             picture.setImageBitmap(currentResto.getPicture());
             description.setText(comment.getComment());
-            distance.setText("distance :"+ Integer.toString((int)currentResto.getDistance()/1000) + " km");
+            distance.setText("distance :" + Integer.toString((int) currentResto.getDistance() / 1000) + " km");
         }
 
         public View getItemView() {
