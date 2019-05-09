@@ -208,7 +208,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         }
     }
 
-    private void moveCamera(LatLng latLng, float zoom) {
+    public void moveCamera(LatLng latLng, float zoom) {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 

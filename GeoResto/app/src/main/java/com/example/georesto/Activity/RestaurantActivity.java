@@ -5,11 +5,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Location;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import com.example.georesto.Model.ProfileList;
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.R;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
@@ -145,7 +148,7 @@ public class RestaurantActivity {
     private void setRestaurantInformation(Restaurant restaurant) {
         this.name.setText(restaurant.getName());
         this.picture.setImageBitmap(restaurant.getPicture());
-        this.ratingBar.setRating(((float) restaurant.getGrade()));
+        this.ratingBar.setRating((float) restaurant.getGrade());
         this.address.setText(restaurant.getAddress());
         this.website.setText(restaurant.getWebsite());
         this.phone.setText(restaurant.getPhoneNumber());
@@ -156,6 +159,22 @@ public class RestaurantActivity {
         this.friday.setText(restaurant.getSchedule(4));
         this.saturday.setText(restaurant.getSchedule(5));
         this.sunday.setText(restaurant.getSchedule(6));
+
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MapsActivity) parent ).moveCamera(restaurant.getPosition(), 15.0f);
+            }
+        });
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:"+restaurant.getPhoneNumber()));
+                parent.startActivity(intent);
+            }
+        });
+        Linkify.addLinks(website, Linkify.WEB_URLS);
     }
 
     private void setFavourite(Restaurant restaurant) {
