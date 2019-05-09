@@ -68,14 +68,16 @@ public class Restaurant {
     }
 
     public void setDistance(LatLng userLocation) {
-        Location loc1 = new Location("");
-        loc1.setLatitude(position.latitude);
-        loc1.setLongitude(position.longitude);
+        if(userLocation!= null) {
+            Location loc1 = new Location("");
+            loc1.setLatitude(position.latitude);
+            loc1.setLongitude(position.longitude);
 
-        Location loc2 = new Location("");
-        loc2.setLatitude(userLocation.latitude);
-        loc2.setLongitude(userLocation.longitude);
-        this.distance = loc1.distanceTo(loc2);
+            Location loc2 = new Location("");
+            loc2.setLatitude(userLocation.latitude);
+            loc2.setLongitude(userLocation.longitude);
+            this.distance = loc1.distanceTo(loc2);
+        }
     }
 
     public String getName() {

@@ -113,6 +113,30 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         configureSideViews();
 
+        Thread t= new Thread(){
+            @Override
+            public void run(){
+                while(!isInterrupted()){
+                    try {
+                        Thread.sleep(1000);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (Restaurant resto : restaurantList.getRestaurants()) {
+                                    resto.setDistance(userLocation);
+                                }
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        };
+
+        t.start();
 
         ImageButton logo = findViewById(R.id.logo);
         logo.setOnClickListener(info -> {
@@ -266,9 +290,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         mMap.clear();
         for (Restaurant resto : list.getRestaurants()
         ) {
-            if (userLocation != null) {
-                resto.setDistance(userLocation);
-            }
             resto.setMarkerOnMap(mMap);
         }
     }
