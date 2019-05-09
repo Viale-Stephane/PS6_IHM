@@ -120,15 +120,14 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, paths);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         toolbar.setNavigationOnClickListener(v -> {
             if (!drawerMap.isDrawerOpen(searchView)) {
                 drawerMap.closeDrawer(profileView);
                 drawerMap.openDrawer(searchView);
+
+                searchView.removeHeaderView(searchView.getHeaderView(0));
+                searchView.inflateHeaderView(R.layout.research);
                 this.configureSearchView();
-                //tagSpinner = findViewById(R.id.tagSpinner);
-                //tagSpinner.setAdapter(adapter);
             } else {
                 drawerMap.closeDrawer(searchView);
             }
@@ -168,8 +167,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected void configureSearchView() {
         new SearchActivity(this);
     }
-
-    ;
 
     // --------------------
     //     GoogleMaps

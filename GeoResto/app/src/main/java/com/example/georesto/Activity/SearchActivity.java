@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 class SearchActivity {
     private final MapsActivity activity;
+    private NavigationView searchView;
     private final SearchView search;
     private final ToggleButton toggleRestaurant;
     private final ToggleButton toggleCommerce;
@@ -37,7 +38,7 @@ class SearchActivity {
 
     SearchActivity(MapsActivity mapsActivity) {
         this.activity = mapsActivity;
-        NavigationView searchView = mapsActivity.findViewById(R.id.research);
+        this.searchView = mapsActivity.findViewById(R.id.research);
         View currentHeader = searchView.getHeaderView(0);
 
         this.search = currentHeader.findViewById(R.id.research_search);
@@ -58,7 +59,10 @@ class SearchActivity {
         this.configureSpinner();
         this.configureSeekBars();
 
-        //filterButton.setOnClickListener(v -> filter());
+        filterButton.setOnClickListener(v -> {
+            this.searchView.removeHeaderView(searchView.getHeaderView(0));
+            this.searchView.inflateHeaderView(R.layout.info);
+        });
     }
 
     private void configureSeekBars() {
