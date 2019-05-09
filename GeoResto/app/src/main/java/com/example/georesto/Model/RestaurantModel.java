@@ -1,6 +1,5 @@
 package com.example.georesto.Model;
 
-import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.view.View;
 import android.widget.Button;
@@ -10,14 +9,12 @@ import android.widget.TextView;
 
 import com.example.georesto.R;
 
-import org.w3c.dom.Text;
-
 public class RestaurantModel {
     private View currentHeader;
     private TextView name;
     private ImageView picture;
     private RatingBar ratingBar;
-    private TextView adress;
+    private TextView address;
     private TextView website;
     private TextView phone;
     private TextView monday;
@@ -28,6 +25,7 @@ public class RestaurantModel {
     private TextView saturday;
     private TextView sunday;
 
+    private Button addContact;
     private Button rappel;
 
     public RestaurantModel(NavigationView resView) {
@@ -35,7 +33,7 @@ public class RestaurantModel {
         this.name = currentHeader.findViewById(R.id.infoRes_name);
         this.picture = currentHeader.findViewById(R.id.infoRes_picture);
         this.ratingBar = currentHeader.findViewById(R.id.infoRes_rate);
-        this.adress = currentHeader.findViewById(R.id.infoRes_address);
+        this.address = currentHeader.findViewById(R.id.infoRes_address);
         this.website = currentHeader.findViewById(R.id.infoRes_website);
         this.phone = currentHeader.findViewById(R.id.infoRes_tel);
         this.monday = currentHeader.findViewById(R.id.infoRes_monday);
@@ -46,6 +44,7 @@ public class RestaurantModel {
         this.saturday = currentHeader.findViewById(R.id.infoRes_saturday);
         this.sunday = currentHeader.findViewById(R.id.infoRes_sunday);
 
+        this.addContact = currentHeader.findViewById(R.id.buttonAddContact);
         this.rappel = currentHeader.findViewById(R.id.buttonAddRappel);
     }
 
@@ -53,7 +52,7 @@ public class RestaurantModel {
         this.name.setText(restaurant.getName());
         this.picture.setImageBitmap(restaurant.getPicture());
         this.ratingBar.setRating(((float) restaurant.getGrade()));
-        this.adress.setText(restaurant.getAdress());
+        this.address.setText(restaurant.getAddress());
         this.website.setText(restaurant.getWebsite());
         this.phone.setText(restaurant.getPhoneNumber());
         this.monday.setText(restaurant.getSchedule(0));
@@ -71,7 +70,7 @@ public class RestaurantModel {
                 Intent intent = new Intent(Intent.ACTION_EDIT);
                 intent.setType("vnd.android.cursor.item/event");
                 intent.putExtra("title", "Réservation "+restaurant.getName());
-                intent.putExtra("eventLocation", restaurant.getAdress());
+                intent.putExtra("eventLocation", restaurant.getAddress());
                 startActivity(intent);
             }
         });

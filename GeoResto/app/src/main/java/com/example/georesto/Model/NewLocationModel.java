@@ -77,7 +77,7 @@ public class NewLocationModel {
             this.commerceButton.setChecked(!restaurant.isKindRestaurant());
             this.nameLocation.setText(restaurant.getName());
             this.ratingBar.setRating(((float) restaurant.getGrade()));
-            this.adress.setText(restaurant.getAdress());
+            this.adress.setText(restaurant.getAddress());
             this.website.setText(restaurant.getWebsite());
             this.phoneNumber.setText(restaurant.getPhoneNumber());
             if(restaurant.getPosition()!=new LatLng(0,0)) {

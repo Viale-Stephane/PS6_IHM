@@ -39,7 +39,7 @@ class SearchActivity {
         this.activity = mapsActivity;
         NavigationView searchView = mapsActivity.findViewById(R.id.research);
         View currentHeader = searchView.getHeaderView(0);
-        
+
         this.search = currentHeader.findViewById(R.id.research_search);
         this.toggleRestaurant = currentHeader.findViewById(R.id.research_toggle_restaurant);
         this.toggleCommerce = currentHeader.findViewById(R.id.research_toggle_commerce);

@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class Restaurant {
-    private String restaurant, adress, website, phoneNumber;
+    private String restaurant, address, website, phoneNumber;
     private String[] schedule;
     private List<Tag> tags;
     private LatLng position;
@@ -23,10 +23,10 @@ public class Restaurant {
     private CommentList commentList;
 
 
-    public Restaurant(String restaurant, boolean kindRestaurant, String adress, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position,Bitmap restaurantPicture) {
+    public Restaurant(String restaurant, boolean kindRestaurant, String address, String website, String phoneNumber, String[] schedule, double grade, double price, List<Tag> tags, LatLng position,Bitmap restaurantPicture) {
         this.restaurant = restaurant;
         this.kindRestaurant = kindRestaurant;
-        this.adress = adress;
+        this.address = address;
         this.website = website;
         this.phoneNumber = phoneNumber;
         this.schedule = schedule;
@@ -102,8 +102,8 @@ public class Restaurant {
         return this.website;
     }
 
-    public String getAdress() {
-        return this.adress;
+    public String getAddress() {
+        return this.address;
     }
 
     public String getPhoneNumber() {
@@ -151,7 +151,7 @@ public class Restaurant {
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder("Le nom du restaurant est : " + this.restaurant + "\n" +
-                "L'adresse du restaurant est : " + this.adress + "\n" +
+                "L'adresse du restaurant est : " + this.address + "\n" +
                 "Le site internet du restaurant est : " + this.website + "\n" +
                 "Le numéro de téléphone du restaurant est : " + this.phoneNumber + "\n" +
                 "L'emploi du temps du restaurant est le suivant : ");

@@ -80,7 +80,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             currentResto = restaurant;
             name.setText(restaurant.getName());
             picture.setImageBitmap(restaurant.getPicture());
-            description.setText(restaurant.getAdress());
+            description.setText(restaurant.getAddress());
             distance.setText("distance :"+ Integer.toString((int)restaurant.getDistance()/1000) + " km");
         }
 

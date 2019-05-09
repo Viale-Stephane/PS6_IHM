@@ -13,6 +13,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -180,6 +181,17 @@ public class MapsActivityOnline extends MapsActivity {
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takePictureIntent, CAMERA);
             }
+    }
+
+    public void insertRestaurantToContact(Restaurant restaurant) {
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+        intent.putExtra(ContactsContract.Intents.Insert.NAME, restaurant.getName());
+        intent.putExtra(ContactsContract.Intents.Insert.PHONE, restaurant.getPhoneNumber());
+        intent.putExtra(ContactsContract.Intents.Insert.POSTAL, restaurant.getAddress());
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     @Override
