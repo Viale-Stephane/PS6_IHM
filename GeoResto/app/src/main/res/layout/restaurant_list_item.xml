@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="125dp"
-    android:padding="20dip">
+    android:padding="0dp">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
+        android:padding="5dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,12 +30,20 @@
             android:layout_height="wrap_content"
             android:maxWidth="150dp"
             android:textSize="12sp" />
+
         <TextView
             android:id="@+id/restaurant_list_item_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:maxWidth="150dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:maxWidth="150dp"
+            android:id="@+id/horaireActuel"
+            android:text="Ouvert: ferme à 18h00"/>
     </LinearLayout>
 
     <ImageView
