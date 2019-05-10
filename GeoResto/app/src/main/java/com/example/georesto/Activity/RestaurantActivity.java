@@ -164,13 +164,13 @@ public class RestaurantActivity {
         this.address.setText(restaurant.getAddress());
         this.website.setText(restaurant.getWebsite());
         this.phone.setText(restaurant.getPhoneNumber());
-        this.monday.setText(restaurant.getSchedule(0));
-        this.tuesday.setText(restaurant.getSchedule(1));
-        this.wednesday.setText(restaurant.getSchedule(2));
-        this.thursday.setText(restaurant.getSchedule(3));
-        this.friday.setText(restaurant.getSchedule(4));
-        this.saturday.setText(restaurant.getSchedule(5));
-        this.sunday.setText(restaurant.getSchedule(6));
+        this.monday.setText("Lundi : "+restaurant.getSchedule(0));
+        this.tuesday.setText("Mardi : "+restaurant.getSchedule(1));
+        this.wednesday.setText("Mercredi : "+restaurant.getSchedule(2));
+        this.thursday.setText("Jeudi : "+restaurant.getSchedule(3));
+        this.friday.setText("Vendredi : "+restaurant.getSchedule(4));
+        this.saturday.setText("Samedi : "+restaurant.getSchedule(5));
+        this.sunday.setText("Dimanche : "+restaurant.getSchedule(6));
 
         addressBlock.setOnClickListener(v -> ((MapsActivity) parent).moveCamera(restaurant.getPosition(), 15.0f));
         phoneNumberBlock.setOnClickListener(v -> {
