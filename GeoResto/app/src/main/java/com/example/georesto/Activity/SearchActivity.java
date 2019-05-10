@@ -91,14 +91,16 @@ class SearchActivity {
     }
 
     private void filter(CharSequence query) {
-        RestaurantList rl = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getNumStars()));
-        System.out.println(rl);
+        RestaurantList restaurantList = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getProgress()));
+        System.out.println(restaurantList.getRestaurants());
+
         searchView.removeHeaderView(searchView.getHeaderView(0));
         searchView.inflateHeaderView(R.layout.result);
-        RecyclerView rv = searchView.findViewById(R.id.result);
-        rv.setLayoutManager(new LinearLayoutManager(parent));
-        RestaurantAdapter adapter =new RestaurantAdapter(parent, searchView, rl);
-        rv.setAdapter(adapter);
+
+        RecyclerView recyclerView = searchView.findViewById(R.id.result);
+        recyclerView.setLayoutManager(new LinearLayoutManager(parent));
+        RestaurantAdapter adapter =new RestaurantAdapter(parent, searchView, restaurantList);
+        recyclerView.setAdapter(adapter);
     }
 
     // ------------------ //
@@ -107,6 +109,7 @@ class SearchActivity {
 
     private void configureSeekBars() {
         priceSeekBar.setProgress(20);
+        priceSeekBar.setMax(500);
         priceSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -125,6 +128,7 @@ class SearchActivity {
         });
 
         distanceSeekBar.setProgress(5);
+        distanceSeekBar.setMax(200);
         distanceSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

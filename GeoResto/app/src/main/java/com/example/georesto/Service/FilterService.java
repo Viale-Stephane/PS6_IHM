@@ -16,36 +16,42 @@ public class FilterService {
         this.restaurantListFull = new ArrayList<>(restaurantList.getRestaurants());
     }
 
-    public void filter(CharSequence query, boolean isRestaurant, ArrayList<Tag> tags, int maxPrice, int maxDistance, int minMark, Profile profile) {
+    public void filter(CharSequence query, boolean isRestaurant, ArrayList<Tag> tags, int maxPrice, int maxDistance, int minGrade, Profile profile) {
     }
 
     public List<Restaurant> filter(CharSequence query, boolean isRestaurant, ArrayList<Tag> tags, int maxPrice, int maxDistance, int minGrade) {
         String filterPattern = query.toString().toLowerCase().trim();
 
-        restaurantListFull.stream()
+        System.out.println(restaurantListFull.get(restaurantListFull.size()-1).getGrade());
+        System.out.println(minGrade);
+
+        return restaurantListFull.stream()
                 .filter(restaurant ->
                         restaurant.getName().toLowerCase().contains(filterPattern)
                                 && restaurant.isKindRestaurant() == isRestaurant
-                                && isAMatch(tags, restaurant.getTags())
+                                && isAMatch(restaurant.getTags(), tags)
                                 && restaurant.getPrice() < maxPrice
-                                && restaurant.getDistance() < maxDistance
-                                && restaurant.getGrade() < minGrade)
+                                && (restaurant.getDistance()/1000) < maxDistance
+                                //&& restaurant.getGrade() > minGrade
+                        )
                 .collect(Collectors.toList());
 
-        return restaurantListFull;
     }
 
-    private boolean isAMatch(ArrayList<Tag> filterTags, List<Tag> restaurantTags) {
-        // TODO C4EST CA QIO MARCHE PAS MDR
-        if (filterTags.isEmpty()|| restaurantTags.isEmpty()) {
-            return true;
-        } else {
-            for (Tag tag : restaurantTags) {
-                if (filterTags.contains(tag)) {
-                    return true;
-                }
-            }
+    boolean isAMatch(List<Tag> restaurantTags, List<Tag> filterTags) {
+        if (filterTags == null || restaurantTags == null) {
             return false;
+        } else {
+            if (filterTags.isEmpty() || restaurantTags.isEmpty()) {
+                return true;
+            } else {
+                for (Tag tag : restaurantTags) {
+                    if (filterTags.contains(tag)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
     }
 
