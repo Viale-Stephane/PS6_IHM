@@ -157,6 +157,10 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                 drawerMap.closeDrawer(searchView);
             }
         });
+        try {
+            Thread.sleep(1000);
+            moveCamera(userLocation, DEFAULT_ZOOM);
+        }catch (Exception e){}
     }
 
     @Override
@@ -224,7 +228,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                     if (task.isSuccessful() && task.getResult() != null) {
                         Location currentLocation = (Location) task.getResult();
                         userLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                        moveCamera(userLocation, DEFAULT_ZOOM);
                     } else {
                         locationManager.requestLocationUpdates(bestProvider, 1000, 0, new LocationListener() {
                             @Override
@@ -233,7 +236,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                                 double longitude = location1.getLongitude();
                                 userLocation = new LatLng(latitude, longitude);
                                 Log.d(TAG, "onLocationChanged: " + latitude + "  " + longitude);
-                                moveCamera(userLocation, DEFAULT_ZOOM);
                             }
 
                             @Override
@@ -337,4 +339,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         }
 
     }
+
+
 }
