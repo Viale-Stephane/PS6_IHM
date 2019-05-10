@@ -2,6 +2,8 @@ package com.example.georesto.Activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -171,15 +173,24 @@ public class RestaurantActivity {
         this.sunday.setText(restaurant.getSchedule(6));
 
         addressBlock.setOnClickListener(v -> ((MapsActivity) parent).moveCamera(restaurant.getPosition(), 15.0f));
-       // if(ContextCompat.checkSelfPermission(,Manifest.permission.CALL_PHONE))
         phoneNumberBlock.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel:" + restaurant.getPhoneNumber()));
-            parent.startActivity(intent);
+            if(ContextCompat.checkSelfPermission(parent,Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + restaurant.getPhoneNumber()));
+                parent.startActivity(intent);
+            } else {
+                ActivityCompat.requestPermissions(parent, new String[]{Manifest.permission.CALL_PHONE},0);
+            }
         });
         websiteBlock.setOnClickListener(v -> {
-            Linkify.addLinks(website, Linkify.WEB_URLS);
-            System.out.println("click on websiteblock");
+            try {
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(restaurant.getWebsite()));
+                parent.startActivity(launchBrowser);
+           /* Linkify.addLinks(website, Linkify.WEB_URLS);
+            Linkify */
+            } catch ( ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
     }
