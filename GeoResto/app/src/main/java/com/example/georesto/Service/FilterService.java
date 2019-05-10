@@ -22,7 +22,7 @@ public class FilterService {
     public List<Restaurant> filter(CharSequence query, boolean isRestaurant, ArrayList<Tag> tags, int maxPrice, int maxDistance, int minGrade) {
         String filterPattern = query.toString().toLowerCase().trim();
 
-        return restaurantListFull.stream()
+        restaurantListFull.stream()
                 .filter(restaurant ->
                         restaurant.getName().toLowerCase().contains(filterPattern)
                                 && restaurant.isKindRestaurant() == isRestaurant
@@ -31,15 +31,22 @@ public class FilterService {
                                 && restaurant.getDistance() < maxDistance
                                 && restaurant.getGrade() < minGrade)
                 .collect(Collectors.toList());
+
+        return restaurantListFull;
     }
 
     private boolean isAMatch(ArrayList<Tag> filterTags, List<Tag> restaurantTags) {
-        for (Tag tag : restaurantTags) {
-            if (filterTags.contains(tag)) {
-                return true;
+        // TODO C4EST CA QIO MARCHE PAS MDR
+        if (filterTags.isEmpty()|| restaurantTags.isEmpty()) {
+            return true;
+        } else {
+            for (Tag tag : restaurantTags) {
+                if (filterTags.contains(tag)) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
     }
 
     public ArrayList<Restaurant> filter(CharSequence query) {

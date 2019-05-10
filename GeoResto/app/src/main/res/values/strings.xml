@@ -62,4 +62,7 @@
     <string name="nom_du_lieu">Nom du lieu</string>
     <string name="priceSeekBarText">Prix : %d €</string>
     <string name="distanceSeekBarText">Distance : %d km</string>
+    <string name="star_button">Star Button</string>
+    <string name="add_to_contact">Ajouter à mes contacts</string>
+    <string name="add_to_reminders">Ajouter un rappel</string>
 </resources>

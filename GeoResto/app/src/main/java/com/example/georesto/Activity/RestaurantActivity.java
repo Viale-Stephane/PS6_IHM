@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.location.Location;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
@@ -23,9 +22,6 @@ import android.widget.Toast;
 import com.example.georesto.Model.ProfileList;
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.R;
-import com.google.android.gms.maps.model.LatLng;
-
-import java.util.ArrayList;
 
 public class RestaurantActivity {
     private Activity parent;
@@ -85,7 +81,10 @@ public class RestaurantActivity {
 
         this.setRestaurantInformation(restaurant);
 
-        this.setFavourite(restaurant);
+        if (ProfileList.getCurrentUser() != null) {
+
+            this.configureFavourite(restaurant);
+        }
 
         this.configureAddContact();
         this.configureAddRemind();
@@ -108,15 +107,12 @@ public class RestaurantActivity {
     }
 
     private void configureAddRemind() {
-        rappel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_EDIT);
-                intent.setType("vnd.android.cursor.item/event");
-                intent.putExtra("title", "Réservation "+restaurant.getName());
-                intent.putExtra("eventLocation", restaurant.getAddress());
-                parent.startActivity(intent);
-            }
+        rappel.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_EDIT);
+            intent.setType("vnd.android.cursor.item/event");
+            intent.putExtra("title", "Réservation " + restaurant.getName());
+            intent.putExtra("eventLocation", restaurant.getAddress());
+            parent.startActivity(intent);
         });
     }
 
@@ -160,45 +156,37 @@ public class RestaurantActivity {
         this.saturday.setText(restaurant.getSchedule(5));
         this.sunday.setText(restaurant.getSchedule(6));
 
-        address.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MapsActivity) parent ).moveCamera(restaurant.getPosition(), 15.0f);
-            }
-        });
-        phone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:"+restaurant.getPhoneNumber()));
-                parent.startActivity(intent);
-            }
+        address.setOnClickListener(v -> ((MapsActivity) parent).moveCamera(restaurant.getPosition(), 15.0f));
+        phone.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:" + restaurant.getPhoneNumber()));
+            parent.startActivity(intent);
         });
         Linkify.addLinks(website, Linkify.WEB_URLS);
     }
 
-    private void setFavourite(Restaurant restaurant) {
+    private void configureFavourite(Restaurant restaurant) {
         buttonStar.setImageResource(android.R.drawable.star_big_off);
-        for(Restaurant res: ProfileList.getCurrentUser().getFavourites()) {
-            if(res.equals(restaurant)) {
+
+        buttonStar.setVisibility(1);
+
+        for (Restaurant res : ProfileList.getCurrentUser().getFavourites()) {
+            if (res.equals(restaurant)) {
                 buttonStar.setImageResource(android.R.drawable.star_big_on);
                 favourite = true;
                 break;
             }
         }
 
-        buttonStar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (favourite){
-                    buttonStar.setImageResource(android.R.drawable.star_big_off);
-                    ProfileList.getCurrentUser().removeFavourite(restaurant);
-                } else {
-                    buttonStar.setImageResource(android.R.drawable.star_big_on);
-                    ProfileList.getCurrentUser().addFavourite(restaurant);
-                }
-                favourite = !favourite;
+        buttonStar.setOnClickListener(view -> {
+            if (favourite) {
+                buttonStar.setImageResource(android.R.drawable.star_big_off);
+                ProfileList.getCurrentUser().removeFavourite(restaurant);
+            } else {
+                buttonStar.setImageResource(android.R.drawable.star_big_on);
+                ProfileList.getCurrentUser().addFavourite(restaurant);
             }
+            favourite = !favourite;
         });
     }
 }
