@@ -10,11 +10,13 @@ import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.telecom.Call;
 import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,10 +25,17 @@ import com.example.georesto.Model.ProfileList;
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.R;
 
+import java.security.Permission;
+import java.security.Permissions;
+
 public class RestaurantActivity {
     private Activity parent;
     private NavigationView navigationView;
     private Restaurant restaurant;
+
+    private LinearLayout addressBlock;
+    private LinearLayout websiteBlock;
+    private LinearLayout phoneNumberBlock;
 
     private View currentHeader;
     private TextView name;
@@ -58,6 +67,11 @@ public class RestaurantActivity {
         navigationView.inflateHeaderView(R.layout.info_restaurant);
 
         this.currentHeader = navigationView.getHeaderView(0);
+
+        this.addressBlock = currentHeader.findViewById(R.id.adressLayout);
+        this.websiteBlock = currentHeader.findViewById(R.id.websiteLayout);
+        this.phoneNumberBlock = currentHeader.findViewById(R.id.phoneNumberLayout);
+
         this.name = currentHeader.findViewById(R.id.infoRes_name);
         this.picture = currentHeader.findViewById(R.id.infoRes_picture);
         this.ratingBar = currentHeader.findViewById(R.id.infoRes_rate);
@@ -156,19 +170,24 @@ public class RestaurantActivity {
         this.saturday.setText(restaurant.getSchedule(5));
         this.sunday.setText(restaurant.getSchedule(6));
 
-        address.setOnClickListener(v -> ((MapsActivity) parent).moveCamera(restaurant.getPosition(), 15.0f));
-        phone.setOnClickListener(v -> {
+        addressBlock.setOnClickListener(v -> ((MapsActivity) parent).moveCamera(restaurant.getPosition(), 15.0f));
+       // if(ContextCompat.checkSelfPermission(,Manifest.permission.CALL_PHONE))
+        phoneNumberBlock.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_CALL);
             intent.setData(Uri.parse("tel:" + restaurant.getPhoneNumber()));
             parent.startActivity(intent);
         });
-        Linkify.addLinks(website, Linkify.WEB_URLS);
+        websiteBlock.setOnClickListener(v -> {
+            Linkify.addLinks(website, Linkify.WEB_URLS);
+            System.out.println("click on websiteblock");
+        });
+
     }
 
     private void configureFavourite(Restaurant restaurant) {
         buttonStar.setImageResource(android.R.drawable.star_big_off);
 
-        buttonStar.setVisibility(1);
+        buttonStar.setVisibility(View.VISIBLE);
 
         for (Restaurant res : ProfileList.getCurrentUser().getFavourites()) {
             if (res.equals(restaurant)) {
