@@ -30,7 +30,7 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
         RestaurantList suggestionList = new RestaurantList();
         for(Restaurant restaurant : restaurants.getRestaurants()) {
             for(Tag tag: restaurant.getTags()){
-                if(tag == Tag.Healthy ||tag == Tag.Salade) {
+                if(tag == Tag.Healthy ||tag == Tag.Salade || tag == Tag.Vege) {
                     suggestionList.addRestaurant(restaurant);
                     break;
                 }

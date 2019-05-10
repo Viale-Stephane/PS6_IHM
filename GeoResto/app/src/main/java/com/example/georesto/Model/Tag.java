@@ -17,7 +17,10 @@ public enum Tag {
     Healthy("#Healthy "),
     Kebab("#Kebab "),
     Sandwich("#Sandwich "),
-    Salade("#Salade ");
+    Salade("#Salade "),
+    Viande("#Viande "),
+    Indien("#Indien "),
+    Vege("#Vegetarien ");
 
     private final String name;
 
