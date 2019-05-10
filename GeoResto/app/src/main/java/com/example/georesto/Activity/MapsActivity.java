@@ -44,10 +44,10 @@ import java.text.DecimalFormat;
 
 public abstract class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
+    public static final DecimalFormat df = new DecimalFormat("####.###");
     static final String TAG = "MapsActivity";
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15.0f;
-    public static final DecimalFormat df = new DecimalFormat("####.###");
     //mocks
     public static RestaurantList restaurantList = new RestaurantList();
     public static ProfileList profileList = new ProfileList();
@@ -71,6 +71,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     LatLng userLocation;
 
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    private Toolbar toolbar;
 
     public boolean isServicesOK() {
         Log.d(TAG, "isServicesOK: checking google services version");
@@ -113,10 +114,10 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         configureSideViews();
 
-        Thread t= new Thread(){
+        Thread t = new Thread() {
             @Override
-            public void run(){
-                while(!isInterrupted()){
+            public void run() {
+                while (!isInterrupted()) {
                     try {
                         Thread.sleep(1000);
 
@@ -146,21 +147,24 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             drawerMap.openDrawer(profileView);
         });
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_search_black_24dp);
         toolbar.setNavigationOnClickListener(v -> {
             if (!drawerMap.isDrawerOpen(searchView)) {
                 drawerMap.closeDrawer(profileView);
                 drawerMap.openDrawer(searchView);
-
+                toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
                 new SearchActivity(this, searchView);
             } else {
                 drawerMap.closeDrawer(searchView);
+                toolbar.setNavigationIcon(R.drawable.ic_search_black_24dp);
             }
         });
         try {
             Thread.sleep(1000);
             moveCamera(userLocation, DEFAULT_ZOOM);
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -169,6 +173,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             this.drawerMap.closeDrawer(profileView);
         } else if (this.drawerMap.isDrawerOpen(searchView)) {
             this.drawerMap.closeDrawer(searchView);
+            toolbar.setNavigationIcon(R.drawable.ic_search_black_24dp);
         } else {
             super.onBackPressed();
         }

@@ -91,7 +91,12 @@ class SearchActivity {
     }
 
     private void filter(CharSequence query) {
-        RestaurantList restaurantList = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getProgress()));
+        RestaurantList restaurantList;
+        if (ProfileList.getCurrentUser() == null) {
+            restaurantList = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getProgress()));
+        } else {
+            restaurantList = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getProgress(), ProfileList.getCurrentUser()));
+        }
         System.out.println(restaurantList.getRestaurants());
 
         searchView.removeHeaderView(searchView.getHeaderView(0));
@@ -99,7 +104,7 @@ class SearchActivity {
 
         RecyclerView recyclerView = searchView.findViewById(R.id.result);
         recyclerView.setLayoutManager(new LinearLayoutManager(parent));
-        RestaurantAdapter adapter =new RestaurantAdapter(parent, searchView, restaurantList);
+        RestaurantAdapter adapter = new RestaurantAdapter(parent, searchView, restaurantList);
         recyclerView.setAdapter(adapter);
     }
 

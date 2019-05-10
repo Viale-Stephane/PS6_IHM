@@ -16,14 +16,8 @@ public class FilterService {
         this.restaurantListFull = new ArrayList<>(restaurantList.getRestaurants());
     }
 
-    public void filter(CharSequence query, boolean isRestaurant, ArrayList<Tag> tags, int maxPrice, int maxDistance, int minGrade, Profile profile) {
-    }
-
-    public List<Restaurant> filter(CharSequence query, boolean isRestaurant, ArrayList<Tag> tags, int maxPrice, int maxDistance, int minGrade) {
+    public List<Restaurant> filter(CharSequence query, boolean isRestaurant, ArrayList<Tag> tags, int maxPrice, int maxDistance, int minGrade, Profile profile) {
         String filterPattern = query.toString().toLowerCase().trim();
-
-        System.out.println(restaurantListFull.get(restaurantListFull.size()-1).getGrade());
-        System.out.println(minGrade);
 
         return restaurantListFull.stream()
                 .filter(restaurant ->
@@ -32,7 +26,22 @@ public class FilterService {
                                 && isAMatch(restaurant.getTags(), tags)
                                 && restaurant.getPrice() < maxPrice
                                 && (restaurant.getDistance()/1000) < maxDistance
-                                //&& restaurant.getGrade() > minGrade
+                                && restaurant.getGrade() > minGrade
+                )
+                .collect(Collectors.toList());
+    }
+
+    public List<Restaurant> filter(CharSequence query, boolean isRestaurant, ArrayList<Tag> tags, int maxPrice, int maxDistance, int minGrade) {
+        String filterPattern = query.toString().toLowerCase().trim();
+
+        return restaurantListFull.stream()
+                .filter(restaurant ->
+                        restaurant.getName().toLowerCase().contains(filterPattern)
+                                && restaurant.isKindRestaurant() == isRestaurant
+                                && isAMatch(restaurant.getTags(), tags)
+                                && restaurant.getPrice() < maxPrice
+                                && (restaurant.getDistance()/1000) < maxDistance
+                                && restaurant.getGrade() > minGrade
                         )
                 .collect(Collectors.toList());
 
