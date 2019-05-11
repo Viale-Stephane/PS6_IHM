@@ -60,6 +60,11 @@ public class MapsActivityOnline extends MapsActivity {
     Geocoder geocoder = null;
     View main;
     Snackbar newLocationTips = null, newLocationTips2 = null;
+    PopUpTimePickerModel popUpTimePickerModel;
+    AlertDialog alertDialog;
+    private boolean inTimePicker = false;
+    private EditText[] orientationChangeDays;
+    private int orientationChangeDayNumber;
 
 
     @Override
@@ -314,6 +319,7 @@ public class MapsActivityOnline extends MapsActivity {
         newLocationScheduleModel.getValidateButton().setOnClickListener(v -> {
             restaurant.addSchedule(newLocationScheduleModel.getSchedule());
             restaurantList.addRestaurant(restaurant);
+            ProfileList.getCurrentUser().getHistory().addRestaurant(restaurant);
             updateMapsMarker(restaurantList);
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.profile);
@@ -323,13 +329,17 @@ public class MapsActivityOnline extends MapsActivity {
     }
 
     public void popUpTimePickerActions(EditText[] days, int dayNumber) {
+        inTimePicker = true;
+        orientationChangeDays = days;
+        orientationChangeDayNumber = dayNumber;
+
         LayoutInflater li = LayoutInflater.from(this);
         View view = li.inflate(R.layout.time_wheel_view, null);
-        PopUpTimePickerModel popUpTimePickerModel = new PopUpTimePickerModel(view);
+        this.popUpTimePickerModel = new PopUpTimePickerModel(view);
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(view);
-        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog = alertDialogBuilder.create();
         Display display = getWindowManager().getDefaultDisplay();
         int mwidth = (int)(display.getWidth()*0.95);
         int mheight = (int)(display.getHeight()*0.95);
@@ -369,6 +379,7 @@ public class MapsActivityOnline extends MapsActivity {
                     }
                 }
                 alertDialog.cancel();
+                inTimePicker = false;
             } else {
                 popUpTimePickerModel.takeTime();
                 popUpTimePickerModel.setSchedule("Horaire de fermeture");
@@ -378,6 +389,16 @@ public class MapsActivityOnline extends MapsActivity {
         popUpTimePickerModel.clickOnFullWeekButton();
         popUpTimePickerModel.clickOnWeekButton();
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(inTimePicker) {
+                alertDialog.cancel();
+                this.popUpTimePickerActions(orientationChangeDays,orientationChangeDayNumber);
+        }
+    }
+
 
     public void setPersonalInformation() {
         TextView mailProfile = findViewById(R.id.mailProfile);
