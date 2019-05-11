@@ -88,6 +88,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             picture.setImageBitmap(currentResto.getPicture());
             description.setText(comment.getComment());
             description.setBackgroundColor(255);
+            description.setMaxLines(5);
             distance.setText("distance :" + df.format(currentResto.getDistance()/1000) + " km");
             horaire.setText(currentResto.isItOpen());
         }
