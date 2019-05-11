@@ -24,6 +24,9 @@ import com.example.georesto.View.RestaurantAdapter;
 
 import java.util.ArrayList;
 
+import static com.example.georesto.Activity.MapsActivity.restaurantList;
+import static com.example.georesto.Activity.MapsActivity.filteredList;
+
 class SearchActivity {
     private final Activity parent;
     private final NavigationView searchView;
@@ -43,8 +46,10 @@ class SearchActivity {
     private ArrayList<Tag> tagsToShow;
     private boolean isInit;
 
+    MapsActivity mapsActivity;
+
     // Parent Activity, Navigation View to show
-    SearchActivity(Activity parent, NavigationView view) {
+    SearchActivity(Activity parent, NavigationView view, MapsActivity mapsActivity) {
         this.parent = parent;
         this.searchView = parent.findViewById(R.id.research);
 
@@ -64,6 +69,8 @@ class SearchActivity {
         this.ratingBar = currentHeader.findViewById(R.id.research_rating_bar);
         this.filterButton = currentHeader.findViewById(R.id.research_filter);
 
+        this.mapsActivity = mapsActivity;
+
 
         this.tagsToShow = new ArrayList<>();
         this.isInit = true;
@@ -72,7 +79,7 @@ class SearchActivity {
         this.configureSpinner();
         this.configureSeekBars();
 
-        filterService = new FilterService(MapsActivity.restaurantList);
+        filterService = new FilterService();
 
         filterButton.setOnClickListener(v -> filter(searchBar.getQuery()));
 
@@ -91,11 +98,12 @@ class SearchActivity {
     }
 
     private void filter(CharSequence query) {
-        RestaurantList restaurantList;
+        filteredList = restaurantList;
         if (ProfileList.getCurrentUser() == null) {
-            restaurantList = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getProgress()));
+
+            filteredList = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getProgress()));
         } else {
-            restaurantList = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getProgress(), ProfileList.getCurrentUser()));
+            filteredList = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getProgress(), ProfileList.getCurrentUser()));
         }
         System.out.println(restaurantList.getRestaurants());
 
@@ -104,7 +112,8 @@ class SearchActivity {
 
         RecyclerView recyclerView = searchView.findViewById(R.id.result);
         recyclerView.setLayoutManager(new LinearLayoutManager(parent));
-        RestaurantAdapter adapter = new RestaurantAdapter(parent, searchView, restaurantList);
+        RestaurantAdapter adapter = new RestaurantAdapter(parent, searchView, filteredList);
+        mapsActivity.updateMapsMarker(filteredList);
         recyclerView.setAdapter(adapter);
     }
 

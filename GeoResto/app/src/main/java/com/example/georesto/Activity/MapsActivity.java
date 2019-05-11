@@ -50,6 +50,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     private static final float DEFAULT_ZOOM = 15.0f;
     //mocks
     public static RestaurantList restaurantList = new RestaurantList();
+    public static RestaurantList filteredList;
     public static ProfileList profileList = new ProfileList();
     // Testing Spinner
     protected final String[] paths = {"item 1", "item 2", "item 3"};
@@ -63,6 +64,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected Profile user;
     //variables
     protected boolean init = true;
+    protected  boolean hasZoomed = false;
     // GoogleMaps
     protected GoogleMap mMap;
 
@@ -102,6 +104,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             restaurantList.sampleRestaurant(this);
             profileList.instantiateProfiles(restaurantList);
             init = false;
+            filteredList = restaurantList;
         }
 
         user = ProfileList.getCurrentUser();
@@ -124,6 +127,10 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(userLocation != null && !hasZoomed) {
+                                    hasZoomed = true;
+                                    moveCamera(userLocation,DEFAULT_ZOOM);
+                                }
                                 getDeviceLocation();
                                 for (Restaurant resto : restaurantList.getRestaurants()) {
                                     resto.setDistance(userLocation);
@@ -153,8 +160,10 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             if (!drawerMap.isDrawerOpen(searchView)) {
                 drawerMap.closeDrawer(profileView);
                 drawerMap.openDrawer(searchView);
+                filteredList = restaurantList;
+                updateMapsMarker(filteredList);
                 toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-                new SearchActivity(this, searchView);
+                new SearchActivity(this, searchView,this);
             } else {
                 drawerMap.closeDrawer(searchView);
                 toolbar.setNavigationIcon(R.drawable.ic_search_black_24dp);
@@ -322,7 +331,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         Log.d(TAG, "onMapReady: maps is ready");
         mMap.clear();
-        for (Restaurant resto : restaurantList.getRestaurants()) {
+        for (Restaurant resto : filteredList.getRestaurants()) {
             if (userLocation != null) {
                 resto.setDistance(userLocation);
             }
