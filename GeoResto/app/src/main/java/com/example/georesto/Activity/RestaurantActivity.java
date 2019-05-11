@@ -3,7 +3,6 @@ package com.example.georesto.Activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,23 +11,27 @@ import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.telecom.Call;
-import android.text.util.Linkify;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
+import com.example.georesto.Model.Comment;
+import com.example.georesto.Model.Profile;
 import com.example.georesto.Model.ProfileList;
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.R;
+import com.example.georesto.View.CommentListAdapter;
 
-import java.security.Permission;
-import java.security.Permissions;
+import java.util.ArrayList;
 
 public class RestaurantActivity {
     private Activity parent;
@@ -54,8 +57,14 @@ public class RestaurantActivity {
     private TextView saturday;
     private TextView sunday;
 
+    private ToggleButton details;
+    private ToggleButton comments;
+
     private ImageButton buttonStar;
     private boolean favourite;
+
+    private Button addComment;
+    private EditText newComment;
 
     private Button addContact;
     private Button rappel;
@@ -89,8 +98,14 @@ public class RestaurantActivity {
         this.saturday = currentHeader.findViewById(R.id.infoRes_saturday);
         this.sunday = currentHeader.findViewById(R.id.infoRes_sunday);
 
+        this.details = currentHeader.findViewById(R.id.infoRes_Details);
+        this.comments = currentHeader.findViewById(R.id.infoRes_Comments);
+
         this.buttonStar = currentHeader.findViewById(R.id.infoRes_star);
         this.favourite = false;
+
+        this.addComment = currentHeader.findViewById(R.id.buttonAddComment);
+        this.newComment = currentHeader.findViewById(R.id.textAddComment);
 
         this.addContact = currentHeader.findViewById(R.id.buttonAddContact);
         this.rappel = currentHeader.findViewById(R.id.buttonAddRappel);
@@ -98,12 +113,21 @@ public class RestaurantActivity {
         this.setRestaurantInformation(restaurant);
 
         if (ProfileList.getCurrentUser() != null) {
-
             this.configureFavourite(restaurant);
         }
 
+        this.setToggleButtons();
+        this.displayComments(restaurant);
         this.configureAddContact();
         this.configureAddRemind();
+
+        addComment.setOnClickListener(v -> {
+            if(!newComment.getText().toString().equals("")) {
+                Profile currentUser = ProfileList.getCurrentUser();
+                Comment comment = new Comment(newComment.getText().toString(), currentUser, restaurant);
+                currentUser.getUserComments().addComment(comment);
+            }
+        });
     }
 
     private void configureAddContact() {
@@ -155,6 +179,56 @@ public class RestaurantActivity {
             permission = false;
         }
         return permission;
+    }
+
+    private void setToggleButtons() {
+        details.setOnClickListener(v -> {
+            if (details.isChecked()) {
+                comments.setChecked(false);
+                currentHeader.findViewById(R.id.layoutDetails).setVisibility(View.VISIBLE);
+                currentHeader.findViewById(R.id.layoutButtons).setVisibility(View.VISIBLE);
+                currentHeader.findViewById(R.id.layoutComments).setVisibility(View.GONE);
+                currentHeader.findViewById(R.id.layoutAddComments).setVisibility(View.GONE);
+            } else {
+                details.setChecked(true);
+                currentHeader.findViewById(R.id.layoutDetails).setVisibility(View.VISIBLE);
+                currentHeader.findViewById(R.id.layoutButtons).setVisibility(View.VISIBLE);
+                currentHeader.findViewById(R.id.layoutComments).setVisibility(View.GONE);
+                currentHeader.findViewById(R.id.layoutAddComments).setVisibility(View.GONE);
+            }
+        });
+
+        comments.setOnClickListener(v -> {
+            if (comments.isChecked()) {
+                details.setChecked(false);
+                currentHeader.findViewById(R.id.layoutDetails).setVisibility(View.GONE);
+                currentHeader.findViewById(R.id.layoutButtons).setVisibility(View.GONE);
+                currentHeader.findViewById(R.id.layoutComments).setVisibility(View.VISIBLE);
+                currentHeader.findViewById(R.id.layoutAddComments).setVisibility(View.VISIBLE);
+            } else {
+                comments.setChecked(true);
+                currentHeader.findViewById(R.id.layoutDetails).setVisibility(View.GONE);
+                currentHeader.findViewById(R.id.layoutButtons).setVisibility(View.GONE);
+                currentHeader.findViewById(R.id.layoutComments).setVisibility(View.VISIBLE);
+                currentHeader.findViewById(R.id.layoutAddComments).setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void displayComments(Restaurant restaurant) {
+        RecyclerView rv = currentHeader.findViewById(R.id.infoRes_listComments);
+        rv.setNestedScrollingEnabled(false);
+        rv.setLayoutManager(new LinearLayoutManager(parent));
+
+        ArrayList<Comment> commentsList = new ArrayList<>();
+        for(Profile profile: ProfileList.getProfiles()) {
+            for (Comment c : profile.getUserComments().getCommentList()) {
+                if (c.getRestaurant().equals(restaurant)) commentsList.add(c);
+            }
+        }
+
+        CommentListAdapter adapter = new CommentListAdapter(commentsList);
+        rv.setAdapter(adapter);
     }
 
     private void setRestaurantInformation(Restaurant restaurant) {
