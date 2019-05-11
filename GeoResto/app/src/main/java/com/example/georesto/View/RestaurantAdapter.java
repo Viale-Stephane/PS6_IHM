@@ -66,7 +66,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
     class MyViewHolder extends RecyclerView.ViewHolder {
         private final TextView name;
         private final ImageView picture;
-        private final TextView description;
+        private final TextView tag;
+        private final TextView tag2;
         private final TextView distance;
         private final TextView horaire;
 
@@ -77,8 +78,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
 
             this.name = itemView.findViewById(R.id.restaurant_list_item_name);
             this.picture = itemView.findViewById(R.id.restaurant_list_item_image);
-            this.description = itemView.findViewById(R.id.restaurant_list_item_description);
+            this.tag = itemView.findViewById(R.id.restaurant_list_item_description);
+            this.tag2 = itemView.findViewById(R.id.restaurant_list_item_description2);
             this.distance = itemView.findViewById(R.id.restaurant_list_item_distance);
+
             this.horaire = itemView.findViewById(R.id.restaurant_list_item_horaire);
 
         }
@@ -87,7 +90,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             currentResto = restaurant;
             name.setText(restaurant.getName());
             picture.setImageBitmap(restaurant.getPicture());
-            description.setText(restaurant.getAddress());
+            tag.setText(restaurant.getTags().get(0).getName());
+            if (restaurant.getTags().size() >= 2) {
+                tag2.setText(restaurant.getTags().get(1).getName());
+            } else {
+               tag2.setText("");
+               tag2.setBackgroundColor(255);
+            }
             distance.setText("distance :" + df.format(restaurant.getDistance()/1000) + " km");
             horaire.setText(restaurant.isItOpen());
         }

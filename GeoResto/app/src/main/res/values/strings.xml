@@ -38,8 +38,8 @@
     <string name="website">Site web</string>
     <string name="phoneNumber">Téléphone</string>
     <string name="filtersAdded">Filtres Ajoutés</string>
-    <string name="currentPrice">Prix: 20€</string>
-    <string name="currentDistance">Distance: 5km</string>
+    <string name="currentPrice">Prix maximum: 20€</string>
+    <string name="currentDistance">Distance maximum: 5km</string>
     <string name="newPicture">Ajouter une photo</string>
     <string name="schedule">Horaires</string>
     <string name="mondayText">Lundi</string>
@@ -60,8 +60,8 @@
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
     <string name="nom_du_lieu">Nom du lieu</string>
-    <string name="priceSeekBarText">Prix : %d €</string>
-    <string name="distanceSeekBarText">Distance : %d km</string>
+    <string name="priceSeekBarText">Prix maximum: %d €</string>
+    <string name="distanceSeekBarText">Distance maximum: %d km</string>
     <string name="star_button">Star Button</string>
     <string name="add_to_contact">Ajouter à mes contacts</string>
     <string name="add_to_reminders">Ajouter un rappel</string>
