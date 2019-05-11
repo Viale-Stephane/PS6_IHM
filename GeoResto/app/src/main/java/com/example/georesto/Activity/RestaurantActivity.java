@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -149,11 +151,7 @@ public class RestaurantActivity {
 
     private void configureAddRemind() {
         rappel.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_EDIT);
-            intent.setType("vnd.android.cursor.item/event");
-            intent.putExtra("title", "Réservation " + restaurant.getName());
-            intent.putExtra("eventLocation", restaurant.getAddress());
-            parent.startActivity(intent);
+            showNotification(this.navigationView,10000,"Rappel : " + restaurant.getName(), restaurant.getName()+" est ouvert au " + restaurant.getAddress());
         });
     }
 
@@ -293,5 +291,34 @@ public class RestaurantActivity {
             }
             favourite = !favourite;
         });
+    }
+
+    public void showNotification(View view,int millis, String title, String desc) {
+        Thread notif = new Thread() {
+            @Override
+            public void run() {
+                while (!isInterrupted()) {
+                    try {
+                        Thread.sleep(millis);
+
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(view.getContext());
+
+                        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(view.getContext(), MapsActivity.CHANNEL_ID)
+                                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                                .setContentTitle(title)
+                                .setContentText(desc)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                        // notificationId est un identificateur unique par notification qu'il vous faut définir
+                        notificationManager.notify(MapsActivity.NOTIFICATION_ID, notifBuilder.build());
+
+                    } catch (InterruptedException e) {}
+
+                }
+
+            }
+        };
+
+        notif.start();
     }
 }

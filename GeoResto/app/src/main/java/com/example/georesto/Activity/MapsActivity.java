@@ -160,8 +160,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         ImageButton logo = findViewById(R.id.logo);
         logo.setOnClickListener(info -> {
-            showNotification(10000);
-
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.info);
             drawerMap.openDrawer(profileView);
@@ -400,35 +398,5 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
         }
     }
-
-    public void showNotification(int millis) {
-        Thread notif = new Thread() {
-        @Override
-            public void run() {
-                while (!isInterrupted()) {
-                    try {
-                        Thread.sleep(millis);
-
-                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MapsActivity.this);
-
-                        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(MapsActivity.this, MapsActivity.CHANNEL_ID)
-                                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                                .setContentTitle("Titre")
-                                .setContentText("Contenu")
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-                        // notificationId est un identificateur unique par notification qu'il vous faut définir
-                        notificationManager.notify(MapsActivity.NOTIFICATION_ID, notifBuilder.build());
-
-                    } catch (InterruptedException e) {}
-
-                }
-
-            }
-        };
-
-        notif.start();
-    }
-
 
 }
