@@ -2,17 +2,22 @@ package com.example.georesto.Activity;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -41,6 +46,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.Task;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 
 public abstract class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
@@ -68,6 +74,9 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     protected  boolean hasZoomed = false;
     // GoogleMaps
     protected GoogleMap mMap;
+    // Notifications
+    public static String CHANNEL_ID = "reminder";
+    public static int NOTIFICATION_ID = 1221;
 
 
     Boolean mLocationPermissionGranted = false;
@@ -99,6 +108,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        createNotificationChannel();
         setContentView(R.layout.main);
 
         if (init) {
@@ -150,6 +160,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         ImageButton logo = findViewById(R.id.logo);
         logo.setOnClickListener(info -> {
+            showNotification(10000);
+
             profileView.removeHeaderView(profileView.getHeaderView(0));
             profileView.inflateHeaderView(R.layout.info);
             drawerMap.openDrawer(profileView);
@@ -373,6 +385,49 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
 
 
+    }
+
+
+    private void createNotificationChannel() {
+        // Créer le NotificationChannel, seulement pour API 26+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Notification channel name";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription("Notification channel description");
+            // Enregister le canal sur le système : attention de ne plus rien modifier après
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
+        }
+    }
+
+    public void showNotification(int millis) {
+        Thread notif = new Thread() {
+        @Override
+            public void run() {
+                while (!isInterrupted()) {
+                    try {
+                        Thread.sleep(millis);
+
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MapsActivity.this);
+
+                        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(MapsActivity.this, MapsActivity.CHANNEL_ID)
+                                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                                .setContentTitle("Titre")
+                                .setContentText("Contenu")
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                        // notificationId est un identificateur unique par notification qu'il vous faut définir
+                        notificationManager.notify(MapsActivity.NOTIFICATION_ID, notifBuilder.build());
+
+                    } catch (InterruptedException e) {}
+
+                }
+
+            }
+        };
+
+        notif.start();
     }
 
 
