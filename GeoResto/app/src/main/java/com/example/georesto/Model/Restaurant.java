@@ -17,8 +17,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
-import static com.example.georesto.Activity.MapsActivity.df;
-
 public class Restaurant {
     private String restaurant, address, website, phoneNumber;
     private String[] schedule;
@@ -148,12 +146,16 @@ public class Restaurant {
         }
         openingHours = this.schedule[i].split(" ")[1];
         closingHours = this.schedule[i].split(" ")[3];
+
         opHours = Integer.parseInt(openingHours.split(":")[0]) + Integer.parseInt(openingHours.split(":")[1])/60;
         clHours = Integer.parseInt(closingHours.split(":")[0]) + Integer.parseInt(closingHours.split(":")[1])/60;
+
         if ( hourOfDay > opHours && hourOfDay < clHours) {
+
             result = "Ouvert: ferme à " + closingHours;
+
         } else if (hourOfDay < opHours || hourOfDay > clHours) {
-            result = "Fermé: ouvre à " + openingHours;
+
             result = "Fermé: ouvre à " + openingHours;
         }
 
@@ -202,7 +204,7 @@ public class Restaurant {
         } else {
             map.addMarker(new MarkerOptions()
                     .position(this.position)
-                    .title(df.format(distance/1000) + " km")
+                    .title(this.restaurant)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
         }
     }

@@ -68,6 +68,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         private final TextView name;
         private final ImageView picture;
         private final TextView description;
+        private final TextView description2;
         private final TextView distance;
         private Restaurant currentResto;
         private final TextView horaire;
@@ -77,7 +78,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
             this.name = itemView.findViewById(R.id.restaurant_list_item_name);
             this.picture = itemView.findViewById(R.id.restaurant_list_item_image);
-            this.description = itemView.findViewById(R.id.restaurant_list_item_description);
+            this.description = itemView.findViewById(R.id.restaurant_list_item_tag);
+            this.description2 = itemView.findViewById(R.id.restaurant_list_item_tag2);
             this.distance = itemView.findViewById(R.id.restaurant_list_item_distance);
             this.horaire = itemView.findViewById(R.id.restaurant_list_item_horaire);
         }
@@ -88,6 +90,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             picture.setImageBitmap(currentResto.getPicture());
             description.setText(comment.getComment());
             description.setBackgroundColor(255);
+            description2.setBackgroundColor(255);
+            description2.setText("");
             description.setMaxLines(5);
             distance.setText("distance :" + df.format(currentResto.getDistance()/1000) + " km");
             horaire.setText(currentResto.isItOpen());

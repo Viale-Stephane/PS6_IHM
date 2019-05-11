@@ -37,6 +37,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.Task;
 
 import java.text.DecimalFormat;
@@ -351,6 +352,26 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                 return;
             }
         }
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for(Restaurant resto: filteredList.getRestaurants()) {
+                    if (marker.getTitle().equals(resto.getName())) {
+                        drawerMap.openDrawer(searchView);
+
+                        new RestaurantActivity(MapsActivity.this, searchView, resto);
+                        searchView.setScrollX(0);
+                        searchView.setScrollY(0);
+                    }
+                }
+                //Using position get Value from arraylist
+                return false;
+            }
+        });
+
+
 
     }
 

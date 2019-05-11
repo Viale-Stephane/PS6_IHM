@@ -78,8 +78,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
 
             this.name = itemView.findViewById(R.id.restaurant_list_item_name);
             this.picture = itemView.findViewById(R.id.restaurant_list_item_image);
-            this.tag = itemView.findViewById(R.id.restaurant_list_item_description);
-            this.tag2 = itemView.findViewById(R.id.restaurant_list_item_description2);
+            this.tag = itemView.findViewById(R.id.restaurant_list_item_tag);
+            this.tag2 = itemView.findViewById(R.id.restaurant_list_item_tag2);
             this.distance = itemView.findViewById(R.id.restaurant_list_item_distance);
 
             this.horaire = itemView.findViewById(R.id.restaurant_list_item_horaire);

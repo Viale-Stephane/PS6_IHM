@@ -84,7 +84,7 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
 
             this.name = itemView.findViewById(R.id.restaurant_list_item_name);
             this.picture = itemView.findViewById(R.id.restaurant_list_item_image);
-            this.description = itemView.findViewById(R.id.restaurant_list_item_description);
+            this.description = itemView.findViewById(R.id.restaurant_list_item_tag);
             this.distance = itemView.findViewById(R.id.restaurant_list_item_distance);
         }
 
