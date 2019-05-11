@@ -57,7 +57,7 @@ public class RestaurantList {
         Restaurant kashmir = new Restaurant("Kashmir", true, "11 Rue de la Fontaine, 06560 Valbonne", "https://www.lekashmirvalbonne.fr", " 0493751615", schedule1, 4.4, 18, new ArrayList<>(Arrays.asList(Tag.Indien,Tag.Vege)), new LatLng(43.641689, 7.009170), BitmapFactory.decodeResource(context.getResources(), R.drawable.kashmir));
 
 
-        Restaurant[] listOfRestaurants = {artdoise,hongYun,flunch,dejSoleil, kingsGrill, boucherieLoufti, laBoucherie, burgerKing, mcDonaldS, ilRistorante, laCiteDOr, carrefourAntibes,casinoSophia,subwayGarbe,subwayTemplier,leclercAntibes,sushiSpiritA,biocoopNice1,biocoopNice2,intermarch};
+        Restaurant[] listOfRestaurants = {artdoise,hongYun,flunch,dejSoleil, kingsGrill, boucherieLoufti, laBoucherie, burgerKing, mcDonaldS, ilRistorante, laCiteDOr, carrefourAntibes,casinoSophia,subwayGarbe,subwayTemplier,leclercAntibes,sushiSpiritA,biocoopNice1,biocoopNice2,intermarch,kashmir};
 
         this.restaurants.addAll(Arrays.asList(listOfRestaurants));
     }
