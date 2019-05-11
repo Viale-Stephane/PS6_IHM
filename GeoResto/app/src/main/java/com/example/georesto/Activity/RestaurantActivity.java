@@ -126,6 +126,7 @@ public class RestaurantActivity {
                 Profile currentUser = ProfileList.getCurrentUser();
                 Comment comment = new Comment(newComment.getText().toString(), currentUser, restaurant);
                 currentUser.getUserComments().addComment(comment);
+                displayComments(restaurant);
             }
         });
     }
