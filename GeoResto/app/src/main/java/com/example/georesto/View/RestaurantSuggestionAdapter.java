@@ -2,7 +2,6 @@ package com.example.georesto.View;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.georesto.Activity.RestaurantActivity;
 import com.example.georesto.Model.Restaurant;
 import com.example.georesto.Model.RestaurantList;
-import com.example.georesto.Activity.RestaurantActivity;
-import com.example.georesto.R;
 import com.example.georesto.Model.Tag;
+import com.example.georesto.R;
+
+import static com.example.georesto.Activity.MapsActivity.df;
 
 public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<RestaurantSuggestionAdapter.RestaurantSuggestionViewHolder>  {
 
@@ -72,6 +73,7 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
         private final TextView name;
         private final ImageView picture;
         private final TextView description;
+        private final TextView description2;
         private final TextView distance;
 
         private Restaurant currentResto;
@@ -82,6 +84,7 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
             this.name = itemView.findViewById(R.id.restaurant_list_item_name);
             this.picture = itemView.findViewById(R.id.restaurant_list_item_image);
             this.description = itemView.findViewById(R.id.restaurant_list_item_tag);
+            this.description2 = itemView.findViewById(R.id.restaurant_list_item_tag2);
             this.distance = itemView.findViewById(R.id.restaurant_list_item_distance);
         }
 
@@ -89,12 +92,15 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
             currentResto = restaurant;
             name.setText(restaurant.getName());
             picture.setImageBitmap(restaurant.getPicture());
-            String tags = "";
-            for(Tag tag: restaurant.getTags()) {
-                tags +=tag.getName();
+            if(restaurant.getTags().size() != 0)
+                description.setText(restaurant.getTags().get(0).getName());
+            if (restaurant.getTags().size() >= 2) {
+                description2.setText(restaurant.getTags().get(1).getName());
+            } else {
+                description2.setText("");
+                description2.setBackgroundColor(255);
             }
-            description.setText(tags);
-            distance.setText("distance :"+ Integer.toString((int)restaurant.getDistance()/1000) + " km");
+            distance.setText("distance :" + df.format(restaurant.getDistance()/1000) + " km");
         }
 
         public View getItemView() {
