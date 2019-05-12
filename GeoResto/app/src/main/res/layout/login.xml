@@ -143,14 +143,13 @@
 
     <TextView
         android:id="@+id/wrongIdentifiers"
-        android:layout_width="127dp"
+        android:layout_width="0dp"
         android:layout_height="22dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="100dp"
         android:autoSizeTextType="uniform"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.761"
         app:layout_constraintStart_toStartOf="parent"

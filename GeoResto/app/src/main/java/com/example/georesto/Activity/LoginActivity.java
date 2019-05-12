@@ -51,7 +51,7 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
                 if (model.connect(username.getText().toString(), password.getText().toString()) != null) {
                     startActivity(new Intent(LoginActivity.this, MapsActivityOnline.class));
                 } else {
-                    wrongIdentifiers.setText("Identifiants incorrects");
+                    wrongIdentifiers.setText("Identifiants non reconnus.");
                 }
         });
 
@@ -61,7 +61,7 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
         ImageButton home =  findViewById(R.id.home_button);
         home.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, MapsActivityOffline.class)));
 
-        passwordForgotten.setOnClickListener(v -> passwordForgotten.setText(passwordForgotten.getText() + ProfileList.findUserByUsername(username.getText().toString()).getPassword()));
+        passwordForgotten.setOnClickListener(v -> passwordForgotten.setText(passwordForgotten.getText() + ProfileList.findUserByUsername(" "+username.getText().toString()).getPassword()));
 
         Button accessToRegister =  findViewById(R.id.accessToRegister);
         accessToRegister.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
