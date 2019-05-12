@@ -160,7 +160,7 @@ public class RestaurantActivity {
 
     private void configureAddRemind() {
         rappel.setOnClickListener(v -> {
-            showNotification(this.navigationView,10000,"Rappel : " + restaurant.getName(), restaurant.getName()+" est ouvert au " + restaurant.getAddress());
+            showNotification(this.navigationView,60000,"Rappel : " + restaurant.getName(), restaurant.getName()+" est ouvert au " + restaurant.getAddress());
             Intent intent = new Intent(Intent.ACTION_EDIT);
             intent.setType("vnd.android.cursor.item/event");
             intent.putExtra("title", "Réservation " + restaurant.getName());
@@ -366,6 +366,7 @@ public class RestaurantActivity {
                         // notificationId est un identificateur unique par notification qu'il vous faut définir
                         notificationManager.notify(MapsActivity.NOTIFICATION_ID, notifBuilder.build());
 
+                        this.interrupt();
                     } catch (InterruptedException e) {}
 
                 }
