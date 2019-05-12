@@ -120,6 +120,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         user = ProfileList.getCurrentUser();
 
+        System.out.println(ProfileList.getProfiles().size());
         if (isServicesOK()) {
             getLocationPermissions();
         }
