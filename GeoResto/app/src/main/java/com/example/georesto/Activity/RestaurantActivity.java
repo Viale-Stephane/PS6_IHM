@@ -2,6 +2,7 @@ package com.example.georesto.Activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -160,6 +161,11 @@ public class RestaurantActivity {
     private void configureAddRemind() {
         rappel.setOnClickListener(v -> {
             showNotification(this.navigationView,10000,"Rappel : " + restaurant.getName(), restaurant.getName()+" est ouvert au " + restaurant.getAddress());
+            Intent intent = new Intent(Intent.ACTION_EDIT);
+            intent.setType("vnd.android.cursor.item/event");
+            intent.putExtra("title", "Réservation " + restaurant.getName());
+            intent.putExtra("eventLocation", restaurant.getAddress());
+            parent.startActivity(intent);
         });
     }
 
@@ -338,6 +344,13 @@ public class RestaurantActivity {
                 while (!isInterrupted()) {
                     try {
                         Thread.sleep(millis);
+                        Intent intent;
+                        if(ProfileList.getCurrentUser()==null)
+                            intent = new Intent(view.getContext(), MapsActivityOffline.class);
+                        else intent = new Intent(view.getContext(), MapsActivityOnline.class);
+
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        PendingIntent pendingIntent = PendingIntent.getActivity(view.getContext(), 0, intent, 0);
 
                         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(view.getContext());
 
@@ -345,7 +358,10 @@ public class RestaurantActivity {
                                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                                 .setContentTitle(title)
                                 .setContentText(desc)
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                                .setLargeIcon(restaurant.getPicture())
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setContentIntent(pendingIntent)
+                                .setAutoCancel(true);
 
                         // notificationId est un identificateur unique par notification qu'il vous faut définir
                         notificationManager.notify(MapsActivity.NOTIFICATION_ID, notifBuilder.build());
