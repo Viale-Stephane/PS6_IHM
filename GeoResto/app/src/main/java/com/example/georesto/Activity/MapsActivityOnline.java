@@ -42,6 +42,7 @@ import com.example.georesto.View.CommentAdapter;
 import com.example.georesto.View.RestaurantAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 import java.io.IOException;
 import java.util.List;
@@ -86,6 +87,7 @@ public class MapsActivityOnline extends MapsActivity {
             profileView.inflateHeaderView(R.layout.profile);
             setPersonalInformation();
             drawerMap.openDrawer(profileView);
+            isAddingLocation = false;
             this.profileActions();
         });
     }
@@ -511,6 +513,42 @@ public class MapsActivityOnline extends MapsActivity {
                 newLocationModel.getAdressTextField().setText(address.get(0).getAddressLine(0));
                 drawerMap.openDrawer(profileView);
             }
+        });
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for(Restaurant resto: filteredList.getRestaurants()) {
+                    if (marker.getTitle().equals(resto.getName())) {
+                        drawerMap.openDrawer(searchView);
+
+                        new RestaurantActivity(MapsActivityOnline.this, searchView, resto);
+                        searchView.setScrollX(0);
+                        searchView.setScrollY(0);
+                    }
+                }
+                //Using position get Value from arraylist
+                return false;
+            }
+        });
+
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                for(Restaurant resto: filteredList.getRestaurants()) {
+                    if (marker.getTitle().equals(resto.getName())) {
+                        drawerMap.openDrawer(searchView);
+
+                        new RestaurantActivity(MapsActivityOnline.this, searchView, resto);
+                        searchView.setScrollX(0);
+                        searchView.setScrollY(0);
+                    }
+                }
+                //Using position get Value from arraylist
+
+            }
+
         });
     }
 }

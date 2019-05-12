@@ -112,7 +112,8 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         setContentView(R.layout.main);
 
         if (init) {
-            restaurantList.sampleRestaurant(this);
+            if (restaurantList.size() == 0)
+                restaurantList.sampleRestaurant(this);
             profileList.instantiateProfiles(restaurantList);
             init = false;
             filteredList = restaurantList;
@@ -380,6 +381,24 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                 //Using position get Value from arraylist
                 return false;
             }
+        });
+
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                for(Restaurant resto: filteredList.getRestaurants()) {
+                    if (marker.getTitle().equals(resto.getName())) {
+                        drawerMap.openDrawer(searchView);
+
+                        new RestaurantActivity(MapsActivity.this, searchView, resto);
+                        searchView.setScrollX(0);
+                        searchView.setScrollY(0);
+                    }
+                }
+                //Using position get Value from arraylist
+
+            }
+
         });
 
 

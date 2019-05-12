@@ -64,7 +64,6 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
 
         passwordForgotten.setOnClickListener(v -> {
             Profile profile = ProfileList.findUserByUsername(username.getText().toString());
-            System.out.println(profile);
             if(profile != null)
             passwordForgotten.setText(getString(R.string.passwordForgotten) + " " + ProfileList.findUserByUsername(username.getText().toString()).getPassword());
             else
