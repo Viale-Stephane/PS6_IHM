@@ -32,7 +32,7 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
         RestaurantList suggestionList = new RestaurantList();
         for(Restaurant restaurant : restaurants.getRestaurants()) {
             for(Tag tag: restaurant.getTags()){
-                if(tag == Tag.Healthy ||tag == Tag.Salade || tag == Tag.Vege) {
+                if((tag == Tag.Healthy ||tag == Tag.Salade || tag == Tag.Vege) && restaurant.getDistance() <= 4000) {
                     suggestionList.addRestaurant(restaurant);
                     break;
                 }
@@ -91,14 +91,34 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
             currentResto = restaurant;
             name.setText(restaurant.getName());
             picture.setImageBitmap(restaurant.getPicture());
-            if(restaurant.getTags().size() != 0)
+            Tag tag1 = null;
+            for(Tag tag : restaurant.getTags()) {
+                if((tag == Tag.Healthy ||tag == Tag.Salade || tag == Tag.Vege)) {
+                    if (restaurant.getTags().size() >= 1) {
+                        tag1 = tag;
+                        description.setText(tag.getName());
+                    }
+                    if (restaurant.getTags().size() >= 2) {
+                            if(tag != tag1) {
+                                description2.setText(tag.getName());
+                                break;
+                            }
+                    }
+                }
+                if(tag == restaurant.getTags().get(restaurant.getTags().size() - 1)) {
+                    description2.setText("");
+                    description2.setBackgroundColor(255);
+                }
+            }
+           /* if(restaurant.getTags().size() != 0) {
                 description.setText(restaurant.getTags().get(0).getName());
+            }
             if (restaurant.getTags().size() >= 2) {
                 description2.setText(restaurant.getTags().get(1).getName());
             } else {
                 description2.setText("");
                 description2.setBackgroundColor(255);
-            }
+            }*/
             distance.setText("distance :" + df.format(restaurant.getDistance()/1000) + " km");
         }
 

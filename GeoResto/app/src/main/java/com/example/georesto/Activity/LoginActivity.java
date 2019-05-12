@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.georesto.Model.Profile;
 import com.example.georesto.R;
 import com.example.georesto.Model.LoginModel;
 import com.example.georesto.Model.ProfileList;
@@ -61,7 +62,14 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
         ImageButton home =  findViewById(R.id.home_button);
         home.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, MapsActivityOffline.class)));
 
-        passwordForgotten.setOnClickListener(v -> passwordForgotten.setText(passwordForgotten.getText() + ProfileList.findUserByUsername(" "+username.getText().toString()).getPassword()));
+        passwordForgotten.setOnClickListener(v -> {
+            Profile profile = ProfileList.findUserByUsername(username.getText().toString());
+            System.out.println(profile);
+            if(profile != null)
+            passwordForgotten.setText(getString(R.string.passwordForgotten) + " " + ProfileList.findUserByUsername(username.getText().toString()).getPassword());
+            else
+                passwordForgotten.setText(getString(R.string.passwordForgotten) + " compte inexistant");
+        });
 
         Button accessToRegister =  findViewById(R.id.accessToRegister);
         accessToRegister.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
