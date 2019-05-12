@@ -1,5 +1,6 @@
 package com.example.georesto.View;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v7.widget.RecyclerView;
@@ -19,13 +20,13 @@ import static com.example.georesto.Activity.MapsActivity.df;
 
 public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<RestaurantSuggestionAdapter.RestaurantSuggestionViewHolder>  {
 
+    private final DrawerLayout drawerMap;
     private RestaurantList restaurants;
     private RestaurantSuggestionViewHolder restaurantSuggestionViewHolder;
-    private NavigationView profileView;
+    private Activity parent;
     private NavigationView searchView;
-    private RestaurantActivity restaurantModel;
 
-    public RestaurantSuggestionAdapter(RestaurantList restaurants, NavigationView searchView) {
+    public RestaurantSuggestionAdapter(Activity parent, RestaurantList restaurants) {
 
         RestaurantList suggestionList = new RestaurantList();
         for(Restaurant restaurant : restaurants.getRestaurants()) {
@@ -36,8 +37,10 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
                 }
             }
         }
+        this.parent = parent;
+        this.drawerMap = parent.findViewById(R.id.drawerMaps);
         this.restaurants = suggestionList;
-        this.searchView = searchView;
+        this.searchView = parent.findViewById(R.id.research);
     }
 
     @NonNull
@@ -53,14 +56,9 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
     public void onBindViewHolder(@NonNull RestaurantSuggestionViewHolder restaurantSuggestionViewHolder, int i) {
         Restaurant restaurant = this.restaurants.getRestaurant(i);
         restaurantSuggestionViewHolder.display(restaurant);
-        /*restaurantSuggestionViewHolder.getItemView().setOnClickListener(v -> {
-            this.drawerMap.closeDrawer(this.profileView);
-            this.drawerMap.openDrawer(this.searchView);
-            searchView.removeHeaderView(searchView.getHeaderView(0));
-            searchView.inflateHeaderView(R.layout.info_restaurant);
-            restaurantModel = new RestaurantActivity(searchView);
-            restaurantModel.init(restaurant);
-        });*/
+        restaurantSuggestionViewHolder.getItemView().setOnClickListener(v -> {
+            new RestaurantActivity(parent, searchView, restaurant);
+        });
     }
 
 
