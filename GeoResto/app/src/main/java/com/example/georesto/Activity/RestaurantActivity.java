@@ -36,6 +36,8 @@ import com.example.georesto.R;
 import com.example.georesto.View.CommentListAdapter;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RestaurantActivity {
     private Activity parent;
@@ -160,7 +162,7 @@ public class RestaurantActivity {
 
     private void configureAddRemind() {
         rappel.setOnClickListener(v -> {
-            showNotification(this.navigationView,60000,"Rappel : " + restaurant.getName(), restaurant.getName()+" est ouvert au " + restaurant.getAddress());
+            showNotification(this.navigationView,this.restaurant,"Rappel : " + restaurant.getName(), restaurant.getName()+" est ouvert au " + restaurant.getAddress());
             Intent intent = new Intent(Intent.ACTION_EDIT);
             intent.setType("vnd.android.cursor.item/event");
             intent.putExtra("title", "Réservation " + restaurant.getName());
@@ -337,13 +339,13 @@ public class RestaurantActivity {
         });
     }
 
-    public void showNotification(View view,int millis, String title, String desc) {
+    public void showNotification(View view,Restaurant resto, String title, String desc) {
         Thread notif = new Thread() {
             @Override
             public void run() {
                 while (!isInterrupted()) {
                     try {
-                        Thread.sleep(millis);
+                        this.sleep(1000);
                         Intent intent;
                         if(ProfileList.getCurrentUser()==null)
                             intent = new Intent(view.getContext(), MapsActivityOffline.class);
@@ -364,9 +366,13 @@ public class RestaurantActivity {
                                 .setAutoCancel(true);
 
                         // notificationId est un identificateur unique par notification qu'il vous faut définir
-                        notificationManager.notify(MapsActivity.NOTIFICATION_ID, notifBuilder.build());
+                        Pattern p = Pattern.compile("Ouvert*");
+                        Matcher m = p.matcher(resto.isItOpen());
+                        if(m.find()) {
+                            notificationManager.notify(MapsActivity.NOTIFICATION_ID, notifBuilder.build());
+                            this.interrupt();
+                        }
 
-                        this.interrupt();
                     } catch (InterruptedException e) {}
 
                 }
