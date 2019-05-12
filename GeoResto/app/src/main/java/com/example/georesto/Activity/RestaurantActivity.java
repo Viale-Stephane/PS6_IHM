@@ -113,22 +113,27 @@ public class RestaurantActivity {
         this.setRestaurantInformation(restaurant);
 
         if (ProfileList.getCurrentUser() != null) {
+            //Setup en online
             this.configureFavourite(restaurant);
+            this.setToggleButtonsOnline();
+            addComment.setOnClickListener(v -> {
+                if(!newComment.getText().toString().equals("")) {
+                    Profile currentUser = ProfileList.getCurrentUser();
+                    Comment comment = new Comment(newComment.getText().toString(), currentUser, restaurant);
+                    currentUser.getUserComments().addComment(comment);
+                    displayComments(restaurant);
+                }
+            });
+        } else {
+            //Setup en offline
+            buttonStar.setVisibility(View.GONE);
+            currentHeader.findViewById(R.id.layoutAddComments).setVisibility(View.GONE);
+            this.setToggleButtonsOffline();
         }
 
-        this.setToggleButtons();
         this.displayComments(restaurant);
         this.configureAddContact();
         this.configureAddRemind();
-
-        addComment.setOnClickListener(v -> {
-            if(!newComment.getText().toString().equals("")) {
-                Profile currentUser = ProfileList.getCurrentUser();
-                Comment comment = new Comment(newComment.getText().toString(), currentUser, restaurant);
-                currentUser.getUserComments().addComment(comment);
-                displayComments(restaurant);
-            }
-        });
     }
 
     private void configureAddContact() {
@@ -182,7 +187,7 @@ public class RestaurantActivity {
         return permission;
     }
 
-    private void setToggleButtons() {
+    private void setToggleButtonsOnline() {
         details.setOnClickListener(v -> {
             if (details.isChecked()) {
                 comments.setChecked(false);
@@ -212,6 +217,36 @@ public class RestaurantActivity {
                 currentHeader.findViewById(R.id.layoutButtons).setVisibility(View.GONE);
                 currentHeader.findViewById(R.id.layoutComments).setVisibility(View.VISIBLE);
                 currentHeader.findViewById(R.id.layoutAddComments).setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void setToggleButtonsOffline() {
+        details.setOnClickListener(v -> {
+            if (details.isChecked()) {
+                comments.setChecked(false);
+                currentHeader.findViewById(R.id.layoutDetails).setVisibility(View.VISIBLE);
+                currentHeader.findViewById(R.id.layoutButtons).setVisibility(View.VISIBLE);
+                currentHeader.findViewById(R.id.layoutComments).setVisibility(View.GONE);
+            } else {
+                details.setChecked(true);
+                currentHeader.findViewById(R.id.layoutDetails).setVisibility(View.VISIBLE);
+                currentHeader.findViewById(R.id.layoutButtons).setVisibility(View.VISIBLE);
+                currentHeader.findViewById(R.id.layoutComments).setVisibility(View.GONE);
+            }
+        });
+
+        comments.setOnClickListener(v -> {
+            if (comments.isChecked()) {
+                details.setChecked(false);
+                currentHeader.findViewById(R.id.layoutDetails).setVisibility(View.GONE);
+                currentHeader.findViewById(R.id.layoutButtons).setVisibility(View.GONE);
+                currentHeader.findViewById(R.id.layoutComments).setVisibility(View.VISIBLE);
+            } else {
+                comments.setChecked(true);
+                currentHeader.findViewById(R.id.layoutDetails).setVisibility(View.GONE);
+                currentHeader.findViewById(R.id.layoutButtons).setVisibility(View.GONE);
+                currentHeader.findViewById(R.id.layoutComments).setVisibility(View.VISIBLE);
             }
         });
     }
