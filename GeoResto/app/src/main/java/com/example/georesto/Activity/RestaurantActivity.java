@@ -133,7 +133,6 @@ public class RestaurantActivity {
         } else {
             //Setup en offline
             buttonStar.setVisibility(View.GONE);
-            currentHeader.findViewById(R.id.layoutAddComments).setVisibility(View.GONE);
             this.setToggleButtonsOffline();
         }
 

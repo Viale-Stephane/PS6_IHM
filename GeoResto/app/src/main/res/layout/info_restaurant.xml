@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/layoutAddComments">
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -352,7 +352,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutComments">
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout5">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -381,11 +381,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <TimePicker
-                android:id="@+id/simpleTimePicker2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:timePickerMode="clock" />
 
         </LinearLayout>
 
