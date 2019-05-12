@@ -121,7 +121,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         user = ProfileList.getCurrentUser();
 
-        System.out.println(ProfileList.getProfiles().size());
         if (isServicesOK()) {
             getLocationPermissions();
         }
@@ -262,7 +261,6 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                                 double latitude = location1.getLatitude();
                                 double longitude = location1.getLongitude();
                                 userLocation = new LatLng(latitude, longitude);
-                                Log.d(TAG, "onLocationChanged: " + latitude + "  " + longitude);
                             }
 
                             @Override
