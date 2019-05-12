@@ -52,14 +52,41 @@ public class ProfileList {
     }
 
     public void instantiateProfiles(RestaurantList restaurantList) {
-        RestaurantList history = restaurantList;
-        RestaurantList favourite = restaurantList;
+        RestaurantList history1 = new RestaurantList();
+        RestaurantList history2 = new RestaurantList();
+        RestaurantList history3 = new RestaurantList();
+        RestaurantList history4 = new RestaurantList();
 
-        Profile admin = new Profile("admin", "", "administrator", "administrator", "administrator@gmail.com", "@drawable/default_profile", history, favourite);
-        Profile noName = new Profile("", "", "noName", "noLastName", "noNameIsNice@gmail.com", "@drawable/default_profile", history, favourite);
-        Profile camille = new Profile("camille", "azerty", "Camille", "Bourgeois", "camille.bourgeois@hotmail.com", "@drawable/camille", history, favourite);
-        Profile elvis = new Profile("elvis", "azerty", "Elvis", "Pressé", "elvisLeBG@orange.fr", "@drawable/elvis", history, favourite);
-        Profile richard = new Profile("richard", "azerty", "Richard", "Cuterie", "richouCute@gmail.com", "@drawable/richard", history, favourite);
+        RestaurantList favourite = new RestaurantList();
+        RestaurantList favourite1 = new RestaurantList();
+        RestaurantList favourite2 = new RestaurantList();
+        RestaurantList favourite3 = new RestaurantList();
+
+        for(int i = 0; i<restaurantList.size(); i ++) {
+
+            if((2*i)<restaurantList.size())
+            history1.addRestaurant(restaurantList.getRestaurant(2*i));
+            if((3*i)<restaurantList.size())
+                history2.addRestaurant(restaurantList.getRestaurant(3*i));
+            if((4*i)<restaurantList.size())
+                history3.addRestaurant(restaurantList.getRestaurant(4*i));
+            history4.addRestaurant(restaurantList.getRestaurant(i));
+
+            if((5*i)<restaurantList.size())
+                favourite.addRestaurant(restaurantList.getRestaurant(5*i));
+            if((1+(5*i))<restaurantList.size())
+                favourite1.addRestaurant(restaurantList.getRestaurant(1+(5*i)));
+            if((2+(5*i))<restaurantList.size())
+                favourite2.addRestaurant(restaurantList.getRestaurant(2+(5*i)));
+            if((3+(5*i))<restaurantList.size())
+                favourite3.addRestaurant(restaurantList.getRestaurant(3+(5*i)));
+        }
+
+        Profile admin = new Profile("admin", "", "administrator", "administrator", "administrator@gmail.com", "@drawable/default_profile", history1, favourite);
+        Profile noName = new Profile("", "", "noName", "noLastName", "noNameIsNice@gmail.com", "@drawable/default_profile", history2, favourite1);
+        Profile camille = new Profile("camille", "azerty", "Camille", "Bourgeois", "camille.bourgeois@hotmail.com", "@drawable/camille", history3, favourite2);
+        Profile elvis = new Profile("elvis", "azerty", "Elvis", "Pressé", "elvisLeBG@orange.fr", "@drawable/elvis", history4, favourite3);
+        Profile richard = new Profile("richard", "azerty", "Richard", "Cuterie", "richouCute@gmail.com", "@drawable/richard", history1, favourite);
 
         richard.getUserComments().addComment(new Comment("Tres bon service avec de tres bon burger", richard, restaurantList.getRestaurant(0)));
         noName.getUserComments().addComment(new Comment("Un fastfood classique, sans plus", noName, restaurantList.getRestaurant(0)));
