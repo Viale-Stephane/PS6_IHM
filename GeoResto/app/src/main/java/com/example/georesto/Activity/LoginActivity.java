@@ -40,11 +40,11 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             connect.setX(-400);
             register.setX(400);
-            register.setY(-175);
+            register.setY(-145);
             passwordForgotten.setY(-175);
             passwordForgotten.setX(-400);
-            wrongIdentifiers.setY(-250);
-            wrongIdentifiers.setX(275);
+            wrongIdentifiers.setY(-245);
+            wrongIdentifiers.setX(390);
         }
 
         connect.setOnClickListener(v -> {
