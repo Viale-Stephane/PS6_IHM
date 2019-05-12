@@ -50,14 +50,20 @@ public class Profile {
     public String getLastName() { return this.lastName; }
 
     public String getUsername() {
+        if(this.username == null)
+            return "nom d'utilisateur incorrect";
         return this.username;
     }
 
     public String getEmail() {
+        if( this.email == null)
+            return "mail incorrect";
         return this.email;
     }
 
     public String getPassword() {
+        if( this.password == null)
+            return "identifiant incorrect";
         return this.password;
     }
 

@@ -20,12 +20,11 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
 
     private RestaurantList restaurants;
     private RestaurantSuggestionViewHolder restaurantSuggestionViewHolder;
-    private DrawerLayout drawerMap;
     private NavigationView profileView;
     private NavigationView searchView;
     private RestaurantActivity restaurantModel;
 
-    public RestaurantSuggestionAdapter(RestaurantList restaurants, DrawerLayout drawerMap, NavigationView profileView, NavigationView searchView) {
+    public RestaurantSuggestionAdapter(RestaurantList restaurants, NavigationView searchView) {
 
         RestaurantList suggestionList = new RestaurantList();
         for(Restaurant restaurant : restaurants.getRestaurants()) {
@@ -37,8 +36,6 @@ public class RestaurantSuggestionAdapter extends RecyclerView.Adapter<Restaurant
             }
         }
         this.restaurants = suggestionList;
-        this.drawerMap = drawerMap;
-        this.profileView = profileView;
         this.searchView = searchView;
     }
 

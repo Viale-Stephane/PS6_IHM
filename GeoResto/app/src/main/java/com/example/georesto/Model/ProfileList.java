@@ -19,6 +19,15 @@ public class ProfileList {
         return currentUser;
     }
 
+    public static Profile findUserByUsername(String username) {
+        for(Profile profile : profiles) {
+            if(profile.getUsername().equals(username) || profile.getEmail().equals(username)) {
+                return profile;
+            }
+        }
+        return null;
+    }
+
     public static void setCurrentUser(Profile user) {
         currentUser = user;
     }

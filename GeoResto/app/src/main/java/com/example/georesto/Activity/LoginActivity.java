@@ -14,6 +14,8 @@ import com.example.georesto.R;
 import com.example.georesto.Model.LoginModel;
 import com.example.georesto.Model.ProfileList;
 
+import org.w3c.dom.Text;
+
 public class LoginActivity extends Activity { // sans oublier l'implémentation de l'interface OnClickListener
     private ProfileList profileList = new ProfileList();
     private LoginModel model = new LoginModel();
@@ -45,46 +47,26 @@ public class LoginActivity extends Activity { // sans oublier l'implémentation 
             wrongIdentifiers.setX(275);
         }
 
-        connect.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View connect) {
+        connect.setOnClickListener(v -> {
                 if (model.connect(username.getText().toString(), password.getText().toString()) != null) {
                     startActivity(new Intent(LoginActivity.this, MapsActivityOnline.class));
                 } else {
                     wrongIdentifiers.setText("Identifiants incorrects");
                 }
-            }
-
         });
 
 
-        register.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View passwordForgotten) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }
-        });
+        register.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
-        ImageButton home = (ImageButton) findViewById(R.id.home_button);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MapsActivityOffline.class));
-            }
-        });
+        ImageButton home =  findViewById(R.id.home_button);
+        home.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, MapsActivityOffline.class)));
 
-        Button accessToRegister = (Button) findViewById(R.id.accessToRegister);
-        accessToRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }
-        });
+        passwordForgotten.setOnClickListener(v -> passwordForgotten.setText(passwordForgotten.getText() + ProfileList.findUserByUsername(username.getText().toString()).getPassword()));
 
-        Button accessToLogin = (Button) findViewById(R.id.accessToLogin);
-        accessToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-            }
-        });
+        Button accessToRegister =  findViewById(R.id.accessToRegister);
+        accessToRegister.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
+
+        Button accessToLogin = findViewById(R.id.accessToLogin);
+        accessToLogin.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, LoginActivity.class)));
     }
 }

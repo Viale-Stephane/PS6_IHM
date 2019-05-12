@@ -21,6 +21,7 @@ import com.example.georesto.Model.Tag;
 import com.example.georesto.R;
 import com.example.georesto.Service.FilterService;
 import com.example.georesto.View.RestaurantAdapter;
+import com.example.georesto.View.RestaurantSuggestionAdapter;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,7 @@ class SearchActivity {
     private SeekBar distanceSeekBar;
     private RatingBar ratingBar;
     private Button filterButton;
+    private Button suggestionButton;
     private ArrayList<Tag> tagsToShow;
     private boolean isInit;
 
@@ -68,6 +70,7 @@ class SearchActivity {
         this.distanceSeekBar = currentHeader.findViewById(R.id.research_distance_seek_bar);
         this.ratingBar = currentHeader.findViewById(R.id.research_rating_bar);
         this.filterButton = currentHeader.findViewById(R.id.research_filter);
+        this.suggestionButton = currentHeader.findViewById(R.id.suggestionButton);
 
         this.mapsActivity = mapsActivity;
 
@@ -82,6 +85,15 @@ class SearchActivity {
         filterService = new FilterService();
 
         filterButton.setOnClickListener(v -> filter(searchBar.getQuery()));
+        suggestionButton.setOnClickListener(v -> {
+            searchView.removeHeaderView(searchView.getHeaderView(0));
+            searchView.inflateHeaderView(R.layout.restaurant_list_item);
+            ProfileList.getCurrentUser().updateDistance(restaurantList);
+            RecyclerView rv = parent.findViewById(R.id.suggestions);
+            rv.setLayoutManager(new LinearLayoutManager(parent));
+            RestaurantSuggestionAdapter adapter =new RestaurantSuggestionAdapter(restaurantList, searchView);
+            rv.setAdapter(adapter);
+        });
 
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
