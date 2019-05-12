@@ -87,11 +87,10 @@ class SearchActivity {
         filterButton.setOnClickListener(v -> filter(searchBar.getQuery()));
         suggestionButton.setOnClickListener(v -> {
             searchView.removeHeaderView(searchView.getHeaderView(0));
-            searchView.inflateHeaderView(R.layout.restaurant_list_item);
-            ProfileList.getCurrentUser().updateDistance(restaurantList);
+            searchView.inflateHeaderView(R.layout.suggestions);
             RecyclerView rv = parent.findViewById(R.id.suggestions);
             rv.setLayoutManager(new LinearLayoutManager(parent));
-            RestaurantSuggestionAdapter adapter =new RestaurantSuggestionAdapter(restaurantList, searchView);
+            RestaurantSuggestionAdapter adapter =new RestaurantSuggestionAdapter(parent, restaurantList);
             rv.setAdapter(adapter);
         });
 
