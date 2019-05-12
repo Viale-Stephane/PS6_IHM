@@ -25,9 +25,9 @@ public class FilterService {
                         restaurant.getName().toLowerCase().contains(filterPattern)
                                 && restaurant.isKindRestaurant() == isRestaurant
                                 && isAMatch(restaurant.getTags(), tags)
-                                && restaurant.getPrice() < maxPrice
-                                && (restaurant.getDistance()/1000) < maxDistance
-                                && restaurant.getGrade() > minGrade
+                                && restaurant.getPrice() <= maxPrice
+                                && (restaurant.getDistance()/1000) <= maxDistance
+                                && restaurant.getGrade() >= minGrade
                 )
                 .collect(Collectors.toList());
     }

@@ -116,6 +116,7 @@ class SearchActivity {
         } else {
             filteredList = new RestaurantList(filterService.filter(query, toggleRestaurant.isChecked(), tagsToShow, priceSeekBar.getProgress(), distanceSeekBar.getProgress(), ratingBar.getProgress(), ProfileList.getCurrentUser()));
         }
+        System.out.println(ratingBar.getProgress());
 
         searchView.removeHeaderView(searchView.getHeaderView(0));
         searchView.inflateHeaderView(R.layout.result);
