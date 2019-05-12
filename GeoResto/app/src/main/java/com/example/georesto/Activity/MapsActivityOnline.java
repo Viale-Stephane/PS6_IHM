@@ -491,6 +491,15 @@ public class MapsActivityOnline extends MapsActivity {
                 }
                 newLocationActions(null);
                 drawerMap.openDrawer(profileView);
+            } else {
+                try {
+                    this.address = geocoder.getFromLocation(point.latitude,point.longitude,1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                this.position = point;
+                newLocationModel.getAdressTextField().setText(address.get(0).getAddressLine(0));
+                drawerMap.openDrawer(profileView);
             }
             if(isAddingPosition) {
                 try {
