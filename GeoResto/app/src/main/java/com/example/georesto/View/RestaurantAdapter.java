@@ -90,6 +90,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             currentResto = restaurant;
             name.setText(restaurant.getName());
             picture.setImageBitmap(restaurant.getPicture());
+            if(restaurant.getTags().size() != 0)
             tag.setText(restaurant.getTags().get(0).getName());
             if (restaurant.getTags().size() >= 2) {
                 tag2.setText(restaurant.getTags().get(1).getName());

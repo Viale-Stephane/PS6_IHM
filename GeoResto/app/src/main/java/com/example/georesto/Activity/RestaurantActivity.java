@@ -27,6 +27,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.georesto.Model.Comment;
+import com.example.georesto.Model.PopUpTimePickerModel;
 import com.example.georesto.Model.Profile;
 import com.example.georesto.Model.ProfileList;
 import com.example.georesto.Model.Restaurant;
@@ -70,6 +71,9 @@ public class RestaurantActivity {
 
     private Button addContact;
     private Button rappel;
+
+    PopUpTimePickerModel popUpTimePickerModel;
+
 
     public RestaurantActivity(Activity parent, NavigationView navigationView, Restaurant restaurant) {
         this.parent = parent;
