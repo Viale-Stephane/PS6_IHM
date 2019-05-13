@@ -2,8 +2,10 @@ package com.example.georesto.Activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -162,12 +164,30 @@ public class RestaurantActivity {
 
     private void configureAddRemind() {
         rappel.setOnClickListener(v -> {
-            showNotification(this.navigationView,this.restaurant,"Rappel : " + restaurant.getName(), restaurant.getName()+" est ouvert au " + restaurant.getAddress());
-            Intent intent = new Intent(Intent.ACTION_EDIT);
-            intent.setType("vnd.android.cursor.item/event");
-            intent.putExtra("title", "Réservation " + restaurant.getName());
-            intent.putExtra("eventLocation", restaurant.getAddress());
-            parent.startActivity(intent);
+            AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this.navigationView.getContext());
+            pictureDialog.setTitle("Choisissez l'action que vous souhaitez réaliser");
+            String[] pictureDialogItems = {
+                    "Être notifier de l'ouverture.",
+                    "Inscrire dans l'agenda du téléphone." };
+            pictureDialog.setItems(pictureDialogItems,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case 0:
+                                    showNotification(navigationView,restaurant,"Rappel : " + restaurant.getName(), restaurant.getName()+" est ouvert au " + restaurant.getAddress());
+                                    break;
+                                case 1:
+                                    Intent intent = new Intent(Intent.ACTION_EDIT);
+                                    intent.setType("vnd.android.cursor.item/event");
+                                    intent.putExtra("title", "Réservation " + restaurant.getName());
+                                    intent.putExtra("eventLocation", restaurant.getAddress());
+                                    parent.startActivity(intent);
+                                    break;
+                            }
+                        }
+                    });
+            pictureDialog.show();
         });
     }
 
