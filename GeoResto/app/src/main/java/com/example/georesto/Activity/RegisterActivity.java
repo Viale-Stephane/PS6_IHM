@@ -70,22 +70,22 @@ public class RegisterActivity extends Activity {
             passwordConfirmation.setY(-50);
             //right side//
             textUsername.setX(500);
-            textUsername.setY(-725);
+            textUsername.setY(-650);
             username.setX(500);
-            username.setY(-725);
+            username.setY(-650);
             textLastName.setX(500);
-            textLastName.setY(-725);
+            textLastName.setY(-650);
             lastName.setX(500);
-            lastName.setY(-725);
+            lastName.setY(-650);
             textFirstName.setX(500);
             textFirstName.setY(-625);
             firstName.setX(500);
-            firstName.setY(-675);
+            firstName.setY(-610);
 
 
             //buttons//
-            loginButton.setY(-675);
-            registerButton.setY(-675);
+            loginButton.setY(-475);
+            registerButton.setY(-475);
         }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
